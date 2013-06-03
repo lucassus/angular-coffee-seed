@@ -32,7 +32,7 @@ module.exports = (grunt) ->
           dot: true
           cwd: "./app"
           dest: "./dist"
-          src: ["index.html"]
+          src: ["index.html", "components/**/*"]
         ]
 
     connect:

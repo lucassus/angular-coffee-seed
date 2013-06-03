@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Angular seed</title>
+
+  <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css">
 </head>
 <body>
-  <h1>Hello grunt!</h1>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="brand" href="#">Sinatra Yeoman Example</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add your site or application content here -->
+  <div class="container">
+    <ng-view/>
+  </div>
 
   <script src="http://localhost:35729/livereload.js"></script>
   <script type="text/javascript" src="scripts/app.js"></script>
