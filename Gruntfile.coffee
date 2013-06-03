@@ -8,11 +8,15 @@ module.exports = (grunt) ->
         livereload: true
 
       html:
-        files: ["./app/{,*/}*.html"]
+        files: ["./app/**/*.html"]
+        tasks: ["copy:dist"]
+
+      css:
+        files: ["./app/styles/**/*.css"]
         tasks: ["copy:dist"]
 
       coffee:
-        files: ["./app/scripts/{,*/}*.coffee"]
+        files: ["./app/scripts/**/*.coffee"]
         tasks: ["coffee:dist"]
 
     coffee:
@@ -20,7 +24,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: "./app/scripts"
-          src: "{,*/}*.coffee"
+          src: "**/*.coffee"
           dest: "./dist/scripts"
           ext: ".js"
         ]
@@ -32,7 +36,7 @@ module.exports = (grunt) ->
           dot: true
           cwd: "./app"
           dest: "./dist"
-          src: ["index.html", "components/**/*"]
+          src: ["components/**/*", "**/*.html", "styles/**/*.css"]
         ]
 
     connect:

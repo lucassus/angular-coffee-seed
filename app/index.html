@@ -4,8 +4,9 @@
   <title>Angular seed</title>
 
   <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
+<body ng-app="NgSeedApp">
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -29,7 +30,11 @@
     <ng-view/>
   </div>
 
-  <script src="http://localhost:35729/livereload.js"></script>
+  <script type="text/javascript" src="components/angular/angular.js"></script>
+
   <script type="text/javascript" src="scripts/app.js"></script>
+  <script type="text/javascript" src="scripts/controllers/main.js"></script>
+
+  <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 </body>
 </html>
