@@ -3,6 +3,11 @@ module.exports = (grunt) ->
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
 
   grunt.initConfig
+    watch:
+      coffee:
+        files: ["./app/scripts/{,*/}*.coffee"]
+        tasks: ["coffee:dist"]
+
     coffee:
       dist:
         files: [
@@ -20,7 +25,7 @@ module.exports = (grunt) ->
           dot: true
           cwd: "./app"
           dest: "./dist"
-          src: ["*.{ico,txt,html}", ".htaccess", "components/**/*", "images/{,*/}*.{gif,webp}", "styles/fonts/*"]
+          src: ["index.html"]
         ]
 
     connect:
@@ -29,7 +34,6 @@ module.exports = (grunt) ->
           hostname: "localhost"
           port: 9000
           base: "./dist"
-          keepalive: true
 
   grunt.registerTask "build", [
     "copy:dist",
@@ -38,7 +42,8 @@ module.exports = (grunt) ->
 
   grunt.registerTask "server", [
     "build",
-    "connect"
+    "connect",
+    "watch"
   ]
 
   grunt.registerTask "default", ["build"]
