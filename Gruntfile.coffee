@@ -4,6 +4,13 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     watch:
+      options:
+        livereload: true
+
+      html:
+        files: ["./app/{,*/}*.html"]
+        tasks: ["copy:dist"]
+
       coffee:
         files: ["./app/scripts/{,*/}*.coffee"]
         tasks: ["coffee:dist"]
