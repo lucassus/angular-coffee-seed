@@ -29,6 +29,14 @@ module.exports = (grunt) ->
           ext: ".js"
         ]
 
+    requirejs:
+      compile:
+        options:
+          name: "app"
+          baseUrl: "./dist/scripts"
+          mainConfigFile: "./dist/scripts/main.js"
+          out: "./dist/scripts/dist.js"
+
     copy:
       dist:
         files: [
@@ -47,13 +55,13 @@ module.exports = (grunt) ->
           base: "./dist"
 
   grunt.registerTask "build", [
-    "copy:dist",
+    "copy:dist"
     "coffee:dist"
   ]
 
   grunt.registerTask "server", [
-    "build",
-    "connect",
+    "build"
+    "connect"
     "watch"
   ]
 
