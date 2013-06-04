@@ -1,5 +1,4 @@
 module.exports = (grunt) ->
-  # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
 
   grunt.initConfig
@@ -19,6 +18,10 @@ module.exports = (grunt) ->
         files: ["./app/scripts/**/*.coffee"]
         tasks: ["coffee:dist"]
 
+      coffeeTest:
+        files: ["test/unit/**/*.coffee"]
+        tasks: ["coffee:test"]
+
     coffee:
       dist:
         files: [
@@ -26,6 +29,15 @@ module.exports = (grunt) ->
           cwd: "./app/scripts"
           src: "**/*.coffee"
           dest: "./dist/scripts"
+          ext: ".js"
+        ]
+
+      test:
+        files: [
+          expand: true
+          cwd: "./test/unit"
+          src: "**/*.coffee"
+          dest: "./dist/test"
           ext: ".js"
         ]
 
@@ -51,6 +63,11 @@ module.exports = (grunt) ->
           ]
         ]
 
+    karma:
+      unit:
+        configFile: "karma.conf.js"
+        singleRun: true
+
     clean:
       dist: ["./dist"]
 
@@ -71,6 +88,12 @@ module.exports = (grunt) ->
     "build"
     "connect"
     "watch"
+  ]
+
+  grunt.registerTask "test", [
+    "build"
+    "coffee:test"
+    "karma:unit"
   ]
 
   grunt.registerTask "default", ["build"]

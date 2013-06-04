@@ -1,9 +1,9 @@
 require.config
+  baseUrl: "/scripts"
+
   paths:
     jquery: "../components/jquery/jquery"
     angular: "../components/angular/angular"
-
-  baseUrl: "/scripts"
 
   shim:
     "jquery": { "exports": "$" }
