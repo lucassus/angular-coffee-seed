@@ -5,6 +5,7 @@ define -> class
     $scope.products = [
       { name: "HTC Wildfire" }
       { name: "iPone" }
+      { name: "Nexus One" }
       { name: "Nexus 7" }
       { name: "Samsung Galaxy Note" }
       { name: "Samsung S4" }

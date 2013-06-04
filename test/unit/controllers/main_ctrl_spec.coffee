@@ -11,4 +11,4 @@ define ["angular-mocks"], ->
       MainCtrl = $controller "main", $scope: scope
 
     it "should attach a list of products to the scope", ->
-      expect(scope.products.length).toBe(5)
+      expect(scope.products.length).toBe(6)
