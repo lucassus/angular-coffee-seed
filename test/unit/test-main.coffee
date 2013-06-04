@@ -1,9 +1,5 @@
-tests = Object.keys(window.__karma__.files).filter (file) ->
-  /_spec\.js$/.test(file)
-
-tests.push("app")
-
 require.config
+  # karma server files from `/base` directory
   baseUrl: "/base/scripts"
 
   paths:
@@ -14,9 +10,14 @@ require.config
     "angular": { "exports": "angular" }
     "angular-mocks": { "exports": "angular-mocks", deps: ["angular"] }
 
-  # ask Require.js to load these files (all our tests)
-#  deps: tests
+# load the tests
+dependencies = []
+for file, timestamp of window.__karma__.files
+  dependencies.push(file) if /_spec\.js$/.test(file)
 
-# start test run, once Require.js is done
-require tests, ->
+# load the main app module
+dependencies.push("app")
+
+# start test run
+require dependencies, ->
   window.__karma__.start()

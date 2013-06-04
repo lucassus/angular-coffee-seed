@@ -11,9 +11,11 @@ files = [
   REQUIRE,
   REQUIRE_ADAPTER,
 
-  // !! all src and test modules (included: false)
+  // load all external libraries
   { pattern: "components/**/*.js", included: false },
+  // load all the sources
   { pattern: "scripts/**/*.js", included: false },
+  // load all the tests
   { pattern: "test/**/*_spec.js", included: false },
 
   "test/test-main.js"
@@ -21,6 +23,7 @@ files = [
 
 // list of files to exclude
 exclude = [
+  // we don't want to actually start the application in our tests
   "scripts/main.js"
 ];
 

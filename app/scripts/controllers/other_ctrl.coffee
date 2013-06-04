@@ -2,4 +2,4 @@ define -> class
 
   @$inject = ["$scope"]
   constructor: ($scope) ->
-    $scope.name = "other controller"
+    $scope.name = "This is the other controller"
