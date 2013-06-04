@@ -55,14 +55,31 @@ grunt build watch
 grunt test:watch --browsers=Firefox,PhantomJS
 ```
 
-Task `grunt watch` has to be executed since it's recompiling all coffeescripts.
+Task `grunt watch` has to be executed since it's recompiling all CoffeeScripts.
+
+### How to debug failing specs
+
+Put `debugger` in the failing spec:
+
+```coffee
+describe "Failing spec", ->
+
+  it "should run smoothly", ->
+    debugger # this is like setting a breakpoint
+    failMiserably()
+```
+
+Run karma in Chrome browser:
+
+`grunt test:watch --browsers=Chrome`
+
+* Go to the newly opened Chrome Browser
+* Open Chrome's DevTools and refresh the page
+* Now in the source tab you should see the execution stopped at the debugger
 
 ## Roadmap
 
-* figure out how to debug jasmine tests
-* run jasmine specs in the browser
 * setup e2e via karma
-* run e2e tests in the browser
 * grunt-coffeelint
 * build production release
 * compile angular html templates
