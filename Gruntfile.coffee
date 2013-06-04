@@ -51,6 +51,9 @@ module.exports = (grunt) ->
           ]
         ]
 
+    clean:
+      dist: ["./dist"]
+
     connect:
       server:
         options:
@@ -59,6 +62,7 @@ module.exports = (grunt) ->
           base: "./dist"
 
   grunt.registerTask "build", [
+    "clean:dist"
     "copy:dist"
     "coffee:dist"
   ]

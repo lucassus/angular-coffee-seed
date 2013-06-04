@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Angular seed</title>
+  <head>
+    <title>Angular seed</title>
 
-  <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
 
-  <script type="text/javascript" src="components/requirejs/require.js" data-main="/scripts/main"></script>
-</head>
-<body>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="brand" href="#">Angular seed</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li class="active"><a href="#/">Home</a></li>
-            <li class="active"><a href="#/other">Other</a></li>
-          </ul>
+    <script type="text/javascript" src="components/requirejs/require.js" data-main="/scripts/main"></script>
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Angular seed</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#/">Home</a></li>
+              <li class="active"><a href="#/other">Other</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <!-- Add your site or application content here -->
+    <div class="container">
+      <ng-view/>
+    </div>
 
-  <!-- Add your site or application content here -->
-  <div class="container">
-    <ng-view/>
-  </div>
-
-  <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
-</body>
+    <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+  </body>
 </html>

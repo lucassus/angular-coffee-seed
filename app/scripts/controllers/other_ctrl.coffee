@@ -1,7 +1,5 @@
-define ->
+define -> class
 
-  class
-
-    @$inject = ["$scope"]
-    constructor: ($scope) ->
-      $scope.name = "other controller"
+  @$inject = ["$scope"]
+  constructor: ($scope) ->
+    $scope.name = "other controller"
