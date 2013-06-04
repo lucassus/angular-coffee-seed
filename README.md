@@ -1,12 +1,30 @@
+# Custom AngularJS seed project
+
 * AngularJS
 * RequireJS
 * Jasmine
 * karma
 * grunt
+* ..and a lot more
 
 ## Bootstrap
 
-install nodejs from the sources
+Install nodejs v0.10.7 from the sources:
+
+```
+sudo apt-get install build-essential openssl libssl-dev pkg-config
+
+wget http://nodejs.org/dist/v0.10.7/node-v0.10.7.tar.gz
+tar -xzf node-v0.10.7.tar.gz
+
+cd node-v0.10.7
+./configure
+make
+sudo make install
+```
+
+Newer versions of nodejs cause problems with karma and PhantomJS
+see: https://github.com/karma-runner/karma/issues/558
 
 ## Install tools
 
