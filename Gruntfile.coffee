@@ -44,7 +44,11 @@ module.exports = (grunt) ->
           dot: true
           cwd: "./app"
           dest: "./dist"
-          src: ["components/**/*", "**/*.html", "styles/**/*.css"]
+          src: [
+            "components/**/*"
+            "**/*.html"
+            "styles/**/*.css"
+          ]
         ]
 
     connect:
