@@ -1,0 +1,7 @@
+# Project files
+.idea
+*.iml
+
+node_modules
+app/components
+dist

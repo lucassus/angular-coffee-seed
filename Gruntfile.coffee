@@ -1,6 +1,23 @@
 module.exports = (grunt) ->
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
 
+  # Extract browsers list from the command line
+  # For example `grunt test --browsers=Chrome,Firefox`
+  # Currently available browsers:
+  # - Chrome
+  # - ChromeCanary
+  # - Firefox
+  # - Opera
+  # - Safari (only Mac)
+  # - PhantomJS
+  # - IE (only Windows)
+  parseBrowsers = (opts = {}) ->
+    opts.defaultBrowser or= "PhantomJS"
+
+    browsers = grunt.option("browsers") || opts.defaultBrowser
+    browsers = browsers.replace(/[\s\[\]]/, "")
+    browsers.split(",")
+
   grunt.initConfig
     watch:
       options:
@@ -66,6 +83,7 @@ module.exports = (grunt) ->
     karma:
       unit:
         configFile: "karma.conf.js"
+        browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         singleRun: true
 
     clean:
