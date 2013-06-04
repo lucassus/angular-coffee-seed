@@ -95,6 +95,23 @@ Run karma in Chrome browser:
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
+### Run test headlessly
+
+Start Xvfb and export DISPLAY variable:
+
+```
+./script/xvfb start
+export DISPLAY=:99
+```
+
+Perform single run:
+
+grunt test --browsers=Firefox,Chrome,Opera,PhantomJS
+
+or
+
+`grunt test:watch --browsers=Chrome`
+
 ## Roadmap
 
 * setup e2e via karma
