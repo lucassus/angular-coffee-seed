@@ -1,6 +1,6 @@
 define ["angular-mocks"], ->
 
-  describe "Controller: MainCtrl", ->
+  describe "Controller: OtherCtrl", ->
 
     beforeEach module("myApp")
     MainCtrl = null

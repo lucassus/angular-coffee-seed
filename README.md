@@ -29,9 +29,12 @@ Run test against specific browsers
 
 `grunt test --browsers=Chrome,Firefox,Opera,PhantomJS`
 
+Run karma with `autoWatch` option
+
+`grunt test:watch --browsers=Chrome,Opera`
+
 ## Roadmap
 
-* karma unit singRun/autoWatch option
 * setup e2e via karma
 * run jasmine specs in the browser
 * run e2e tests in the browser

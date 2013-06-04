@@ -81,10 +81,16 @@ module.exports = (grunt) ->
         ]
 
     karma:
-      unit:
+      options:
         configFile: "karma.conf.js"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
+
+      unit:
         singleRun: true
+
+      watch:
+        singleRun: false
+        autoWatch: true
 
     clean:
       dist: ["./dist"]
@@ -112,6 +118,12 @@ module.exports = (grunt) ->
     "build"
     "coffee:test"
     "karma:unit"
+  ]
+
+  grunt.registerTask "test:watch", [
+    "build"
+    "coffee:test"
+    "karma:watch"
   ]
 
   grunt.registerTask "default", ["build"]
