@@ -95,7 +95,11 @@ Run karma in Chrome browser:
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
-### Run test headlessly
+### Running e2e tests
+
+`grunt test:e2e`
+
+### Running tests headlessly
 
 Start Xvfb and export DISPLAY variable:
 
@@ -114,7 +118,9 @@ or
 
 ## Roadmap
 
-* setup e2e via karma
+* remove sleep from e2e specs
+* update karma to the stable version, see git://github.com/kavu/grunt-karma#bump_karma_dependency
 * grunt-coffeelint
 * build production release
 * compile angular html templates
+* extend readme, see https://github.com/tnajdek/angular-requirejs-seed

@@ -4,7 +4,7 @@ define -> class
   constructor: ($scope) ->
     $scope.products = [
       { name: "HTC Wildfire" }
-      { name: "iPone" }
+      { name: "iPhone" }
       { name: "Nexus One" }
       { name: "Nexus 7" }
       { name: "Samsung Galaxy Note" }

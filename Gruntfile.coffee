@@ -36,7 +36,7 @@ module.exports = (grunt) ->
         tasks: ["coffee:dist"]
 
       coffeeTest:
-        files: ["test/unit/**/*.coffee"]
+        files: ["test/**/*.coffee"]
         tasks: ["coffee:test"]
 
     coffee:
@@ -52,7 +52,7 @@ module.exports = (grunt) ->
       test:
         files: [
           expand: true
-          cwd: "./test/unit"
+          cwd: "./test"
           src: "**/*.coffee"
           dest: "./dist/test"
           ext: ".js"
@@ -82,10 +82,14 @@ module.exports = (grunt) ->
 
     karma:
       options:
-        configFile: "karma.conf.js"
+        configFile: "./test/karma.conf.js"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
 
       unit:
+        singleRun: true
+
+      e2e:
+        configFile: "./test/karma-e2e.conf.js"
         singleRun: true
 
       watch:
@@ -110,6 +114,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "server", [
     "build"
+    "coffee:test"
     "connect"
     "watch"
   ]
@@ -118,6 +123,13 @@ module.exports = (grunt) ->
     "build"
     "coffee:test"
     "karma:unit"
+  ]
+
+  grunt.registerTask "test:e2e", [
+    "build"
+    "coffee:test"
+    "connect"
+    "karma:e2e"
   ]
 
   grunt.registerTask "test:watch", [

@@ -1,24 +1,20 @@
 // Karma configuration
 
 // base path, that will be used to resolve files and exclude
-basePath = "./dist";
+basePath = "../dist";
+
+frameworks = ["jasmine", "requirejs"]
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-
-  REQUIRE,
-  REQUIRE_ADAPTER,
-
   // load all external libraries
   { pattern: "components/**/*.js", included: false },
   // load all the sources
   { pattern: "scripts/**/*.js", included: false },
   // load all the tests
-  { pattern: "test/**/*_spec.js", included: false },
+  { pattern: "test/unit/**/*_spec.js", included: false },
 
-  "test/test-main.js"
+  "test/unit/test-main.js"
 ];
 
 // list of files to exclude
@@ -46,6 +42,16 @@ logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
 autoWatch = false;
+
+// Start these browsers, currently available:
+// - Chrome
+// - ChromeCanary
+// - Firefox
+// - Opera
+// - Safari (only Mac)
+// - PhantomJS
+// - IE (only Windows)
+browsers = ["PhantomJS"];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;
