@@ -33,7 +33,7 @@ module.exports = (grunt) ->
 
       coffee:
         files: ["./app/scripts/**/*.coffee"]
-        tasks: ["coffee:dist", "browserify2:compile"]
+        tasks: ["coffee:dist", "browserify2:dist"]
 
       coffeeTest:
         files: ["test/**/*.coffee"]
@@ -73,7 +73,7 @@ module.exports = (grunt) ->
         ]
 
     browserify2:
-      compile:
+      dist:
         entry: "./dist/scripts/my_app.js"
         compile: "./dist/scripts/application.js"
 
@@ -111,7 +111,7 @@ module.exports = (grunt) ->
     "clean:dist"
     "copy:dist"
     "coffee:dist"
-    "browserify2:compile"
+    "browserify2:dist"
   ]
 
   grunt.registerTask "server", [
