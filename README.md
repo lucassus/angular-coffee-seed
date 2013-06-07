@@ -118,9 +118,14 @@ or
 
 ## Roadmap
 
+* check http://www.doboism.com/blog/2013/05/17/cross-developing-for-node-js-and-browsers-using-browserify/
+* add browserify for jasmine specs
+* move components outside ./app
+* rename ./app to ./src
+* migrate karma.*.conf.js to coffee
 * try https://github.com/thlorenz/browserify-shim
-* optimize ./build/components - do not include all files
 * grunt-coffeelint
 * build production release
+* minify production release
 * compile angular html templates
 * extend readme, see https://github.com/tnajdek/angular-requirejs-seed

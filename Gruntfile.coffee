@@ -77,6 +77,12 @@ module.exports = (grunt) ->
         entry: "./dist/scripts/my_app.js"
         compile: "./dist/scripts/application.js"
 
+    bower:
+      install:
+        options:
+          targetDir: "./dist/components"
+          install: false
+
     karma:
       options:
         configFile: "./test/karma.conf.js"
@@ -109,6 +115,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build", [
     "clean:dist"
+    "bower:install"
     "copy:dist"
     "coffee:dist"
     "browserify2:dist"
