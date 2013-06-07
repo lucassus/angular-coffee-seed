@@ -3,19 +3,10 @@
 // base path, that will be used to resolve files and exclude
 basePath = "../dist";
 
-frameworks = ["ng-scenario"]
-
-plugins = [
-  "karma-ng-scenario",
-  "karma-phantomjs-launcher",
-  "karma-firefox-launcher",
-  "karma-chrome-launcher"
-];
-
 // list of files / patterns to load in the browser
 files = [
-//  ANGULAR_SCENARIO,
-//  ANGULAR_SCENARIO_ADAPTER,
+  ANGULAR_SCENARIO,
+  ANGULAR_SCENARIO_ADAPTER,
 
   "test/e2e/**/*_spec.js"
 ];
@@ -63,5 +54,5 @@ singleRun = false;
 // Running server address
 urlRoot = "/__karma__/";
 proxies = {
-  "/": "http://localhost:9000/"
+  "/": "http://localhost:9001/"
 };

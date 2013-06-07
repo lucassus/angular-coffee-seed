@@ -1,4 +1,4 @@
-define -> class
+module.exports = class MainCtrl
 
   @$inject = ["$scope"]
   constructor: ($scope) ->

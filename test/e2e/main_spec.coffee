@@ -2,7 +2,6 @@ describe "Products list page", ->
 
   beforeEach ->
     browser().navigateTo("/#")
-    sleep(0.5) # TODO get rid of this sleep
 
   it "navigates to the valid url", ->
     expect(browser().location().url()).toBe("/")

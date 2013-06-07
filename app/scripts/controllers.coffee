@@ -1,17 +1,6 @@
-controllers =
-  main: "controllers/main_ctrl"
-  other: "controllers/other_ctrl"
+angular = require("./lib/angular")
+require("./services")
 
-define [
-  "angular"
-  "require"
-
-  "services"
-  "controllers/main_ctrl"
-  "controllers/other_ctrl"
-], (angular, require) ->
-
-  # Load controllers
-  module = angular.module("myApp.controllers", ["myApp.services"])
-  for name, file of controllers
-    module.controller(name, require(file))
+controllers = angular.module("myApp.controllers", ["myApp.services"])
+controllers.controller("MainCtrl", require("./controllers/main_ctrl"))
+controllers.controller("OtherCtrl", require("./controllers/other_ctrl"))
