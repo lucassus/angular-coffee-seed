@@ -1,3 +1,5 @@
+# Entry point for the application
+
 require("./services")
 require("./controllers")
 

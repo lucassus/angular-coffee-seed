@@ -11,7 +11,7 @@ files = [
   "components/angular/angular.js",
   "components/angular-mocks/angular-mocks.js",
 
-  "scripts/bundle.js",
+  "scripts/application.js",
 
   "test/unit/**/*_spec.js"
 ];
