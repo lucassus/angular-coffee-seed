@@ -7,10 +7,8 @@
     "grunt-contrib-copy": "~0.4.0",
     "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
-    "grunt-karma": "git://github.com/kavu/grunt-karma#bump_karma_dependency",
-    "karma-ng-scenario": "0.0.1",
+    "grunt-karma": "~0.4.4",
     "matchdep": "~0.1.1"
   }
 }

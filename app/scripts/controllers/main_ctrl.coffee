@@ -1,4 +1,6 @@
-define -> class
+module = angular.module("myApp.controllers")
+
+class MainCtrl
 
   @$inject = ["$scope"]
   constructor: ($scope) ->
@@ -10,3 +12,5 @@ define -> class
       { name: "Samsung Galaxy Note" }
       { name: "Samsung S4" }
     ]
+
+module.controller "MainCtrl", MainCtrl

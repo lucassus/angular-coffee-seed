@@ -58,14 +58,6 @@ module.exports = (grunt) ->
           ext: ".js"
         ]
 
-    requirejs:
-      compile:
-        options:
-          name: "app"
-          baseUrl: "./dist/scripts"
-          mainConfigFile: "./dist/scripts/main.js"
-          out: "./dist/scripts/dist.js"
-
     copy:
       dist:
         files: [

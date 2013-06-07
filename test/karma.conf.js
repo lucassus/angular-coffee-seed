@@ -3,24 +3,21 @@
 // base path, that will be used to resolve files and exclude
 basePath = "../dist";
 
-frameworks = ["jasmine", "requirejs"]
-
 // list of files / patterns to load in the browser
 files = [
-  // load all external libraries
-  { pattern: "components/**/*.js", included: false },
-  // load all the sources
-  { pattern: "scripts/**/*.js", included: false },
-  // load all the tests
-  { pattern: "test/unit/**/*_spec.js", included: false },
+  JASMINE,
+  JASMINE_ADAPTER,
 
-  "test/unit/test-main.js"
-];
+  "components/angular/angular.js",
+  "components/angular-mocks/angular-mocks.js",
 
-// list of files to exclude
-exclude = [
-  // we don't want to actually start the application in our tests
-  "scripts/main.js"
+  "scripts/services.js",
+  "scripts/controllers.js",
+  "scripts/controllers/main_ctrl.js",
+  "scripts/controllers/other_ctrl.js",
+  "scripts/app.js",
+
+  "test/unit/**/*_spec.js"
 ];
 
 // test results reporter to use

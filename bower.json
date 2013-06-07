@@ -2,7 +2,6 @@
   "name": "Angular grunt seed",
   "version": "0.0.1",
   "dependencies": {
-    "requirejs": "~2.1.5",
     "angular": "~1.0.7",
     "angular-resource": "~1.0.5",
     "bootstrap": "http://twitter.github.com/bootstrap/assets/bootstrap.zip"
