@@ -54,5 +54,5 @@ singleRun = false;
 // Running server address
 urlRoot = "/__karma__/";
 proxies = {
-  "/": "http://localhost:9000/"
+  "/": "http://localhost:9001/"
 };

@@ -33,7 +33,7 @@ module.exports = (grunt) ->
 
       coffee:
         files: ["./app/scripts/**/*.coffee"]
-        tasks: ["coffee:dist"]
+        tasks: ["coffee:dist", "browserify2:compile"]
 
       coffeeTest:
         files: ["test/**/*.coffee"]
@@ -74,8 +74,8 @@ module.exports = (grunt) ->
 
     browserify2:
       compile:
-        entry: "./dist/scripts/app.js"
-        compile: "./dist/scripts/bundle.js"
+        entry: "./dist/scripts/my_app.js"
+        compile: "./dist/scripts/application.js"
 
     karma:
       options:
@@ -97,11 +97,15 @@ module.exports = (grunt) ->
       dist: ["./dist"]
 
     connect:
+      options:
+        hostname: "localhost"
+        base: "./dist"
+
       server:
-        options:
-          hostname: "localhost"
-          port: 9000
-          base: "./dist"
+        options: port: 9000
+
+      e2e:
+        options: port: 9001
 
   grunt.registerTask "build", [
     "clean:dist"
@@ -126,7 +130,7 @@ module.exports = (grunt) ->
   grunt.registerTask "test:e2e", [
     "build"
     "coffee:test"
-    "connect"
+    "connect:e2e"
     "karma:e2e"
   ]
 
