@@ -118,9 +118,6 @@ or
 
 ## Roadmap
 
-* migrate to browserify (it seems that requirejs does not play well with angularjs)
-* remove sleep from e2e specs
-* update karma to the stable version, see git://github.com/kavu/grunt-karma#bump_karma_dependency
 * grunt-coffeelint
 * build production release
 * compile angular html templates
