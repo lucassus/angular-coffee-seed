@@ -1,4 +1,4 @@
-define -> class
+module.exports = class OtherCtrl
 
   @$inject = ["$scope"]
   constructor: ($scope) ->

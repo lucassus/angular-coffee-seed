@@ -1,4 +1,4 @@
-define ["angular"], (angular) ->
+angular = require("./lib/angular")
 
-  angular.module("myApp.services", [])
-    .value("varsion", "0.1")
+angular.module("myApp.services", [])
+  .value("version", "0.1")

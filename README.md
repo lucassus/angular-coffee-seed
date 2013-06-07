@@ -1,7 +1,7 @@
 # Custom AngularJS seed project
 
 * AngularJS
-* RequireJS
+* browserify
 * Jasmine
 * karma
 * grunt
@@ -118,8 +118,8 @@ or
 
 ## Roadmap
 
-* remove sleep from e2e specs
-* update karma to the stable version, see git://github.com/kavu/grunt-karma#bump_karma_dependency
+* try https://github.com/thlorenz/browserify-shim
+* optimize ./build/components - do not include all files
 * grunt-coffeelint
 * build production release
 * compile angular html templates
