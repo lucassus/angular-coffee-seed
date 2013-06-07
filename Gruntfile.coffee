@@ -73,11 +73,6 @@ module.exports = (grunt) ->
         ]
 
     browserify2:
-      dev:
-        entry: "./dist/scripts/app.js"
-        compile: "./dist/scripts/bundle.js"
-        debug: true
-
       compile:
         entry: "./dist/scripts/app.js"
         compile: "./dist/scripts/bundle.js"
@@ -112,7 +107,7 @@ module.exports = (grunt) ->
     "clean:dist"
     "copy:dist"
     "coffee:dist"
-    "browserify2:dev"
+    "browserify2:compile"
   ]
 
   grunt.registerTask "server", [
