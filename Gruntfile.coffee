@@ -72,6 +72,16 @@ module.exports = (grunt) ->
           ]
         ]
 
+    browserify2:
+      dev:
+        entry: "./dist/scripts/app.js"
+        compile: "./dist/scripts/bundle.js"
+        debug: true
+
+      compile:
+        entry: "./dist/scripts/app.js"
+        compile: "./dist/scripts/bundle.js"
+
     karma:
       options:
         configFile: "./test/karma.conf.js"
@@ -102,6 +112,7 @@ module.exports = (grunt) ->
     "clean:dist"
     "copy:dist"
     "coffee:dist"
+    "browserify2:dev"
   ]
 
   grunt.registerTask "server", [

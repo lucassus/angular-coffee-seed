@@ -1,3 +1,8 @@
+require("./services")
+require("./controllers")
+
+angular = require("./lib/angular")
+
 app = angular.module("myApp", ["myApp.services", "myApp.controllers"])
 app.config [
   "$routeProvider", ($routeProvider) ->

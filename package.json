@@ -8,6 +8,7 @@
     "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-clean": "~0.4.1",
+    "grunt-browserify2": "~0.1.8",
     "grunt-karma": "~0.4.4",
     "matchdep": "~0.1.1"
   }

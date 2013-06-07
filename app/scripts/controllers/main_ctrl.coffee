@@ -1,6 +1,4 @@
-module = angular.module("myApp.controllers")
-
-class MainCtrl
+module.exports = class MainCtrl
 
   @$inject = ["$scope"]
   constructor: ($scope) ->
@@ -12,5 +10,3 @@ class MainCtrl
       { name: "Samsung Galaxy Note" }
       { name: "Samsung S4" }
     ]
-
-module.controller "MainCtrl", MainCtrl
