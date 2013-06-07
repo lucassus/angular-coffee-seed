@@ -118,6 +118,8 @@ or
 
 ## Roadmap
 
+* try https://github.com/thlorenz/browserify-shim
+* optimize ./build/components - do not include all files
 * grunt-coffeelint
 * build production release
 * compile angular html templates
