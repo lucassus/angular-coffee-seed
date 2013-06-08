@@ -19,6 +19,7 @@ module.exports = (grunt) ->
     browsers.split(",")
 
   grunt.initConfig
+    pkg: grunt.file.readJSON('package.json')
     watch:
       options:
         livereload: true
@@ -66,7 +67,6 @@ module.exports = (grunt) ->
           cwd: "./app"
           dest: "./dist"
           src: [
-            "components/**/*"
             "**/*.html"
             "styles/**/*.css"
           ]
@@ -74,8 +74,8 @@ module.exports = (grunt) ->
 
     browserify2:
       dist:
-        entry: "./dist/scripts/my_app.js"
-        compile: "./dist/scripts/application.js"
+        entry: "./dist/scripts/application.js"
+        compile: "./dist/scripts/<%= pkg.name %>.js"
 
     bower:
       install:

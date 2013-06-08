@@ -118,6 +118,8 @@ or
 
 ## Roadmap
 
+* check http://gpiot.com/twitter-bower-grunt-get-started-with-assets-management/
+* document the build process
 * check http://www.doboism.com/blog/2013/05/17/cross-developing-for-node-js-and-browsers-using-browserify/
 * add browserify for jasmine specs
 * move components outside ./app
@@ -127,5 +129,6 @@ or
 * grunt-coffeelint
 * build production release
 * minify production release
+* add less
 * compile angular html templates
 * extend readme, see https://github.com/tnajdek/angular-requirejs-seed

@@ -3,5 +3,5 @@
 *.iml
 
 node_modules
-app/components
+components
 dist
