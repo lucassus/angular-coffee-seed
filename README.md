@@ -125,7 +125,6 @@ or
 * rename ./app to ./src
 * migrate karma.*.conf.js to coffee
 * try https://github.com/thlorenz/browserify-shim
-* grunt-coffeelint
 * build production release
 * minify production release
 * extend readme, see https://github.com/tnajdek/angular-requirejs-seed

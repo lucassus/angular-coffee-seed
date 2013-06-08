@@ -80,6 +80,15 @@ module.exports = (grunt) ->
           ]
         ]
 
+    coffeelint:
+      options:
+        max_line_length:
+          value: 120
+          level: "warn"
+
+      app: ["Gruntfile.coffee", "./app/scripts/**/*.coffee"]
+      test: ["./test/**/*.coffee"]
+
     browserify2:
       dist:
         entry: "./dist/scripts/application.js"
@@ -130,6 +139,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build", [
     "clean:dist"
+    "coffeelint"
     "bower:install"
     "copy:dist"
     "coffee:dist"
@@ -164,4 +174,4 @@ module.exports = (grunt) ->
     "karma:watch"
   ]
 
-  grunt.registerTask "default", ["build"]
+  grunt.registerTask "default", ["test"]
