@@ -114,14 +114,24 @@ module.exports = (grunt) ->
 
     karma:
       options:
-        configFile: "<%= appConfig.test %>/karma.conf.js"
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        basePath: "../<%= appConfig.dist %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
+        colors: true
+        # test results reporter to use
+        # possible values: dots || progress || growl
+        reporters: ["dots"]
+        # level of logging
+        # possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+        logLevel: "LOG_INFO"
+        # If browser does not capture in given timeout [ms], kill it
+        captureTimeout: 5000
 
       unit:
         singleRun: true
 
       e2e:
-        configFile: "<%= appConfig.test %>/karma-e2e.conf.js"
+        configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
         singleRun: true
 
       watch:

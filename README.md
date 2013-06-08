@@ -118,12 +118,9 @@ or
 
 ## Roadmap
 
-* check http://gpiot.com/twitter-bower-grunt-get-started-with-assets-management/
-* document the build process
-* check http://www.doboism.com/blog/2013/05/17/cross-developing-for-node-js-and-browsers-using-browserify/
-* add browserify for jasmine specs
-* migrate karma.*.conf.js to coffee
 * try https://github.com/thlorenz/browserify-shim
 * build production release
+* bundle vendor js
 * minify production release
+* document the build process
 * extend readme, see https://github.com/tnajdek/angular-requirejs-seed

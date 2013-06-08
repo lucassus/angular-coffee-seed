@@ -1,1 +1,0 @@
-angular = require("./lib/angular")
