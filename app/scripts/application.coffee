@@ -1,12 +1,11 @@
 # Entry point for the application
 
-require("./services")
 require("./controllers")
 require("./modules/alerts")
 
 angular = require("./lib/angular")
 
-app = angular.module("myApp", ["myApp.services", "myApp.controllers", "myApp.alerts"])
+app = angular.module("myApp", ["myApp.controllers", "myApp.alerts"])
 app.config [
   "$provide", "$routeProvider", ($provide, $routeProvider) ->
     $provide.value("alertTimeout", 3000)
