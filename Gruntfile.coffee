@@ -121,13 +121,17 @@ module.exports = (grunt) ->
         # test results reporter to use
         # possible values: dots || progress || growl
         reporters: ["dots"]
-        # level of logging
-        # possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-        logLevel: "LOG_INFO"
         # If browser does not capture in given timeout [ms], kill it
         captureTimeout: 5000
 
       unit:
+        reporters: ["dots", "coverage"]
+        preprocessors:
+          "scripts/**/*.js": "coverage"
+        coverageReporter:
+          type: "text"
+          dir: "coverage"
+
         singleRun: true
 
       e2e:

@@ -40,3 +40,7 @@ singleRun = false
 # Running server address
 urlRoot = "/__karma__/"
 proxies = "/": "http://localhost:9001/"
+
+# level of logging
+# possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+logLevel = LOG_WARN
