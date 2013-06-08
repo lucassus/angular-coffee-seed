@@ -43,7 +43,7 @@ module.exports = (grunt) ->
 
       coffee:
         files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
-        tasks: ["coffee:dist", "browserify2:dist"]
+        tasks: ["coffee:dist", "browserify"]
 
       coffeeTest:
         files: ["<%= appConfig.test %>/**/*.coffee"]
@@ -94,10 +94,8 @@ module.exports = (grunt) ->
       app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee"]
       test: ["<%= appConfig.test %>/**/*.coffee"]
 
-    browserify2:
-      dist:
-        entry: "<%= appConfig.dist %>/scripts/application.js"
-        compile: "<%= appConfig.dist %>/scripts/<%= pkg.name %>.js"
+    browserify:
+      "<%= appConfig.dist %>/scripts/<%= pkg.name %>.js": "<%= appConfig.dist %>/scripts/application.js"
 
     html2js:
       options:
@@ -163,7 +161,7 @@ module.exports = (grunt) ->
     "copy:dist"
     "coffee:dist"
     "sass:dist"
-    "browserify2:dist"
+    "browserify"
     "html2js"
   ]
 

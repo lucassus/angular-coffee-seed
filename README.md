@@ -118,6 +118,9 @@ or
 
 ## Roadmap
 
+* grunt-browserify vs grunt-browserify2
+
+* separate bundles for controllers, modules etc.
 * try https://github.com/thlorenz/browserify-shim
 * build production release
 * bundle vendor js
