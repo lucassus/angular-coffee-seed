@@ -8,11 +8,14 @@ files = [
   JASMINE,
   JASMINE_ADAPTER,
 
+  "components/jquery/jquery.js",
   "components/angular/angular.js",
   "components/angular-mocks/angular-mocks.js",
 
-  "scripts/application.js",
+  "scripts/templates.js",
+  "scripts/angular-seed.js",
 
+  "test/unit/helpers/**/*.js",
   "test/unit/**/*_spec.js"
 ];
 

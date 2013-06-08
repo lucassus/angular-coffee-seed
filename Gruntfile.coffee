@@ -28,6 +28,10 @@ module.exports = (grunt) ->
         files: ["./app/**/*.html"]
         tasks: ["copy:dist"]
 
+      templates:
+        files: ["./app/templates/**/*.tpl.html"]
+        tasks: ["html2js"]
+
       css:
         files: ["./app/styles/**/*.scss"]
         tasks: ["sass:dist"]
@@ -81,6 +85,13 @@ module.exports = (grunt) ->
         entry: "./dist/scripts/application.js"
         compile: "./dist/scripts/<%= pkg.name %>.js"
 
+    html2js:
+      options:
+        base: "app"
+      main:
+        src: ["./app/templates/**/*.tpl.html"]
+        dest: "./dist/scripts/templates.js"
+
     bower:
       install:
         options:
@@ -124,6 +135,7 @@ module.exports = (grunt) ->
     "coffee:dist"
     "sass:dist"
     "browserify2:dist"
+    "html2js"
   ]
 
   grunt.registerTask "server", [

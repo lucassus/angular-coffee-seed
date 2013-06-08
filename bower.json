@@ -2,6 +2,7 @@
   "name": "Angular grunt seed",
   "version": "0.0.1",
   "dependencies": {
+    "jquery": "~2.0.2",
     "angular": "~1.0.7",
     "bootstrap": "http://twitter.github.com/bootstrap/assets/bootstrap.zip"
   },

@@ -118,7 +118,6 @@ or
 
 ## Roadmap
 
-* compile angular html templates
 * check http://gpiot.com/twitter-bower-grunt-get-started-with-assets-management/
 * document the build process
 * check http://www.doboism.com/blog/2013/05/17/cross-developing-for-node-js-and-browsers-using-browserify/
