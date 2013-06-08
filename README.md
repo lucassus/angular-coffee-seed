@@ -122,7 +122,6 @@ or
 * document the build process
 * check http://www.doboism.com/blog/2013/05/17/cross-developing-for-node-js-and-browsers-using-browserify/
 * add browserify for jasmine specs
-* rename ./app to ./src
 * migrate karma.*.conf.js to coffee
 * try https://github.com/thlorenz/browserify-shim
 * build production release

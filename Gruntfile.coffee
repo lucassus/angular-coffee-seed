@@ -19,62 +19,67 @@ module.exports = (grunt) ->
     browsers.split(",")
 
   grunt.initConfig
-    pkg: grunt.file.readJSON('package.json')
+    pkg: grunt.file.readJSON("package.json")
+    appConfig:
+      app: "./app"
+      test: "./test"
+      dist: "./dist"
+
     watch:
       options:
         livereload: true
 
       html:
-        files: ["./app/**/*.html"]
+        files: ["<%= appConfig.app %>/**/*.html"]
         tasks: ["copy:dist"]
 
       templates:
-        files: ["./app/templates/**/*.tpl.html"]
+        files: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
         tasks: ["html2js"]
 
       css:
-        files: ["./app/styles/**/*.scss"]
+        files: ["<%= appConfig.app %>/styles/**/*.scss"]
         tasks: ["sass:dist"]
 
       coffee:
-        files: ["./app/scripts/**/*.coffee"]
+        files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
         tasks: ["coffee:dist", "browserify2:dist"]
 
       coffeeTest:
-        files: ["test/**/*.coffee"]
+        files: ["<%= appConfig.test %>/**/*.coffee"]
         tasks: ["coffee:test"]
 
     coffee:
       dist:
         files: [
           expand: true
-          cwd: "./app/scripts"
+          cwd: "<%= appConfig.app %>/scripts"
           src: "**/*.coffee"
-          dest: "./dist/scripts"
+          dest: "<%= appConfig.dist %>/scripts"
           ext: ".js"
         ]
 
       test:
         files: [
           expand: true
-          cwd: "./test"
+          cwd: "<%= appConfig.test %>"
           src: "**/*.coffee"
-          dest: "./dist/test"
+          dest: "<%= appConfig.dist %>/test"
           ext: ".js"
         ]
 
     sass:
       dist:
         files:
-          "./dist/styles/style.css": "./app/styles/style.scss"
+          "<%= appConfig.dist %>/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
 
     copy:
       dist:
         files: [
           expand: true
           dot: true
-          cwd: "./app"
-          dest: "./dist"
+          cwd: "<%= appConfig.app %>"
+          dest: "<%= appConfig.dist %>"
           src: [
             "**/*.html"
           ]
@@ -86,37 +91,37 @@ module.exports = (grunt) ->
           value: 120
           level: "warn"
 
-      app: ["Gruntfile.coffee", "./app/scripts/**/*.coffee"]
-      test: ["./test/**/*.coffee"]
+      app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee"]
+      test: ["<%= appConfig.test %>/**/*.coffee"]
 
     browserify2:
       dist:
-        entry: "./dist/scripts/application.js"
-        compile: "./dist/scripts/<%= pkg.name %>.js"
+        entry: "<%= appConfig.dist %>/scripts/application.js"
+        compile: "<%= appConfig.dist %>/scripts/<%= pkg.name %>.js"
 
     html2js:
       options:
         base: "app"
       main:
-        src: ["./app/templates/**/*.tpl.html"]
-        dest: "./dist/scripts/templates.js"
+        src: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
+        dest: "<%= appConfig.dist %>/scripts/templates.js"
 
     bower:
       install:
         options:
-          targetDir: "./dist/components"
+          targetDir: "<%= appConfig.dist %>/components"
           install: false
 
     karma:
       options:
-        configFile: "./test/karma.conf.js"
+        configFile: "<%= appConfig.test %>/karma.conf.js"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
 
       unit:
         singleRun: true
 
       e2e:
-        configFile: "./test/karma-e2e.conf.js"
+        configFile: "<%= appConfig.test %>/karma-e2e.conf.js"
         singleRun: true
 
       watch:
@@ -124,12 +129,12 @@ module.exports = (grunt) ->
         autoWatch: true
 
     clean:
-      dist: ["./dist"]
+      dist: ["<%= appConfig.dist %>"]
 
     connect:
       options:
         hostname: "localhost"
-        base: "./dist"
+        base: "<%= appConfig.dist %>"
 
       server:
         options: port: 9000
