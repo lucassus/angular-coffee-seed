@@ -1,7 +1,7 @@
 # Entry point for the application
 
+require("./modules")
 require("./controllers")
-require("./modules/alerts")
 
 angular = require("./lib/angular")
 
