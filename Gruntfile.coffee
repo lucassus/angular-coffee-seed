@@ -29,8 +29,8 @@ module.exports = (grunt) ->
         tasks: ["copy:dist"]
 
       css:
-        files: ["./app/styles/**/*.css"]
-        tasks: ["copy:dist"]
+        files: ["./app/styles/**/*.scss"]
+        tasks: ["sass:dist"]
 
       coffee:
         files: ["./app/scripts/**/*.coffee"]
@@ -59,6 +59,11 @@ module.exports = (grunt) ->
           ext: ".js"
         ]
 
+    sass:
+      dist:
+        files:
+          "./dist/styles/style.css": "./app/styles/style.scss"
+
     copy:
       dist:
         files: [
@@ -68,7 +73,6 @@ module.exports = (grunt) ->
           dest: "./dist"
           src: [
             "**/*.html"
-            "styles/**/*.css"
           ]
         ]
 
@@ -118,6 +122,7 @@ module.exports = (grunt) ->
     "bower:install"
     "copy:dist"
     "coffee:dist"
+    "sass:dist"
     "browserify2:dist"
   ]
 
