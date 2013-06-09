@@ -140,6 +140,10 @@ module.exports = (grunt) ->
         singleRun: false
         autoWatch: true
 
+    casperjs:
+      options: {}
+      files: ["<%= appConfig.dist %>/test/casperjs/**/*.js"]
+
     clean:
       dist: ["<%= appConfig.dist %>"]
 
@@ -183,6 +187,13 @@ module.exports = (grunt) ->
     "coffee:test"
     "connect:e2e"
     "karma:e2e"
+  ]
+
+  grunt.registerTask "test:casperjs", [
+    "build"
+    "coffee:test"
+    "connect:e2e"
+    "casperjs"
   ]
 
   grunt.registerTask "test:watch", [
