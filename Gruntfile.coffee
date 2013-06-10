@@ -95,6 +95,9 @@ module.exports = (grunt) ->
       test: ["<%= appConfig.test %>/**/*.coffee"]
 
     browserify:
+      options:
+        debug: true
+
       "<%= appConfig.dist %>/scripts/<%= pkg.name %>.js": "<%= appConfig.dist %>/scripts/application.js"
 
     html2js:
