@@ -20,6 +20,8 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     pkg: grunt.file.readJSON("package.json")
+
+    # configurable paths
     appConfig:
       app: "./app"
       test: "./test"

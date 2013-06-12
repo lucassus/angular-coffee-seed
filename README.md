@@ -118,11 +118,10 @@ or
 
 ## Roadmap
 
-* use coffee directly in karma
 * migrate from browserify to grunt-usemin
-* separate bundles for controllers, modules etc.
+* better build process, take some ideas from yeoman
 * build production release
-* bundle vendor js
 * minify production release
 * document the build process
 * extend readme, see https://github.com/tnajdek/angular-requirejs-seed
+* use coffee directly in karma
