@@ -1,9 +1,4 @@
-# Entry point for the application
-
-require("./modules")
-require("./controllers")
-
-angular = require("./lib/angular")
+# The entry point for the application
 
 app = angular.module("myApp", ["myApp.controllers", "myApp.alerts"])
 app.config [

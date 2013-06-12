@@ -118,6 +118,8 @@ or
 
 ## Roadmap
 
+* use coffee directly in karma
+* migrate from browserify to grunt-usemin
 * separate bundles for controllers, modules etc.
 * build production release
 * bundle vendor js
