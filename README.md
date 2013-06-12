@@ -98,6 +98,7 @@ Run karma in Chrome browser:
 ### Running e2e tests
 
 `grunt test:e2e`
+`grunt test:casperjs`
 
 ### Running tests headlessly
 
@@ -116,12 +117,21 @@ or
 
 `grunt test:watch --browsers=Chrome`
 
+## Build process
+
+```
+grunt build
+(cd dist/ ; python -m SimpleHTTPServer 8000)
+```
+
+And then navigate to `http://localhost:8000` to see the production release.
+
 ## Roadmap
 
-* migrate from browserify to grunt-usemin
-* better build process, take some ideas from yeoman
-* build production release
-* minify production release
+* fix css minify
 * document the build process
+* setup travis-ci
+* create sample todo app with complete e2e specs (e2e + casperjs)
+* try page objects for casperjs
 * extend readme, see https://github.com/tnajdek/angular-requirejs-seed
 * use coffee directly in karma
