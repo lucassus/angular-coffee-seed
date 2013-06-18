@@ -49,7 +49,8 @@ module.exports = (grunt) ->
 
       livereload:
         files: [
-          "<%= appConfig.app %>/{,*/}*.html"
+          # TODO use **/*
+          "<%= appConfig.app %>/{,*/}{,*/}*.html"
           "{.tmp,<%= appConfig.app %>}/styles/{,*/}*.css"
           "{.tmp,<%= appConfig.app %>}/scripts/{,*/}*.js"
           "<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
@@ -87,8 +88,9 @@ module.exports = (grunt) ->
     concat:
       dist:
         files:
-          "<%= appConfig.dist %>/scripts/scripts.js": [
-            ".tmp/scripts/**/*.js",
+          ".tmp/scripts/scripts.js": [
+            ".tmp/scripts/**/*.js"
+            "!.tmp/scripts/templates.js" # do not include complited templates
             "<%= appConfig.app %>/scripts/**/*.js"
           ]
 
@@ -101,7 +103,7 @@ module.exports = (grunt) ->
       html: ["<%= appConfig.dist %>/index.html"]
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
-        dirs: ["<%= appConfig.dist %>"],
+        dirs: ["<%= appConfig.dist %>"]
 
     imagemin:
       dist:
@@ -233,12 +235,12 @@ module.exports = (grunt) ->
     "sass"
     "useminPrepare"
     "imagemin"
-    "cssmin"
     "htmlmin"
     "concat"
     "copy"
-    "uglify"
     "usemin"
+    "uglify"
+    "cssmin"
   ]
 
   grunt.registerTask "server", [
