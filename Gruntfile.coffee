@@ -91,6 +91,7 @@ module.exports = (grunt) ->
           ".tmp/scripts/scripts.js": [
             ".tmp/scripts/**/*.js"
             "!.tmp/scripts/templates.js" # do not include complited templates
+            "!.tmp/scripts/application_test.js" # do not include test application module
             "<%= appConfig.app %>/scripts/**/*.js"
           ]
 
