@@ -128,9 +128,8 @@ And then navigate to `http://localhost:8000` to see the production release.
 
 ## Roadmap
 
-* concat, tune options
 * include mocks in e2e specs
-* do not include livereload in the prod release
+
 * document the build process
 * setup travis-ci
 * create sample todo app with complete e2e specs (e2e + casperjs)
