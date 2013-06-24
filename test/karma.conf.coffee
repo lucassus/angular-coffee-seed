@@ -8,6 +8,7 @@ files = [
   "components/jquery/jquery.js"
   "components/angular/angular.js"
   "components/angular-mocks/angular-mocks.js"
+  "components/jasmine-given/dist/jasmine-given.js"
 
   "scripts/templates.js"
   "scripts/modules/**/*.js"

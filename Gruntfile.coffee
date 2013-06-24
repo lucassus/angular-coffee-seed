@@ -324,6 +324,7 @@ module.exports = (grunt) ->
     "casperjs"
   ]
 
+  # TODO this task is broken
   grunt.registerTask "test:watch", [
     "build"
     "coffee:test"
