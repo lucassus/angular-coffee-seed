@@ -125,12 +125,3 @@ grunt build
 ```
 
 And then navigate to `http://localhost:8000` to see the production release.
-
-## Roadmap
-
-* document the build process
-* setup travis-ci
-* create sample todo app with complete e2e specs (e2e + casperjs)
-* try page objects for casperjs
-* extend readme, see https://github.com/tnajdek/angular-requirejs-seed
-* use coffee directly in karma
