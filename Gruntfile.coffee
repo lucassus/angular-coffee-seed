@@ -139,6 +139,21 @@ module.exports = (grunt) ->
           ]
         ]
 
+      server:
+        files: [
+          expand: true
+          dot: true
+          cwd: "<%= appConfig.app %>"
+          dest: ".tmp"
+          src: [
+            "*.{ico,txt}"
+            "**/*.html"
+            "components/**/*"
+            "images/**/*.{gif,webp}"
+            "styles/fonts/*"
+          ]
+        ]
+
     coffeelint:
       options:
         max_line_length:
@@ -215,16 +230,16 @@ module.exports = (grunt) ->
         options:
           port: 9001
           middleware: (connect) ->
-            [mountFolder(connect, ".tmp"),
-             mountFolder(connect, appConfig.app)]
+            [mountFolder(connect, ".tmp")]
 
       livereload:
         options:
           port: 9000
           middleware: (connect) ->
-            [livereloadSnippet,
-             mountFolder(connect, ".tmp"),
-             mountFolder(connect, appConfig.app)]
+            [
+              livereloadSnippet
+              mountFolder(connect, ".tmp")
+            ]
 
   grunt.renameTask "regarde", "watch"
 
@@ -246,6 +261,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "server", [
     "clean:server"
+    "copy:server"
     "bower:install"
     "coffee:dist"
     "sass"
@@ -266,6 +282,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test:e2e", [
     "clean:server"
+    "copy:server"
     "bower:install"
     "coffee"
     "html2js"
@@ -277,6 +294,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test:casperjs", [
     "clean:server"
+    "copy:server"
     "bower:install"
     "coffee"
     "html2js"

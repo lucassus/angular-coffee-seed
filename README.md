@@ -128,7 +128,6 @@ And then navigate to `http://localhost:8000` to see the production release.
 
 ## Roadmap
 
-* serve only from .tmp dir
 * include mocks in e2e specs (grunt-preprocess)
 * document the build process
 * setup travis-ci
