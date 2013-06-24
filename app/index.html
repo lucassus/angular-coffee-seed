@@ -51,8 +51,9 @@
     <script type="text/javascript" src="scripts/application.js"></script>
     <!-- endbuild -->
 
-    <!-- @ifdef E2E -->
-    <script type="text/javascript" src="scripts/application_test.js"></script>
+    <!-- @if E2E -->
+      <!-- include mocks for e2e specs -->
+      <script type="text/javascript" src="scripts/application_test.js"></script>
     <!-- @endif -->
   </body>
 </html>

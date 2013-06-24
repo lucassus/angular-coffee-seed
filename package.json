@@ -23,6 +23,7 @@
     "grunt-usemin": "~0.1.10",
     "grunt-karma": "~0.4.4",
     "grunt-regarde": "~0.1.1",
+    "grunt-preprocess": "~2.3.0",
     "matchdep": "~0.1.1"
   }
 }

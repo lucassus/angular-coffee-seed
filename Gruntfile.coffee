@@ -154,6 +154,23 @@ module.exports = (grunt) ->
           ]
         ]
 
+    preprocess:
+
+      html:
+        options: context: E2E: false
+        src: "<%= appConfig.app %>/index.html"
+        dest: ".tmp/index.html"
+
+      dist:
+        options: context: E2E: false
+        src: "<%= appConfig.dist %>/index.html"
+        dest: "<%= appConfig.dist %>/index.html"
+
+      e2e:
+        options: context: E2E: true
+        src: "<%= appConfig.app %>/index.html"
+        dest: ".tmp/index.html"
+
     coffeelint:
       options:
         max_line_length:
@@ -255,6 +272,7 @@ module.exports = (grunt) ->
     "concat"
     "copy"
     "usemin"
+    "preprocess:dist"
     "uglify"
     "cssmin"
   ]
@@ -262,6 +280,7 @@ module.exports = (grunt) ->
   grunt.registerTask "server", [
     "clean:server"
     "copy:server"
+    "preprocess:html"
     "bower:install"
     "coffee:dist"
     "sass"
@@ -284,6 +303,7 @@ module.exports = (grunt) ->
     "clean:server"
     "copy:server"
     "bower:install"
+    "preprocess:e2e"
     "coffee"
     "html2js"
     "coffeelint"
