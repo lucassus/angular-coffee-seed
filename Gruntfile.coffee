@@ -1,4 +1,10 @@
+livereloadSnippet = require("grunt-contrib-livereload/lib/utils").livereloadSnippet
+
+mountFolder = (connect, dir) ->
+  connect.static require("path").resolve(dir)
+
 module.exports = (grunt) ->
+  # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
 
   # Extract browsers list from the command line
@@ -18,36 +24,42 @@ module.exports = (grunt) ->
     browsers = browsers.replace(/[\s\[\]]/, "")
     browsers.split(",")
 
+  # configurable paths
+  appConfig =
+    app: "./app"
+    test: "./test"
+    dist: "./dist"
+
   grunt.initConfig
+    appConfig: appConfig
     pkg: grunt.file.readJSON("package.json")
-    appConfig:
-      app: "./app"
-      test: "./test"
-      dist: "./dist"
 
     watch:
-      options:
-        livereload: true
+      coffee:
+        files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
+        tasks: ["coffee:dist"]
 
-      html:
-        files: ["<%= appConfig.app %>/**/*.html"]
-        tasks: ["copy:dist"]
+      coffeeTest:
+        files: ["<%= appConfig.test %>/**/*.coffee"]
+        tasks: ["coffee:test"]
 
       templates:
         files: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
         tasks: ["html2js"]
 
+      livereload:
+        files: [
+          # TODO use **/*
+          "<%= appConfig.app %>/{,*/}{,*/}*.html"
+          "{.tmp,<%= appConfig.app %>}/styles/{,*/}*.css"
+          "{.tmp,<%= appConfig.app %>}/scripts/{,*/}*.js"
+          "<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
+        ]
+        tasks: ["livereload"]
+
       css:
         files: ["<%= appConfig.app %>/styles/**/*.scss"]
         tasks: ["sass:dist"]
-
-      coffee:
-        files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
-        tasks: ["coffee:dist", "browserify"]
-
-      coffeeTest:
-        files: ["<%= appConfig.test %>/**/*.coffee"]
-        tasks: ["coffee:test"]
 
     coffee:
       dist:
@@ -55,7 +67,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.app %>/scripts"
           src: "**/*.coffee"
-          dest: "<%= appConfig.dist %>/scripts"
+          dest: ".tmp/scripts"
           ext: ".js"
         ]
 
@@ -64,14 +76,53 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.test %>"
           src: "**/*.coffee"
-          dest: "<%= appConfig.dist %>/test"
+          dest: ".tmp/test"
           ext: ".js"
         ]
 
     sass:
       dist:
         files:
-          "<%= appConfig.dist %>/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
+          ".tmp/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
+
+    concat:
+      dist:
+        files:
+          ".tmp/scripts/scripts.js": [
+            ".tmp/scripts/**/*.js"
+            "!.tmp/scripts/templates.js" # do not include complited templates
+            "!.tmp/scripts/application_test.js" # do not include test application module
+            "<%= appConfig.app %>/scripts/**/*.js"
+          ]
+
+    useminPrepare:
+      html: "<%= appConfig.app %>/index.html"
+      options:
+        dest: "<%= appConfig.dist %>"
+
+    usemin:
+      html: ["<%= appConfig.dist %>/index.html"]
+      css: ["<%= appConfig.dist %>/styles/**/*.css"]
+      options:
+        dirs: ["<%= appConfig.dist %>"]
+
+    imagemin:
+      dist:
+        files: [
+          expand: true,
+          cwd: "<%= appConfig.app %>/images",
+          src: "**/*.{png,jpg,jpeg}",
+          dest: "<%= appConfig.dist %>/images"
+        ]
+
+    htmlmin:
+      dist:
+        files: [
+          expand: true,
+          cwd: "<%= appConfig.app %>",
+          src: ["*.html", "views/*.html", "templates/*.tpl.html"],
+          dest: "<%= appConfig.dist %>"
+        ]
 
     copy:
       dist:
@@ -81,7 +132,10 @@ module.exports = (grunt) ->
           cwd: "<%= appConfig.app %>"
           dest: "<%= appConfig.dist %>"
           src: [
-            "**/*.html"
+            "*.{ico,txt}"
+            "components/**/*"
+            "images/**/*.{gif,webp}"
+            "styles/fonts/*"
           ]
         ]
 
@@ -94,29 +148,23 @@ module.exports = (grunt) ->
       app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee"]
       test: ["<%= appConfig.test %>/**/*.coffee"]
 
-    browserify:
-      options:
-        debug: true
-
-      "<%= appConfig.dist %>/scripts/<%= pkg.name %>.js": "<%= appConfig.dist %>/scripts/application.js"
-
     html2js:
       options:
         base: "app"
       main:
         src: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
-        dest: "<%= appConfig.dist %>/scripts/templates.js"
+        dest: ".tmp/scripts/templates.js"
 
     bower:
       install:
         options:
-          targetDir: "<%= appConfig.dist %>/components"
+          targetDir: ".tmp/components"
           install: false
 
     karma:
       options:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
-        basePath: "../<%= appConfig.dist %>"
+        basePath: "../.tmp"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
         # test results reporter to use
@@ -143,49 +191,99 @@ module.exports = (grunt) ->
         singleRun: false
         autoWatch: true
 
+    casperjs:
+      files: [".tmp/test/casperjs/**/*.js"]
+
     clean:
-      dist: ["<%= appConfig.dist %>"]
+      dist:
+        files: [
+          dot: true
+          src: [
+            ".tmp"
+            "<%= appConfig.dist %>/*"
+            "!<%= appConfig.dist %>/.git*"
+          ]
+        ]
+
+      server: ".tmp"
 
     connect:
       options:
         hostname: "localhost"
-        base: "<%= appConfig.dist %>"
-
-      server:
-        options: port: 9000
 
       e2e:
-        options: port: 9001
+        options:
+          port: 9001
+          middleware: (connect) ->
+            [mountFolder(connect, ".tmp"),
+             mountFolder(connect, appConfig.app)]
+
+      livereload:
+        options:
+          port: 9000
+          middleware: (connect) ->
+            [livereloadSnippet,
+             mountFolder(connect, ".tmp"),
+             mountFolder(connect, appConfig.app)]
+
+  grunt.renameTask "regarde", "watch"
 
   grunt.registerTask "build", [
     "clean:dist"
     "coffeelint"
-    "bower:install"
-    "copy:dist"
-    "coffee:dist"
-    "sass:dist"
-    "browserify"
-    "html2js"
+    "test"
+    "coffee"
+    "sass"
+    "useminPrepare"
+    "imagemin"
+    "htmlmin"
+    "concat"
+    "copy"
+    "usemin"
+    "uglify"
+    "cssmin"
   ]
 
   grunt.registerTask "server", [
-    "build"
-    "coffee:test"
-    "connect"
+    "clean:server"
+    "bower:install"
+    "coffee:dist"
+    "sass"
+    "livereload-start"
+    "connect:livereload"
     "watch"
   ]
 
   grunt.registerTask "test", [
-    "build"
-    "coffee:test"
+    "clean:server"
+    "bower:install"
+    "coffee"
+    "html2js"
+    "coffeelint"
+
     "karma:unit"
   ]
 
   grunt.registerTask "test:e2e", [
-    "build"
-    "coffee:test"
+    "clean:server"
+    "bower:install"
+    "coffee"
+    "html2js"
+    "coffeelint"
+
     "connect:e2e"
     "karma:e2e"
+  ]
+
+  grunt.registerTask "test:casperjs", [
+    "clean:server"
+    "bower:install"
+    "coffee"
+    "html2js"
+    "coffeelint"
+
+    "connect:e2e"
+    "casperjs"
   ]
 
   grunt.registerTask "test:watch", [
