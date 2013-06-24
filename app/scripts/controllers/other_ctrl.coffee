@@ -1,9 +1,10 @@
-module.exports = (controllers) ->
-  class OtherCtrl
+class OtherCtrl
 
-    @$inject = ["$scope", "alerts"]
-    constructor: ($scope, alerts) ->
-      $scope.name = "This is the other controller"
-      alerts.info("Hello World!")
+  @$inject = ["$scope", "alerts"]
+  constructor: ($scope, alerts) ->
+    $scope.name = "This is the other controller"
+    alerts.info("Hello World!")
 
-  controllers.controller("OtherCtrl", OtherCtrl)
+
+controllers = angular.module("myApp.controllers")
+controllers.controller("OtherCtrl", OtherCtrl)

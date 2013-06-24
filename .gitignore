@@ -2,6 +2,10 @@
 .idea
 *.iml
 
+# 3hrd party libraries
 node_modules
 components
+
+# Builds
+.tmp
 dist

@@ -10,7 +10,10 @@ files = [
   "components/angular-mocks/angular-mocks.js"
 
   "scripts/templates.js"
-  "scripts/angular-seed.js"
+  "scripts/modules/**/*.js"
+  "scripts/controllers.js"
+  "scripts/controllers/**/*.js"
+  "scripts/application.js"
 
   "test/unit/helpers/**/*.js"
   "test/unit/**/*_spec.js"
