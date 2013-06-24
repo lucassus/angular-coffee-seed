@@ -29,6 +29,7 @@ module.exports = (grunt) ->
     app: "./app"
     test: "./test"
     dist: "./dist"
+    dev: "./tmp"
 
   grunt.initConfig
     appConfig: appConfig
@@ -51,8 +52,8 @@ module.exports = (grunt) ->
         files: [
           # TODO use **/*
           "<%= appConfig.app %>/{,*/}{,*/}*.html"
-          "{.tmp,<%= appConfig.app %>}/styles/{,*/}*.css"
-          "{.tmp,<%= appConfig.app %>}/scripts/{,*/}*.js"
+          "{<%= appConfig.dev %>,<%= appConfig.app %>}/styles/{,*/}*.css"
+          "{<%= appConfig.dev %>,<%= appConfig.app %>}/scripts/{,*/}*.js"
           "<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
         ]
         tasks: ["livereload"]
@@ -67,7 +68,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.app %>/scripts"
           src: "**/*.coffee"
-          dest: ".tmp/scripts"
+          dest: "<%= appConfig.dev %>/scripts"
           ext: ".js"
         ]
 
@@ -76,22 +77,22 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.test %>"
           src: "**/*.coffee"
-          dest: ".tmp/test"
+          dest: "<%= appConfig.dev %>/test"
           ext: ".js"
         ]
 
     sass:
       dist:
         files:
-          ".tmp/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
+          "<%= appConfig.dev %>/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
 
     concat:
       dist:
         files:
-          ".tmp/scripts/scripts.js": [
-            ".tmp/scripts/**/*.js"
-            "!.tmp/scripts/templates.js" # do not include complited templates
-            "!.tmp/scripts/application_test.js" # do not include test application module
+          "<%= appConfig.dev %>/scripts/scripts.js": [
+            "<%= appConfig.dev %>/scripts/**/*.js"
+            "!<%= appConfig.dev %>/scripts/templates.js" # do not include complited templates
+            "!<%= appConfig.dev %>/scripts/application_test.js" # do not include test application module
             "<%= appConfig.app %>/scripts/**/*.js"
           ]
 
@@ -144,7 +145,7 @@ module.exports = (grunt) ->
           expand: true
           dot: true
           cwd: "<%= appConfig.app %>"
-          dest: ".tmp"
+          dest: "<%= appConfig.dev %>"
           src: [
             "*.{ico,txt}"
             "**/*.html"
@@ -159,7 +160,7 @@ module.exports = (grunt) ->
       html:
         options: context: E2E: false
         src: "<%= appConfig.app %>/index.html"
-        dest: ".tmp/index.html"
+        dest: "<%= appConfig.dev %>/index.html"
 
       dist:
         options: context: E2E: false
@@ -169,7 +170,7 @@ module.exports = (grunt) ->
       e2e:
         options: context: E2E: true
         src: "<%= appConfig.app %>/index.html"
-        dest: ".tmp/index.html"
+        dest: "<%= appConfig.dev %>/index.html"
 
     coffeelint:
       options:
@@ -185,18 +186,18 @@ module.exports = (grunt) ->
         base: "app"
       main:
         src: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
-        dest: ".tmp/scripts/templates.js"
+        dest: "<%= appConfig.dev %>/scripts/templates.js"
 
     bower:
       install:
         options:
-          targetDir: ".tmp/components"
+          targetDir: "<%= appConfig.dev %>/components"
           install: false
 
     karma:
       options:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
-        basePath: "../.tmp"
+        basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
         # test results reporter to use
@@ -224,20 +225,20 @@ module.exports = (grunt) ->
         autoWatch: true
 
     casperjs:
-      files: [".tmp/test/casperjs/**/*.js"]
+      files: ["<%= appConfig.dev %>/test/casperjs/**/*.js"]
 
     clean:
       dist:
         files: [
           dot: true
           src: [
-            ".tmp"
+            "<%= appConfig.dev %>"
             "<%= appConfig.dist %>/*"
             "!<%= appConfig.dist %>/.git*"
           ]
         ]
 
-      server: ".tmp"
+      server: "<%= appConfig.dev %>"
 
     connect:
       options:
@@ -247,7 +248,7 @@ module.exports = (grunt) ->
         options:
           port: 9001
           middleware: (connect) ->
-            [mountFolder(connect, ".tmp")]
+            [mountFolder(connect, "<%= appConfig.dev %>")]
 
       livereload:
         options:
@@ -255,7 +256,7 @@ module.exports = (grunt) ->
           middleware: (connect) ->
             [
               livereloadSnippet
-              mountFolder(connect, ".tmp")
+              mountFolder(connect, "<%= appConfig.dev %>")
             ]
 
   grunt.renameTask "regarde", "watch"
@@ -324,6 +325,7 @@ module.exports = (grunt) ->
     "casperjs"
   ]
 
+  # TODO this task is broken
   grunt.registerTask "test:watch", [
     "build"
     "coffee:test"
