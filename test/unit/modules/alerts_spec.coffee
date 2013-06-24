@@ -15,27 +15,26 @@ describe "myApp.alerts", ->
         $scope: $scope,
         alerts: alerts
 
-    it "assings flash messages", ->
+    Then "$scope.alertMessages should be defined", ->
       expect($scope.alertMessages).toBeDefined()
-      expect($scope.alertMessages).toEqual([])
+    And -> expect($scope.alertMessages).toEqual([])
 
-      alerts.info("Test message.")
-      expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Test message.")
+    describe "#info", ->
+      When -> alerts.info("Test message.")
+      Then ->
+        expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Test message.")
 
     describe "#disposeAlert", ->
-      it "disposes an alert at the given index", ->
-        # Given
+      Given ->
         alerts.info("Information..")
         alerts.error("Error..")
         spyOn(alerts, "dispose").andCallThrough()
 
-        # When
-        $scope.disposeAlert(2)
+      When -> $scope.disposeAlert(2)
 
-        # Then
-        expect(alerts.dispose).toHaveBeenCalledWith(2)
-        expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
-        expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
+      Then -> expect(alerts.dispose).toHaveBeenCalledWith(2)
+      And -> expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
+      And -> expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
 
   describe "directive", ->
     $scope = null
@@ -57,82 +56,84 @@ describe "myApp.alerts", ->
       expect(element.find(".alert-info").length).toEqual(1)
 
   describe "service", ->
-    it "is defined", inject (alerts) ->
-      expect(alerts).toBeDefined()
+    alerts = null
+    beforeEach inject ($injector) -> alerts = $injector.get("alerts")
+
+    Then -> expect(alerts).toBeDefined()
 
     describe "#nextId", ->
-      it "return the next id for the new flash message", inject (alerts) ->
-        expect(alerts.nextId()).toEqual(1)
-        alerts.nextId() for [1..4]
-        expect(alerts.nextId()).toEqual(6)
+      describe "first id", ->
+        Then -> expect(alerts.nextId()).toEqual(1)
+
+      describe "next id", ->
+        Given -> alerts.nextId() for [1..4]
+        Then -> expect(alerts.nextId()).toEqual(5)
 
     describe "#push", ->
-      beforeEach inject (alerts) ->
-        spyOn(alerts, "delayedDispose")
+      Given -> spyOn(alerts, "delayedDispose")
 
-      it "returns an id for the new flash message", inject (alerts) ->
-        expect(alerts.push("info", "Test..")).toEqual(1)
-        expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+      describe "return id for the new flash, message", ->
+        When -> alerts.push("info", "Test..")
 
-        expect(alerts.push("error", "Test error..")).toEqual(2)
-        expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+        describe "first message", ->
+          Then -> expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          And -> expect(alerts.lastId).toEqual(1)
+
+        describe "second message", ->
+          When -> alerts.push("error", "Test error..")
+          Then -> expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+          And -> expect(alerts.lastId).toEqual(2)
 
       describe "#info", ->
-        it "pushesh the given message", inject (alerts) ->
-          # Given
-          testMessage = "This is a test message!"
-          otherTestMessage = "This is a second test message!"
+        describe "push the given message", ->
+          Given -> @testMessage = "This is a test message!"
+          Given -> @otherTestMessage = "This is a second test message!"
 
-          # When
-          alerts.info(testMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          When ->
+            alerts.info(@testMessage)
+            alerts.info(@otherTestMessage)
 
-          alerts.info(otherTestMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
-
-          # Then
-          expect(alerts.messages).toContain(id: 1, type: "info", text: testMessage)
-          expect(alerts.messages).toContain(id: 2, type: "info", text: otherTestMessage)
+          Then ->
+            expect(alerts.messages).toContain(id: 1, type: "info", text: @testMessage)
+          And ->
+            expect(alerts.messages).toContain(id: 2, type: "info", text: @otherTestMessage)
 
       describe "#error", ->
-        it "pushesh the given message", inject (alerts) ->
-          # Given
-          testMessage = "This is a test message!"
+        describe "push the given message", ->
+          Given -> @testMessage = "This is a test message!"
 
-          # When
-          alerts.error(testMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          When -> alerts.error(@testMessage)
 
-          # Then
-          expect(alerts.messages).toContain(id: 1, type: "error", text: testMessage)
+          Then -> expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          And ->
+            expect(alerts.messages).toContain(id: 1, type: "error", text: @testMessage)
 
     describe "#dispose", ->
-      it "removes a message with the given id", inject (alerts) ->
-        # Given
-        alerts.info("First message")
-        alerts.info("Second message")
-        alerts.info("Third message")
-        alerts.error("Error message")
+      describe "remove a message with the given id", ->
+        Given ->
+          alerts.info("First message")
+          alerts.info("Second message")
+          alerts.info("Third message")
+          alerts.error("Error message")
 
-        # When
-        alerts.dispose(2)
+        When -> alerts.dispose(2)
 
-        # Then
-        expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
-        expect(alerts.messages).not.toContain(id: 2, type: "info", text: "Second message")
-        expect(alerts.messages).toContain(id: 3, type: "info", text: "Third message")
-        expect(alerts.messages).toContain(id: 4, type: "error", text: "Error message")
+        Then ->
+          expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
+          expect(alerts.messages).not.toContain(id: 2, type: "info", text: "Second message")
+          expect(alerts.messages).toContain(id: 3, type: "info", text: "Third message")
+          expect(alerts.messages).toContain(id: 4, type: "error", text: "Error message")
 
     describe "#delayedDispose", ->
-      it "removes a message after the given time", inject (alerts, $timeout) ->
-        # Given
-        alerts.info("First message")
+      $timeout = null
+      beforeEach inject ($injector) -> $timeout = $injector.get("$timeout")
 
-        # When
-        alerts.delayedDispose(1)
-        expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
+      describe "remove a message after the given time", ->
+        Given -> alerts.info("First message")
 
-        $timeout.flush()
+        When ->
+          alerts.delayedDispose(1)
+          expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
 
-        # Then
-        expect(alerts.messages).toEqual([])
+        When -> $timeout.flush()
+        Then -> expect(alerts.messages).toEqual([])
