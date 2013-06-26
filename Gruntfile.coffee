@@ -156,7 +156,6 @@ module.exports = (grunt) ->
         ]
 
     preprocess:
-
       html:
         options: context: E2E: false
         src: "<%= appConfig.app %>/index.html"
@@ -192,7 +191,9 @@ module.exports = (grunt) ->
       install:
         options:
           targetDir: "<%= appConfig.dev %>/components"
-          install: false
+          layout: "byComponent"
+          cleanTargetDir: true
+          install: true
 
     karma:
       options:
@@ -282,7 +283,7 @@ module.exports = (grunt) ->
     "clean:server"
     "copy:server"
     "preprocess:html"
-    "bower:install"
+    "bower"
     "coffee:dist"
     "sass"
     "livereload-start"
@@ -292,7 +293,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test", [
     "clean:server"
-    "bower:install"
+    "bower"
     "coffee"
     "html2js"
     "coffeelint"
@@ -303,7 +304,7 @@ module.exports = (grunt) ->
   grunt.registerTask "test:e2e", [
     "clean:server"
     "copy:server"
-    "bower:install"
+    "bower"
     "preprocess:e2e"
     "coffee"
     "html2js"
@@ -316,7 +317,7 @@ module.exports = (grunt) ->
   grunt.registerTask "test:casperjs", [
     "clean:server"
     "copy:server"
-    "bower:install"
+    "bower"
     "coffee"
     "html2js"
     "coffeelint"
