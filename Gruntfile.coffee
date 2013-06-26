@@ -29,7 +29,7 @@ module.exports = (grunt) ->
     app: "./app"
     test: "./test"
     dist: "./dist"
-    dev: "./tmp"
+    dev: "./dev"
 
   grunt.initConfig
     appConfig: appConfig
