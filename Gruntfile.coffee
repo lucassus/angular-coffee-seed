@@ -249,7 +249,7 @@ module.exports = (grunt) ->
         options:
           port: 9001
           middleware: (connect) ->
-            [mountFolder(connect, "<%= appConfig.dev %>")]
+            [mountFolder(connect, appConfig.dev)]
 
       livereload:
         options:
@@ -257,7 +257,7 @@ module.exports = (grunt) ->
           middleware: (connect) ->
             [
               livereloadSnippet
-              mountFolder(connect, "<%= appConfig.dev %>")
+              mountFolder(connect, appConfig.dev)
             ]
 
   grunt.renameTask "regarde", "watch"

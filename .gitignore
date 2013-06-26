@@ -7,5 +7,5 @@ node_modules
 bower_components
 
 # Builds
-.tmp
+tmp
 dist
