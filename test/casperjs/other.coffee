@@ -7,6 +7,8 @@ casper.then ->
   @test.assertTitle "Angular seed"
 
 casper.then ->
+  @clickLabel "Say hello!", "button"
+
   @test.assertEvalEquals (->
     document.querySelectorAll("div.alert").length
   ), 1, "Page displays 1 alert message"
