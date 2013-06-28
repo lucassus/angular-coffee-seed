@@ -285,11 +285,15 @@ module.exports = (grunt) ->
     "cssmin"
   ]
 
-  grunt.renameTask "build:dist", "build"
-
   grunt.registerTask "test:watch", [
     "coffee:test"
     "karma:watch"
   ]
+
+  grunt.renameTask "build:dist", "build"
+
+  # Used during heroku deployment
+  # see: https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt
+  grunt.registerTask "heroku:production", ["build"]
 
   grunt.registerTask "default", ["test"]
