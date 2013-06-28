@@ -155,7 +155,7 @@ module.exports = (grunt) ->
           targetDir: "<%= appConfig.dev %>/components"
           layout: "byComponent"
           cleanTargetDir: true
-          install: true
+          install: false
 
     karma:
       options:
@@ -226,7 +226,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dev", [
     "clean"
-    "bower" # TODO a little bit slow
+    "bower"
     "coffeelint"
     "coffee"
     "less"
