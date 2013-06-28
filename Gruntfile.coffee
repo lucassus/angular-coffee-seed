@@ -286,9 +286,7 @@ module.exports = (grunt) ->
 
   grunt.renameTask "build:dist", "build"
 
-  # TODO this task is broken
   grunt.registerTask "test:watch", [
-    "build"
     "coffee:test"
     "karma:watch"
   ]

@@ -67,7 +67,7 @@ or
 
 ```
 # inside the first terminal
-grunt build watch
+grunt build:dev watch
 
 # inside the second terminal
 grunt test:watch --browsers=Firefox,PhantomJS
