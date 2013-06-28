@@ -6,7 +6,7 @@ node_js:
   - 0.10.7
 
 before_script:
-  - npm install grunt-cli -g
+  - npm install grunt-cli bower -g
   - npm install
   - bower install
   - gem install compass
