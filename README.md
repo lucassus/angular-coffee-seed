@@ -9,6 +9,8 @@
 
 [![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
 
+Demo: http://lucassus-angular-seed.herokuapp.com
+
 ## Bootstrap
 
 Install nodejs v0.10.7 from the sources:
