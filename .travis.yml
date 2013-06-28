@@ -1,0 +1,26 @@
+language:
+  - ruby
+  - node_js
+
+node_js:
+  - 0.10.7
+
+before_install:
+  - npm install grunt-cli bower -g
+  - npm install
+  - bower install
+  - gem install compass
+
+  # install CasperJS
+  - git clone git://github.com/n1k0/casperjs.git ~/casperjs
+  - cd ~/casperjs
+  - git checkout tags/1.0.2
+  - export PATH=$PATH:`pwd`/bin
+  - cd -
+
+before_script:
+  - phantomjs --version
+  - casperjs --version
+
+script:
+  - DISPLAY=:99.0 grunt test:ci

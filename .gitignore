@@ -4,8 +4,8 @@
 
 # 3hrd party libraries
 node_modules
-components
+bower_components
 
 # Builds
-.tmp
+dev
 dist

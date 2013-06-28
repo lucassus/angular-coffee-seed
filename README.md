@@ -7,6 +7,8 @@
 * grunt
 * ..and a lot more
 
+[![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
+
 ## Bootstrap
 
 Install nodejs v0.10.7 from the sources:
@@ -67,7 +69,7 @@ or
 
 ```
 # inside the first terminal
-grunt build watch
+grunt build:dev watch
 
 # inside the second terminal
 grunt test:watch --browsers=Firefox,PhantomJS

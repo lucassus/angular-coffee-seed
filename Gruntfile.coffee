@@ -29,6 +29,7 @@ module.exports = (grunt) ->
     app: "./app"
     test: "./test"
     dist: "./dist"
+    dev: "./dev"
 
   grunt.initConfig
     appConfig: appConfig
@@ -43,23 +44,24 @@ module.exports = (grunt) ->
         files: ["<%= appConfig.test %>/**/*.coffee"]
         tasks: ["coffee:test"]
 
+      html:
+        files: [
+          "<%= appConfig.app %>/index.html"
+          "<%= appConfig.app %>/views/*.html"
+        ]
+        tasks: ["copy:dev"]
+
       templates:
         files: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
         tasks: ["html2js"]
 
-      livereload:
-        files: [
-          # TODO use **/*
-          "<%= appConfig.app %>/{,*/}{,*/}*.html"
-          "{.tmp,<%= appConfig.app %>}/styles/{,*/}*.css"
-          "{.tmp,<%= appConfig.app %>}/scripts/{,*/}*.js"
-          "<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
-        ]
-        tasks: ["livereload"]
-
       css:
-        files: ["<%= appConfig.app %>/styles/**/*.scss"]
-        tasks: ["sass:dist"]
+        files: ["<%= appConfig.app %>/styles/**/*.less"]
+        tasks: ["less"]
+
+      livereload:
+        files: ["<%= appConfig.dev %>/**/*"]
+        tasks: ["livereload"]
 
     coffee:
       dist:
@@ -67,7 +69,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.app %>/scripts"
           src: "**/*.coffee"
-          dest: ".tmp/scripts"
+          dest: "<%= appConfig.dev %>/scripts"
           ext: ".js"
         ]
 
@@ -76,27 +78,27 @@ module.exports = (grunt) ->
           expand: true
           cwd: "<%= appConfig.test %>"
           src: "**/*.coffee"
-          dest: ".tmp/test"
+          dest: "<%= appConfig.dev %>/test"
           ext: ".js"
         ]
 
-    sass:
+    less:
       dist:
         files:
-          ".tmp/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
+          "<%= appConfig.dev %>/styles/style.css": "<%= appConfig.app %>/styles/style.less"
 
     concat:
       dist:
         files:
-          ".tmp/scripts/scripts.js": [
-            ".tmp/scripts/**/*.js"
-            "!.tmp/scripts/templates.js" # do not include complited templates
-            "!.tmp/scripts/application_test.js" # do not include test application module
+          "<%= appConfig.dev %>/scripts/scripts.js": [
+            "<%= appConfig.dev %>/scripts/**/*.js"
+            "!<%= appConfig.dev %>/scripts/templates.js" # do not include complited templates
+            "!<%= appConfig.dev %>/scripts/application_test.js" # do not include test application module
             "<%= appConfig.app %>/scripts/**/*.js"
           ]
 
     useminPrepare:
-      html: "<%= appConfig.app %>/index.html"
+      html: "<%= appConfig.dev %>/index.html"
       options:
         dest: "<%= appConfig.dist %>"
 
@@ -105,15 +107,6 @@ module.exports = (grunt) ->
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
         dirs: ["<%= appConfig.dist %>"]
-
-    imagemin:
-      dist:
-        files: [
-          expand: true,
-          cwd: "<%= appConfig.app %>/images",
-          src: "**/*.{png,jpg,jpeg}",
-          dest: "<%= appConfig.dist %>/images"
-        ]
 
     htmlmin:
       dist:
@@ -125,26 +118,12 @@ module.exports = (grunt) ->
         ]
 
     copy:
-      dist:
+      dev:
         files: [
           expand: true
           dot: true
           cwd: "<%= appConfig.app %>"
-          dest: "<%= appConfig.dist %>"
-          src: [
-            "*.{ico,txt}"
-            "components/**/*"
-            "images/**/*.{gif,webp}"
-            "styles/fonts/*"
-          ]
-        ]
-
-      server:
-        files: [
-          expand: true
-          dot: true
-          cwd: "<%= appConfig.app %>"
-          dest: ".tmp"
+          dest: "<%= appConfig.dev %>"
           src: [
             "*.{ico,txt}"
             "**/*.html"
@@ -153,23 +132,6 @@ module.exports = (grunt) ->
             "styles/fonts/*"
           ]
         ]
-
-    preprocess:
-
-      html:
-        options: context: E2E: false
-        src: "<%= appConfig.app %>/index.html"
-        dest: ".tmp/index.html"
-
-      dist:
-        options: context: E2E: false
-        src: "<%= appConfig.dist %>/index.html"
-        dest: "<%= appConfig.dist %>/index.html"
-
-      e2e:
-        options: context: E2E: true
-        src: "<%= appConfig.app %>/index.html"
-        dest: ".tmp/index.html"
 
     coffeelint:
       options:
@@ -185,18 +147,20 @@ module.exports = (grunt) ->
         base: "app"
       main:
         src: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
-        dest: ".tmp/scripts/templates.js"
+        dest: "<%= appConfig.dev %>/scripts/templates.js"
 
     bower:
       install:
         options:
-          targetDir: ".tmp/components"
-          install: false
+          targetDir: "<%= appConfig.dev %>/components"
+          layout: "byComponent"
+          cleanTargetDir: true
+          install: true
 
     karma:
       options:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
-        basePath: "../.tmp"
+        basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
         # test results reporter to use
@@ -224,20 +188,20 @@ module.exports = (grunt) ->
         autoWatch: true
 
     casperjs:
-      files: [".tmp/test/casperjs/**/*.js"]
+      files: ["<%= appConfig.dev %>/test/casperjs/**/*.js"]
 
     clean:
-      dist:
+      options:
         files: [
           dot: true
           src: [
-            ".tmp"
+            "<%= appConfig.dev %>"
+            "!<%= appConfig.dev %>/.git*"
+
             "<%= appConfig.dist %>/*"
             "!<%= appConfig.dist %>/.git*"
           ]
         ]
-
-      server: ".tmp"
 
     connect:
       options:
@@ -247,7 +211,7 @@ module.exports = (grunt) ->
         options:
           port: 9001
           middleware: (connect) ->
-            [mountFolder(connect, ".tmp")]
+            [mountFolder(connect, appConfig.dev)]
 
       livereload:
         options:
@@ -255,78 +219,75 @@ module.exports = (grunt) ->
           middleware: (connect) ->
             [
               livereloadSnippet
-              mountFolder(connect, ".tmp")
+              mountFolder(connect, appConfig.dev)
             ]
 
   grunt.renameTask "regarde", "watch"
 
-  grunt.registerTask "build", [
-    "clean:dist"
+  grunt.registerTask "build:dev", [
+    "clean"
+    "bower" # TODO a little bit slow
     "coffeelint"
-    "test"
     "coffee"
-    "sass"
-    "useminPrepare"
-    "imagemin"
-    "htmlmin"
-    "concat"
-    "copy"
-    "usemin"
-    "preprocess:dist"
-    "uglify"
-    "cssmin"
+    "less"
+    "copy:dev"
   ]
 
   grunt.registerTask "server", [
-    "clean:server"
-    "copy:server"
-    "preprocess:html"
-    "bower:install"
-    "coffee:dist"
-    "sass"
+    "build:dev"
+
     "livereload-start"
     "connect:livereload"
     "watch"
   ]
 
   grunt.registerTask "test", [
-    "clean:server"
-    "bower:install"
-    "coffee"
+    "build:dev"
     "html2js"
-    "coffeelint"
-
     "karma:unit"
   ]
 
   grunt.registerTask "test:e2e", [
-    "clean:server"
-    "copy:server"
-    "bower:install"
-    "preprocess:e2e"
-    "coffee"
-    "html2js"
-    "coffeelint"
-
+    "build:dev"
     "connect:e2e"
     "karma:e2e"
   ]
 
   grunt.registerTask "test:casperjs", [
-    "clean:server"
-    "copy:server"
-    "bower:install"
-    "coffee"
-    "html2js"
-    "coffeelint"
-
+    "build:dev"
     "connect:e2e"
     "casperjs"
   ]
 
-  # TODO this task is broken
+  # run all tests on the ci server
+  grunt.registerTask "test:ci", [
+    "build:dev"
+    "html2js"
+
+    # run unit tests
+    "karma:unit"
+
+    # run e2e tests
+    "connect:e2e"
+    "karma:e2e"
+
+    # run casperjs integration tests
+    "casperjs"
+  ]
+
+  grunt.registerTask "build:dist", [
+    "test:ci"
+    "useminPrepare"
+    "htmlmin"
+    "concat"
+    "usemin"
+    "uglify"
+    "cssmin"
+  ]
+
+  grunt.renameTask "build:dist", "build"
+
   grunt.registerTask "test:watch", [
-    "build"
     "coffee:test"
     "karma:watch"
   ]
