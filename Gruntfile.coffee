@@ -56,8 +56,8 @@ module.exports = (grunt) ->
         tasks: ["html2js"]
 
       css:
-        files: ["<%= appConfig.app %>/styles/**/*.scss"]
-        tasks: ["sass:dist"]
+        files: ["<%= appConfig.app %>/styles/**/*.less"]
+        tasks: ["less"]
 
       livereload:
         files: ["<%= appConfig.dev %>/**/*"]
@@ -82,10 +82,10 @@ module.exports = (grunt) ->
           ext: ".js"
         ]
 
-    sass:
+    less:
       dist:
         files:
-          "<%= appConfig.dev %>/styles/style.css": "<%= appConfig.app %>/styles/style.scss"
+          "<%= appConfig.dev %>/styles/style.css": "<%= appConfig.app %>/styles/style.less"
 
     concat:
       dist:
@@ -229,7 +229,7 @@ module.exports = (grunt) ->
     "bower" # TODO a little bit slow
     "coffeelint"
     "coffee"
-    "sass"
+    "less"
     "copy:dev"
   ]
 
