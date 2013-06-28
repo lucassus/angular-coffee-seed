@@ -1,10 +1,9 @@
 {
   "name": "angular-seed",
   "version": "0.1.0",
+  "main": "./web.coffee",
   "dependencies": {
-    "gzippo": "*",
-    "express": "*",
-    "coffee-script": "*"
+    "express": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -28,5 +27,9 @@
     "grunt-karma": "~0.4.4",
     "grunt-regarde": "~0.1.1",
     "matchdep": "~0.1.1"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
   }
 }
