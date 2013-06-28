@@ -7,6 +7,8 @@
 * grunt
 * ..and a lot more
 
+[![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
+
 ## Bootstrap
 
 Install nodejs v0.10.7 from the sources:
