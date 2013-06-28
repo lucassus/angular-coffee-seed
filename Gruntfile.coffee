@@ -44,23 +44,24 @@ module.exports = (grunt) ->
         files: ["<%= appConfig.test %>/**/*.coffee"]
         tasks: ["coffee:test"]
 
+      html:
+        files: [
+          "<%= appConfig.app %>/index.html"
+          "<%= appConfig.app %>/views/*.html"
+        ]
+        tasks: ["copy:dev"]
+
       templates:
         files: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
         tasks: ["html2js"]
 
-      livereload:
-        files: [
-          # TODO use **/*
-          "<%= appConfig.app %>/{,*/}{,*/}*.html"
-          "{<%= appConfig.dev %>,<%= appConfig.app %>}/styles/{,*/}*.css"
-          "{<%= appConfig.dev %>,<%= appConfig.app %>}/scripts/{,*/}*.js"
-          "<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
-        ]
-        tasks: ["livereload"]
-
       css:
         files: ["<%= appConfig.app %>/styles/**/*.scss"]
         tasks: ["sass:dist"]
+
+      livereload:
+        files: ["<%= appConfig.dev %>/**/*"]
+        tasks: ["livereload"]
 
     coffee:
       dist:
