@@ -1,6 +1,11 @@
 {
   "name": "angular-seed",
   "version": "0.1.0",
+  "dependencies": {
+    "gzippo": "*",
+    "express": "*",
+    "coffee-script": "*"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-connect": "~0.3.0",
