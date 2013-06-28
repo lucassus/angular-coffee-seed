@@ -9,4 +9,4 @@ describe "Controller: OtherCtrl", ->
     MainCtrl = $controller "OtherCtrl", $scope: scope
 
   it "should attach a name", ->
-    expect(scope.name).toBe("This is the other controller")
+    expect(scope.name).toBe "This is the other controller"

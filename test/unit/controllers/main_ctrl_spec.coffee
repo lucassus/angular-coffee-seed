@@ -9,4 +9,4 @@ describe "Controller: MainCtrl", ->
     MainCtrl = $controller "MainCtrl", $scope: scope
 
   it "should attach a list of products to the scope", ->
-    expect(scope.products.length).toBe(6)
+    expect(scope.products.length).toBe 6

@@ -97,7 +97,7 @@ module.exports = (grunt) ->
           ]
 
     useminPrepare:
-      html: "<%= appConfig.app %>/index.html"
+      html: "<%= appConfig.dev %>/index.html"
       options:
         dest: "<%= appConfig.dist %>"
 
@@ -106,15 +106,6 @@ module.exports = (grunt) ->
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
         dirs: ["<%= appConfig.dist %>"]
-
-    imagemin:
-      dist:
-        files: [
-          expand: true,
-          cwd: "<%= appConfig.app %>/images",
-          src: "**/*.{png,jpg,jpeg}",
-          dest: "<%= appConfig.dist %>/images"
-        ]
 
     htmlmin:
       dist:
@@ -126,21 +117,7 @@ module.exports = (grunt) ->
         ]
 
     copy:
-      dist:
-        files: [
-          expand: true
-          dot: true
-          cwd: "<%= appConfig.app %>"
-          dest: "<%= appConfig.dist %>"
-          src: [
-            "*.{ico,txt}"
-            "components/**/*"
-            "images/**/*.{gif,webp}"
-            "styles/fonts/*"
-          ]
-        ]
-
-      server:
+      dev:
         files: [
           expand: true
           dot: true
@@ -154,22 +131,6 @@ module.exports = (grunt) ->
             "styles/fonts/*"
           ]
         ]
-
-    preprocess:
-      html:
-        options: context: E2E: false
-        src: "<%= appConfig.app %>/index.html"
-        dest: "<%= appConfig.dev %>/index.html"
-
-      dist:
-        options: context: E2E: false
-        src: "<%= appConfig.dist %>/index.html"
-        dest: "<%= appConfig.dist %>/index.html"
-
-      e2e:
-        options: context: E2E: true
-        src: "<%= appConfig.app %>/index.html"
-        dest: "<%= appConfig.dev %>/index.html"
 
     coffeelint:
       options:
@@ -229,17 +190,17 @@ module.exports = (grunt) ->
       files: ["<%= appConfig.dev %>/test/casperjs/**/*.js"]
 
     clean:
-      dist:
+      options:
         files: [
           dot: true
           src: [
             "<%= appConfig.dev %>"
+            "!<%= appConfig.dev %>/.git*"
+
             "<%= appConfig.dist %>/*"
             "!<%= appConfig.dist %>/.git*"
           ]
         ]
-
-      server: "<%= appConfig.dev %>"
 
     connect:
       options:
@@ -262,69 +223,68 @@ module.exports = (grunt) ->
 
   grunt.renameTask "regarde", "watch"
 
-  grunt.registerTask "build", [
-    "clean:dist"
+  grunt.registerTask "build:dev", [
+    "clean"
+    "bower" # TODO a little bit slow
     "coffeelint"
-    "test"
     "coffee"
     "sass"
-    "useminPrepare"
-    "imagemin"
-    "htmlmin"
-    "concat"
-    "copy"
-    "usemin"
-    "preprocess:dist"
-    "uglify"
-    "cssmin"
+    "copy:dev"
   ]
 
   grunt.registerTask "server", [
-    "clean:server"
-    "copy:server"
-    "preprocess:html"
-    "bower"
-    "coffee:dist"
-    "sass"
+    "build:dev"
+
     "livereload-start"
     "connect:livereload"
     "watch"
   ]
 
   grunt.registerTask "test", [
-    "clean:server"
-    "bower"
-    "coffee"
+    "build:dev"
     "html2js"
-    "coffeelint"
-
     "karma:unit"
   ]
 
   grunt.registerTask "test:e2e", [
-    "clean:server"
-    "copy:server"
-    "bower"
-    "preprocess:e2e"
-    "coffee"
-    "html2js"
-    "coffeelint"
-
+    "build:dev"
     "connect:e2e"
     "karma:e2e"
   ]
 
   grunt.registerTask "test:casperjs", [
-    "clean:server"
-    "copy:server"
-    "bower"
-    "coffee"
-    "html2js"
-    "coffeelint"
-
+    "build:dev"
     "connect:e2e"
     "casperjs"
   ]
+
+  # run all tests on the ci server
+  grunt.registerTask "test:ci", [
+    "build:dev"
+    "html2js"
+
+    # run unit tests
+    "karma:unit"
+
+    # run e2e tests
+    "connect:e2e"
+    "karma:e2e"
+
+    # run casperjs integration tests
+    "casperjs"
+  ]
+
+  grunt.registerTask "build:dist", [
+    "test:ci"
+    "useminPrepare"
+    "htmlmin"
+    "concat"
+    "usemin"
+    "uglify"
+    "cssmin"
+  ]
+
+  grunt.renameTask "build:dist", "build"
 
   # TODO this task is broken
   grunt.registerTask "test:watch", [
