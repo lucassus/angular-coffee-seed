@@ -3,10 +3,26 @@ class TodosCtrl
   @$inject = ["$scope"]
   constructor: ($scope) ->
     $scope.todos = [
-      { name: "First task", complete: false }
-      { name: "Second task", complete: false }
-      { name: "Completed task", complete: true }
+      { name: "First task", done: false }
+      { name: "Completed task", done: true }
+      { name: "Second task", done: false }
     ]
+
+    incompeleteTodos = ->
+      todo for todo in $scope.todos when not todo.done
+
+    $scope.remaining = ->
+      incompeleteTodos().length
+
+    $scope.archive = ->
+      $scope.todos = incompeleteTodos()
+
+    $scope.newTodo = {}
+
+    $scope.addTodo = ->
+      todo = $scope.newTodo
+      $scope.todos.push(name: todo.name, done: !!todo.done)
+      $scope.newTodo = {}
 
 controllers = angular.module("myApp.controllers")
 controllers.controller("TodosCtrl", TodosCtrl)
