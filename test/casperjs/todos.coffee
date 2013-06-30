@@ -1,44 +1,4 @@
-class PageObject
-  constructor: (@casper) ->
-
-class FormObject extends PageObject
-  fillWith: (data) ->
-    @casper.fill "form[name=new-todo]", data
-
-  checkDone: ->
-    @casper.click "input[name=done]"
-
-  clickAddButton: ->
-    @casper.clickLabel "Add", "button"
-
-class TodosPage extends PageObject
-  constructor: (@casper) ->
-    super(@casper)
-    @form = new FormObject(@casper)
-
-  clickNthTodo: (nth) ->
-    @casper.click("ul#todos li:nth-child(#{nth}) input")
-
-  clickArchive: ->
-    @casper.clickLabel "archive", "a"
-
-  headerText: ->
-    @casper.fetchText("h2")
-
-  remainingText: ->
-    @casper.fetchText("span#remaining")
-
-  getTodosCount: ->
-    @casper.evaluate ->
-      document.querySelectorAll("ul#todos li").length
-
-Casper = require("casper").Casper
-class CustomCasper extends Casper
-
-  constructor: (options = {}) ->
-    super(options)
-    @currentPage = new TodosPage(this)
-
+CustomCasper = require("./test/casperjs/helpers/custom_casper").CustomCasper
 casper = new CustomCasper()
 
 casper.start "http://localhost:9001", ->
