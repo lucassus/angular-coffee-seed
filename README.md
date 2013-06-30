@@ -59,7 +59,7 @@ Run karma with `autoWatch` option:
 
 ```
 # inside the first terminal
-grunt server
+grunt server --force
 
 # inside the second terminal
 grunt test:watch --browsers=Chrome,Opera
@@ -69,7 +69,7 @@ or
 
 ```
 # inside the first terminal
-grunt build:dev watch
+grunt build:dev watch --force
 
 # inside the second terminal
 grunt test:watch --browsers=Firefox,PhantomJS
