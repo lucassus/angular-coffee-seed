@@ -1,51 +1,49 @@
-CustomCasper = require("./test/casperjs/helpers/custom_casper").CustomCasper
-casper = new CustomCasper()
+scenario = require("./test/casperjs/helpers/scenario").create()
 
-casper.start "http://localhost:9001", ->
-  @clickLabel "Todos", "a"
+scenario "Todo List page", ->
 
-  # Define custom assertion
-  @test.assertTodoCount = (n) =>
-    @test.assertEquals @currentPage().getTodosCount(), n, "Page displays #{n} todos"
+  @feature "Navigate to the Todo List page", ->
+    @clickLabel "Todos", "a"
+    @test.assertTitle "Angular seed"
 
-casper.then ->
-  @test.assertEquals @currentPage().pageTitleText(), "Todo List"
+    # Define custom assertion
+    @test.assertTodoCount = (number) =>
+      @test.assertEquals @currentPage().getTodosCount(), number,
+        "Page displays #{number} todos"
 
-casper.then ->
-  @test.assertEquals @currentPage().remainingText(), "2 of 3 remaining"
-  @test.assertTodoCount 3
+  @feature "Show the valid page title", ->
+    @test.assertEquals @currentPage().pageTitleText(), "Todo List"
 
-casper.then ->
-  @currentPage().form.fillWith name: "New Todo"
-  @currentPage().form.clickAddButton()
+  @feature "Show all todos", ->
+    @test.assertEquals @currentPage().remainingText(), "2 of 3 remaining"
+    @test.assertTodoCount 3
 
-casper.then ->
-  @test.assertEquals @currentPage().remainingText(), "3 of 4 remaining"
-  @test.assertTodoCount 4
+  @feature "Create a new task", ->
+    @currentPage().form.fillWith name: "New Todo"
+    @currentPage().form.clickAddButton()
 
-casper.then ->
-  @currentPage().form.fillWith name: "Another Todo"
-  @currentPage().form.checkDone()
-  @currentPage().form.clickAddButton()
+    @test.assertEquals @currentPage().remainingText(), "3 of 4 remaining"
+    @test.assertTodoCount 4
 
-casper.then ->
-  @test.assertEquals @currentPage().remainingText(), "3 of 5 remaining"
-  @test.assertTodoCount 5
+  @feature "Create a new completed task", ->
+    @currentPage().form.fillWith name: "Another Todo"
+    @currentPage().form.checkDone()
+    @currentPage().form.clickAddButton()
 
-casper.then ->
-  @currentPage().clickArchive()
-  @test.assertEquals @currentPage().remainingText(), "3 of 3 remaining"
-  @test.assertTodoCount 3
+    @test.assertEquals @currentPage().remainingText(), "3 of 5 remaining"
+    @test.assertTodoCount 5
 
-casper.then ->
-  @currentPage().clickNthTodo(1)
-  @test.assertEquals @currentPage().remainingText(), "2 of 3 remaining"
-  @test.assertTodoCount 3
+  @feature "Archive all completed tasks", ->
+    @currentPage().clickArchive()
+    @test.assertEquals @currentPage().remainingText(), "3 of 3 remaining"
+    @test.assertTodoCount 3
 
-casper.then ->
-  @currentPage().clickNthTodo(3)
-  @test.assertEquals @currentPage().remainingText(), "3 of 3 remaining"
-  @test.assertTodoCount 3
+  @feature "Complete a taks", ->
+    @currentPage().clickNthTodo(1)
+    @test.assertEquals @currentPage().remainingText(), "2 of 3 remaining"
+    @test.assertTodoCount 3
 
-casper.run ->
-  @test.renderResults(true)
+  @feature "Uncomplete other task", ->
+    @currentPage().clickNthTodo(3)
+    @test.assertEquals @currentPage().remainingText(), "3 of 3 remaining"
+    @test.assertTodoCount 3
