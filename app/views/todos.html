@@ -1,0 +1,28 @@
+<h2>Todo List</h2>
+
+<span id="remaining">{{remaining()}} of {{todos.length}} remaining</span>
+[ <a class="archive" ng-click="archive()">archive</a> ]
+
+<ul id="todos">
+  <li ng-repeat="todo in todos | orderBy:'done'">
+    <label>
+      <input type="checkbox" ng-model="todo.done" />
+      <span ng-class="{done: todo.done}">{{todo.name}}</span>
+    </label>
+  </li>
+</ul>
+
+<form name="new-todo" ng-submit="addTodo()">
+  <field>
+    <legend>New todo</legend>
+
+    <label for="new-todo-name">Task name</label>
+    <input id="new-todo-name" type="text" name="name" ng-model="newTodo.name" required />
+
+    <label class="checkbox">
+      <input type="checkbox" name="done" ng-model="newTodo.done" /> Done
+    </label>
+
+    <button type="submit" class="btn">Add</button>
+  </field>
+</form>
