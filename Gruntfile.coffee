@@ -181,7 +181,7 @@ module.exports = (grunt) ->
 
       e2e:
         configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-        singleRun: true
+        singleRun: true # `false` for debugging
 
       watch:
         singleRun: false

@@ -4,7 +4,6 @@ describe "Controller: OtherCtrl", ->
   $scope = null
 
   beforeEach inject ($controller, $rootScope, alerts) ->
-    # initialize the controller
     $scope = $rootScope.$new()
     $controller "OtherCtrl", $scope: $scope
 

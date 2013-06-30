@@ -14,5 +14,9 @@ app.config [
         templateUrl: "views/other.html",
         controller: "OtherCtrl"
 
+      .when "/todos",
+        templateUrl: "views/todos.html",
+        controller: "TodosCtrl"
+
       .otherwise redirectTo: "/"
 ]
