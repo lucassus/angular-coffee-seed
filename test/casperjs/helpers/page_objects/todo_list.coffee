@@ -12,9 +12,6 @@ exports.TodoList = class extends Base
   clickArchive: ->
     @casper.clickLabel "archive", "a"
 
-  headerText: ->
-    @casper.fetchText("h2")
-
   remainingText: ->
     @casper.fetchText("span#remaining")
 
