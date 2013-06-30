@@ -8,11 +8,11 @@ describe "Products list page", ->
 
   it "displays available products", ->
     expect(repeater("ul#products li").column("product.name"))
-      .toEqual([
+      .toEqual [
         "HTC Wildfire"
         "iPhone"
         "Nexus One"
         "Nexus 7"
         "Samsung Galaxy Note"
         "Samsung S4"
-      ])
+      ]

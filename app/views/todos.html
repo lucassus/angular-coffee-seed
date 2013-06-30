@@ -1,1 +1,5 @@
-<h2>Todos</h2>
+<h2>Todo List</h2>
+
+<ul id="todos">
+  <li ng-repeat="todo in todos|filter:{ complete: false }">{{todo.name}}</li>
+</ul>
