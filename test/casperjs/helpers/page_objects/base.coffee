@@ -15,20 +15,27 @@ exports.Base = class
   #   @checkComplete()
   #   @unCheckComplete()
   defineElement: (id, selector) ->
-    prefix = id
-    suffix = id.charAt(0).toUpperCase() + id.slice(1)
+    # Appends a prefix for the given method
+    withPrefix = (method) ->
+      methodSuffix = method.charAt(0).toUpperCase() + method.slice(1)
+      id + methodSuffix
+
+    # Appends a suffix for the given method
+    withSuffix = (method) ->
+      suffix = id.charAt(0).toUpperCase() + id.slice(1)
+      method + suffix
 
     # Retrieve text contents
     fetchText = => @casper.fetchText(selector).trim()
-    @["#{prefix}Text"] = fetchText
+    @[withPrefix("text")] = fetchText
 
     # Perform click
     clickElement = => @casper.click(selector)
-    @["click#{suffix}"] = clickElement
+    @[withSuffix("click")] = clickElement
 
     # Retrieve the given attribute
     getAttribute = (attribute) => @casper.getElementAttribute(selector, attribute)
-    @["#{prefix}Attribute"] = getAttribute
+    @[withPrefix("attribute")] = getAttribute
 
     info = @casper.getElementInfo(selector)
 
@@ -39,8 +46,7 @@ exports.Base = class
         checked = => @casper.evaluate -> $("#{selector}:checked").length > 0
 
         checkElement = => if not checked() then clickElement()
-        @["check#{suffix}"] = checkElement
+        @[withSuffix("check")] = checkElement
 
         unCheckElement = => if checked() then clickElement()
-        @["unCheck#{suffix}"] = unCheckElement
-
+        @[withSuffix("unCheck")] = unCheckElement
