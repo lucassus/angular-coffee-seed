@@ -5,9 +5,7 @@ exports.TodoForm = class extends Base
     super(@casper)
 
     @defineElement "addButton", "form[name=new-todo] button[type=submit]"
+    @defineElement "done", "form[name=new-todo] input[name=done]"
 
   fillWith: (data) ->
     @casper.fill "form[name=new-todo]", data
-
-  checkDone: ->
-    @casper.click "input[name=done]"
