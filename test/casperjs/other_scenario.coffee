@@ -10,6 +10,10 @@ scenario "Other page", ->
     @test.assertEquals @currentPage().pageTitleText(), "Other Controller"
     @test.assertTextExist "This is the other controller"
 
+  @feature "Has 'Say hello!' button", ->
+    @test.assertEquals "Say hello!", @currentPage().sayHelloButtonText()
+    @test.assertEquals "sayHello()", @currentPage().sayHelloButtonAttribute("ng-click")
+
   @feature "Click 'Say Hello' button", ->
     @currentPage().clickSayHelloButton()
     @test.assertEquals 1, @flashMessages().count(), "Page displays 1 alert message"

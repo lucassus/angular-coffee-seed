@@ -6,14 +6,11 @@ exports.TodoList = class extends Base
     super(@casper)
     @form = new TodoForm(@casper)
 
+    @defineElement "remaining", "span#remaining"
+    @defineElement "archiveButton", "a.archive"
+
   clickNthTodo: (nth) ->
     @casper.click("ul#todos li:nth-child(#{nth}) input")
-
-  clickArchive: ->
-    @casper.clickLabel "archive", "a"
-
-  remainingText: ->
-    @casper.fetchText("span#remaining")
 
   getTodosCount: ->
     @casper.evaluate ->

@@ -23,6 +23,7 @@ class Scenario extends Casper
       @echo "\n#{desc}", "GREEN_BAR"
       fn.call(this)
 
+  # TODO find better solution
   currentPage: ->
     currentUrl = @getCurrentUrl()
     return new Other(this) if currentUrl.match /other$/

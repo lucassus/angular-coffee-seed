@@ -33,8 +33,11 @@ scenario "Todo List page", ->
     @test.assertEquals @currentPage().remainingText(), "3 of 5 remaining"
     @test.assertTodoCount 5
 
+  @feature "Has 'Archive' button", ->
+    @test.assertEquals "archive", @currentPage().archiveButtonText()
+
   @feature "Archive all completed tasks", ->
-    @currentPage().clickArchive()
+    @currentPage().clickArchiveButton()
     @test.assertEquals @currentPage().remainingText(), "3 of 3 remaining"
     @test.assertTodoCount 3
 

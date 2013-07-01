@@ -1,6 +1,7 @@
 Base = require("./test/casperjs/helpers/page_objects/base").Base
 
 exports.Other = class extends Base
+  constructor: (@casper) ->
+    super(@casper)
 
-  clickSayHelloButton: ->
-    @casper.clickLabel "Say hello!", "button"
+    @defineElement "sayHelloButton", ".btn.say-hello"
