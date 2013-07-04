@@ -49,10 +49,7 @@ module.exports = (grunt) ->
         tasks: ["copy:dev"]
 
       templates:
-        files: [
-          "<%= appConfig.app %>/templates/**/*.html"
-          "<%= appConfig.app %>/views/*.html"
-        ]
+        files: ["<%= appConfig.app %>/templates/**/*.html"]
         tasks: ["ngtemplates"]
 
       css:
