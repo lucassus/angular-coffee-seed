@@ -5,6 +5,12 @@ app.config [
   "$provide", "$routeProvider", ($provide, $routeProvider) ->
     $provide.value("alertTimeout", 3000)
 
+    # workarounds e2e scenarios
+    e2eScenarioRunner = window.location.port is "8090"
+    if e2eScenarioRunner
+      # disable timeouts, see https://github.com/angular/angular.js/issues/2402
+      $provide.value("alertTimeout", null)
+
     $routeProvider
       .when "/",
         templateUrl: "templates/views/main.html",
