@@ -188,7 +188,7 @@ module.exports = (grunt) ->
         autoWatch: true
 
     casperjs:
-      files: ["<%= appConfig.dev %>/test/casperjs/**/*.js"]
+      files: ["<%= appConfig.dev %>/test/casperjs/**/*_scenario.js"]
 
     clean:
       options:

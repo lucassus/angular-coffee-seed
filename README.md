@@ -43,7 +43,27 @@ bower install
 grunt server
 ```
 
-open http://localhost:9000
+Navigate to http://localhost:9000
+
+## Install PhantomJS ad CasperJS for the integration testing
+
+Download and install PhantomJS
+
+```
+wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
+tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
+cd tar xvjf phantomjs-1.9.1-linux-x86_64
+ln -sf `pwd`/bin/phantomjs /usr/local/bin/phantomjs
+```
+
+Checkout and install CasperJS
+
+```
+git clone git://github.com/n1k0/casperjs.git
+cd casperjs
+git checkout tags/1.0.2
+ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+```
 
 ## Running test
 
