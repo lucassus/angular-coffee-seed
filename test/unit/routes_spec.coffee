@@ -2,10 +2,6 @@ describe "Application routes", ->
 
   beforeEach module("myApp")
 
-  beforeEach inject ($httpBackend) ->
-    for partial in ["views/main.html", "views/other.html", "views/todos.html"]
-      $httpBackend.whenGET(partial).respond({})
-
   beforeEach inject ($location, $rootScope) ->
     @navigateTo = (path) ->
       $location.path(path)
