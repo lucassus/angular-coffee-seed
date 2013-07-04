@@ -293,7 +293,6 @@ module.exports = (grunt) ->
   grunt.renameTask "build:dist", "build"
 
   # Used during heroku deployment
-  # see: https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt
   grunt.registerTask "heroku:production", ["build"]
 
   grunt.registerTask "default", ["test"]
