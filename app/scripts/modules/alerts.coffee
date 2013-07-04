@@ -1,4 +1,4 @@
-alerts = angular.module("myApp.alerts", [])
+alerts = angular.module("myApp.alerts", ["myApp.templates"])
 
 class AlertsController
   @$inject = ["$scope", "alerts"]
@@ -50,7 +50,7 @@ alerts.directive "alerts", ->
   restrict: "E"
   transclude: true
 
-  templateUrl: "templates/alerts.tpl.html"
+  templateUrl: "templates/alerts.html"
   replace: true
 
   controller: "alerts"
