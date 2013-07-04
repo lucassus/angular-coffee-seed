@@ -9,10 +9,10 @@ files = [
   "components/angular/angular.js"
   "components/angular-mocks/angular-mocks.js"
 
-  "scripts/templates.js"
   "scripts/modules/**/*.js"
   "scripts/controllers.js"
   "scripts/controllers/**/*.js"
+  "scripts/templates.js"
   "scripts/application.js"
 
   "test/unit/helpers/**/*.js"

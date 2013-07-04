@@ -7,15 +7,15 @@ app.config [
 
     $routeProvider
       .when "/",
-        templateUrl: "views/main.html",
+        templateUrl: "templates/views/main.html",
         controller: "MainCtrl"
 
       .when "/other",
-        templateUrl: "views/other.html",
+        templateUrl: "templates/views/other.html",
         controller: "OtherCtrl"
 
       .when "/todos",
-        templateUrl: "views/todos.html",
+        templateUrl: "templates/views/todos.html",
         controller: "TodosCtrl"
 
       .otherwise redirectTo: "/"
