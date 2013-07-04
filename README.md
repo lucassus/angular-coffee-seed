@@ -9,6 +9,8 @@
 
 [![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
 
+Demo: http://lucassus-angular-seed.herokuapp.com
+
 ## Bootstrap
 
 Install nodejs v0.10.7 from the sources:
@@ -147,3 +149,12 @@ grunt build
 ```
 
 And then navigate to `http://localhost:8000` to see the production release.
+
+# Heroku deployment
+
+```
+git co heroku-production
+git merge master
+grunt heroku:production
+git push heroku heroku-production:master -f
+```
