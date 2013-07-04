@@ -149,3 +149,12 @@ grunt build
 ```
 
 And then navigate to `http://localhost:8000` to see the production release.
+
+# Heroku deployment
+
+```
+git co heroku-production
+git merge master
+grunt heroku:production
+git push heroku heroku-production:master -f
+```
