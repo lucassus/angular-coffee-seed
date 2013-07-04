@@ -4,6 +4,10 @@ class Scenario extends Casper
   constructor: (@baseUrl = "http://localhost:9001") ->
     super
 
+    # catches remote `console.log` calls
+    @on "remote.message", (message) ->
+      console.log "remote", message
+
   scenario: (desc, fn) =>
     desc = "Scenario: #{desc}"
     @echo "\n#{desc}", "INFO_BAR"
