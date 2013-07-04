@@ -155,7 +155,7 @@ module.exports = (grunt) ->
           targetDir: "<%= appConfig.dev %>/components"
           layout: "byComponent"
           cleanTargetDir: true
-          install: true
+          install: false
 
     karma:
       options:
@@ -181,14 +181,14 @@ module.exports = (grunt) ->
 
       e2e:
         configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-        singleRun: true
+        singleRun: true # `false` for debugging
 
       watch:
         singleRun: false
         autoWatch: true
 
     casperjs:
-      files: ["<%= appConfig.dev %>/test/casperjs/**/*.js"]
+      files: ["<%= appConfig.dev %>/test/casperjs/**/*_scenario.js"]
 
     clean:
       options:
@@ -226,7 +226,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dev", [
     "clean"
-    "bower" # TODO a little bit slow
+    "bower"
     "coffeelint"
     "coffee"
     "less"
@@ -285,11 +285,14 @@ module.exports = (grunt) ->
     "cssmin"
   ]
 
-  grunt.renameTask "build:dist", "build"
-
   grunt.registerTask "test:watch", [
     "coffee:test"
     "karma:watch"
   ]
+
+  grunt.renameTask "build:dist", "build"
+
+  # Used during heroku deployment
+  grunt.registerTask "heroku:production", ["build"]
 
   grunt.registerTask "default", ["test"]
