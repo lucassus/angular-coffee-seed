@@ -6,7 +6,7 @@ class Scenario extends Casper
 
   scenario: (desc, fn) =>
     desc = "Scenario: #{desc}"
-    @echo "\n#{desc}", "RED_BAR"
+    @echo "\n#{desc}", "INFO_BAR"
 
     @start @baseUrl
 
@@ -17,7 +17,11 @@ class Scenario extends Casper
   feature: (desc, fn) =>
     this.then ->
       @echo "\n#{desc}", "GREEN_BAR"
-      fn.call(this)
+
+      if fn?
+        fn.call this
+      else
+        @echo "pending", "RED_BAR"
 
 exports.create = (baseUrl) ->
   casper = new Scenario(baseUrl)
