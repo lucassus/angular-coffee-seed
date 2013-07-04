@@ -45,15 +45,12 @@ module.exports = (grunt) ->
         tasks: ["coffee:test"]
 
       html:
-        files: [
-          "<%= appConfig.app %>/index.html"
-          "<%= appConfig.app %>/views/*.html"
-        ]
+        files: ["<%= appConfig.app %>/index.html"]
         tasks: ["copy:dev"]
 
       templates:
-        files: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
-        tasks: ["html2js"]
+        files: ["<%= appConfig.app %>/templates/**/*.html"]
+        tasks: ["ngtemplates"]
 
       css:
         files: ["<%= appConfig.app %>/styles/**/*.less"]
@@ -92,18 +89,23 @@ module.exports = (grunt) ->
         files:
           "<%= appConfig.dev %>/scripts/scripts.js": [
             "<%= appConfig.dev %>/scripts/**/*.js"
-            "!<%= appConfig.dev %>/scripts/templates.js" # do not include complited templates
             "!<%= appConfig.dev %>/scripts/application_test.js" # do not include test application module
             "<%= appConfig.app %>/scripts/**/*.js"
           ]
 
     useminPrepare:
-      html: "<%= appConfig.dev %>/index.html"
+      html: [
+        "<%= appConfig.dev %>/**/*.html"
+        "!<%= appConfig.dev %>/templates/**/*"
+      ]
       options:
         dest: "<%= appConfig.dist %>"
 
     usemin:
-      html: ["<%= appConfig.dist %>/index.html"]
+      html: [
+        "<%= appConfig.dist %>/**/*.html"
+        "!<%= appConfig.dist %>/templates/**/*"
+      ]
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
         dirs: ["<%= appConfig.dist %>"]
@@ -113,7 +115,10 @@ module.exports = (grunt) ->
         files: [
           expand: true,
           cwd: "<%= appConfig.app %>",
-          src: ["*.html", "views/*.html", "templates/*.tpl.html"],
+          src: [
+            "**/*.html"
+            "!templates/**/*"
+          ],
           dest: "<%= appConfig.dist %>"
         ]
 
@@ -127,6 +132,7 @@ module.exports = (grunt) ->
           src: [
             "*.{ico,txt}"
             "**/*.html"
+            "!templates/**/*"
             "components/**/*"
             "images/**/*.{gif,webp}"
             "styles/fonts/*"
@@ -142,11 +148,18 @@ module.exports = (grunt) ->
       app: ["Gruntfile.coffee", "<%= appConfig.app %>/scripts/**/*.coffee"]
       test: ["<%= appConfig.test %>/**/*.coffee"]
 
-    html2js:
+    ngtemplates:
       options:
-        base: "app"
-      main:
-        src: ["<%= appConfig.app %>/templates/**/*.tpl.html"]
+        base: "<%= appConfig.app %>"
+        module:
+          name: "myApp.templates"
+          define: true
+
+      myApp:
+        src: [
+          "<%= appConfig.app %>/templates/**/*.html"
+          "<%= appConfig.app %>/views/**/*.html"
+        ]
         dest: "<%= appConfig.dev %>/scripts/templates.js"
 
     bower:
@@ -228,6 +241,7 @@ module.exports = (grunt) ->
     "coffee"
     "less"
     "copy:dev"
+    "ngtemplates"
   ]
 
   grunt.registerTask "server", [
@@ -240,7 +254,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test", [
     "build:dev"
-    "html2js"
     "karma:unit"
   ]
 
@@ -259,7 +272,6 @@ module.exports = (grunt) ->
   # run all tests on the ci server
   grunt.registerTask "test:ci", [
     "build:dev"
-    "html2js"
 
     # run unit tests
     "karma:unit"
