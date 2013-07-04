@@ -94,12 +94,18 @@ module.exports = (grunt) ->
           ]
 
     useminPrepare:
-      html: "<%= appConfig.dev %>/index.html"
+      html: [
+        "<%= appConfig.dev %>/**/*.html"
+        "!<%= appConfig.dev %>/templates/**/*"
+      ]
       options:
         dest: "<%= appConfig.dist %>"
 
     usemin:
-      html: ["<%= appConfig.dist %>/index.html"]
+      html: [
+        "<%= appConfig.dist %>/**/*.html"
+        "!<%= appConfig.dist %>/templates/**/*"
+      ]
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
         dirs: ["<%= appConfig.dist %>"]
@@ -109,7 +115,10 @@ module.exports = (grunt) ->
         files: [
           expand: true,
           cwd: "<%= appConfig.app %>",
-          src: ["index.html"],
+          src: [
+            "**/*.html"
+            "!templates/**/*"
+          ],
           dest: "<%= appConfig.dist %>"
         ]
 
@@ -122,7 +131,8 @@ module.exports = (grunt) ->
           dest: "<%= appConfig.dev %>"
           src: [
             "*.{ico,txt}"
-            "index.html" # TODO all html files except ng templates
+            "**/*.html"
+            "!templates/**/*"
             "components/**/*"
             "images/**/*.{gif,webp}"
             "styles/fonts/*"
