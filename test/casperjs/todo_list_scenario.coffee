@@ -23,6 +23,14 @@ scenario "Todo List page", ->
     @test.assertEquals page.remainingText(), "2 of 3 remaining"
     @test.assertTodoCount 3
 
+    firstTodo = page.findTodoByText("First task")
+    @test.assertEquals "First task", firstTodo.getName()
+    @test.assertFalsy firstTodo.isCompleted()
+
+    completedTodo = page.findTodoByText("Completed task")
+    @test.assertEquals "Completed task", completedTodo.getName()
+    @test.assertTruthy completedTodo.isCompleted()
+
   @feature "Create a new task", ->
     form.fillWith name: "New Todo"
 
@@ -35,13 +43,16 @@ scenario "Todo List page", ->
     @test.assertEquals page.remainingText(), "3 of 4 remaining"
     @test.assertTodoCount 4
 
+    newTodo = page.findTodoByText("New Todo")
+    @test.assertFalsy newTodo.isCompleted()
+
   @feature "Create a new completed task", ->
     form.fillWith name: "Another Todo"
     form.checkDone()
 
     formValues = form.getValues()
     @test.assertEqual "Another Todo", formValues.name
-    @test.assertTrue formValues.done
+    @test.assertTruthy formValues.done
 
     form.clickAddButton()
     @capture "test.png"
@@ -49,17 +60,26 @@ scenario "Todo List page", ->
     @test.assertEquals page.remainingText(), "3 of 5 remaining"
     @test.assertTodoCount 5
 
-  @feature "Archive all completed tasks", ->
-    page.clickArchiveButton()
-    @test.assertEquals page.remainingText(), "3 of 3 remaining"
-    @test.assertTodoCount 3
+    newTodo = page.findTodoByText("Another Todo")
+    @test.assertTruthy newTodo.isCompleted()
 
   @feature "Complete a taks", ->
-    page.clickNthTodo(1)
-    @test.assertEquals page.remainingText(), "2 of 3 remaining"
-    @test.assertTodoCount 3
+    todo = page.findTodoByText("First task")
+    @test.assertFalsy todo.isCompleted()
+    todo.complete()
 
-  @feature "Uncomplete other task", ->
-    page.clickNthTodo(3)
+    @test.assertEquals page.remainingText(), "2 of 5 remaining"
+    @test.assertTodoCount 5
+
+  @feature "Incomplete other task", ->
+    todo = page.findTodoByText("Completed task")
+    @test.assertTruthy todo.isCompleted()
+    todo.incomplete()
+
+    @test.assertEquals page.remainingText(), "3 of 5 remaining"
+    @test.assertTodoCount 5
+
+  @feature "Archive all completed tasks", ->
+    page.clickArchiveButton()
     @test.assertEquals page.remainingText(), "3 of 3 remaining"
     @test.assertTodoCount 3
