@@ -1,11 +1,14 @@
-Base = require("./test/casperjs/helpers/page_objects/base").Base
+BaseForm = require("./test/casperjs/helpers/page_objects/base_form").BaseForm
 
-exports.TodoForm = class extends Base
-  constructor: (@casper) ->
-    super(@casper)
+exports.TodoForm = class extends BaseForm
+  constructor: (@casper, @selector) ->
+    super(@casper, @selector)
 
-    @defineElement "addButton", "form[name=new-todo] button[type=submit]"
-    @defineElement "done", "form[name=new-todo] input[name=done]"
+  checkDone: ->
+    @casper.evaluate (selector) ->
+      $checkbox = $("#{selector} input[type=checkbox][name=done]")
+      $checkbox.click() if $checkbox.not(":checked")
+    , @selector
 
-  fillWith: (data) ->
-    @casper.fill "form[name=new-todo]", data
+  clickAddButton: ->
+    @casper.click "#{@selector} button[type=submit]"

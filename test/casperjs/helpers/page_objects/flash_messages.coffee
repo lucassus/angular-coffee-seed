@@ -8,4 +8,4 @@ exports.FlashMessages = class extends Base
   text: -> @nthText(1)
 
   nthText: (nth) ->
-    @casper.fetchText("#alerts div:nth-child(#{nth}) span")
+    @casper.fetchText "#alerts div:nth-child(#{nth}) span"
