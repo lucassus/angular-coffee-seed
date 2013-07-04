@@ -204,17 +204,14 @@ module.exports = (grunt) ->
       files: ["<%= appConfig.dev %>/test/casperjs/**/*_scenario.js"]
 
     clean:
-      options:
-        files: [
-          dot: true
-          src: [
-            "<%= appConfig.dev %>"
-            "!<%= appConfig.dev %>/.git*"
-
-            "<%= appConfig.dist %>/*"
-            "!<%= appConfig.dist %>/.git*"
-          ]
-        ]
+      dev: [
+        "<%= appConfig.dev %>/**/*"
+        "!<%= appConfig.dev %>/.git*"
+      ]
+      dist: [
+        "<%= appConfig.dist %>/**/*"
+        "!<%= appConfig.dist %>/.git*"
+      ]
 
     connect:
       options:
