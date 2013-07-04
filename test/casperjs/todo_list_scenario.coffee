@@ -55,7 +55,6 @@ scenario "Todo List page", ->
     @test.assertTruthy formValues.done
 
     form.clickAddButton()
-    @capture "test.png"
 
     @test.assertEquals page.remainingText(), "3 of 5 remaining"
     @test.assertTodoCount 5

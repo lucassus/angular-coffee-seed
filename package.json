@@ -1,6 +1,11 @@
 {
   "name": "angular-seed",
   "version": "0.1.0",
+  "main": "./web.coffee",
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "express": "~3.3.1"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-connect": "~0.3.0",
@@ -23,5 +28,9 @@
     "grunt-karma": "~0.4.4",
     "grunt-regarde": "~0.1.1",
     "matchdep": "~0.1.1"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
   }
 }
