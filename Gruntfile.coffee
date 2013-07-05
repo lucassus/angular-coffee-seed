@@ -95,7 +95,7 @@ module.exports = (grunt) ->
     useminPrepare:
       html: [
         "<%= appConfig.dev %>/**/*.html"
-        "!<%= appConfig.dev %>/templates/**/*"
+        "!<%= appConfig.dev %>/templates/**/*.html"
       ]
       options:
         dest: "<%= appConfig.dist %>"
@@ -103,7 +103,7 @@ module.exports = (grunt) ->
     usemin:
       html: [
         "<%= appConfig.dist %>/**/*.html"
-        "!<%= appConfig.dist %>/templates/**/*"
+        "!<%= appConfig.dist %>/templates/**/*.html"
       ]
       css: ["<%= appConfig.dist %>/styles/**/*.css"]
       options:
@@ -116,7 +116,7 @@ module.exports = (grunt) ->
           cwd: "<%= appConfig.app %>",
           src: [
             "**/*.html"
-            "!templates/**/*"
+            "!templates/**/*.html"
           ],
           dest: "<%= appConfig.dist %>"
         ]
@@ -131,7 +131,7 @@ module.exports = (grunt) ->
           src: [
             "*.{ico,txt}"
             "**/*.html"
-            "!templates/**/*"
+            "!templates/**/*.html"
             "components/**/*"
             "images/**/*.{gif,webp}"
             "styles/fonts/*"
