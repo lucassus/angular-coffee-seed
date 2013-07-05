@@ -196,6 +196,8 @@ module.exports = (grunt) ->
         singleRun: true # `false` for debugging
 
       watch:
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["dots"]
         singleRun: false
         autoWatch: true
 
