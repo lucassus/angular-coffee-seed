@@ -2,7 +2,7 @@
   "name": "Angular grunt seed",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "~2.0.2",
+    "jquery": "~2.0.3",
     "angular": "~1.0.7",
     "bootstrap": "~2.3.2"
   },

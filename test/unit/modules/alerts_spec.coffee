@@ -40,13 +40,16 @@ describe "myApp.alerts", ->
     $scope = null
     element = null
 
-    beforeEach module("templates/alerts.tpl.html")
+    beforeEach module("myApp.templates")
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope
 
+      # compite the html snippet
       element = angular.element "<alerts></alerts>"
-      $compile(element)($scope)
+      linkFn = $compile(element)
+      linkFn($scope)
+
       $scope.$digest()
 
     it "renders alerts", ->

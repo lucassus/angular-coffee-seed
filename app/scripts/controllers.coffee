@@ -1,1 +1,1 @@
-angular.module("myApp.controllers", [])
+angular.module("myApp.controllers", ["myApp.templates"])
