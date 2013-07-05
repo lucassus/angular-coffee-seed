@@ -17,11 +17,12 @@ describe "myApp.alerts", ->
 
     Then "$scope.alertMessages should be defined", ->
       expect($scope.alertMessages).toBeDefined()
-    And -> expect($scope.alertMessages).toEqual([])
+    And ->
+      expect($scope.alertMessages).toEqual([])
 
     describe "#info", ->
       When -> alerts.info("Test message.")
-      Then ->
+      Then "it should contain the message", ->
         expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Test message.")
 
     describe "#disposeAlert", ->
@@ -32,7 +33,7 @@ describe "myApp.alerts", ->
 
       When -> $scope.disposeAlert(2)
 
-      Then -> expect(alerts.dispose).toHaveBeenCalledWith(2)
+      Then "the message should disappear", -> expect(alerts.dispose).toHaveBeenCalledWith(2)
       And -> expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
       And -> expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
 
@@ -62,15 +63,16 @@ describe "myApp.alerts", ->
     alerts = null
     beforeEach inject ($injector) -> alerts = $injector.get("alerts")
 
-    Then -> expect(alerts).toBeDefined()
+    Then "then service should be defined", ->
+      expect(alerts).toBeDefined()
 
     describe "#nextId", ->
       describe "first id", ->
-        Then -> expect(alerts.nextId()).toEqual(1)
+        Then "it should return the first id", -> expect(alerts.nextId()).toEqual(1)
 
       describe "next id", ->
         Given -> alerts.nextId() for [1..4]
-        Then -> expect(alerts.nextId()).toEqual(5)
+        Then "it should return the next id", -> expect(alerts.nextId()).toEqual(5)
 
     describe "#push", ->
       Given -> spyOn(alerts, "delayedDispose")
@@ -79,12 +81,14 @@ describe "myApp.alerts", ->
         When -> alerts.push("info", "Test..")
 
         describe "first message", ->
-          Then -> expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          Then "it should return id for the first message", ->
+            expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
           And -> expect(alerts.lastId).toEqual(1)
 
         describe "second message", ->
           When -> alerts.push("error", "Test error..")
-          Then -> expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+          Then "it should return id for the next message", ->
+            expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
           And -> expect(alerts.lastId).toEqual(2)
 
       describe "#info", ->
@@ -96,7 +100,7 @@ describe "myApp.alerts", ->
             alerts.info(@testMessage)
             alerts.info(@otherTestMessage)
 
-          Then ->
+          Then "it should push the given messages", ->
             expect(alerts.messages).toContain(id: 1, type: "info", text: @testMessage)
           And ->
             expect(alerts.messages).toContain(id: 2, type: "info", text: @otherTestMessage)
@@ -107,7 +111,8 @@ describe "myApp.alerts", ->
 
           When -> alerts.error(@testMessage)
 
-          Then -> expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          Then "it should push the given messages", ->
+            expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
           And ->
             expect(alerts.messages).toContain(id: 1, type: "error", text: @testMessage)
 
@@ -121,7 +126,7 @@ describe "myApp.alerts", ->
 
         When -> alerts.dispose(2)
 
-        Then ->
+        Then "it should remove a message with the given id", ->
           expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
           expect(alerts.messages).not.toContain(id: 2, type: "info", text: "Second message")
           expect(alerts.messages).toContain(id: 3, type: "info", text: "Third message")
@@ -139,4 +144,5 @@ describe "myApp.alerts", ->
           expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
 
         When -> $timeout.flush()
-        Then -> expect(alerts.messages).toEqual([])
+        Then "it should remove all messages", ->
+          expect(alerts.messages).toEqual([])
