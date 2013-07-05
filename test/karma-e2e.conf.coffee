@@ -47,3 +47,9 @@ module.exports = (config) ->
     # level of logging
     # possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_WARN
+
+    plugins: [
+      "karma-phantomjs-launcher"
+      "karma-ng-scenario"
+      "karma-spec-reporter"
+    ]
