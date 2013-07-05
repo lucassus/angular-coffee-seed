@@ -12,6 +12,8 @@ navigation.directive "navLinks", ->
         $item = $(link)
         $item.addClass("active") if $item.find("a").attr("href").match "#{path}$"
 
-  controller: ($scope, $location) ->
-    $scope.$on "$locationChangeSuccess", ->
-      $scope.$emit "pathChanged", $location.path()
+  controller: [
+    "$scope", "$location", ($scope, $location) ->
+      $scope.$on "$locationChangeSuccess", ->
+        $scope.$emit "pathChanged", $location.path()
+  ]
