@@ -1,6 +1,6 @@
 navigation = angular.module("myApp.navigation", [])
 
-navigation.directive "navTabs", ->
+navigation.directive "navLinks", ->
   restrict: "A"
 
   link: ($scope, element) ->
