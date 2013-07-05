@@ -8,9 +8,6 @@ files = [
   "test/e2e/**/*_spec.js"
 ]
 
-# list of files to exclude
-exclude = []
-
 # web server port
 port = 8090
 

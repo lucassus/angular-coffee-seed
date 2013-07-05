@@ -1,6 +1,11 @@
 # The entry point for the application
 
-app = angular.module("myApp", ["myApp.controllers", "myApp.alerts"])
+app = angular.module "myApp", [
+  "myApp.controllers"
+  "myApp.alerts"
+  "myApp.navigation"
+]
+
 app.config [
   "$provide", "$routeProvider", ($provide, $routeProvider) ->
     $provide.value("alertTimeout", 3000)
