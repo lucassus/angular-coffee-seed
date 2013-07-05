@@ -171,7 +171,6 @@ module.exports = (grunt) ->
 
     karma:
       options:
-        configFile: "<%= appConfig.test %>/karma.conf.coffee"
         basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
@@ -182,6 +181,7 @@ module.exports = (grunt) ->
         captureTimeout: 5000
 
       unit:
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
         reporters: ["dots", "coverage"]
         preprocessors:
           "scripts/**/*.js": "coverage"
