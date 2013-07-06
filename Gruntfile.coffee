@@ -246,6 +246,7 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
+    "jasmine-html"
   ]
 
   grunt.registerTask "server", [
@@ -309,3 +310,20 @@ module.exports = (grunt) ->
   grunt.registerTask "heroku:production", ["build"]
 
   grunt.registerTask "default", ["test"]
+
+  grunt.registerTask "jasmine-html", ->
+    loadKarmaPatterns = ->
+      files = []
+      config = set: (config) -> files = config.files
+      require("./#{appConfig.test}/karma.conf.coffee")(config)
+      files
+
+    grunt.file.setBase appConfig.dev
+    patterns = loadKarmaPatterns()
+    files = grunt.file.expand(patterns)
+
+    template = grunt.file.read "../jasmine.html.tpl"
+    html = grunt.template.process template, data: files: files
+
+    grunt.file.write "jasmine.html", html
+    grunt.file.setBase "../"
