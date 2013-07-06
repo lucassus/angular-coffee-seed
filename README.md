@@ -170,6 +170,12 @@ or
 
 `grunt test:watch --browsers=Chrome`
 
+### Running jasmine specs inside the browser
+
+`grunt server`
+
+navigate to: http://localhost:9000/jasmine.html
+
 ## Build process
 
 ```
