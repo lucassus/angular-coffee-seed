@@ -45,7 +45,10 @@ module.exports = (grunt) ->
         tasks: ["coffee:test"]
 
       html:
-        files: ["<%= appConfig.app %>/index.html"]
+        files: [
+          "<%= appConfig.app %>/**/*.html"
+          "!<%= appConfig.dev %>/templates/**/*.html"
+        ]
         tasks: ["copy:dev"]
 
       templates:
