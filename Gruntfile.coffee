@@ -26,10 +26,10 @@ module.exports = (grunt) ->
 
   # configurable paths
   appConfig =
-    app: "./app"
-    test: "./test"
-    dist: "./dist"
-    dev: "./dev"
+    app: "app"
+    test: "test"
+    dist: "dist"
+    dev: "dev"
 
   grunt.initConfig
     appConfig: appConfig
@@ -42,7 +42,10 @@ module.exports = (grunt) ->
 
       coffeeTest:
         files: ["<%= appConfig.test %>/**/*.coffee"]
-        tasks: ["coffee:test"]
+        tasks: [
+          "coffee:test"
+          "jasminehtml"
+        ]
 
       html:
         files: [
@@ -204,6 +207,11 @@ module.exports = (grunt) ->
         singleRun: false
         autoWatch: true
 
+    jasminehtml:
+      options:
+        karmaConfigFile: "<%= appConfig.test %>/karma.conf.coffee"
+        dest: "<%= appConfig.dev %>"
+
     casperjs:
       files: ["<%= appConfig.dev %>/test/casperjs/**/*_scenario.js"]
 
@@ -246,7 +254,7 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
-    "jasmine-html"
+    "jasminehtml"
   ]
 
   grunt.registerTask "server", [
@@ -311,19 +319,31 @@ module.exports = (grunt) ->
 
   grunt.registerTask "default", ["test"]
 
-  grunt.registerTask "jasmine-html", ->
+  grunt.registerTask "jasminehtml", ->
+    path = require("path")
+    options = @options()
+
     loadKarmaPatterns = ->
       files = []
       config = set: (config) -> files = config.files
-      require("./#{appConfig.test}/karma.conf.coffee")(config)
+
+      # Reload karma config file
+      delete require.cache[path.resolve(options.karmaConfigFile)]
+      require("./#{options.karmaConfigFile}")(config)
+
       files
 
-    grunt.file.setBase appConfig.dev
-    patterns = loadKarmaPatterns()
-    files = grunt.file.expand(patterns)
+    loadFiles = ->
+      grunt.log.writeln("Found files:")
+      files = []
+      for pattern in loadKarmaPatterns()
+        for file in grunt.file.expand(path.join(options.dest, pattern))
+          file = file.replace new RegExp("^#{options.dest}/"), ""
+          grunt.log.writeln(file)
+          files.push file
+      files
 
-    template = grunt.file.read "../jasmine.html.tpl"
-    html = grunt.template.process template, data: files: files
+    template = grunt.file.read path.join("tasks", "jasmine.html.tpl")
+    html = grunt.template.process template, data: files: loadFiles()
 
-    grunt.file.write "jasmine.html", html
-    grunt.file.setBase "../"
+    grunt.file.write path.join(options.dest, "jasmine.html"), html
