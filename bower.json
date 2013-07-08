@@ -9,6 +9,7 @@
   "devDependencies": {
     "angular-mocks": "~1.0.7",
     "angular-scenario": "~1.0.7",
+    "jasmine": "~1.3.1",
     "jasmine-given": "https://github.com/searls/jasmine-given.git"
   },
   "exportsOverride": {
@@ -16,6 +17,13 @@
       "js": "docs/assets/js/bootstrap.js",
       "css": "docs/assets/css/bootstrap.css",
       "img": "img/*.png"
+    },
+    "jasmine": {
+      "js": [
+          "lib/jasmine-core/jasmine.js",
+          "lib/jasmine-core/jasmine-html.js"
+      ],
+      "css": "lib/jasmine-core/jasmine.css"
     }
   }
 }
