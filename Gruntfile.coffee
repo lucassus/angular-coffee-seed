@@ -209,7 +209,6 @@ module.exports = (grunt) ->
 
     jasminehtml:
       options:
-        karmaConfigFile: "<%= appConfig.test %>/karma.conf.coffee"
         dest: "<%= appConfig.dev %>"
 
     casperjs:
@@ -321,7 +320,9 @@ module.exports = (grunt) ->
 
   grunt.registerTask "jasminehtml", ->
     path = require("path")
+
     options = @options()
+    options.karmaConfigFile or= grunt.config("karma.unit.configFile")
 
     loadKarmaPatterns = ->
       files = []
