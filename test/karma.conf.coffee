@@ -51,7 +51,10 @@ module.exports = (config) ->
 
     plugins: [
       "karma-jasmine"
-      "karma-phantomjs-launcher"
       "karma-spec-reporter"
       "karma-coverage"
+
+      "karma-phantomjs-launcher"
+      "karma-chrome-launcher"
+      "karma-firefox-launcher"
     ]

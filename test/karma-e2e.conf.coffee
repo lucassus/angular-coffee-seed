@@ -46,7 +46,10 @@ module.exports = (config) ->
     logLevel: config.LOG_WARN
 
     plugins: [
-      "karma-phantomjs-launcher"
       "karma-ng-scenario"
       "karma-spec-reporter"
+
+      "karma-phantomjs-launcher"
+      "karma-chrome-launcher"
+      "karma-firefox-launcher"
     ]
