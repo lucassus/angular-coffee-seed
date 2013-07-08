@@ -22,9 +22,6 @@ module.exports = (config) ->
       "test/unit/**/*_spec.js"
     ]
 
-    # list of files to exclude
-    exclude: []
-
     # web server port
     port: 8080
 
