@@ -6,6 +6,7 @@ mountFolder = (connect, dir) ->
 module.exports = (grunt) ->
   # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
+  grunt.loadTasks("tasks")
 
   # Extract browsers list from the command line
   # For example `grunt test --browsers=Chrome,Firefox`
@@ -26,10 +27,10 @@ module.exports = (grunt) ->
 
   # configurable paths
   appConfig =
-    app: "./app"
-    test: "./test"
-    dist: "./dist"
-    dev: "./dev"
+    app: "app"
+    test: "test"
+    dist: "dist"
+    dev: "dev"
 
   grunt.initConfig
     appConfig: appConfig
@@ -42,10 +43,16 @@ module.exports = (grunt) ->
 
       coffeeTest:
         files: ["<%= appConfig.test %>/**/*.coffee"]
-        tasks: ["coffee:test"]
+        tasks: [
+          "coffee:test"
+          "jasminehtml"
+        ]
 
       html:
-        files: ["<%= appConfig.app %>/index.html"]
+        files: [
+          "<%= appConfig.app %>/**/*.html"
+          "!<%= appConfig.dev %>/templates/**/*.html"
+        ]
         tasks: ["copy:dev"]
 
       templates:
@@ -201,6 +208,10 @@ module.exports = (grunt) ->
         singleRun: false
         autoWatch: true
 
+    jasminehtml:
+      options:
+        dest: "<%= appConfig.dev %>"
+
     casperjs:
       files: ["<%= appConfig.dev %>/test/casperjs/**/*_scenario.js"]
 
@@ -243,6 +254,7 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
+    "jasminehtml"
   ]
 
   grunt.registerTask "server", [
