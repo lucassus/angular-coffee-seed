@@ -45,7 +45,7 @@ describe "Controller: TodosCtrl", ->
           { done: true }, { done: true }, { done: true }
         ]
 
-      it "returns", ->
+      it "returns 0", ->
         expect($scope.remaining()).toEqual 0
 
   describe "#addTodo", ->
@@ -60,4 +60,3 @@ describe "Controller: TodosCtrl", ->
       expect($scope.todos.length).toEqual 4
       expect($scope.todos[3]).toEqual
         name: "New task", done: false
-
