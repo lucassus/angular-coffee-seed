@@ -24,5 +24,5 @@ class TodosCtrl
       $scope.todos.push(name: todo.name, done: !!todo.done)
       $scope.newTodo = {}
 
-controllers = angular.module("myApp.controllers")
-controllers.controller("TodosCtrl", TodosCtrl)
+angular.module("myApp")
+  .controller("TodosCtrl", TodosCtrl)

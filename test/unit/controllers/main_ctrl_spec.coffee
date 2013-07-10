@@ -3,6 +3,7 @@ describe "Controller: MainCtrl", ->
   beforeEach module("myApp")
   $scope = null
 
+  # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     $scope = $rootScope.$new()
     $controller "MainCtrl", $scope: $scope

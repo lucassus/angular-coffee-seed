@@ -3,7 +3,8 @@ describe "Controller: TodosCtrl", ->
   beforeEach module("myApp")
   $scope = null
 
-  beforeEach inject ($controller, $rootScope, alerts) ->
+  # Initialize the controller and a mock scope
+  beforeEach inject ($controller, $rootScope) ->
     $scope = $rootScope.$new()
     $controller "TodosCtrl", $scope: $scope
 

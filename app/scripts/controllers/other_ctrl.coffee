@@ -7,5 +7,5 @@ class OtherCtrl
     $scope.sayHello = ->
       alerts.info("Hello World!")
 
-controllers = angular.module("myApp.controllers")
-controllers.controller("OtherCtrl", OtherCtrl)
+angular.module("myApp")
+  .controller("OtherCtrl", OtherCtrl)

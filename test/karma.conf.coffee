@@ -12,11 +12,10 @@ module.exports = (config) ->
       "components/angular/angular.js"
       "components/angular-mocks/angular-mocks.js"
 
-      "scripts/modules/**/*.js"
-      "scripts/controllers.js"
-      "scripts/controllers/**/*.js"
       "scripts/templates.js"
+      "scripts/modules/**/*.js"
       "scripts/application.js"
+      "scripts/controllers/**/*.js"
 
       "test/unit/helpers/**/*.js"
       "test/unit/**/*_spec.js"

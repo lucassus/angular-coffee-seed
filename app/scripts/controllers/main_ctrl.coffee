@@ -11,5 +11,5 @@ class MainCtrl
       { name: "Samsung S4" }
     ]
 
-controllers = angular.module("myApp.controllers")
-controllers.controller("MainCtrl", MainCtrl)
+angular.module("myApp")
+  .controller("MainCtrl", MainCtrl)
