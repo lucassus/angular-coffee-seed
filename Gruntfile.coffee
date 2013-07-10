@@ -39,13 +39,14 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
-        tasks: ["coffee:dist"]
+        tasks: ["coffee:dist", "timestamp"]
 
       coffeeTest:
         files: ["<%= appConfig.test %>/**/*.coffee"]
         tasks: [
           "coffee:test"
           "jasminehtml"
+          "timestamp"
         ]
 
       html:
@@ -53,19 +54,19 @@ module.exports = (grunt) ->
           "<%= appConfig.app %>/**/*.html"
           "!<%= appConfig.dev %>/templates/**/*.html"
         ]
-        tasks: ["copy:dev"]
+        tasks: ["copy:dev", "timestamp"]
 
       templates:
         files: ["<%= appConfig.app %>/templates/**/*.html"]
-        tasks: ["ngtemplates"]
+        tasks: ["ngtemplates", "timestamp"]
 
       css:
         files: ["<%= appConfig.app %>/styles/**/*.less"]
-        tasks: ["less"]
+        tasks: ["less", "timestamp"]
 
       livereload:
         files: ["<%= appConfig.dev %>/**/*"]
-        tasks: ["livereload"]
+        tasks: ["livereload", "timestamp"]
 
     coffee:
       dist:
@@ -245,6 +246,8 @@ module.exports = (grunt) ->
             ]
 
   grunt.renameTask "regarde", "watch"
+
+  grunt.registerTask "timestamp", -> grunt.log.subhead "--- timestamp: #{new Date()}"
 
   grunt.registerTask "build:dev", [
     "clean"
