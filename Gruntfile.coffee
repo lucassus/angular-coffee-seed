@@ -183,13 +183,13 @@ module.exports = (grunt) ->
         colors: true
         # test results reporter to use
         # possible values: dots || progress || growl
-        reporters: ["spec"]
+        reporters: ["dots"]
         # If browser does not capture in given timeout [ms], kill it
         captureTimeout: 5000
 
       unit:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
-        reporters: ["spec", "coverage"]
+        reporters: ["dots", "coverage"]
         preprocessors:
           "scripts/**/*.js": "coverage"
         coverageReporter:
