@@ -73,7 +73,7 @@ grunt server
 
 Navigate to http://localhost:9000
 
-## Install PhantomJS ad CasperJS for the integration testing
+## Install PhantomJS and CasperJS for the integration testing
 
 Download and install PhantomJS
 
