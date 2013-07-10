@@ -5,7 +5,7 @@ This is a custom AngularJS seed project based on grunt the JavaScript task runne
 * AngularJS 1.0.7
 * CoffeeScript and Less support
 * Bower for front-end package menagement
-* Full support for unit and e2e tests
+* Full support for unit and end2end tests
 * Generates code coverage for JavaScripr unit tests
 * Support for CasperJS integration tests
 * Support for Karma Test Runner (formerly Testacular)
@@ -21,24 +21,25 @@ Demo: http://lucassus-angular-seed.herokuapp.com
 
 ## Directory structure
 
-* ./app - contains CoffeeScript sources, styles, images, fonts and other assets
-  * ./app/scripts - CoffeeScript sources
-  * ./app/styles - stylesheets
-  * ./app/views - html views used by AngularJS
-* ./test - contains tests for the application
-  * ./tests/casperjs - CasperJS integration specs
-  * ./tests/unit - unit tests for AngularJS components
+* `./app` - contains CoffeeScript sources, styles, images, fonts and other assets
+  * `./app/scripts` - CoffeeScript sources
+  * `./app/styles` - stylesheets
+  * `./app/views` - html templates used by AngularJS
+* `./test` - contains tests for the application
+  * `./tests/casperjs` - CasperJS integration specs
+  * `./test/e2e` - AngularJS end2end scenarios
+  * `./tests/unit` - unit tests for AngularJS components
 
 Third-party libraries
 
-* ./bower_components - components dowloaded by `bower install` command
-* ./custom_components - you could put custom components here
-* ./node_modules - command dowloaded by `npm install` command
+* `./bower_components` - components dowloaded by `bower install` command
+* `./custom_components` - you could put custom components here
+* `./node_modules` - command dowloaded by `npm install` command
 
 Generated stuff
 
-* ./dev - compiled development release
-* ./dist - created by `grunt build` command, contains the production minified release of the app
+* `./dev` - compiled development release
+* `./dist` - created by `grunt build` command, contains the minified production release of the app
 
 ## Bootstrap
 
@@ -56,7 +57,7 @@ make
 sudo make install
 ```
 
-## Install tools
+## Install grunt and bower globally
 
 ```
 npm install -g grunt-cli
@@ -71,7 +72,7 @@ bower install
 grunt server
 ```
 
-Navigate to http://localhost:9000
+Navigate to `http://localhost:9000`
 
 ## Install PhantomJS and CasperJS for the integration testing
 
@@ -145,7 +146,7 @@ Run karma in Chrome browser:
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
-### Running e2e tests
+### Running end2end tests
 
 `grunt test:e2e`
 `grunt test:casperjs`
@@ -169,24 +170,22 @@ or
 
 ### Running jasmine specs inside the browser
 
-`grunt server`
-
-navigate to: http://localhost:9000/jasmine.html
+Run `grunt server` and navigate to: `http://localhost:9000/jasmine.html`
+`jasmine.html` is automatically generated from karma's `./test/karma.conf.coffee` file.
 
 ## Build process
 
-```
-grunt build
-(cd dist/ ; python -m SimpleHTTPServer 8000)
-```
+`grunt build` will build the minified production release.
 
-And then navigate to `http://localhost:8000` to see the production release.
+`(cd dist/ ; python -m SimpleHTTPServer 8000)` will serve a static assets from `./dist` directory.
+
+Navigate to `http://localhost:8000` to see the production release.
 
 # Heroku deployment
 
 ```
 git co heroku-production
 git merge master
-grunt heroku:production
+grunt build
 git push heroku heroku-production:master -f
 ```
