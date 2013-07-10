@@ -4,7 +4,7 @@
   "main": "./web.coffee",
   "dependencies": {
     "coffee-script": "~1.6.3",
-    "express": "~3.3.3"
+    "express": "~3.3.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
