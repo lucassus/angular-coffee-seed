@@ -2,7 +2,7 @@ language:
   - node_js
 
 node_js:
-  - 0.10.7
+  - 0.10.13
 
 before_install:
   - npm install grunt-cli bower -g
