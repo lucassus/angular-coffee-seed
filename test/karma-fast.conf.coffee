@@ -14,8 +14,11 @@ module.exports = (config) ->
       "bower_components/angular/angular.js"
       "bower_components/angular-mocks/angular-mocks.js"
 
-      # TODO add html2js preprocessor
-      # "app/scripts/templates.coffee"
+      # TODO add ng-html2js preprocessor
+      # * grunt ngtemplates karma:fast
+      # * karma start test/karma-fast.conf.coffee --single-run
+      "dev/scripts/templates.js"
+
       "app/scripts/modules/**/*.coffee"
       "app/scripts/application.coffee"
       "app/scripts/controllers/**/*.coffee"
