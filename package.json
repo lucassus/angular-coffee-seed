@@ -30,6 +30,7 @@
     "phantomjs": "~1.9",
     "karma-ng-scenario": "~0.0.2",
     "karma-spec-reporter": "~0.0.1",
+    "karma-coffee-preprocessor": "~0.0.3",
     "karma-coverage": "~0.0.2",
     "matchdep": "~0.1.1"
   },
