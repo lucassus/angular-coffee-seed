@@ -52,7 +52,6 @@ module.exports = (grunt) ->
       html:
         files: [
           "<%= appConfig.app %>/**/*.html"
-          "!<%= appConfig.dev %>/templates/**/*.html"
         ]
         tasks: ["copy:dev", "timestamp"]
 
@@ -139,7 +138,6 @@ module.exports = (grunt) ->
           src: [
             "*.{ico,txt}"
             "**/*.html"
-            "!templates/**/*.html"
             "components/**/*"
             "images/**/*.{gif,webp}"
             "styles/fonts/*"
@@ -158,9 +156,7 @@ module.exports = (grunt) ->
     ngtemplates:
       options:
         base: "<%= appConfig.app %>"
-        module:
-          name: "myApp.templates"
-          define: true
+        module: "myApp"
 
       myApp:
         src: [
@@ -191,12 +187,16 @@ module.exports = (grunt) ->
       unit:
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
         reporters: ["dots", "coverage"]
-        preprocessors:
-          "scripts/**/*.js": "coverage"
         coverageReporter:
           type: "text"
           dir: "coverage"
 
+        singleRun: true
+
+      coffee:
+        basePath: "../"
+        configFile: "<%= appConfig.test %>/karma-coffee.conf.coffee"
+        reporters: ["dots"]
         singleRun: true
 
       e2e:
