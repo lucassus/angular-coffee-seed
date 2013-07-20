@@ -193,9 +193,9 @@ module.exports = (grunt) ->
 
         singleRun: true
 
-      fast:
+      coffee:
         basePath: "../"
-        configFile: "<%= appConfig.test %>/karma-fast.conf.coffee"
+        configFile: "<%= appConfig.test %>/karma-coffee.conf.coffee"
         reporters: ["dots"]
         singleRun: true
 

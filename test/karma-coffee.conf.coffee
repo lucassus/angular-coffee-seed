@@ -31,7 +31,7 @@ module.exports = (config) ->
     ngHtml2JsPreprocessor:
       stripPrefix: "app/"
 
-    reporters: ["dots"]
+    reporters: ["dots", "coverage"]
 
     # web server port
     port: 8080

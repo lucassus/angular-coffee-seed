@@ -146,9 +146,9 @@ Run karma in Chrome browser:
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
-Run karma directly
+Run karma directly without CoffeeScript compilation:
 
-`karma start test/karma-fast.conf.coffee --single-run`
+`karma start test/karma-coffee.conf.coffee --single-run`
 
 ### Running end2end tests
 
