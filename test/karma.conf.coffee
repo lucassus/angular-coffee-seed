@@ -12,7 +12,8 @@ module.exports = (config) ->
       "components/angular/angular.js"
       "components/angular-mocks/angular-mocks.js"
 
-      "scripts/templates.js"
+      "templates/**/*.html"
+
       "scripts/modules/**/*.js"
       "scripts/application.js"
       "scripts/controllers/**/*.js"
@@ -20,6 +21,13 @@ module.exports = (config) ->
       "test/unit/helpers/**/*.js"
       "test/unit/**/*_spec.js"
     ]
+
+    preprocessors:
+      "templates/**/*.html": ["html2js"]
+      "scripts/**/*.js": "coverage"
+
+    ngHtml2JsPreprocessor:
+      stripPrefix: "../app/"
 
     # web server port
     port: 8080
@@ -49,6 +57,8 @@ module.exports = (config) ->
     logLevel: config.LOG_WARN
 
     plugins: [
+      "karma-ng-html2js-preprocessor"
+
       "karma-jasmine"
       "karma-spec-reporter"
       "karma-coverage"

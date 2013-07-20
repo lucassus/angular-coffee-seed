@@ -2,7 +2,7 @@ describe "myApp.alerts", ->
   beforeEach module("myApp.alerts")
   beforeEach module("mocks")
 
-  describe "controller", ->
+  describe "controller: alerts", ->
     $scope = null
     alerts = null
 
@@ -37,11 +37,11 @@ describe "myApp.alerts", ->
         expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
         expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
 
-  describe "directive", ->
+  describe "directive: alerts", ->
     $scope = null
     element = null
 
-    beforeEach module("myApp.templates")
+    beforeEach module("templates/alerts.html")
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope
@@ -59,7 +59,7 @@ describe "myApp.alerts", ->
       ]
       expect(element.find(".alert-info").length).toEqual(1)
 
-  describe "service", ->
+  describe "service: alerts", ->
     it "is defined", inject (alerts) ->
       expect(alerts).toBeDefined()
 

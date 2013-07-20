@@ -146,6 +146,10 @@ Run karma in Chrome browser:
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
+Run karma directly
+
+`karma start test/karma-fast.conf.coffee --single-run`
+
 ### Running end2end tests
 
 `grunt test:e2e`

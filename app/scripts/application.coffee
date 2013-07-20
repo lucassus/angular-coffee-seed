@@ -1,7 +1,6 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
-  "myApp.templates"
   "myApp.alerts"
   "myApp.navigation"
 ]

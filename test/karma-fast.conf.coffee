@@ -14,10 +14,7 @@ module.exports = (config) ->
       "bower_components/angular/angular.js"
       "bower_components/angular-mocks/angular-mocks.js"
 
-      # TODO add ng-html2js preprocessor
-      # * grunt ngtemplates karma:fast
-      # * karma start test/karma-fast.conf.coffee --single-run
-      "dev/scripts/templates.js"
+      "app/templates/**/*.html"
 
       "app/scripts/modules/**/*.coffee"
       "app/scripts/application.coffee"
@@ -27,8 +24,14 @@ module.exports = (config) ->
       "test/unit/**/*_spec.coffee"
     ]
 
-    preprocessors :
+    preprocessors:
       "**/*.coffee": ["coffee"]
+      "**/*.html": ["html2js"]
+
+    ngHtml2JsPreprocessor:
+      stripPrefix: "app/"
+
+    reporters: ["dots"]
 
     # web server port
     port: 8080
@@ -59,6 +62,7 @@ module.exports = (config) ->
 
     plugins: [
       "karma-coffee-preprocessor"
+      "karma-ng-html2js-preprocessor"
 
       "karma-jasmine"
       "karma-spec-reporter"
