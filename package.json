@@ -37,6 +37,7 @@
     "karma-coffee-preprocessor": "~0.0.3",
     "karma-ng-html2js-preprocessor": "~0.0.2",
     "karma-coverage": "~0.0.2",
+    "karma-opera-launcher": "~0.0.2",
     "matchdep": "~0.1.1"
   },
   "engines": {
