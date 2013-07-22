@@ -150,6 +150,10 @@ Run karma directly without CoffeeScript compilation:
 
 `karma start test/karma-coffee.conf.coffee --single-run`
 
+or with auto watch option:
+
+`karma start test/karma-coffee.conf.coffee`
+
 ### Running end2end tests
 
 `grunt test:e2e`

@@ -40,7 +40,7 @@ module.exports = (config) ->
     runnerPort: 9100
 
     # enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false
+    autoWatch: true
 
     # Start these browsers, currently available:
     # - Chrome
