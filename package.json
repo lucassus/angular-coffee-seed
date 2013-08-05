@@ -1,6 +1,10 @@
 {
   "name": "angular-seed",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucassus/angular-seed.git"
+  },
   "main": "./web.coffee",
   "dependencies": {
     "coffee-script": "~1.6.3",
