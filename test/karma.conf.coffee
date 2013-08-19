@@ -10,6 +10,7 @@ module.exports = (config) ->
     files: [
       "components/jquery/jquery.js"
       "components/angular/angular.js"
+      "components/angular/angular-animate.js"
       "components/angular/angular-mocks.js"
       "components/angular/angular-route.js"
 

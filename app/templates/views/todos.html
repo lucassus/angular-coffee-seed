@@ -4,7 +4,7 @@
 [ <a href="" class="archive" ng-click="todos.archive()">archive</a> ]
 
 <ul id="todos">
-  <li ng-repeat="task in todos.tasks | orderBy:'done'">
+  <li ng-repeat="task in todos.tasks | orderBy:'done'" class="repeat-item">
     <label>
       <input type="checkbox" ng-model="task.done" />
       <span ng-class="{done: task.done}">{{task.name}}</span>

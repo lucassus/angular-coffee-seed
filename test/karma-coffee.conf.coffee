@@ -12,6 +12,7 @@ module.exports = (config) ->
     files: [
       "bower_components/jquery/jquery.js"
       "bower_components/angular/angular.js"
+      "bower_components/angular/angular-animate.js"
       "bower_components/angular/angular-mocks.js"
       "bower_components/angular/angular-route.js"
 

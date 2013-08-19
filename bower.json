@@ -13,6 +13,7 @@
     "angular": {
       "/": [
         "angular.js",
+        "angular-animate.js",
         "angular-mocks.js",
         "angular-route.js"
       ]
