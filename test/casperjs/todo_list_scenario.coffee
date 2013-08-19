@@ -17,7 +17,7 @@ scenario "Todo List page", ->
         "Page displays #{number} todos"
 
   @feature "Show the valid page title", ->
-    @test.assertEquals page.pageTitleText(), "Todo List"
+    @test.assertEquals page.pageTitleText(), "Tasks List"
 
   @feature "Show all todos", ->
     @test.assertEquals page.remainingText(), "2 of 3 remaining"
@@ -32,10 +32,10 @@ scenario "Todo List page", ->
     @test.assertTruthy completedTodo.isCompleted()
 
   @feature "Create a new task", ->
-    form.fillWith name: "New Todo"
+    form.fillWith name: "New task"
 
     formValues = form.getValues()
-    @test.assertEqual "New Todo", formValues.name
+    @test.assertEqual "New task", formValues.name
     @test.assertFalse formValues.done
 
     form.clickAddButton()
@@ -43,7 +43,7 @@ scenario "Todo List page", ->
     @test.assertEquals page.remainingText(), "3 of 4 remaining"
     @test.assertTodoCount 4
 
-    newTodo = page.findTodoByText("New Todo")
+    newTodo = page.findTodoByText("New task")
     @test.assertFalsy newTodo.isCompleted()
 
   @feature "Create a new completed task", ->

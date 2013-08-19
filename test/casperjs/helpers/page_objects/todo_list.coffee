@@ -5,7 +5,7 @@ Todo = require("./test/casperjs/helpers/page_objects/todo").Todo
 exports.TodoList = class extends Base
   constructor: (@casper) ->
     super(@casper)
-    @form = new TodoForm(@casper, "form[name=new-todo]")
+    @form = new TodoForm(@casper, "form[name=taskForm]")
 
   getForm: -> @form
 
