@@ -26,8 +26,10 @@ class TodosCtrl
   reset: ->
     @$scope.task = angular.copy(@master)
     @$scope.taskForm?.$setPristine()
+    @$scope.taskForm?.$submitted = false
 
   addTask: (task) ->
+    @$scope.taskForm?.$submitted = true
     return unless @$scope.taskForm?.$valid
 
     @tasks.push angular.copy(task)

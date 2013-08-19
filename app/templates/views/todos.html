@@ -16,9 +16,12 @@
   <field>
     <legend>New task</legend>
 
-    <label for="new-todo-name">Task name</label>
-    <input id="new-todo-name" type="text"
-           name="name" ng-model="task.name" required />
+    <div class="control-group" ng-class="{error: taskForm.$submitted && taskForm.name.$invalid}">
+      <label for="new-todo-name">Task name</label>
+      <input id="new-todo-name" type="text"
+             name="name" ng-model="task.name" required />
+      <span ng-show="taskForm.$submitted && taskForm.name.$error.required" class="help-inline">Task name is required</span>
+    </div>
 
     <label class="checkbox">
       <input type="checkbox"
