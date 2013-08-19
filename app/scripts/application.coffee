@@ -18,16 +18,16 @@ app.config [
 
     $routeProvider
       .when "/",
-        templateUrl: "templates/views/main.html",
+        templateUrl: "templates/views/main.html"
         controller: "MainCtrl"
 
       .when "/other",
-        templateUrl: "templates/views/other.html",
+        templateUrl: "templates/views/other.html"
         controller: "OtherCtrl"
 
       .when "/todos",
-        templateUrl: "templates/views/todos.html",
-        controller: "TodosCtrl"
+        templateUrl: "templates/views/todos.html"
+        controller: "TodosCtrl as todos"
 
       .otherwise redirectTo: "/"
 ]

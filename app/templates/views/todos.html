@@ -1,26 +1,26 @@
 <h2 class="page-title">Todo List</h2>
 
-<span id="remaining">{{remaining()}} of {{todos.length}} remaining</span>
-[ <a href="" class="archive" ng-click="archive()">archive</a> ]
+<span id="remaining">{{todos.remaining()}} of {{todos.count()}} remaining</span>
+[ <a href="" class="archive" ng-click="todos.archive()">archive</a> ]
 
 <ul id="todos">
-  <li ng-repeat="todo in todos | orderBy:'done'">
+  <li ng-repeat="task in todos.tasks | orderBy:'done'">
     <label>
-      <input type="checkbox" ng-model="todo.done" />
-      <span ng-class="{done: todo.done}">{{todo.name}}</span>
+      <input type="checkbox" ng-model="task.done" />
+      <span ng-class="{done: task.done}">{{task.name}}</span>
     </label>
   </li>
 </ul>
 
-<form name="new-todo" ng-submit="addTodo()">
+<form name="todoForm" ng-submit="todos.createTask()">
   <field>
     <legend>New todo</legend>
 
     <label for="new-todo-name">Task name</label>
-    <input id="new-todo-name" type="text" name="name" ng-model="newTodo.name" required />
+    <input id="new-todo-name" type="text" name="name" ng-model="todos.newTask.name" required />
 
     <label class="checkbox">
-      <input type="checkbox" name="done" ng-model="newTodo.done" /> Done
+      <input type="checkbox" name="done" ng-model="todos.newTask.done" /> Done
     </label>
 
     <button type="submit" class="btn">Add</button>

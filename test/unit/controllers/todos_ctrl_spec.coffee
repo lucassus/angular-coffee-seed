@@ -1,64 +1,62 @@
 describe "Controller: TodosCtrl", ->
 
   beforeEach module("myApp")
-  $scope = null
+  ctrl = null
 
   # Initialize the controller and a mock scope
-  beforeEach inject ($controller, $rootScope) ->
-    $scope = $rootScope.$new()
-    $controller "TodosCtrl", $scope: $scope
+  beforeEach inject ($controller) ->
+    ctrl = $controller "TodosCtrl"
 
-  it "assisgns todos", ->
-    expect($scope.todos).toBeDefined()
-    expect($scope.todos.length).toEqual 3
+  it "assisgns tasks", ->
+    expect(ctrl.tasks).toBeDefined()
+    expect(ctrl.tasks.length).toEqual 3
 
   describe "#archive", ->
     beforeEach ->
-      $scope.todos = [
+      ctrl.tasks = [
         { done: false }, { done: true }, { done: true }
       ]
 
     it "removes completed todos from the list", ->
-      expect($scope.todos.length).toEqual 3
+      expect(ctrl.tasks.length).toEqual 3
 
-      $scope.archive()
-      expect($scope.todos.length).toEqual 1
+      ctrl.archive()
+      expect(ctrl.tasks.length).toEqual 1
 
   describe "#remaining", ->
     describe "when todo list is empty" ,->
-      beforeEach -> $scope.todos = []
+      beforeEach -> ctrl.tasks = []
 
       it "returns 0", ->
-        expect($scope.remaining()).toEqual 0
+        expect(ctrl.remaining()).toEqual 0
 
     describe "when todo list contains uncompleted tasks", ->
       beforeEach ->
-        $scope.todos = [
+        ctrl.tasks = [
           { done: false }, { done: false }, { done: true }
         ]
 
       it "returns > 0", ->
-        expect($scope.remaining()).toEqual 2
+        expect(ctrl.remaining()).toEqual 2
 
     describe "when all tasks are completed", ->
       beforeEach ->
-        $scope.todos = [
+        ctrl.tasks = [
           { done: true }, { done: true }, { done: true }
         ]
 
       it "returns", ->
-        expect($scope.remaining()).toEqual 0
+        expect(ctrl.remaining()).toEqual 0
 
-  describe "#addTodo", ->
+  describe "#createTask", ->
     it "adds a new task", ->
       # Given
 
-      $scope.newTodo = name: "New task"
+      ctrl.newTask = name: "New task"
       # When
-      $scope.addTodo()
+      ctrl.createTask()
 
       # Then
-      expect($scope.todos.length).toEqual 4
-      expect($scope.todos[3]).toEqual
+      expect(ctrl.tasks.length).toEqual 4
+      expect(ctrl.tasks[3]).toEqual
         name: "New task", done: false
-

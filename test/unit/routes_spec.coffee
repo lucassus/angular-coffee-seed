@@ -24,4 +24,4 @@ describe "Application routes", ->
   it "recognizes '/todos'", inject ($route) ->
     @navigateTo "/todos"
     expect($route.current.templateUrl).toEqual("templates/views/todos.html")
-    expect($route.current.controller).toEqual("TodosCtrl")
+    expect($route.current.controller).toEqual("TodosCtrl as todos")
