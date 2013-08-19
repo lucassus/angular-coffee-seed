@@ -20,11 +20,11 @@ app.config [
     $routeProvider
       .when "/",
         templateUrl: "templates/views/main.html"
-        controller: "MainCtrl"
+        controller: "MainCtrl as main"
 
       .when "/other",
         templateUrl: "templates/views/other.html"
-        controller: "OtherCtrl"
+        controller: "OtherCtrl as other"
 
       .when "/todos",
         templateUrl: "templates/views/todos.html"
