@@ -1,6 +1,7 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
+  "ngRoute"
   "myApp.alerts"
   "myApp.navigation"
 ]
