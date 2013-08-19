@@ -1,6 +1,6 @@
-<h2 class="page-title">Todo List</h2>
+<h2 class="page-title">Tasks List</h2>
 
-<span id="remaining">{{todos.remaining()}} of {{todos.count()}} remaining</span>
+<span id="remaining">{{todos.remainingTasksCount()}} of {{todos.tasksCount()}} remaining</span>
 [ <a href="" class="archive" ng-click="todos.archive()">archive</a> ]
 
 <ul id="todos">
@@ -12,17 +12,27 @@
   </li>
 </ul>
 
-<form name="todoForm" ng-submit="todos.createTask()">
+<form name="taskForm" ng-submit="todos.addTask(task)" novalidate>
   <field>
-    <legend>New todo</legend>
+    <legend>New task</legend>
 
     <label for="new-todo-name">Task name</label>
-    <input id="new-todo-name" type="text" name="name" ng-model="todos.newTask.name" required />
+    <input id="new-todo-name" type="text"
+           name="name" ng-model="task.name" required />
 
     <label class="checkbox">
-      <input type="checkbox" name="done" ng-model="todos.newTask.done" /> Done
+      <input type="checkbox"
+             name="done" ng-model="task.done" /> Done
     </label>
 
-    <button type="submit" class="btn">Add</button>
+    <button type="submit" class="btn btn-primary">
+      <i class="icon-plus-sign"></i> Add
+    </button>
+
+    <button type="button" class="btn"
+            ng-click="todos.reset()"
+            ng-disabled="taskForm.$pristine">
+      Reset
+    </button>
   </field>
 </form>
