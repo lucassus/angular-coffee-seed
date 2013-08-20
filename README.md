@@ -2,9 +2,9 @@
 
 This is a custom AngularJS seed project based on grunt the JavaScript task runner.
 
-* AngularJS 1.0.7
+* AngularJS 1.2.0
 * CoffeeScript and Less support
-* Bower for front-end package menagement
+* Bower for front-end packages menagement
 * Full support for unit and end2end tests
 * Generates code coverage for JavaScripr unit tests
 * Support for CasperJS integration tests
