@@ -1,18 +1,17 @@
 describe "Controller: OtherCtrl", ->
 
   beforeEach module("myApp")
-  $scope = null
+  ctrl = null
 
   # Initialize the controller and a mock scope
-  beforeEach inject ($controller, $rootScope, alerts) ->
-    $scope = $rootScope.$new()
-    $controller "OtherCtrl", $scope: $scope
+  beforeEach inject ($controller, alerts) ->
+    ctrl = $controller "OtherCtrl"
 
     spyOn(alerts, "info")
 
   it "should attach a name", ->
-    expect($scope.name).toBe "This is the other controller"
+    expect(ctrl.name).toBe "This is the other controller"
 
   it "should display the flash message", inject (alerts) ->
-    $scope.sayHello()
+    ctrl.sayHello()
     expect(alerts.info).toHaveBeenCalledWith("Hello World!")

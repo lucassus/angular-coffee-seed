@@ -1,28 +1,41 @@
-<h2 class="page-title">Todo List</h2>
+<h2 class="page-title">Tasks List</h2>
 
-<span id="remaining">{{remaining()}} of {{todos.length}} remaining</span>
-[ <a href="" class="archive" ng-click="archive()">archive</a> ]
+<span id="remaining">{{todos.remainingTasksCount()}} of {{todos.tasksCount()}} remaining</span>
+[ <a href="" class="archive" ng-click="todos.archive()">archive</a> ]
 
-<ul id="todos">
-  <li ng-repeat="todo in todos | orderBy:'done'">
+<ul id="tasks">
+  <li ng-repeat="task in todos.tasks | orderBy:'done'" class="repeat-item">
     <label>
-      <input type="checkbox" ng-model="todo.done" />
-      <span ng-class="{done: todo.done}">{{todo.name}}</span>
+      <input type="checkbox" ng-model="task.done" />
+      <span ng-class="{done: task.done}">{{task.name}}</span>
     </label>
   </li>
 </ul>
 
-<form name="new-todo" ng-submit="addTodo()">
+<form name="taskForm" ng-submit="todos.addTask(task)" novalidate>
   <field>
-    <legend>New todo</legend>
+    <legend>New task</legend>
 
-    <label for="new-todo-name">Task name</label>
-    <input id="new-todo-name" type="text" name="name" ng-model="newTodo.name" required />
+    <div class="control-group" ng-class="{error: taskForm.$submitted && taskForm.name.$invalid}">
+      <label for="new-todo-name">Task name</label>
+      <input id="new-todo-name" type="text"
+             name="name" ng-model="task.name" required />
+      <span ng-show="taskForm.$submitted && taskForm.name.$error.required" class="help-inline">Task name is required</span>
+    </div>
 
     <label class="checkbox">
-      <input type="checkbox" name="done" ng-model="newTodo.done" /> Done
+      <input type="checkbox"
+             name="done" ng-model="task.done" /> Done
     </label>
 
-    <button type="submit" class="btn">Add</button>
+    <button type="submit" class="btn btn-primary">
+      <i class="icon-plus-sign"></i> Add
+    </button>
+
+    <button type="button" class="btn"
+            ng-click="todos.reset()"
+            ng-disabled="taskForm.$pristine">
+      Reset
+    </button>
   </field>
 </form>
