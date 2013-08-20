@@ -3,7 +3,7 @@
 <span id="remaining">{{todos.remainingTasksCount()}} of {{todos.tasksCount()}} remaining</span>
 [ <a href="" class="archive" ng-click="todos.archive()">archive</a> ]
 
-<ul id="todos">
+<ul id="tasks">
   <li ng-repeat="task in todos.tasks | orderBy:'done'" class="repeat-item">
     <label>
       <input type="checkbox" ng-model="task.done" />
