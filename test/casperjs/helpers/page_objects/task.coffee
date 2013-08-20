@@ -1,6 +1,6 @@
 Base = require("./test/casperjs/helpers/page_objects/base").Base
 
-exports.Todo = class extends Base
+exports.Task = class extends Base
   constructor: (@casper, @selector) ->
     super(@casper)
 
