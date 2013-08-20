@@ -26,6 +26,6 @@ exports.TaskList = class extends Base
 
     new Task(@casper, "ul#tasks li:nth-child(#{index + 1})")
 
-  getTodosCount: ->
+  getTasksCount: ->
     @casper.evaluate ->
       document.querySelectorAll("ul#tasks li").length

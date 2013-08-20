@@ -1,4 +1,4 @@
-class TodosCtrl
+class TasksCtrl
 
   @$inject = ["$scope"]
   constructor: (@$scope) ->
@@ -36,4 +36,4 @@ class TodosCtrl
     @reset()
 
 angular.module("myApp")
-  .controller("TodosCtrl", TodosCtrl)
+  .controller("TasksCtrl", TasksCtrl)

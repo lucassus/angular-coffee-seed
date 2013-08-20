@@ -1,4 +1,4 @@
-describe "Controller: TodosCtrl", ->
+describe "Controller: TasksCtrl", ->
 
   beforeEach module("myApp")
   ctrl = null
@@ -7,7 +7,7 @@ describe "Controller: TodosCtrl", ->
   # Initialize the controller and a mock scope
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-    ctrl = $controller "TodosCtrl", $scope: $scope
+    ctrl = $controller "TasksCtrl", $scope: $scope
 
   it "assisgns tasks", ->
     expect(ctrl.tasks).toBeDefined()
@@ -19,7 +19,7 @@ describe "Controller: TodosCtrl", ->
         { done: false }, { done: true }, { done: true }
       ]
 
-    it "removes completed todos from the list", ->
+    it "removes completed task from the list", ->
       expect(ctrl.tasks.length).toEqual 3
 
       ctrl.archive()
@@ -31,13 +31,13 @@ describe "Controller: TodosCtrl", ->
       expect(ctrl.tasksCount()).toEqual 3
 
   describe "#remainingTasksCount", ->
-    describe "when todo list is empty" ,->
+    describe "when task list is empty" ,->
       beforeEach -> ctrl.tasks = []
 
       it "returns 0", ->
         expect(ctrl.remainingTasksCount()).toEqual 0
 
-    describe "when todo list contains uncompleted tasks", ->
+    describe "when task list contains uncompleted tasks", ->
       beforeEach ->
         ctrl.tasks = [
           { done: false }, { done: false }, { done: true }

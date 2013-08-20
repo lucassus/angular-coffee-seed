@@ -1,19 +1,19 @@
-describe "Todos page", ->
+describe "Tasks page", ->
 
   beforeEach ->
-    browser().navigateTo("/#todos")
+    browser().navigateTo("/#tasks")
 
   taskList = null
   beforeEach -> taskList = repeater("ul#tasks li")
 
   it "navigates to the valid url", ->
-    expect(browser().location().url()).toBe "/todos"
+    expect(browser().location().url()).toBe "/tasks"
 
   it "displays number of remaining tasks", ->
     expect(element("span#remaining").text()).toEqual "2 of 3 remaining"
 
-  describe "todo list", ->
-    it "displays all todos", ->
+  describe "task list", ->
+    it "displays all tasks", ->
       expect(taskList.count()).toEqual 3
 
       expect(taskList.column("task.name"))

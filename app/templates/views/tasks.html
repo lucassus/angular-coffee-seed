@@ -1,10 +1,10 @@
 <h2 class="page-title">Tasks List</h2>
 
-<span id="remaining">{{todos.remainingTasksCount()}} of {{todos.tasksCount()}} remaining</span>
-[ <a href="" class="archive" ng-click="todos.archive()">archive</a> ]
+<span id="remaining">{{tasks.remainingTasksCount()}} of {{tasks.tasksCount()}} remaining</span>
+[ <a href="" class="archive" ng-click="tasks.archive()">archive</a> ]
 
 <ul id="tasks">
-  <li ng-repeat="task in todos.tasks | orderBy:'done'" class="repeat-item">
+  <li ng-repeat="task in tasks.tasks | orderBy:'done'" class="repeat-item">
     <label>
       <input type="checkbox" ng-model="task.done" />
       <span ng-class="{done: task.done}">{{task.name}}</span>
@@ -12,13 +12,13 @@
   </li>
 </ul>
 
-<form name="taskForm" ng-submit="todos.addTask(task)" novalidate>
+<form name="taskForm" ng-submit="tasks.addTask(task)" novalidate>
   <field>
     <legend>New task</legend>
 
     <div class="control-group" ng-class="{error: taskForm.$submitted && taskForm.name.$invalid}">
-      <label for="new-todo-name">Task name</label>
-      <input id="new-todo-name" type="text"
+      <label for="new-task-name">Task name</label>
+      <input id="new-task-name" type="text"
              name="name" ng-model="task.name" required />
       <span ng-show="taskForm.$submitted && taskForm.name.$error.required" class="help-inline">Task name is required</span>
     </div>
@@ -33,7 +33,7 @@
     </button>
 
     <button type="button" class="btn"
-            ng-click="todos.reset()"
+            ng-click="tasks.reset()"
             ng-disabled="taskForm.$pristine">
       Reset
     </button>

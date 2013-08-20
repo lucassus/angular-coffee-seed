@@ -26,9 +26,9 @@ app.config [
         templateUrl: "templates/views/other.html"
         controller: "OtherCtrl as other"
 
-      .when "/todos",
-        templateUrl: "templates/views/todos.html"
-        controller: "TodosCtrl as todos"
+      .when "/tasks",
+        templateUrl: "templates/views/tasks.html"
+        controller: "TasksCtrl as tasks"
 
       .otherwise redirectTo: "/"
 ]

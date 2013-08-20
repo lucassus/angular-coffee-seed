@@ -4,7 +4,7 @@ describe "Application routes", ->
 
   beforeEach module("templates/views/main.html")
   beforeEach module("templates/views/other.html")
-  beforeEach module("templates/views/todos.html")
+  beforeEach module("templates/views/tasks.html")
 
   beforeEach inject ($location, $rootScope) ->
     @navigateTo = (path) ->
@@ -21,7 +21,7 @@ describe "Application routes", ->
     expect($route.current.templateUrl).toEqual "templates/views/other.html"
     expect($route.current.controller).toEqual "OtherCtrl as other"
 
-  it "recognizes '/todos'", inject ($route) ->
-    @navigateTo "/todos"
-    expect($route.current.templateUrl).toEqual "templates/views/todos.html"
-    expect($route.current.controller).toEqual "TodosCtrl as todos"
+  it "recognizes '/tasks'", inject ($route) ->
+    @navigateTo "/tasks"
+    expect($route.current.templateUrl).toEqual "templates/views/tasks.html"
+    expect($route.current.controller).toEqual "TasksCtrl as tasks"

@@ -3,17 +3,17 @@ scenario = require("./test/casperjs/helpers/scenario").create()
 # Page Objects
 TaskList = require("./test/casperjs/helpers/page_objects/task_list").TaskList
 
-scenario "Todo List page", ->
+scenario "Task List page", ->
   page = new TaskList(this)
   form = page.getForm()
 
   @feature "Navigate to the Task List page", ->
-    @clickLabel "Todos", "a"
+    @clickLabel "Tasks", "a"
     @test.assertTitle "Angular seed"
 
     # Define custom assertion
     @test.assertTasksCount = (number) =>
-      @test.assertEquals page.getTodosCount(), number,
+      @test.assertEquals page.getTasksCount(), number,
         "Page displays #{number} tasks"
 
   @feature "Show the valid page title", ->
@@ -27,9 +27,9 @@ scenario "Todo List page", ->
     @test.assertEquals "First task", firstTask.getName()
     @test.assertFalsy firstTask.isCompleted()
 
-    completedTodo = page.findTaskByName("Completed task")
-    @test.assertEquals "Completed task", completedTodo.getName()
-    @test.assertTruthy completedTodo.isCompleted()
+    completedTask = page.findTaskByName("Completed task")
+    @test.assertEquals "Completed task", completedTask.getName()
+    @test.assertTruthy completedTask.isCompleted()
 
   @feature "Create a new task", ->
     form.fillWith name: "New task"
@@ -47,11 +47,11 @@ scenario "Todo List page", ->
     @test.assertFalsy newTask.isCompleted()
 
   @feature "Create a new completed task", ->
-    form.fillWith name: "Another Todo"
+    form.fillWith name: "Another task"
     form.checkDone()
 
     formValues = form.getValues()
-    @test.assertEqual "Another Todo", formValues.name
+    @test.assertEqual "Another task", formValues.name
     @test.assertTruthy formValues.done
 
     form.clickAddButton()
@@ -59,13 +59,13 @@ scenario "Todo List page", ->
     @test.assertEquals page.remainingText(), "3 of 5 remaining"
     @test.assertTasksCount 5
 
-    newTodo = page.findTaskByName("Another Todo")
-    @test.assertTruthy newTodo.isCompleted()
+    newTask = page.findTaskByName("Another task")
+    @test.assertTruthy newTask.isCompleted()
 
   @feature "Complete a taks", ->
-    todo = page.findTaskByName("First task")
-    @test.assertFalsy todo.isCompleted()
-    todo.complete()
+    task = page.findTaskByName("First task")
+    @test.assertFalsy task.isCompleted()
+    task.complete()
 
     @test.assertEquals page.remainingText(), "2 of 5 remaining"
     @test.assertTasksCount 5
