@@ -32,6 +32,7 @@
     "grunt-regarde": "~0.1.1",
     "grunt-karma": "~0.5.0",
     "phantomjs": "~1.9",
+    "karma": "~0.9.4",
     "karma-ng-scenario": "~0.0.2",
     "karma-spec-reporter": "~0.0.1",
     "karma-coffee-preprocessor": "~0.0.3",
