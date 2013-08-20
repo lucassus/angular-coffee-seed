@@ -1,8 +1,7 @@
 class MainCtrl
 
-  @$inject = ["$scope"]
-  constructor: ($scope) ->
-    $scope.products = [
+  constructor: ->
+    @products = [
       { name: "HTC Wildfire" }
       { name: "iPhone" }
       { name: "Nexus One" }

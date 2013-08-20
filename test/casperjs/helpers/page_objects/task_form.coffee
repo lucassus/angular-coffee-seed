@@ -1,6 +1,6 @@
 BaseForm = require("./test/casperjs/helpers/page_objects/base_form").BaseForm
 
-exports.TodoForm = class extends BaseForm
+exports.TaskForm = class extends BaseForm
   constructor: (@casper, @selector) ->
     super(@casper, @selector)
 

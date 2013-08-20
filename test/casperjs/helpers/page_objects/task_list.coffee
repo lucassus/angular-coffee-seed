@@ -1,11 +1,11 @@
 Base = require("./test/casperjs/helpers/page_objects/base").Base
-TodoForm = require("./test/casperjs/helpers/page_objects/todo_form").TodoForm
-Todo = require("./test/casperjs/helpers/page_objects/todo").Todo
+TaskForm = require("./test/casperjs/helpers/page_objects/task_form").TaskForm
+Task = require("./test/casperjs/helpers/page_objects/task").Task
 
-exports.TodoList = class extends Base
+exports.TaskList = class extends Base
   constructor: (@casper) ->
     super(@casper)
-    @form = new TodoForm(@casper, "form[name=new-todo]")
+    @form = new TaskForm(@casper, "form[name=taskForm]")
 
   getForm: -> @form
 
@@ -15,17 +15,17 @@ exports.TodoList = class extends Base
   clickArchiveButton: ->
     @casper.clickLabel "archive", "a"
 
-  findTodoByText: (name) ->
+  findTaskByName: (name) ->
     index = @casper.evaluate (name) ->
       foundIndex = null
-      $("ul#todos li").each (index, li) ->
+      $("ul#tasks li").each (index, li) ->
         if $(li).find("span:contains('#{name}')").length > 0
           foundIndex = index
       foundIndex
     , name
 
-    new Todo(@casper, "ul#todos li:nth-child(#{index + 1})")
+    new Task(@casper, "ul#tasks li:nth-child(#{index + 1})")
 
   getTodosCount: ->
     @casper.evaluate ->
-      document.querySelectorAll("ul#todos li").length
+      document.querySelectorAll("ul#tasks li").length

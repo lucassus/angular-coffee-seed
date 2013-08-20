@@ -1,28 +1,39 @@
 class TodosCtrl
 
   @$inject = ["$scope"]
-  constructor: ($scope) ->
-    $scope.todos = [
+  constructor: (@$scope) ->
+    @tasks = [
       { name: "First task", done: false }
       { name: "Completed task", done: true }
       { name: "Second task", done: false }
     ]
 
-    incompeleteTodos = ->
-      todo for todo in $scope.todos when not todo.done
+    @master = { name: "", done: false }
+    @reset()
 
-    $scope.remaining = ->
-      incompeleteTodos().length
+  incompeleteTasks: ->
+    task for task in @tasks when not task.done
 
-    $scope.archive = ->
-      $scope.todos = incompeleteTodos()
+  tasksCount: ->
+    @tasks.length
 
-    $scope.newTodo = {}
+  remainingTasksCount: ->
+    @incompeleteTasks().length
 
-    $scope.addTodo = ->
-      todo = $scope.newTodo
-      $scope.todos.push(name: todo.name, done: !!todo.done)
-      $scope.newTodo = {}
+  archive: ->
+    @tasks = @incompeleteTasks()
+
+  reset: ->
+    @$scope.task = angular.copy(@master)
+    @$scope.taskForm?.$setPristine()
+    @$scope.taskForm?.$submitted = false
+
+  addTask: (task) ->
+    @$scope.taskForm?.$submitted = true
+    return unless @$scope.taskForm?.$valid
+
+    @tasks.push angular.copy(task)
+    @reset()
 
 angular.module("myApp")
   .controller("TodosCtrl", TodosCtrl)

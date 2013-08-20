@@ -1,6 +1,8 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
+  "ngAnimate"
+  "ngRoute"
   "myApp.alerts"
   "myApp.navigation"
 ]
@@ -17,16 +19,16 @@ app.config [
 
     $routeProvider
       .when "/",
-        templateUrl: "templates/views/main.html",
-        controller: "MainCtrl"
+        templateUrl: "templates/views/main.html"
+        controller: "MainCtrl as main"
 
       .when "/other",
-        templateUrl: "templates/views/other.html",
-        controller: "OtherCtrl"
+        templateUrl: "templates/views/other.html"
+        controller: "OtherCtrl as other"
 
       .when "/todos",
-        templateUrl: "templates/views/todos.html",
-        controller: "TodosCtrl"
+        templateUrl: "templates/views/todos.html"
+        controller: "TodosCtrl as todos"
 
       .otherwise redirectTo: "/"
 ]

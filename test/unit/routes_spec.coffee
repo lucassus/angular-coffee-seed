@@ -13,15 +13,15 @@ describe "Application routes", ->
 
   it "recognizes '/'", inject ($route) ->
     @navigateTo "/"
-    expect($route.current.templateUrl).toEqual("templates/views/main.html")
-    expect($route.current.controller).toEqual("MainCtrl")
+    expect($route.current.templateUrl).toEqual "templates/views/main.html"
+    expect($route.current.controller).toEqual "MainCtrl as main"
 
   it "recognizes '/other'", inject ($route) ->
     @navigateTo "/other"
-    expect($route.current.templateUrl).toEqual("templates/views/other.html")
-    expect($route.current.controller).toEqual("OtherCtrl")
+    expect($route.current.templateUrl).toEqual "templates/views/other.html"
+    expect($route.current.controller).toEqual "OtherCtrl as other"
 
   it "recognizes '/todos'", inject ($route) ->
     @navigateTo "/todos"
-    expect($route.current.templateUrl).toEqual("templates/views/todos.html")
-    expect($route.current.controller).toEqual("TodosCtrl")
+    expect($route.current.templateUrl).toEqual "templates/views/todos.html"
+    expect($route.current.controller).toEqual "TodosCtrl as todos"
