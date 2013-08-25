@@ -38,13 +38,14 @@ module.exports = (grunt) ->
 
     watch:
       coffee:
-        files: ["<%= appConfig.app %>/scripts/**/*.coffee"]
-        tasks: ["coffee:dist", "timestamp"]
-
-      coffeeTest:
-        files: ["<%= appConfig.test %>/**/*.coffee"]
+        files: [
+          "<%= appConfig.app %>/scripts/**/*.coffee"
+          "<%= appConfig.test %>/**/*.coffee"
+        ]
         tasks: [
+          "coffee:dist"
           "coffee:test"
+          "ngtemplates"
           "jasminehtml"
           "timestamp"
         ]
@@ -219,6 +220,8 @@ module.exports = (grunt) ->
         configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
         singleRun: true
 
+    # generate jasmine html runner
+    # run `grunt server` and open http://localhost:9000/jasmine.html
     jasminehtml:
       options:
         dest: "<%= appConfig.dev %>"
