@@ -205,7 +205,7 @@ module.exports = (grunt) ->
         configFile: "<%= appConfig.test %>/karma-coverage.conf.coffee"
         reporters: ["dots", "coverage"]
         coverageReporter:
-          type: grunt.option("coverage-reporter") || "text  "
+          type: grunt.option("coverage-reporter") || "text"
           dir: "coverage"
 
         singleRun: true
