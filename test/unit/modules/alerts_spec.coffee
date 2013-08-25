@@ -41,8 +41,6 @@ describe "myApp.alerts", ->
     $scope = null
     element = null
 
-    beforeEach module("templates/alerts.html")
-
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope
 

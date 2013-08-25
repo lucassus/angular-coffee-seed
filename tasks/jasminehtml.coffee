@@ -4,7 +4,7 @@ module.exports = (grunt) ->
   grunt.registerTask "jasminehtml", ->
 
     options = @options()
-    options.karmaConfigFile or= grunt.config("karma.unit.configFile")
+    options.karmaConfigFile or= grunt.config("karma.coverage.configFile")
 
     loadKarmaPatterns = ->
       files = []
