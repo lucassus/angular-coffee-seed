@@ -1,4 +1,4 @@
-alerts = angular.module("myApp.alerts", [])
+alerts = angular.module("myApp.alerts", ["myApp.templates"])
 
 class AlertsController
   @$inject = ["$scope", "alerts"]

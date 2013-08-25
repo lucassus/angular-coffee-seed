@@ -52,6 +52,7 @@ module.exports = (grunt) ->
       html:
         files: [
           "<%= appConfig.app %>/**/*.html"
+          "!<%= appConfig.app %>/templates/**/*.html"
         ]
         tasks: ["copy:dev", "timestamp"]
 
@@ -156,7 +157,9 @@ module.exports = (grunt) ->
     ngtemplates:
       options:
         base: "<%= appConfig.app %>"
-        module: "myApp"
+        module:
+          name: "myApp.templates"
+          define: true
 
       myApp:
         src: [

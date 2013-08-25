@@ -3,6 +3,8 @@
 app = angular.module "myApp", [
   "ngAnimate"
   "ngRoute"
+  "ngRoute"
+  "myApp.templates"
   "myApp.alerts"
   "myApp.navigation"
 ]

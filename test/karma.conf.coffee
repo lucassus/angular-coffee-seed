@@ -32,6 +32,7 @@ module.exports = (config) ->
 
     ngHtml2JsPreprocessor:
       stripPrefix: "app/"
+      moduleName: "myApp.templates"
 
     reporters: ["dots", "coverage"]
 

@@ -14,9 +14,8 @@ module.exports = (config) ->
       "components/angular/angular-mocks.js"
       "components/angular/angular-route.js"
 
-      "templates/**/*.html"
-
       "scripts/modules/**/*.js"
+      "scripts/templates.js"
       "scripts/application.js"
       "scripts/controllers/**/*.js"
 
