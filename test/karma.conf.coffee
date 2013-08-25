@@ -2,34 +2,38 @@
 module.exports = (config) ->
   config.set
 
+    basePath: "../"
+
     frameworks: [
       "jasmine"
     ]
 
     # list of files / patterns to load in the browser
     files: [
-      "components/jquery/jquery.js"
-      "components/angular/angular.js"
-      "components/angular/angular-animate.js"
-      "components/angular/angular-mocks.js"
-      "components/angular/angular-route.js"
+      "bower_components/jquery/jquery.js"
+      "bower_components/angular/angular.js"
+      "bower_components/angular/angular-animate.js"
+      "bower_components/angular/angular-mocks.js"
+      "bower_components/angular/angular-route.js"
 
-      "templates/**/*.html"
+      "app/templates/**/*.html"
 
-      "scripts/modules/**/*.js"
-      "scripts/application.js"
-      "scripts/controllers/**/*.js"
+      "app/scripts/modules/**/*.coffee"
+      "app/scripts/application.coffee"
+      "app/scripts/controllers/**/*.coffee"
 
-      "test/unit/helpers/**/*.js"
-      "test/unit/**/*_spec.js"
+      "test/unit/helpers/**/*.coffee"
+      "test/unit/**/*_spec.coffee"
     ]
 
     preprocessors:
-      "templates/**/*.html": ["html2js"]
-      "scripts/**/*.js": "coverage"
+      "**/*.coffee": ["coffee"]
+      "**/*.html": ["html2js"]
 
     ngHtml2JsPreprocessor:
-      stripPrefix: "../app/"
+      stripPrefix: "app/"
+
+    reporters: ["dots", "coverage"]
 
     # web server port
     port: 8080
@@ -38,10 +42,10 @@ module.exports = (config) ->
     runnerPort: 9100
 
     # enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false
+    autoWatch: true
 
     # Start these browsers, currently available:
-        # - Chrome
+    # - Chrome
     # - ChromeCanary
     # - Firefox
     # - Opera
@@ -59,6 +63,7 @@ module.exports = (config) ->
     logLevel: config.LOG_WARN
 
     plugins: [
+      "karma-coffee-preprocessor"
       "karma-ng-html2js-preprocessor"
 
       "karma-jasmine"

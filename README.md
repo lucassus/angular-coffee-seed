@@ -98,33 +98,11 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 By default all tests are executes in PhantomJS browser
 
-`grunt test`
+`grunt test:unit`
 
 Run test against specific browsers
 
-`grunt test --browsers=Chrome,Firefox,Opera,PhantomJS`
-
-Run karma with `autoWatch` option:
-
-```
-# inside the first terminal
-grunt server --force
-
-# inside the second terminal
-grunt test:watch --browsers=Chrome,Opera
-```
-
-or
-
-```
-# inside the first terminal
-grunt build:dev watch --force
-
-# inside the second terminal
-grunt test:watch --browsers=Firefox,PhantomJS
-```
-
-Task `grunt watch` has to be executed since it's recompiling all CoffeeScripts.
+`grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
 
 ### How to debug failing specs
 
@@ -140,7 +118,7 @@ describe "Failing spec", ->
 
 Run karma in Chrome browser:
 
-`grunt test:watch --browsers=Chrome`
+`grunt test:unit:watch --browsers=Chrome`
 
 * Go to the newly opened Chrome Browser
 * Open Chrome's DevTools and refresh the page
@@ -148,16 +126,29 @@ Run karma in Chrome browser:
 
 Run karma directly without CoffeeScript compilation:
 
-`karma start test/karma-coffee.conf.coffee --single-run`
+`karma start test/karma.conf.coffee --single-run`
 
 or with auto watch option:
 
-`karma start test/karma-coffee.conf.coffee`
+`karma start test/karma.conf.coffee`
+
+or
+
+`karma test:unit:watch`
 
 ### Running end2end tests
 
 `grunt test:e2e`
 `grunt test:casperjs`
+
+### Grunt tasks for running specs
+
+* `grunt test:unit` or `grunt test` - run unit tests
+* `grunt test:unit:watch` - run unit tests in watch mode
+* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
+* `grunt test:e2e` - build the dev release and run e2e specs
+* `grunt test:casperjs` - build the dev release and run casperjs integration specs
+* `grunt test:ci` -
 
 ### Running tests headlessly
 

@@ -174,8 +174,8 @@ module.exports = (grunt) ->
           install: false
 
     karma:
+      # common options for all karma's modes (unit, watch, coverage, e2e)
       options:
-        basePath: "../<%= appConfig.dev %>"
         browsers: parseBrowsers(defaultBrowser: "PhantomJS")
         colors: true
         # test results reporter to use
@@ -184,8 +184,25 @@ module.exports = (grunt) ->
         # If browser does not capture in given timeout [ms], kill it
         captureTimeout: 5000
 
+      # single run karma for unit tests
       unit:
+        basePath: "../"
         configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["dots"]
+        singleRun: true
+
+      # run karma for unit tests in watch mode
+      watch:
+        basePath: "../"
+        configFile: "<%= appConfig.test %>/karma.conf.coffee"
+        reporters: ["dots"]
+        singleRun: false
+        autoWatch: true
+
+      # generate test code coverage for compiled javascripts
+      coverage:
+        basePath: "../<%= appConfig.dev %>"
+        configFile: "<%= appConfig.test %>/karma-coverage.conf.coffee"
         reporters: ["dots", "coverage"]
         coverageReporter:
           type: "text"
@@ -193,21 +210,11 @@ module.exports = (grunt) ->
 
         singleRun: true
 
-      coffee:
-        basePath: "../"
-        configFile: "<%= appConfig.test %>/karma-coffee.conf.coffee"
-        reporters: ["dots"]
-        singleRun: true
-
+      # run e2e specs
       e2e:
+        basePath: "../<%= appConfig.dev %>"
         configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-        singleRun: true # `false` for debugging
-
-      watch:
-        configFile: "<%= appConfig.test %>/karma.conf.coffee"
-        reporters: ["dots"]
-        singleRun: false
-        autoWatch: true
+        singleRun: true
 
     jasminehtml:
       options:
@@ -268,17 +275,31 @@ module.exports = (grunt) ->
     "watch"
   ]
 
-  grunt.registerTask "test", [
-    "build:dev"
+  # run unit tests
+  grunt.registerTask "test:unit", [
     "karma:unit"
   ]
 
+  # run unit tests in the watch mode
+  grunt.registerTask "test:unit:watch", [
+    "karma:watch"
+  ]
+
+  # run unit tests against compiled develepment release
+  # and generate code coverage report
+  grunt.registerTask "test:unit:coverage", [
+    "build:dev"
+    "karma:coverage"
+  ]
+
+  # run e2e integration tests
   grunt.registerTask "test:e2e", [
     "build:dev"
     "connect:e2e"
     "karma:e2e"
   ]
 
+  # run casperjs integration tests
   grunt.registerTask "test:casperjs", [
     "build:dev"
     "connect:e2e"
@@ -289,15 +310,17 @@ module.exports = (grunt) ->
   grunt.registerTask "test:ci", [
     "build:dev"
 
-    # run unit tests
-    "karma:unit"
+    # run unit tests and generate code coverage report
+    "karma:coverage"
 
-    # run e2e tests
+    # run all integration tests
     "connect:e2e"
     "karma:e2e"
-
-    # run casperjs integration tests
     "casperjs"
+  ]
+
+  grunt.registerTask "test", [
+    "karma:unit"
   ]
 
   grunt.registerTask "build:dist", [
@@ -308,11 +331,6 @@ module.exports = (grunt) ->
     "usemin"
     "uglify"
     "cssmin"
-  ]
-
-  grunt.registerTask "test:watch", [
-    "coffee:test"
-    "karma:watch"
   ]
 
   grunt.renameTask "build:dist", "build"
