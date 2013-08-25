@@ -1,10 +1,5 @@
 describe "Application routes", ->
-
   beforeEach module("myApp")
-
-  beforeEach module("templates/views/main.html")
-  beforeEach module("templates/views/other.html")
-  beforeEach module("templates/views/tasks.html")
 
   beforeEach inject ($location, $rootScope) ->
     @navigateTo = (path) ->
