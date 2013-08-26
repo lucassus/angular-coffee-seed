@@ -12,7 +12,7 @@ module.exports = (grunt) ->
 
       # Reload karma config file
       delete require.cache[path.resolve(options.karmaConfigFile)]
-      require("../#{options.karmaConfigFile}")(config)
+      require("../../#{options.karmaConfigFile}")(config)
 
       files
 
@@ -26,7 +26,7 @@ module.exports = (grunt) ->
           files.push file
       files
 
-    template = grunt.file.read path.join("tasks", "jasmine.html.tpl")
+    template = grunt.file.read path.join("build", "tasks", "jasmine.html.tpl")
     html = grunt.template.process template, data: files: loadFiles()
 
     grunt.file.write path.join(options.dest, "jasmine.html"), html

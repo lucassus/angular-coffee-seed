@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   # load all grunt tasks
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks)
-  grunt.loadTasks("tasks")
+  grunt.loadTasks("build/tasks")
 
   # configurable paths
   appConfig =
