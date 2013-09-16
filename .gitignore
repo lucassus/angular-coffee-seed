@@ -9,3 +9,4 @@ bower_components
 # Builds
 dev
 dist
+coverage
