@@ -145,11 +145,12 @@ or
 
 * `grunt test:unit` or `grunt test` - run unit tests
 * `grunt test:unit:watch` - run unit tests in watch mode
+* `grunt test:coverage` or
 * `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
 * `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
 * `grunt test:e2e` - build the dev release and run e2e specs
 * `grunt test:casperjs` - build the dev release and run casperjs integration specs
-* `grunt test:ci` -
+* `grunt test:ci` - run all tests on the CI server
 
 ### Running tests headlessly
 

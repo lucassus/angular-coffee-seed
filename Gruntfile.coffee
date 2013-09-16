@@ -74,6 +74,10 @@ module.exports = (grunt) ->
     "karma:coverage"
   ]
 
+  grunt.registerTask "test:coverage", [
+    "test:unit:coverage"
+  ]
+
   # run e2e integration tests
   grunt.registerTask "test:e2e", [
     "build:dev"
