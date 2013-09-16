@@ -5,6 +5,9 @@ module.exports = (grunt) ->
     module:
       name: "myApp.templates"
       define: true
+    htmlmin:
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true
 
   myApp:
     src: [
