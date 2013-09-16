@@ -1,6 +1,7 @@
 # Karma configuration
 module.exports = (config) ->
   config.set
+    basePath: "../"
 
     frameworks: [
       "jasmine"
@@ -32,7 +33,7 @@ module.exports = (config) ->
       stripPrefix: "app/"
       moduleName: "myApp.templates"
 
-    reporters: ["dots", "coverage"]
+    reporters: ["dots"]
 
     # web server port
     port: 8080

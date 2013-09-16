@@ -29,14 +29,12 @@ module.exports = (grunt) ->
 
   # single run karma for unit tests
   unit:
-    basePath: "../"
     configFile: "<%= appConfig.test %>/karma.conf.coffee"
     reporters: ["dots"]
     singleRun: true
 
   # run karma for unit tests in watch mode
   watch:
-    basePath: "../"
     configFile: "<%= appConfig.test %>/karma.conf.coffee"
     reporters: ["dots"]
     singleRun: false
