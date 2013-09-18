@@ -1,13 +1,17 @@
 scenario = require("./test/casperjs/helpers/scenario").create()
 
+# Page objects
+Base = require("./test/casperjs/helpers/page_objects/base").Base
+
 scenario "Main page", ->
+  page = new Base(this)
 
   @feature "Navigate to the main page", ->
     @clickLabel "Home", "a"
     @test.assertTitle "Angular seed"
 
   @feature "Display all phones", ->
-    @test.assertSelectorHasText "h2", "You now have phones"
+    @test.assertEquals page.pageTitleText(), "You now have phones"
 
     @test.assertEvalEquals (->
       document.querySelectorAll("ul#products li").length
