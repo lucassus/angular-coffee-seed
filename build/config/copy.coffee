@@ -15,6 +15,7 @@ module.exports = (grunt) ->
       ]
     ]
 
+  # copy fonts to the dist directory
   dist:
     files: [
       expand: true
