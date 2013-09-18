@@ -5,7 +5,7 @@ exports.Other = class extends Base
     super(@casper)
 
   sayHelloButtonText: ->
-    @casper.fetchText ".btn.btn-info"
+    @casper.fetchText(".btn.btn-info").replace(/^\s+|\s+$/g, "")
 
   clickSayHelloButton: ->
     @casper.click ".btn.btn-info"

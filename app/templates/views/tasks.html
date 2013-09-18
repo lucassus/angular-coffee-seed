@@ -6,8 +6,9 @@
 <span id="remaining">{{tasks.remainingTasksCount()}} of {{tasks.tasksCount()}} remaining</span>
 [ <a href="" class="archive" ng-click="tasks.archive()">archive</a> ]
 
-<ul id="tasks">
+<ul id="tasks" class="icons-ul">
   <li ng-repeat="task in tasks.tasks | orderBy:'done'" class="repeat-item">
+    <i class="icon-li icon-ok"></i>
     <label>
       <input type="checkbox" ng-model="task.done" />&nbsp;
       <span ng-class="{done: task.done}">{{task.name}}</span>
@@ -39,6 +40,6 @@
   <button type="button" class="btn"
           ng-click="tasks.reset()"
           ng-disabled="taskForm.$pristine">
-    Reset
+    <i class="icon-remove-circle"></i> Reset
   </button>
 </form>

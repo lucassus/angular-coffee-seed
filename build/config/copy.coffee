@@ -14,3 +14,14 @@ module.exports = (grunt) ->
         "styles/fonts/*"
       ]
     ]
+
+  dist:
+    files: [
+      expand: true
+      dot: true
+      cwd: "bower_components/font-awesome"
+      dest: "<%= appConfig.dist %>"
+      src: [
+        "font/**/*"
+      ]
+    ]
