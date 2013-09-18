@@ -9,14 +9,17 @@ module.exports = (config) ->
     # list of files / patterns to load in the browser
     files: [
       "components/jquery/jquery.js"
+
       "components/angular/angular.js"
-      "components/angular/angular-animate.js"
-      "components/angular/angular-mocks.js"
-      "components/angular/angular-route.js"
+      "components/angular-mocks/angular-mocks.js"
+      "components/angular-resource/angular-resource.js"
+      "components/angular-route/angular-route.js"
+      "components/angular-animate/angular-animate.js"
 
       "scripts/modules/**/*.js"
       "scripts/templates.js"
       "scripts/application.js"
+      "scripts/routes.js"
       "scripts/controllers/**/*.js"
 
       "test/unit/helpers/**/*.js"

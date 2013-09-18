@@ -10,15 +10,18 @@ module.exports = (config) ->
     # list of files / patterns to load in the browser
     files: [
       "bower_components/jquery/jquery.js"
+
       "bower_components/angular/angular.js"
-      "bower_components/angular/angular-animate.js"
-      "bower_components/angular/angular-mocks.js"
-      "bower_components/angular/angular-route.js"
+      "bower_components/angular-mocks/angular-mocks.js"
+      "bower_components/angular-resource/angular-resource.js"
+      "bower_components/angular-route/angular-route.js"
+      "bower_components/angular-animate/angular-animate.js"
 
       "app/templates/**/*.html"
 
       "app/scripts/modules/**/*.coffee"
       "app/scripts/application.coffee"
+      "app/scripts/routes.coffee"
       "app/scripts/controllers/**/*.coffee"
 
       "test/unit/helpers/**/*.coffee"

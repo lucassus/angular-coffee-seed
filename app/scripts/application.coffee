@@ -10,7 +10,8 @@ app = angular.module "myApp", [
 ]
 
 app.config [
-  "$provide", "$routeProvider", ($provide, $routeProvider) ->
+
+  "$provide", ($provide) ->
     $provide.value("alertTimeout", 3000)
 
     # workarounds e2e scenarios
@@ -19,18 +20,4 @@ app.config [
       # disable timeouts, see https://github.com/angular/angular.js/issues/2402
       $provide.value("alertTimeout", null)
 
-    $routeProvider
-      .when "/",
-        templateUrl: "templates/views/main.html"
-        controller: "MainCtrl as main"
-
-      .when "/other",
-        templateUrl: "templates/views/other.html"
-        controller: "OtherCtrl as other"
-
-      .when "/tasks",
-        templateUrl: "templates/views/tasks.html"
-        controller: "TasksCtrl as tasks"
-
-      .otherwise redirectTo: "/"
 ]
