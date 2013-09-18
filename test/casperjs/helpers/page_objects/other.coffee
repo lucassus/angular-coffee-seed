@@ -4,9 +4,8 @@ exports.Other = class extends Base
   constructor: (@casper) ->
     super(@casper)
 
-
   sayHelloButtonText: ->
-    @casper.fetchText ".btn.say-hello"
+    @casper.fetchText ".btn.btn-info"
 
   clickSayHelloButton: ->
-    @casper.click ".btn.say-hello"
+    @casper.click ".btn.btn-info"
