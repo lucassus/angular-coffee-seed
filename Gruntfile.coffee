@@ -114,6 +114,7 @@ module.exports = (grunt) ->
     "useminPrepare"
     "htmlmin"
     "concat"
+    "copy:dist"
     "usemin"
     "uglify"
     "cssmin"

@@ -4,7 +4,8 @@
   "dependencies": {
     "jquery": "~2.0.3",
     "angular": "PatternConsulting/bower-angular#v1.2.0rc1",
-    "bootstrap": "~2.3.2"
+    "bootstrap": "~3.0.0",
+    "font-awesome": "~3.2.1"
   },
   "devDependencies": {
     "jasmine": "~1.3.1"
@@ -18,10 +19,9 @@
         "angular-route.js"
       ]
     },
-    "bootstrap": {
-      "js": "docs/assets/js/bootstrap.js",
-      "css": "docs/assets/css/bootstrap.css",
-      "img": "img/*.png"
+    "font-awesome": {
+      "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
+      "font": ["font/*"]
     },
     "jasmine": {
       "js": [
