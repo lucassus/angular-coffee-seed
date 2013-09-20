@@ -32,46 +32,6 @@ html,body {
   }
 }
 
-// some ng-animations
-.repeat-item.ng-enter,.repeat-item.ng-leave {
-  -webkit-transition: 0.5s linear all;
-  -moz-transition: 0.5s linear all;
-  -o-transition: 0.5s linear all;
-  transition: 0.5s linear all;
-}
-
-.repeat-item.ng-leave, .repeat-item.ng-enter.ng-enter-active {
-  opacity: 1;
-}
-
-.repeat-item.ng-enter, .repeat-item.ng-leave.ng-leave-active {
-  opacity: 0;
-}
-
-/*
- The animate class is apart of the element and the ng-enter class
- is attached to the element once the enter animation event is triggered
-*/
-.reveal-animation.ng-enter {
-  -webkit-transition: 1s linear all; /* Safari/Chrome */
-  -moz-transition: 1s linear all; /* Firefox */
-  -o-transition: 1s linear all; /* Opera */
-  transition: 1s linear all; /* IE10+ and Future Browsers */
-
-  /* The animation preparation code */
-  opacity: 0;
-}
-
-/*
- Keep in mind that you want to combine both CSS
- classes together to avoid any CSS-specificity
- conflicts
-*/
-.reveal-animation.ng-enter.ng-enter-active {
-  /* The animation code itself */
-  opacity: 1;
-}
-
 // tasks list
 .done {
   text-decoration: line-through;
