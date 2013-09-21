@@ -29,7 +29,6 @@ module.exports = (grunt) ->
     ngtemplates:   loadMoule "ngtemplates"
     bower:         loadMoule "bower"
     karma:         loadMoule "karma"
-    jasminehtml:   loadMoule "jasminehtml"
     casperjs:      loadMoule "casperjs"
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
@@ -46,7 +45,6 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
-    "jasminehtml"
   ]
 
   grunt.registerTask "server", [

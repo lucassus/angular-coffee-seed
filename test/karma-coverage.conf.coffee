@@ -3,12 +3,14 @@ module.exports = (config) ->
   config.set
 
     frameworks: [
-      "jasmine"
+      "mocha"
+      "chai"
     ]
 
     # list of files / patterns to load in the browser
     files: [
       "components/jquery/jquery.js"
+      "components/underscore/underscore.js"
 
       "components/angular/angular.js"
       "components/angular-mocks/angular-mocks.js"
@@ -70,7 +72,8 @@ module.exports = (config) ->
     plugins: [
       "karma-ng-html2js-preprocessor"
 
-      "karma-jasmine"
+      "karma-mocha"
+      "karma-chai-plugins"
       "karma-spec-reporter"
       "karma-coverage"
 

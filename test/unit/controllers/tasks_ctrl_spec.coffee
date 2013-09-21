@@ -10,8 +10,8 @@ describe "Controller: TasksCtrl", ->
     ctrl = $controller "TasksCtrl", $scope: $scope
 
   it "assisgns tasks", ->
-    expect(ctrl.tasks).toBeDefined()
-    expect(ctrl.tasks.length).toEqual 3
+    expect(ctrl.tasks).to.not.be.undefined
+    expect(ctrl.tasks.length).to.equal 3
 
   describe "#archive", ->
     beforeEach ->
@@ -20,16 +20,16 @@ describe "Controller: TasksCtrl", ->
       ]
 
     it "removes completed task from the list", ->
-      expect(ctrl.tasks.length).toEqual 3
+      expect(ctrl.tasks.length).to.equal 3
 
       ctrl.archive()
-      expect(ctrl.tasks.length).toEqual 1
+      expect(ctrl.tasks.length).to.equal 1
 
   describe "#tasksCount", ->
 
     it "returs the number of all tasks", ->
       ctrl.tasks = [{}, {}, {}]
-      expect(ctrl.tasksCount()).toEqual 3
+      expect(ctrl.tasksCount()).to.equal 3
 
   describe "#remainingTasksCount", ->
 
@@ -37,7 +37,7 @@ describe "Controller: TasksCtrl", ->
       beforeEach -> ctrl.tasks = []
 
       it "returns 0", ->
-        expect(ctrl.remainingTasksCount()).toEqual 0
+        expect(ctrl.remainingTasksCount()).to.equal 0
 
     describe "when task list contains some uncompleted tasks", ->
       beforeEach ->
@@ -46,7 +46,7 @@ describe "Controller: TasksCtrl", ->
         ]
 
       it "returns > 0", ->
-        expect(ctrl.remainingTasksCount()).toEqual 2
+        expect(ctrl.remainingTasksCount()).to.equal 2
 
     describe "when all tasks are completed", ->
       beforeEach ->
@@ -55,7 +55,7 @@ describe "Controller: TasksCtrl", ->
         ]
 
       it "returns 0", ->
-        expect(ctrl.remainingTasksCount()).toEqual 0
+        expect(ctrl.remainingTasksCount()).to.equal 0
 
   describe "#addTask", ->
 
@@ -74,16 +74,19 @@ describe "Controller: TasksCtrl", ->
         ctrl.addTask(newTask)
 
         # Then
-        expect(ctrl.tasks.length).toEqual 4
-        expect(ctrl.tasks[3]).toEqual
-          name: newTask.name, done: newTask.done
+        expect(ctrl.tasks.length).to.equal 4
+
+        lastTask = ctrl.tasks[3]
+        expect(lastTask).to.not.be.undefined
+        expect(lastTask.name).to.equal newTask.name
+        expect(lastTask.done).to.equal newTask.done
 
       it "resets the form", ->
         # When
         ctrl.addTask({})
 
         # Then
-        expect(stub.called).toBeTruthy()
+        expect(stub.called).to.be.true
 
     describe "when the form is not valid", ->
       beforeEach -> $scope.taskForm = $valid: false
@@ -93,7 +96,7 @@ describe "Controller: TasksCtrl", ->
         ctrl.addTask({})
 
         # Then
-        expect(ctrl.tasks.length).toEqual 3
+        expect(ctrl.tasks.length).to.equal 3
 
       it "does not reset the form", ->
         # Given
@@ -103,5 +106,5 @@ describe "Controller: TasksCtrl", ->
         ctrl.addTask({})
 
         # Then
-        expect(mock.called).toBeFalsy()
+        expect(mock.called).to.be.false
         mock.verify()

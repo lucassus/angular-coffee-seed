@@ -30,17 +30,17 @@ describe "myApp.navigation", ->
 
       it "activates the 'Home' link by default", ->
         changeLocation("/")
-        expect(element.find("li:nth-child(1)").hasClass("active")).toBeTruthy()
-        expect(element.find("li:nth-child(2)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(3)").hasClass("active")).toBeFalsy()
+        expect(element.find("li:nth-child(1)").hasClass("active")).to.be.true
+        expect(element.find("li:nth-child(2)").hasClass("active")).to.be.false
+        expect(element.find("li:nth-child(3)").hasClass("active")).to.be.false
 
       it "activates other links on location change", ->
         changeLocation("/foo")
-        expect(element.find("li:nth-child(1)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(2)").hasClass("active")).toBeTruthy()
-        expect(element.find("li:nth-child(3)").hasClass("active")).toBeFalsy()
+        expect(element.find("li:nth-child(1)").hasClass("active")).to.be.false
+        expect(element.find("li:nth-child(2)").hasClass("active")).to.be.true
+        expect(element.find("li:nth-child(3)").hasClass("active")).to.be.false
 
         changeLocation("/bar")
-        expect(element.find("li:nth-child(1)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(2)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(3)").hasClass("active")).toBeTruthy()
+        expect(element.find("li:nth-child(1)").hasClass("active")).to.be.false
+        expect(element.find("li:nth-child(2)").hasClass("active")).to.be.false
+        expect(element.find("li:nth-child(3)").hasClass("active")).to.be.true

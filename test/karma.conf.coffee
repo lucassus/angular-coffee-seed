@@ -4,12 +4,14 @@ module.exports = (config) ->
     basePath: "../"
 
     frameworks: [
-      "jasmine"
+      "mocha"
+      "chai"
     ]
 
     # list of files / patterns to load in the browser
     files: [
       "bower_components/jquery/jquery.js"
+      "bower_components/underscore/underscore.js"
 
       "bower_components/angular/angular.js"
       "bower_components/angular-mocks/angular-mocks.js"
@@ -76,7 +78,8 @@ module.exports = (config) ->
       "karma-coffee-preprocessor"
       "karma-ng-html2js-preprocessor"
 
-      "karma-jasmine"
+      "karma-mocha"
+      "karma-chai-plugins"
       "karma-spec-reporter"
       "karma-coverage"
 

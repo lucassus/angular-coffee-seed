@@ -13,7 +13,7 @@ describe "Controller: OtherCtrl", ->
     ctrl = $controller "OtherCtrl"
 
   it "has a name", ->
-    expect(ctrl.name).toBe "This is the other controller"
+    expect(ctrl.name).to.equal "This is the other controller"
 
   describe "#sayHello", ->
 
@@ -22,5 +22,5 @@ describe "Controller: OtherCtrl", ->
       ctrl.sayHello()
 
       # Then
-      expect(alerts.info.called).toBeTruthy()
-      expect(alerts.info.calledWith("Hello World!")).toBeTruthy()
+      expect(alerts.info.called).to.be.true
+      expect(alerts.info.calledWith("Hello World!")).to.be.true
