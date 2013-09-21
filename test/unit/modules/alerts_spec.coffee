@@ -39,8 +39,8 @@ describe "myApp.alerts", ->
         $scope.disposeAlert(2)
 
         # Then
-        expect(spy).to.haveBeenCalled
-        expect(spy).to.haveBeenCalledWith 2
+        expect(spy).to.be.called
+        expect(spy).to.be.calledWith 2
 
         firstMessage = _.findWhere($scope.alertMessages, id: 1)
         expect(firstMessage).to.not.be.undefined
@@ -88,10 +88,10 @@ describe "myApp.alerts", ->
 
       it "returns an id for the new flash message", inject (alerts) ->
         expect(alerts.push("info", "Test..")).to.equal 1
-        expect(spy).to.haveBeenCalledWith 1
+        expect(spy).to.be.calledWith 1
 
         expect(alerts.push("error", "Test error..")).to.equal 2
-        expect(spy).to.haveBeenCalledWith 2
+        expect(spy).to.be.calledWith 2
 
       describe "#info", ->
         it "pushesh the given message", inject (alerts) ->
@@ -101,10 +101,10 @@ describe "myApp.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(spy).to.haveBeenCalledWith 1
+          expect(spy).to.be.calledWith 1
 
           alerts.error(otherTestMessage)
-          expect(spy).to.haveBeenCalledWith 2
+          expect(spy).to.be.calledWith 2
 
           # Then
           firstMessage = _.findWhere(alerts.messages, id: 1)
@@ -124,7 +124,7 @@ describe "myApp.alerts", ->
 
           # When
           alerts.error(testMessage)
-          expect(spy).to.haveBeenCalledWith 1
+          expect(spy).to.be.calledWith 1
 
           # Then
           lastMessage = _.findWhere(alerts.messages, id: 1)

@@ -1,7 +1,9 @@
 # Custom chai matchers for SinonJS
 
+Assertion = chai.Assertion
+
 # Pass if the spy was called at least once
-chai.Assertion.addProperty "haveBeenCalled", ->
+Assertion.addProperty "called", ->
   subject = @_obj
 
   @assert subject.called,
@@ -9,10 +11,10 @@ chai.Assertion.addProperty "haveBeenCalled", ->
     "expected #{angular.mock.dump(subject)} to not have been called"
 
 # Pass if the spy was called at least once with the provided arguments
-chai.Assertion.addMethod "haveBeenCalledWith", (args...) ->
+Assertion.addMethod "calledWith", (args...) ->
   subject = @_obj
 
-  new chai.Assertion(subject).to.haveBeenCalled
+  new Assertion(subject).to.be.called
 
   @assert subject.calledWith.apply(subject, args),
     "expected #{angular.mock.dump(subject)} to have been called with #\{exp} but it was called with #\{act}",

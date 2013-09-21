@@ -22,5 +22,5 @@ describe "Controller: OtherCtrl", ->
       ctrl.sayHello()
 
       # Then
-      expect(alerts.info).to.haveBeenCalled
-      expect(alerts.info).to.haveBeenCalledWith("Hello World!")
+      expect(alerts.info).to.be.called
+      expect(alerts.info).to.be.calledWith("Hello World!")
