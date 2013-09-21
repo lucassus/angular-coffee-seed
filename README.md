@@ -153,6 +153,9 @@ or
 * `grunt test:casperjs` - build the dev release and run casperjs integration specs
 * `grunt test:ci` - run all tests on the CI server
 
+* `grunt test --reporters=spec` - run tests with `spec` reporter
+* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
+
 ### Running tests headlessly
 
 Start Xvfb and export DISPLAY variable:

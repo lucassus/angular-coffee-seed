@@ -52,7 +52,7 @@ module.exports = (config) ->
     autoWatch: false
 
     # Start these browsers, currently available:
-        # - Chrome
+    # - Chrome
     # - ChromeCanary
     # - Firefox
     # - Opera
