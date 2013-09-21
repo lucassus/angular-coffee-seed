@@ -1,21 +1,22 @@
 # Custom AngularJS seed project
 
+[![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
+[![Dependency Status](https://gemnasium.com/lucassus/angular-seed.png)](https://gemnasium.com/lucassus/angular-seed)
+
 This is a custom AngularJS seed project based on grunt the JavaScript task runner.
 
 * AngularJS 1.2.0
 * CoffeeScript and Less support
-* Bower for front-end packages menagement
+* Bower for front-end packages management
 * Full support for unit and end2end tests
-* Generates code coverage for JavaScripr unit tests
-* Support for CasperJS integration tests
+* Unit tests with Mocha, Chai and SinonJS
+* Generates code coverage for JavaScript unit tests
+* Support for AngularJS e2e and CasperJS integration tests
 * Support for Karma Test Runner (formerly Testacular)
-* Continous Integration ready ready via `grunt test:ci` task
+* Continuous Integration ready ready via `grunt test:ci` task
 * Grunt task runner along with several useful plugins
 * Production release minification and angular template caching
 * ..and a lot more
-
-[![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
-[![Dependency Status](https://gemnasium.com/lucassus/angular-seed.png)](https://gemnasium.com/lucassus/angular-seed)
 
 Demo: http://lucassus-angular-seed.herokuapp.com
 
@@ -144,13 +145,17 @@ or
 ### Grunt tasks for running specs
 
 * `grunt test:unit` or `grunt test` - run unit tests
-* `grunt test:unit:watch` - run unit tests in watch mode
+* `grunt test:unit:watch` or
+* `grunt test:watch` - run unit tests in watch mode
 * `grunt test:coverage` or
 * `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
 * `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
 * `grunt test:e2e` - build the dev release and run e2e specs
 * `grunt test:casperjs` - build the dev release and run casperjs integration specs
 * `grunt test:ci` - run all tests on the CI server
+
+* `grunt test --reporters=spec` - run tests with `spec` reporter
+* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 ### Running tests headlessly
 
@@ -163,16 +168,11 @@ export DISPLAY=:99
 
 Perform single run:
 
-grunt test --browsers=Firefox,Chrome,Opera,PhantomJS
+`grunt test --browsers=Firefox,Chrome,Opera,PhantomJS`
 
 or
 
 `grunt test:watch --browsers=Chrome`
-
-### Running jasmine specs inside the browser
-
-Run `grunt server` and navigate to: `http://localhost:9000/jasmine.html`
-`jasmine.html` is automatically generated from karma's `./test/karma.conf.coffee` file.
 
 ## Build process
 

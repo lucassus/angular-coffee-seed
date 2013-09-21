@@ -8,4 +8,4 @@ describe "Controller: MainCtrl", ->
     ctrl = $controller "MainCtrl"
 
   it "has a list of products to the scope", ->
-    expect(ctrl.products.length).toBe 6
+    expect(ctrl.products.length).to.equal 6

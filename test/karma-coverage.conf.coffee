@@ -3,12 +3,14 @@ module.exports = (config) ->
   config.set
 
     frameworks: [
-      "jasmine"
+      "mocha"
+      "chai"
     ]
 
     # list of files / patterns to load in the browser
     files: [
       "components/jquery/jquery.js"
+      "components/underscore/underscore.js"
 
       "components/angular/angular.js"
       "components/angular-mocks/angular-mocks.js"
@@ -22,8 +24,6 @@ module.exports = (config) ->
       "components/sinon/lib/sinon/stub.js"
       "components/sinon/lib/sinon/mock.js"
       "components/sinon/lib/sinon/assert.js"
-
-      "components/jasmine-sinon/lib/jasmine-sinon.js"
 
       "scripts/modules/**/*.js"
       "scripts/templates.js"
@@ -52,7 +52,7 @@ module.exports = (config) ->
     autoWatch: false
 
     # Start these browsers, currently available:
-        # - Chrome
+    # - Chrome
     # - ChromeCanary
     # - Firefox
     # - Opera
@@ -72,7 +72,8 @@ module.exports = (config) ->
     plugins: [
       "karma-ng-html2js-preprocessor"
 
-      "karma-jasmine"
+      "karma-mocha"
+      "karma-chai-plugins"
       "karma-spec-reporter"
       "karma-coverage"
 
