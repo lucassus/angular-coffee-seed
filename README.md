@@ -169,11 +169,6 @@ or
 
 `grunt test:watch --browsers=Chrome`
 
-### Running jasmine specs inside the browser
-
-Run `grunt server` and navigate to: `http://localhost:9000/jasmine.html`
-`jasmine.html` is automatically generated from karma's `./test/karma.conf.coffee` file.
-
 ## Build process
 
 `grunt build` will build the minified production release.
