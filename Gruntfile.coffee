@@ -65,6 +65,11 @@ module.exports = (grunt) ->
     "karma:watch"
   ]
 
+  # run unit tests in the watch mode
+  grunt.registerTask "test:watch", [
+    "test:unit:watch"
+  ]
+
   # run unit tests against compiled develepment release
   # and generate code coverage report
   grunt.registerTask "test:unit:coverage", [

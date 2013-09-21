@@ -144,7 +144,8 @@ or
 ### Grunt tasks for running specs
 
 * `grunt test:unit` or `grunt test` - run unit tests
-* `grunt test:unit:watch` - run unit tests in watch mode
+* `grunt test:unit:watch` or
+* `grunt test:watch` - run unit tests in watch mode
 * `grunt test:coverage` or
 * `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
 * `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
