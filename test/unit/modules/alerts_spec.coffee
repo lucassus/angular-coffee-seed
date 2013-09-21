@@ -33,8 +33,8 @@ describe "myApp.alerts", ->
         $scope.disposeAlert(2)
 
         # Then
-        expect(spy).toHaveBeenCalled()
-        expect(spy).toHaveBeenCalledWith(2)
+        expect(spy.called).toBeTruthy()
+        expect(spy.calledWith(2)).toBeTruthy()
 
         expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
         expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
@@ -77,10 +77,10 @@ describe "myApp.alerts", ->
 
       it "returns an id for the new flash message", inject (alerts) ->
         expect(alerts.push("info", "Test..")).toEqual(1)
-        expect(spy).toHaveBeenCalledWith(1)
+        expect(spy.calledWith(1)).toBeTruthy()
 
         expect(alerts.push("error", "Test error..")).toEqual(2)
-        expect(spy).toHaveBeenCalledWith(2)
+        expect(spy.calledWith(2)).toBeTruthy()
 
       describe "#info", ->
         it "pushesh the given message", inject (alerts) ->
@@ -90,10 +90,10 @@ describe "myApp.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(spy).toHaveBeenCalledWith(1)
+          expect(spy.calledWith(1)).toBeTruthy()
 
           alerts.info(otherTestMessage)
-          expect(spy).toHaveBeenCalledWith(2)
+          expect(spy.calledWith(2)).toBeTruthy()
 
           # Then
           expect(alerts.messages).toContain(id: 1, type: "info", text: testMessage)
@@ -106,7 +106,7 @@ describe "myApp.alerts", ->
 
           # When
           alerts.error(testMessage)
-          expect(spy).toHaveBeenCalledWith(1)
+          expect(spy.calledWith(1)).toBeTruthy()
 
           # Then
           expect(alerts.messages).toContain(id: 1, type: "error", text: testMessage)

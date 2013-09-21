@@ -23,8 +23,6 @@ module.exports = (config) ->
       "components/sinon/lib/sinon/mock.js"
       "components/sinon/lib/sinon/assert.js"
 
-      "components/jasmine-sinon/lib/jasmine-sinon.js"
-
       "scripts/modules/**/*.js"
       "scripts/templates.js"
       "scripts/application.js"

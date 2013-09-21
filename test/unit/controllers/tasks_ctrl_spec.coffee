@@ -83,7 +83,7 @@ describe "Controller: TasksCtrl", ->
         ctrl.addTask({})
 
         # Then
-        expect(stub).toHaveBeenCalled()
+        expect(stub.called).toBeTruthy()
 
     describe "when the form is not valid", ->
       beforeEach -> $scope.taskForm = $valid: false
@@ -103,5 +103,5 @@ describe "Controller: TasksCtrl", ->
         ctrl.addTask({})
 
         # Then
-        expect(mock).not.toHaveBeenCalled()
+        expect(mock.called).toBeFalsy()
         mock.verify()
