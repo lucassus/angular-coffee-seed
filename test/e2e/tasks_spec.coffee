@@ -7,7 +7,7 @@ describe "Tasks page", ->
   beforeEach -> taskList = repeater("ul#tasks li")
 
   it "navigates to the valid url", ->
-    expect(browser().location().url()).toBe "/tasks"
+    expect(browser().location().url()).toEqual "/tasks"
 
   it "displays number of remaining tasks", ->
     expect(element("span#remaining").text()).toEqual "2 of 3 remaining"
