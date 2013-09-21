@@ -24,6 +24,8 @@ module.exports = (config) ->
       "bower_components/sinon/lib/sinon/mock.js"
       "bower_components/sinon/lib/sinon/assert.js"
 
+      "bower_components/jasmine-sinon/lib/jasmine-sinon.js"
+
       "app/templates/**/*.html"
 
       "app/scripts/modules/**/*.coffee"
