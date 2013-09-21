@@ -9,7 +9,6 @@ module.exports = (grunt) ->
       "coffee:dist"
       "coffee:test"
       "ngtemplates"
-      "jasminehtml"
       "timestamp"
     ]
 
