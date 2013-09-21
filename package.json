@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/lucassus/angular-seed.git"
   },
-  "main": "./web.coffee",
+  "main": "./server.coffee",
   "dependencies": {
     "coffee-script": "~1.6.3",
     "express": "~3.4.0"
@@ -40,7 +40,8 @@
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-coverage": "~0.1.0",
     "karma-opera-launcher": "~0.1.0",
-    "matchdep": "~0.1.1"
+    "matchdep": "~0.1.1",
+    "nodemon": "~0.7.10"
   },
   "engines": {
     "node": "0.10.x",

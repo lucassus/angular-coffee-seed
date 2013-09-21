@@ -1,6 +1,7 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
+  "ngResource"
   "ngRoute"
   "ngAnimate"
 

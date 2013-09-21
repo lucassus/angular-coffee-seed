@@ -50,6 +50,7 @@ module.exports = (grunt) ->
   grunt.registerTask "server", [
     "build:dev"
 
+    "configureProxies"
     "livereload-start"
     "connect:livereload"
     "watch"

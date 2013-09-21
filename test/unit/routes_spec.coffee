@@ -6,8 +6,11 @@ describe "Application routes", ->
       $location.path(path)
       $rootScope.$digest()
 
-  it "recognizes '/'", inject ($route) ->
+  it "recognizes '/'", inject ($route, $httpBackend) ->
+    $httpBackend.expectGET("/api/products.json").respond([])
     @navigateTo "/"
+    $httpBackend.flush()
+
     expect($route.current.templateUrl).to.equal "templates/views/main.html"
     expect($route.current.controller).to.equal "MainCtrl as main"
 
