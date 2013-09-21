@@ -17,6 +17,13 @@ module.exports = (config) ->
       "bower_components/angular-route/angular-route.js"
       "bower_components/angular-animate/angular-animate.js"
 
+      "bower_components/sinon/lib/sinon.js"
+      "bower_components/sinon/lib/sinon/spy.js"
+      "bower_components/sinon/lib/sinon/call.js"
+      "bower_components/sinon/lib/sinon/stub.js"
+      "bower_components/sinon/lib/sinon/mock.js"
+      "bower_components/sinon/lib/sinon/assert.js"
+
       "app/templates/**/*.html"
 
       "app/scripts/modules/**/*.coffee"

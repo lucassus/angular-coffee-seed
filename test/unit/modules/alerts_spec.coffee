@@ -27,13 +27,15 @@ describe "myApp.alerts", ->
         # Given
         alerts.info("Information..")
         alerts.error("Error..")
-        spyOn(alerts, "dispose").andCallThrough()
+        spy = sinon.spy(alerts, "dispose")
 
         # When
         $scope.disposeAlert(2)
 
         # Then
-        expect(alerts.dispose).toHaveBeenCalledWith(2)
+        expect(spy.called).toBeTruthy()
+        expect(spy.calledWith(2)).toBeTruthy()
+
         expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
         expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
 
@@ -68,15 +70,17 @@ describe "myApp.alerts", ->
         expect(alerts.nextId()).toEqual(6)
 
     describe "#push", ->
+      spy = null
+
       beforeEach inject (alerts) ->
-        spyOn(alerts, "delayedDispose")
+        spy = sinon.spy(alerts, "delayedDispose")
 
       it "returns an id for the new flash message", inject (alerts) ->
         expect(alerts.push("info", "Test..")).toEqual(1)
-        expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+        expect(spy.calledWith(1)).toBeTruthy()
 
         expect(alerts.push("error", "Test error..")).toEqual(2)
-        expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+        expect(spy.calledWith(2)).toBeTruthy()
 
       describe "#info", ->
         it "pushesh the given message", inject (alerts) ->
@@ -86,10 +90,10 @@ describe "myApp.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          expect(spy.calledWith(1)).toBeTruthy()
 
           alerts.info(otherTestMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+          expect(spy.calledWith(2)).toBeTruthy()
 
           # Then
           expect(alerts.messages).toContain(id: 1, type: "info", text: testMessage)
@@ -102,7 +106,7 @@ describe "myApp.alerts", ->
 
           # When
           alerts.error(testMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          expect(spy.calledWith(1)).toBeTruthy()
 
           # Then
           expect(alerts.messages).toContain(id: 1, type: "error", text: testMessage)

@@ -16,6 +16,13 @@ module.exports = (config) ->
       "components/angular-route/angular-route.js"
       "components/angular-animate/angular-animate.js"
 
+      "components/sinon/lib/sinon.js"
+      "components/sinon/lib/sinon/spy.js"
+      "components/sinon/lib/sinon/call.js"
+      "components/sinon/lib/sinon/stub.js"
+      "components/sinon/lib/sinon/mock.js"
+      "components/sinon/lib/sinon/assert.js"
+
       "scripts/modules/**/*.js"
       "scripts/templates.js"
       "scripts/application.js"

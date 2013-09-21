@@ -26,18 +26,20 @@ describe "Controller: TasksCtrl", ->
       expect(ctrl.tasks.length).toEqual 1
 
   describe "#tasksCount", ->
+
     it "returs the number of all tasks", ->
       ctrl.tasks = [{}, {}, {}]
       expect(ctrl.tasksCount()).toEqual 3
 
   describe "#remainingTasksCount", ->
+
     describe "when task list is empty" ,->
       beforeEach -> ctrl.tasks = []
 
       it "returns 0", ->
         expect(ctrl.remainingTasksCount()).toEqual 0
 
-    describe "when task list contains uncompleted tasks", ->
+    describe "when task list contains some uncompleted tasks", ->
       beforeEach ->
         ctrl.tasks = [
           { done: false }, { done: false }, { done: true }
@@ -52,15 +54,17 @@ describe "Controller: TasksCtrl", ->
           { done: true }, { done: true }, { done: true }
         ]
 
-      it "returns", ->
+      it "returns 0", ->
         expect(ctrl.remainingTasksCount()).toEqual 0
 
   describe "#addTask", ->
 
     describe "when the form is valid", ->
+      stub = null
+
       beforeEach ->
         $scope.taskForm = $valid: true
-        spyOn(ctrl, "reset")
+        stub = sinon.stub(ctrl, "reset")
 
       it "adds a new task", ->
         # Given
@@ -77,8 +81,9 @@ describe "Controller: TasksCtrl", ->
       it "resets the form", ->
         # When
         ctrl.addTask({})
+
         # Then
-        expect(ctrl.reset).toHaveBeenCalled()
+        expect(stub.called).toBeTruthy()
 
     describe "when the form is not valid", ->
       beforeEach -> $scope.taskForm = $valid: false
@@ -92,8 +97,11 @@ describe "Controller: TasksCtrl", ->
 
       it "does not reset the form", ->
         # Given
-        spyOn(ctrl, "reset")
+        mock = sinon.mock(ctrl).expects("reset").never()
+
         # When
         ctrl.addTask({})
+
         # Then
-        expect(ctrl.reset).not.toHaveBeenCalled()
+        expect(mock.called).toBeFalsy()
+        mock.verify()
