@@ -10,9 +10,9 @@ describe "Products list page", ->
     expect(repeater("ul#products li").column("product.name"))
       .toEqual [
         "HTC Wildfire"
-        "iPhone"
         "Nexus One"
         "Nexus 7"
+        "iPhone"
         "Samsung Galaxy Note"
         "Samsung S4"
       ]

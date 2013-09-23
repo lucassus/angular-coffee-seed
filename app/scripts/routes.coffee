@@ -9,13 +9,8 @@ app.config [
       .when "/",
         templateUrl: "templates/views/main.html"
         controller: "MainCtrl as main"
-
-        # TODO create Products service
-        # TODO write specs for this case
-        resolve: products: ["$resource", ($resource) ->
-          Products = $resource("/api/products.json")
-          Products.query()
-        ]
+        resolve:
+          products: ["Products", (Products) -> Products.query().$promise]
 
       .when "/other",
         templateUrl: "templates/views/other.html"

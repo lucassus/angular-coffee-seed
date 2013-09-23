@@ -1,18 +1,30 @@
 describe "Application routes", ->
-  beforeEach module("myApp")
+  beforeEach module "myApp"
 
   beforeEach inject ($location, $rootScope) ->
     @navigateTo = (path) ->
-      $location.path(path)
-      $rootScope.$digest()
+      $rootScope.$apply ->
+        $location.path(path)
 
-  it "recognizes '/'", inject ($route, $httpBackend) ->
-    $httpBackend.expectGET("/api/products.json").respond([])
+  # TODO mock `Products` service
+  # TODO it "resolves products"
+  it "recognizes '/'", inject ($route, Products) ->
+    # Given
+    stub = sinon.stub(Products, "query")
+    stub.returns $promise: then: (callback) -> callback([{ id: 1, name: "foo" }, { id: 2, name: "bar" }])
+
+    # When
     @navigateTo "/"
-    $httpBackend.flush()
+
+    # Then
+    expect(stub).to.be.called
 
     expect($route.current.templateUrl).to.equal "templates/views/main.html"
     expect($route.current.controller).to.equal "MainCtrl as main"
+    expect($route.current.resolve.products).to.not.be.undefined
+
+    products = $route.current.locals.products
+    expect(products).to.have.length 2
 
   it "recognizes '/other'", inject ($route) ->
     @navigateTo "/other"

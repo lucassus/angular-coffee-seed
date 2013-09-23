@@ -4,5 +4,8 @@
 <p class="lead">This is a simple list of phones</p>
 
 <ul id="products">
-  <li ng-repeat="product in main.products">{{product.name}}</li>
+  <li ng-repeat="product in main.products | orderBy:'priceWithDiscount()'">
+    <b>{{product.name}}</b>
+    (price: {{product.priceWithDiscount() | currency}}<span ng-show="product.hasDiscount()">, discount: {{product.discount}}%</span>)
+  </li>
 </ul>

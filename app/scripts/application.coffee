@@ -1,13 +1,13 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
-  "ngResource"
   "ngRoute"
   "ngAnimate"
 
   "myApp.templates"
   "myApp.alerts"
   "myApp.navigation"
+  "myApp.resources"
 ]
 
 app.config [

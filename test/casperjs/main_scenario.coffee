@@ -22,8 +22,8 @@ scenario "Main page", ->
         "Phones list on #{nth} position contains '#{text}'"
 
     assertListHasText("HTC Wildfire", 1)
-    assertListHasText("iPhone", 2)
-    assertListHasText("Nexus One", 3)
-    assertListHasText("Nexus 7", 4)
+    assertListHasText("Nexus One", 2)
+    assertListHasText("Nexus 7", 3)
+    assertListHasText("iPhone", 4)
     assertListHasText("Samsung Galaxy Note", 5)
     assertListHasText("Samsung S4", 6)
