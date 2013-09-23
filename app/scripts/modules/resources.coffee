@@ -11,7 +11,7 @@ resources.factory "Products", [
         return @price unless @hasDiscount()
         return @price * (1 - @discount / 100.0)
 
-      # TODO test it, cases: discount can be 0, null, undefined, false, below 0, etc.
+      # Returs true when the product has a discount
       hasDiscount: -> @discount? and @discount > 0
 
     Products
