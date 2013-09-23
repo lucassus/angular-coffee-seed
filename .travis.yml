@@ -21,4 +21,4 @@ before_script:
   - casperjs --version
 
 script:
-  - DISPLAY=:99.0 grunt test:ci
+  - DISPLAY=:99.0 script/test-ci.sh
