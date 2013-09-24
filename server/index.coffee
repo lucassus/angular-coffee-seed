@@ -21,4 +21,4 @@ app.get "/api/products.json", (req, res) ->
 app.get "/api/products/:id.json", (req, res) ->
 
   productProvider.findById req.params.id, (error, product) ->
-    res.send product
+    res.send if product? then product else 404
