@@ -1,8 +1,9 @@
-describe "myApp.alerts", ->
-  beforeEach module("myApp.alerts")
-  beforeEach module("mocks")
+describe "Module `myApp.alerts`", ->
 
-  describe "controller: alerts", ->
+  beforeEach module "myApp.alerts"
+  beforeEach module "mocks"
+
+  describe "Controller `alerts`", ->
     $scope = null
     alerts = null
 
@@ -28,7 +29,7 @@ describe "myApp.alerts", ->
       expect(lastMessage.type).to.equal "info"
       expect(lastMessage.text).to.equal "Test message."
 
-    describe "#disposeAlert", ->
+    describe "#disposeAlert()", ->
       it "disposes an alert at the given index", ->
         # Given
         alerts.info("Information..")
@@ -50,7 +51,7 @@ describe "myApp.alerts", ->
         secondMessage = _.findWhere($scope.alertMessages, id: 2)
         expect(secondMessage).to.be.undefined
 
-  describe "directive: alerts", ->
+  describe "Directive `alerts`", ->
     $scope = null
     element = null
 
@@ -70,17 +71,17 @@ describe "myApp.alerts", ->
       ]
       expect(element.find(".alert-info").length).to.equal(1)
 
-  describe "service: alerts", ->
+  describe "Service `alerts`", ->
     it "is defined", inject (alerts) ->
       expect(alerts).to.not.be.undefined
 
-    describe "#nextId", ->
+    describe "#nextId()", ->
       it "return the next id for the new flash message", inject (alerts) ->
         expect(alerts.nextId()).to.equal(1)
         alerts.nextId() for [1..4]
         expect(alerts.nextId()).to.equal(6)
 
-    describe "#push", ->
+    describe "#push()", ->
       spy = null
 
       beforeEach inject (alerts) ->
@@ -93,7 +94,7 @@ describe "myApp.alerts", ->
         expect(alerts.push("error", "Test error..")).to.equal 2
         expect(spy).to.be.calledWith 2
 
-      describe "#info", ->
+      describe "#info()", ->
         it "pushesh the given message", inject (alerts) ->
           # Given
           testMessage = "This is a test message!"
@@ -117,7 +118,7 @@ describe "myApp.alerts", ->
           expect(secondMessage.type).to.equal "error"
           expect(secondMessage.text).to.equal otherTestMessage
 
-      describe "#error", ->
+      describe "#error()", ->
         it "pushesh the given message", inject (alerts) ->
           # Given
           testMessage = "This is a test message!"
@@ -131,7 +132,7 @@ describe "myApp.alerts", ->
           expect(lastMessage).to.not.be.undefined
           expect(lastMessage.type).to.equal "error"
 
-    describe "#dispose", ->
+    describe "#dispose()", ->
       it "removes a message with the given id", inject (alerts) ->
         # Given
         alerts.info("First message")
@@ -155,7 +156,7 @@ describe "myApp.alerts", ->
         forthMessage = _.findWhere(alerts.messages, type: "error", text: "Error message")
         expect(forthMessage).to.not.be.undefined
 
-    describe "#delayedDispose", ->
+    describe "#delayedDispose()", ->
 
       it "removes a message after the given time", inject (alerts, $timeout) ->
         # Given

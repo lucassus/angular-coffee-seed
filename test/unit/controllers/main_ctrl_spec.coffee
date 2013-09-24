@@ -1,6 +1,6 @@
-describe "Controller: MainCtrl", ->
+describe "Controller `MainCtrl`", ->
 
-  beforeEach module("myApp")
+  beforeEach module "myApp"
   ctrl = null
 
   # Initialize the controller and a mock scope

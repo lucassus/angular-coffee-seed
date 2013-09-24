@@ -1,8 +1,8 @@
-# TODO use this convention for the other specs
-describe "module: myApp.resources", ->
+describe "Module `myApp.resources`", ->
+
   beforeEach module "myApp.resources"
 
-  describe "service: Products", ->
+  describe "Service `Products`", ->
     $rootScope = null
     $httpBackend = null
     Products = null
@@ -15,7 +15,7 @@ describe "module: myApp.resources", ->
     it "is defined", ->
       expect(Products).to.not.be.undefined
 
-    describe ".query", ->
+    describe ".query()", ->
       before -> @products = [{ name: "foo" }, { name: "bar" }]
 
       it "is defined", ->
@@ -34,7 +34,7 @@ describe "module: myApp.resources", ->
 
         expect(products).to.have.length 2
 
-    describe "#priceWithDiscount", ->
+    describe "#priceWithDiscount()", ->
       product = null
       beforeEach inject (Products) ->
         product = new Products(price: @price, discount: @discount)
@@ -58,7 +58,7 @@ describe "module: myApp.resources", ->
         it "returns price with discount", ->
           expect(product.priceWithDiscount()).to.equal 78
 
-    describe "#hasDiscount", ->
+    describe "#hasDiscount()", ->
       product = null
       beforeEach inject (Products) ->
         product = new Products(discount: @discount)
