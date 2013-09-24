@@ -29,7 +29,7 @@ module.exports = (grunt) ->
     ngtemplates:   loadMoule "ngtemplates"
     bower:         loadMoule "bower"
     karma:         loadMoule "karma"
-    casperjs:      loadMoule "casperjs"
+    casper:        loadMoule "casper"
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
 
@@ -92,7 +92,7 @@ module.exports = (grunt) ->
   grunt.registerTask "test:casperjs", [
     "build:dev"
     "connect:e2e"
-    "casperjs"
+    "casper"
   ]
 
   # run all tests on the ci server
@@ -105,7 +105,7 @@ module.exports = (grunt) ->
     # run all integration tests
     "connect:e2e"
     "karma:e2e"
-    "casperjs"
+    "casper"
   ]
 
   grunt.registerTask "test", [
