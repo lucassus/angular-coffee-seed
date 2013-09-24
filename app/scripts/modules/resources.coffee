@@ -6,7 +6,6 @@ resources.factory "Products", [
       query: { method: "GET", isArray: true }
 
     angular.extend Products.prototype,
-      # TODO test it
       priceWithDiscount: ->
         return @price unless @hasDiscount()
         return @price * (1 - @discount / 100.0)
