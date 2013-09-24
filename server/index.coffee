@@ -17,3 +17,8 @@ app.get "/api/products.json", (req, res) ->
 
   productProvider.findAll (error, products) ->
     res.send products
+
+app.get "/api/products/:id.json", (req, res) ->
+
+  productProvider.findById req.params.id, (error, product) ->
+    res.send product

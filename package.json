@@ -8,7 +8,8 @@
   "main": "./server/index.coffee",
   "dependencies": {
     "coffee-script": "~1.6.3",
-    "express": "~3.4.0"
+    "express": "~3.4.0",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

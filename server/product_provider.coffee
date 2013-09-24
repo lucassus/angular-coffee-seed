@@ -1,3 +1,5 @@
+_ = require("underscore")
+
 # Responsible for returning and updating the data for products
 class ProductProvider
 
@@ -6,6 +8,10 @@ class ProductProvider
 
   findAll: (callback = ->) ->
     callback(null, @products)
+
+  findById: (id, callback = ->) ->
+    product = _.findWhere(@products, id: parseInt(id))
+    callback(null, product)
 
   save: (products, callback = ->) ->
     if typeof(products.length) is "undefined"
@@ -27,7 +33,7 @@ class ProductProvider
 # bootstrap with dummy data
 productProvider = new ProductProvider()
 productProvider.save [
-  { name: "HTC Wildfire", price: 499, discount: 10 }
+  { name: "HTC Wildfire", price: 499.99, discount: 10 }
   { name: "iPhone", price: 2500 }
   { name: "Nexus One", price: 1000, discount: 7 }
   { name: "Nexus 7", price: 1200, discount: 12 }
