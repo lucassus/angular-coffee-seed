@@ -23,9 +23,7 @@ describe "Module `myApp.resources`", ->
 
       it "queries for the records", ->
         $httpBackend.whenGET("/api/products.json").respond(@products)
-
         promise = Products.query().$promise
-
         $httpBackend.flush()
 
         products = null
@@ -33,6 +31,25 @@ describe "Module `myApp.resources`", ->
           promise.then (_products_) -> products = _products_
 
         expect(products).to.have.length 2
+
+    describe ".get()", ->
+      before -> @product = id: 123, name: "foo bar"
+
+      it "is defined", ->
+        expect(Products.get).to.not.be.undefined
+
+      it "quries for a product", ->
+        $httpBackend.whenGET("/api/products/123.json").respond(@product)
+        promise = Products.get(id: 123).$promise
+        $httpBackend.flush()
+
+        product = null
+        $rootScope.$apply ->
+          promise.then (_product_) -> product = _product_
+
+        expect(product).to.not.be.null
+        expect(product.id).to.equal 123
+        expect(product.name).to.equal "foo bar"
 
     describe "#priceWithDiscount()", ->
       product = null
