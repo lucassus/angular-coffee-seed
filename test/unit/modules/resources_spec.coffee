@@ -34,12 +34,29 @@ describe "module: myApp.resources", ->
 
         expect(products).to.have.length 2
 
-        # TODO write specs for `product.priceWithDiscount`
-        product = products[0]
-        expect(product).to.be.an.instanceof(Products)
+    describe "#priceWithDiscount", ->
+      product = null
+      beforeEach inject (Products) ->
+        product = new Products(price: @price, discount: @discount)
 
-        expect(product.hasDiscount).to.not.be.undefined
-        expect(product.hasDiscount()).to.be.false
+      it "is defined", ->
+        expect(product.priceWithDiscount).to.not.be.undefined
+
+      context "when discount is not defined", ->
+        before ->
+          @discount = undefined
+          @price = 9.99
+
+        it "returns the base price", ->
+          expect(product.priceWithDiscount()).to.equal 9.99
+
+      context "when discount is defined", ->
+        before ->
+          @discount = 22
+          @price = 100
+
+        it "returns price with discount", ->
+          expect(product.priceWithDiscount()).to.equal 78
 
     describe "#hasDiscount", ->
       product = null
