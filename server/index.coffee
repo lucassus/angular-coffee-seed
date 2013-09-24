@@ -2,7 +2,14 @@ express = require("express")
 path = require("path")
 
 utils = require("./utils")
-productProvider = require("./product_provider")
+
+ProductProvider = new require("./product_provider")
+productProvider = new ProductProvider()
+
+# bootstrap with dummy data
+fixtures = require("./fixtures")
+productProvider.save fixtures.products
+console.log "bootsrap with", productProvider
 
 app = express()
 app.use express.logger()
