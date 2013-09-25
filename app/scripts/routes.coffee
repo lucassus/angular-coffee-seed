@@ -6,11 +6,20 @@ app.config [
   "$routeProvider", ($routeProvider) ->
 
     $routeProvider
-      .when "/",
-        templateUrl: "templates/views/main.html"
-        controller: "MainCtrl as main"
+      .when "/products",
+        templateUrl: "templates/views/products/index.html"
+        controller: "products.IndexCtrl as index"
         resolve:
           products: ["Products", (Products) -> Products.query().$promise]
+
+      .when "/products/:id",
+        templateUrl: "templates/views/products/show.html"
+        controller: "products.ShowCtrl as show"
+        resolve:
+          product: [
+            "Products", "$route", (Products, $route) ->
+              Products.get(id: $route.current.params.id).$promise
+          ]
 
       .when "/other",
         templateUrl: "templates/views/other.html"
@@ -20,5 +29,5 @@ app.config [
         templateUrl: "templates/views/tasks.html"
         controller: "TasksCtrl as tasks"
 
-      .otherwise redirectTo: "/"
+      .otherwise redirectTo: "/products"
 ]

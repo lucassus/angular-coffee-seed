@@ -2,10 +2,11 @@ describe "Application routes", ->
 
   # stub `Products` service
   beforeEach module "myApp.resources", ($provide) ->
-    Products = sinon.stub(query: angular.noop)
+    products = [{ id: 123, name: "foo" }, { id: 234, name: "bar" }]
 
-    products = [{ id: 1, name: "foo" }, { id: 2, name: "bar" }]
+    Products = sinon.stub(query: angular.noop, get: angular.noop)
     Products.query.returns $promise: then: (callback) -> callback(products)
+    Products.get.returns $promise: then: (callback) -> callback(products[0])
 
     $provide.value "Products", Products
 
@@ -18,33 +19,59 @@ describe "Application routes", ->
     beforeEach inject ($location, $route, $rootScope) ->
       $rootScope.$apply -> $location.path(path)
 
-  describe "route `/`", ->
-    navigateTo "/"
+  describe "route `/products`", ->
+    navigateTo "/products"
 
     it "is recognized", inject ($route) ->
-      expect($route.current.templateUrl).to.equal "templates/views/main.html"
-      expect($route.current.controller).to.equal "MainCtrl as main"
-      expect($route.current.resolve.products).to.not.be.undefined
+      expect($route.current)
+        .to.have.templateUrl("templates/views/products/index.html")
+        .and.to.have.controller("products.IndexCtrl as index")
+        .and.to.resolve("products")
 
-    it "queries for products", inject (Products) ->
+    it "queries for the products", inject (Products) ->
       expect(Products.query).to.be.called
 
-    it "loads products", inject ($route) ->
+    it "loads the products", inject ($route) ->
       products = $route.current.locals.products
       expect(products).to.have.length 2
-      expect(products).to.satisfy (collection) -> _.findWhere(collection, id: 1)
-      expect(products).to.satisfy (collection) -> _.findWhere(collection, id: 2)
+      expect(products).to.satisfy (collection) -> _.findWhere(collection, id: 123)
+      expect(products).to.satisfy (collection) -> _.findWhere(collection, id: 234)
+
+  describe "route `/products/:id`", ->
+    navigateTo "/products/123"
+
+    it "is recognized", inject ($route) ->
+      expect($route.current)
+        .to.have.templateUrl("templates/views/products/show.html")
+        .and.to.have.controller("products.ShowCtrl as show")
+        .and.to.resolve("product")
+
+    it "queries for a product", inject ($route, Products) ->
+      expect(Products.get).to.be.calledWith(id: "123")
+
+    it "loads a product", inject ($route) ->
+      product = $route.current.locals.product
+      expect(product.id).to.equal 123
+      expect(product.name).to.equal "foo"
 
   describe "route `/other`", ->
     navigateTo "/other"
 
     it "is recognized", inject ($route) ->
-      expect($route.current.templateUrl).to.equal "templates/views/other.html"
-      expect($route.current.controller).to.equal "OtherCtrl as other"
+      expect($route.current)
+        .to.have.templateUrl("templates/views/other.html")
+        .and.to.have.controller("OtherCtrl as other")
 
   describe "route `/tasks`", ->
     navigateTo "/tasks"
 
     it "is recognized", inject ($route) ->
-      expect($route.current.templateUrl).to.equal "templates/views/tasks.html"
-      expect($route.current.controller).to.equal "TasksCtrl as tasks"
+      expect($route.current)
+        .to.have.templateUrl("templates/views/tasks.html")
+        .and.to.have.controller("TasksCtrl as tasks")
+
+  describe "other routes", ->
+    navigateTo "/this/is/unknown/route"
+
+    it "redirects to `/products`", inject ($route) ->
+      expect($route.current.originalPath).to.equal "/products"
