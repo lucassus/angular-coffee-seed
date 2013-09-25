@@ -6,16 +6,16 @@ Base = require("./test/casperjs/helpers/page_objects/base").Base
 scenario "Main page", ->
   page = new Base(this)
 
-  @feature "Navigate to the main page", ->
-    @clickLabel "Home", "a"
+  @feature "Navigate to the products page", ->
+    @clickLabel "Products", "a"
     @test.assertTitle "Angular seed"
 
-  @feature "Display all phones", ->
-    @test.assertEquals page.pageTitleText(), "You now have phones"
+  @feature "Display all products", ->
+    @test.assertEquals page.pageTitleText(), "You now have products"
 
     @test.assertEvalEquals (->
       document.querySelectorAll("ul#products li").length
-    ), 6, "Page displays 6 phones"
+    ), 6, "Page displays 6 products"
 
     assertListHasText = (text, nth) =>
       @test.assertSelectorHasText "ul#products li:nth-child(#{nth})", text,
