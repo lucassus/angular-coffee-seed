@@ -76,17 +76,17 @@ describe "Module `myApp.resources`", ->
           expect(product.priceWithDiscount()).to.equal 78
 
     describe "#hasDiscount()", ->
+      # custom chai property for checking product's discount
+      chai.Assertion.addProperty "discount", ->
+        subject = @_obj
+
+        @assert subject.hasDiscount(),
+          "expected #\{this} to have discount",
+          "expected #\{this} to not have discount"
+
       product = null
       beforeEach inject (Products) ->
         product = new Products(discount: @discount)
-
-        # custom chai property for checking product's discount
-        chai.Assertion.addProperty "discount", ->
-          subject = @_obj
-
-          @assert subject.hasDiscount(),
-            "expected #\{this} to have discount",
-            "expected #\{this} to not have discount"
 
       it "is defined", ->
         expect(product.hasDiscount).to.not.be.undefined
