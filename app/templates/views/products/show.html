@@ -1,0 +1,22 @@
+<dl class="dl-horizontal" ng-init="product = show.product">
+  <dt>ID</dt>
+  <dd>{{product.id}}</dd>
+
+  <dt>Name</dt>
+  <dd>{{product.name}}</dd>
+
+  <dt>Headline</dt>
+  <dd>{{product.headline}}</dd>
+
+  <dt>Manufacturer</dt>
+  <dd>{{product.manufacturer}}</dd>
+
+  <dt>Price with discount</dt>
+  <dd>{{product.priceWithDiscount() | currency}}</dd>
+
+  <dt>Description</dt>
+  <dd>{{product.description}}</dd>
+
+  <dt>Created At</dt>
+  <dd>{{product.createdAt | date}}</dd>
+</dl>

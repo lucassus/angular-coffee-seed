@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h1>You now have products</h1>
+</div>
+<p class="lead">This is a simple list of products</p>
+
+<ul id="products">
+  <li ng-repeat="product in index.products | orderBy:'priceWithDiscount()'">
+    <b><a href="#/products/{{product.id}}">{{product.name}}</a></b>
+    (price: {{product.priceWithDiscount() | currency}}<span ng-show="product.hasDiscount()">, discount: {{product.discount}}%</span>)
+  </li>
+</ul>

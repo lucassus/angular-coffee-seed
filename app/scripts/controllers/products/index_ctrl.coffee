@@ -1,7 +1,7 @@
-class MainCtrl
+class IndexCtrl
 
   @$inject = ["products"]
   constructor: (@products) ->
 
 angular.module("myApp")
-  .controller("MainCtrl", MainCtrl)
+  .controller("products.IndexCtrl", IndexCtrl)
