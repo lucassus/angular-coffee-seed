@@ -1,7 +1,8 @@
 class ShowCtrl
 
-  @$inject = ["product"]
-  constructor: (@product) ->
+  @$inject = ["$scope", "product"]
+  constructor: ($scope, product) ->
+    $scope.product = product
 
 angular.module("myApp")
   .controller("products.ShowCtrl", ShowCtrl)
