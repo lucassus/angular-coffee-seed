@@ -1,0 +1,48 @@
+app = require("../lib/app")
+expect = require("chai").expect
+request = require("supertest")
+
+describe "The application", ->
+
+  describe "GET /api/products.json", ->
+
+    it "returns a list of products", (done) ->
+      request(app)
+        .get("/api/products.json")
+        .set("Accept", "application/json")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end (error, resp) ->
+          products = resp.body
+
+          expect(products).to.not.be.undefined
+          expect(products.length).to.equal 6
+
+          done()
+
+  describe "GET /api/products/:id.json", ->
+
+    context "when the prouct can be found", ->
+
+      it "finds a product", (done) ->
+        request(app)
+          .get("/api/products/1.json")
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(200)
+          .end (error, resp) ->
+            product = resp.body
+
+            expect(product).to.not.be.undefined
+            expect(product.id).to.equal 1
+            expect(product.name).to.equal "HTC Wildfire"
+
+            done()
+
+    context "when the product cannot be found", ->
+
+      it "raises 404 error", (done) ->
+        request(app)
+          .get("/api/products/123.json")
+          .set("Accept", "application/json")
+          .expect(404, done)

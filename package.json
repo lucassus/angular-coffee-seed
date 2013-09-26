@@ -15,6 +15,7 @@
   "devDependencies": {
     "mocha": "~1.13.0",
     "chai": "~1.8.0",
+    "supertest": "~0.8.0",
 
     "grunt": "~0.4.1",
     "grunt-contrib-connect": "~0.5.0",
