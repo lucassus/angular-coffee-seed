@@ -16,13 +16,10 @@ productProvider.save fixtures.products()
 console.log "bootsrap with", productProvider
 
 app.get "/api/products.json", (req, res) ->
-  utils.randomSleep()
-
   productProvider.findAll (error, products) ->
     res.send products
 
 app.get "/api/products/:id.json", (req, res) ->
-
   productProvider.findById req.params.id, (error, product) ->
     res.send if product? then product else 404
 
