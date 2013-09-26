@@ -3,8 +3,9 @@ _ = require("underscore")
 # Responsible for returning and updating the data for products
 class ProductProvider
 
-  constructor: ->
+  constructor: (products = []) ->
     @products = []
+    @save(products)
 
   findAll: (callback = ->) ->
     callback(null, @products)

@@ -1,13 +1,13 @@
 express = require("express")
 path = require("path")
 
-utils = require("./utils")
+utils = require("./lib/utils")
 
-ProductProvider = new require("./product_provider")
+ProductProvider = new require("./lib/product_provider")
 productProvider = new ProductProvider()
 
 # bootstrap with dummy data
-fixtures = require("./fixtures")
+fixtures = require("./lib/fixtures")
 productProvider.save fixtures.products()
 console.log "bootsrap with", productProvider
 
