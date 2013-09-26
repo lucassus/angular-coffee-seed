@@ -10,3 +10,6 @@ bower_components
 dev
 dist
 coverage
+
+# Other
+npm-debug.log
