@@ -13,7 +13,6 @@ productProvider = new ProductProvider()
 # bootstrap with dummy data
 fixtures = require("./fixtures")
 productProvider.save fixtures.products()
-console.log "bootsrap with", productProvider
 
 app.get "/api/products.json", (req, res) ->
   productProvider.findAll (error, products) ->
