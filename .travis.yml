@@ -22,4 +22,4 @@ before_script:
 
 script:
   - DISPLAY=:99.0 script/test-ci.sh
-  - mocha --compilers coffee:coffee-script --watch --reporter spec server/test
+  - mocha --compilers coffee:coffee-script --reporter spec server/test
