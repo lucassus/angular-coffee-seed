@@ -96,7 +96,7 @@ git checkout tags/1.0.2
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 ```
 
-## Running test
+## Running tests
 
 By default all tests are executes in PhantomJS browser
 
@@ -105,6 +105,10 @@ By default all tests are executes in PhantomJS browser
 Run test against specific browsers
 
 `grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
+
+## Running tests for the server side application
+
+`mocha --compilers coffee:coffee-script --watch --reporter spec server/test`
 
 ### How to debug failing specs
 
