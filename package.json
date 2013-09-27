@@ -30,6 +30,7 @@
     "grunt-contrib-cssmin": "~0.6.1",
     "grunt-contrib-htmlmin": "~0.1.1",
     "grunt-connect-proxy": "~0.1.4",
+    "grunt-shell": "~0.4.0",
     "grunt-coffeelint": "~0.0.6",
     "grunt-casper": "~0.1.3",
     "grunt-angular-templates": "~0.4.1",

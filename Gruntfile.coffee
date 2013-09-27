@@ -32,6 +32,7 @@ module.exports = (grunt) ->
     casper:        loadMoule "casper"
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
+    shell:         loadMoule "shell"
 
   grunt.renameTask "regarde", "watch"
 
