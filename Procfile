@@ -1,2 +1,2 @@
-backend: nodemon server/index.coffee --watch server
+backend: coffee server/index.coffee
 frontend: grunt server

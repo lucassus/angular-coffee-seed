@@ -2,7 +2,7 @@ function startServer() {
     SERVER_PORT=5000
 
     # start the backend server and wait till it's fully operational
-    PORT="$SERVER_PORT" coffee ./server/index.coffee &
+    PORT="$SERVER_PORT" nodemon server/index.coffee --watch server ./server/index.coffee &
     while ! nc -vz localhost "$SERVER_PORT" &> /dev/null; do
       echo "Waiting for the backend server..."
       sleep 0.250
