@@ -26,6 +26,11 @@ class ProductProvider
 
     callback(null, products)
 
+  update: (id, params, callback = ->) ->
+    @findById id, (error, product) ->
+      _.extend(product, _.omit(params, "id"))
+      callback(null, product)
+
   # @private
   _nextId: ->
     @_currentId or= 0

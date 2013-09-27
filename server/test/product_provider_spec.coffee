@@ -97,3 +97,22 @@ describe "ProductProvider", ->
         it "assigns createdAt date for all new records", ->
             expect(products[0].createdAt).to.not.be.undefined
             expect(products[1].createdAt).to.not.be.undefined
+
+  describe "#update()", ->
+
+    it "updates a product", (done) ->
+      params =
+        id: "unknown"
+        name: "New name"
+        description: "New description"
+        price: 99.99
+
+      productProvider.update 1, params, (error, product) ->
+        expect(product).to.not.be.undefined
+
+        expect(product.id).to.equal 1
+        expect(product.name).to.equal params.name
+        expect(product.description).to.equal params.description
+        expect(product.price).to.equal params.price
+
+        done()

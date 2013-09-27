@@ -23,6 +23,13 @@ app.post "/api/products.json", (req, res) ->
   productProvider.save req.body, (error, products) ->
     res.send products[0]
 
+app.post "/api/products/:id.json", (req, res) ->
+  id = req.params.id
+  params = req.body
+
+  productProvider.update id, params, (error, product) ->
+    res.send product
+
 app.get "/api/products/:id.json", (req, res) ->
   productProvider.findById req.params.id, (error, product) ->
     res.send if product? then product else 404
