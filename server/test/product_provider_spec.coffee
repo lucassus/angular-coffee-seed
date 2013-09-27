@@ -116,3 +116,15 @@ describe "ProductProvider", ->
         expect(product.price).to.equal params.price
 
         done()
+
+  describe "#destroy()", ->
+
+    it "deletes a product", (done) ->
+
+      productProvider.destroy 1, (error, product) ->
+        expect(product).to.not.be.undefined
+        expect(product.id).to.equal 1
+
+        productProvider.findById product.id, (error, product) ->
+          expect(product).to.be.undefined
+          done()

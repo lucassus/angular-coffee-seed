@@ -31,6 +31,11 @@ class ProductProvider
       _.extend(product, _.omit(params, "id"))
       callback(null, product)
 
+  destroy: (id, callback = ->) ->
+    @findById id, (error, product) =>
+      @products = _.reject @products, (row) -> row.id is product.id
+      callback(null, product)
+
   # @private
   _nextId: ->
     @_currentId or= 0
