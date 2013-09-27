@@ -1,6 +1,7 @@
 #!/bin/bash
 
-coffee ./server/index.coffee &
-PID=$!
+source ./script/lib/start_server
+
+startServer
 grunt test:e2e
-kill -9 "$PID"
+stopServer
