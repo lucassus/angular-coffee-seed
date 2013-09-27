@@ -3,6 +3,7 @@ path = require("path")
 
 app = express()
 app.use express.logger()
+app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "dist"))
 
 utils = require("./utils")
@@ -17,6 +18,10 @@ productProvider.save fixtures.products()
 app.get "/api/products.json", (req, res) ->
   productProvider.findAll (error, products) ->
     res.send products
+
+app.post "/api/products.json", (req, res) ->
+  productProvider.save req.body, (error, products) ->
+    res.send products[0]
 
 app.get "/api/products/:id.json", (req, res) ->
   productProvider.findById req.params.id, (error, product) ->

@@ -20,6 +20,24 @@ describe "The application", ->
 
           done()
 
+  describe "POST /api/products.json", ->
+
+    it "creates a product", (done) ->
+      request(app)
+        .post("/api/products.json")
+        .set("Accept", "application/json")
+        .send(name: "New product")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end (error, resp) ->
+          product = resp.body
+
+          expect(product).to.not.be.undefined
+          expect(product.id).to.equal 7
+          expect(product.name).to.equal "New product"
+
+          done()
+
   describe "GET /api/products/:id.json", ->
 
     context "when the prouct can be found", ->
