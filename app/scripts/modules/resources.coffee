@@ -2,11 +2,12 @@ resources = angular.module("myApp.resources", ["ngResource"])
 
 resources.factory "Products", [
   "$resource", ($resource) ->
-    Products = $resource "/api/products/:id.json", {},
+    Products = $resource "/api/products/:id.json", id: "@id",
       query: { method: "GET", isArray: true }
       get: { method: "GET" }
 
     angular.extend Products.prototype,
+      # Returns price with discount
       priceWithDiscount: ->
         return @price unless @hasDiscount()
         return @price * (1 - @discount / 100.0)

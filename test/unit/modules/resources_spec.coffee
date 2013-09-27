@@ -41,6 +41,7 @@ describe "Module `myApp.resources`", ->
       it "quries for a product", ->
         $httpBackend.whenGET("/api/products/123.json").respond(@product)
         promise = Products.get(id: 123).$promise
+        expect(promise).to.not.be.undefined
         $httpBackend.flush()
 
         product = null
@@ -50,6 +51,33 @@ describe "Module `myApp.resources`", ->
         expect(product).to.not.be.null
         expect(product.id).to.equal 123
         expect(product.name).to.equal "foo bar"
+
+    describe "#$save()", ->
+      product = null
+
+      context "when the `id` is not given", ->
+        beforeEach inject (Products) ->
+          product = new Products(name: "foo")
+
+        it "creates a new record", ->
+          $httpBackend.whenPOST("/api/products.json").respond({})
+
+          promise = product.$save()
+          expect(promise).to.not.be.undefined
+
+          $httpBackend.flush()
+
+      context "when the `id` is given", ->
+        beforeEach inject (Products) ->
+          product = new Products(id: 4567, name: "foo")
+
+        it "updates the record", ->
+          $httpBackend.whenPOST("/api/products/4567.json").respond({})
+
+          promise = product.$save()
+          expect(promise).to.not.be.undefined
+
+          $httpBackend.flush()
 
     describe "#priceWithDiscount()", ->
       product = null
