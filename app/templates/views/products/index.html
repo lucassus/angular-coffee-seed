@@ -5,9 +5,13 @@
 
 <ul id="products">
   <li ng-repeat="product in index.products | orderBy:'priceWithDiscount()'">
+    [<a href="#/products/{{product.id}}/edit">edit</a>]
+
     <b><a href="#/products/{{product.id}}">{{product.name}}</a></b>
     (price: {{product.priceWithDiscount() | currency}}<span ng-show="product.hasDiscount()">, discount: {{product.discount}}%</span>)
   </li>
 </ul>
 
-<a href="#/products/create" class="btn btn-success">Create</a>
+<a href="#/products/create" class="btn btn-success">
+  <i class="icon-plus-sign"></i> Create
+</a>
