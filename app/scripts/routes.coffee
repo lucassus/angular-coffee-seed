@@ -12,6 +12,15 @@ app.config [
         resolve:
           products: ["Products", (Products) -> Products.query().$promise]
 
+      # TODO test it
+      .when "/products/create",
+        templateUrl: "templates/views/products/form.html"
+        controller: "products.FormCtrl as form"
+        resolve:
+          product: ["Products", (Products) ->
+            new Products()
+          ]
+
       .when "/products/:id",
         templateUrl: "templates/views/products/show.html"
         controller: "products.ShowCtrl as show"

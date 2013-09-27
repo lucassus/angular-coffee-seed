@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Product form</h1>
+</div>
+
+<form name="productForm" ng-submit="form.save(product)" novalidate>
+  <div class="form-group"
+       ng-class="{'has-error': productForm.$submitted && productForm.name.$invalid}">
+    <label for="product-name">Name</label>
+    <input id="product-name" type="text" class="form-control" placeholder="Enter name"
+           name="name" ng-model="product.name" required />
+    <span class="help-block"
+          ng-show="productForm.$submitted && productForm.name.$error.required">Name is required</span>
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    <i class="icon-plus-sign"></i> Add
+  </button>
+</form>
