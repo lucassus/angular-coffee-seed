@@ -100,11 +100,25 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 By default all tests are executes in PhantomJS browser
 
-`grunt test:unit`
+* `grunt test:unit` or `grunt test` - run unit tests
+* `grunt test:unit:watch` or
+* `grunt test:watch` - run unit tests in watch mode
+* `grunt test:coverage` or
+* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
+* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
+
+* `grunt test --reporters=spec` - run tests with `spec` reporter
+* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 Run test against specific browsers
 
 `grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
+
+Running integration tests
+
+* `script/test-ci.sh` - run all specs (useful for CI)
+* `script/test-casperjs.sh` - run CasperJS specs
+* `script/test-e2e.sh` - run AngularJS e2e specs
 
 ## Running tests for the server side application
 
@@ -141,26 +155,6 @@ or with auto watch option:
 or
 
 `karma test:unit:watch`
-
-### Running end2end tests
-
-`grunt test:e2e`
-`grunt test:casperjs`
-
-### Grunt tasks for running specs
-
-* `grunt test:unit` or `grunt test` - run unit tests
-* `grunt test:unit:watch` or
-* `grunt test:watch` - run unit tests in watch mode
-* `grunt test:coverage` or
-* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
-* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
-* `grunt test:e2e` - build the dev release and run e2e specs
-* `grunt test:casperjs` - build the dev release and run casperjs integration specs
-* `grunt test:ci` - run all tests on the CI server
-
-* `grunt test --reporters=spec` - run tests with `spec` reporter
-* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 ### Running tests headlessly
 
