@@ -7,7 +7,7 @@ describe "Products list page", ->
     expect(browser().location().url()).toEqual "/products"
 
   it "displays available products", ->
-    expect(repeater("ul#products li").column("product.name"))
+    expect(repeater("table.products tbody tr").column("product.name"))
       .toEqual [
         "HTC Wildfire"
         "Nexus One"

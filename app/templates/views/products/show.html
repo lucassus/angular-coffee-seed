@@ -21,4 +21,12 @@
   <dd>{{product.createdAt | date}}</dd>
 </dl>
 
-<a href="#/products/{{product.id}}/edit" class="btn btn-success">Edit</a>
+<div>
+  <a href="#/products/{{product.id}}/edit" class="btn btn-success">
+    <i class="icon-edit"></i> Edit
+  </a>
+
+  <button ng-click="show.deleteProduct()" class="btn btn-danger">
+    <i class="icon-trash"></i> Delete
+  </button>
+</div>
