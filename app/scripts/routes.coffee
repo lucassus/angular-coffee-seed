@@ -12,22 +12,26 @@ app.config [
         resolve:
           products: ["Products", (Products) -> Products.query().$promise]
 
-      # TODO test it
       .when "/products/create",
         templateUrl: "templates/views/products/form.html"
         controller: "products.FormCtrl as form"
         resolve:
-          product: ["Products", (Products) ->
-            new Products()
+          product: ["Products", (Products) -> new Products()]
+
+      .when "/products/:id/edit",
+        templateUrl: "templates/views/products/form.html"
+        controller: "products.FormCtrl as form"
+        resolve:
+          product: ["Products", "$route", (Products, $route) ->
+            Products.get(id: $route.current.params.id).$promise
           ]
 
       .when "/products/:id",
         templateUrl: "templates/views/products/show.html"
         controller: "products.ShowCtrl as show"
         resolve:
-          product: [
-            "Products", "$route", (Products, $route) ->
-              Products.get(id: $route.current.params.id).$promise
+          product: ["Products", "$route", (Products, $route) ->
+            Products.get(id: $route.current.params.id).$promise
           ]
 
       .when "/other",

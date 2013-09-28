@@ -132,6 +132,36 @@ describe "Module `myApp.alerts`", ->
           expect(lastMessage).to.not.be.undefined
           expect(lastMessage.type).to.equal "error"
 
+      describe "#success()", ->
+
+        it "pushesh the given message", inject (alerts) ->
+          # Given
+          testMessage = "This is a test message!"
+
+          # When
+          alerts.success(testMessage)
+          expect(spy).to.be.calledWith 1
+
+          # Then
+          lastMessage = _.findWhere(alerts.messages, id: 1)
+          expect(lastMessage).to.not.be.undefined
+          expect(lastMessage.type).to.equal "success"
+
+      describe "#warning()", ->
+
+        it "pushesh the given message", inject (alerts) ->
+          # Given
+          testMessage = "This is a test message!"
+
+          # When
+          alerts.warning(testMessage)
+          expect(spy).to.be.calledWith 1
+
+          # Then
+          lastMessage = _.findWhere(alerts.messages, id: 1)
+          expect(lastMessage).to.not.be.undefined
+          expect(lastMessage.type).to.equal "warning"
+
     describe "#dispose()", ->
       it "removes a message with the given id", inject (alerts) ->
         # Given

@@ -4,9 +4,9 @@ describe "Application routes", ->
   beforeEach module "myApp.resources", ($provide) ->
     products = [{ id: 123, name: "foo" }, { id: 234, name: "bar" }]
 
-    Products = sinon.stub(query: angular.noop, get: angular.noop)
-    Products.query.returns $promise: then: (callback) -> callback(products)
-    Products.get.returns $promise: then: (callback) -> callback(products[0])
+    class Products
+      @query: sinon.stub().returns $promise: then: (callback) -> callback(products)
+      @get: sinon.stub().returns $promise: then: (callback) -> callback(products[0])
 
     $provide.value "Products", Products
 
@@ -36,6 +36,20 @@ describe "Application routes", ->
       expect(products).to.have.length 2
       expect(products).to.satisfy (collection) -> _.findWhere(collection, id: 123)
       expect(products).to.satisfy (collection) -> _.findWhere(collection, id: 234)
+
+  describe "route `/products/create`", ->
+    navigateTo "/products/create"
+
+    it "is recognized", inject ($route) ->
+      expect($route.current)
+        .to.have.templateUrl("templates/views/products/form.html")
+        .and.to.have.controller("products.FormCtrl as form")
+        .and.to.resolve("product")
+
+    it "resolves with a new product instance", inject ($route, Products) ->
+      product = $route.current.locals.product
+      expect(product).to.be.instanceOf(Products)
+      expect(product.id).to.be.undefined
 
   describe "route `/products/:id`", ->
     navigateTo "/products/123"
