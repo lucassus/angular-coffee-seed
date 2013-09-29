@@ -83,3 +83,16 @@ describe "The application", ->
           .get("/api/products/123.json")
           .set("Accept", "application/json")
           .expect(404, done)
+
+  xdescribe "DELETE /api/products/:id.json", ->
+
+    context "when the product can be found", ->
+
+      it "deletes the product", (done) ->
+        request(app)
+          .delete("/api/products/3.json")
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(200)
+          .end (error, resp) ->
+            done()

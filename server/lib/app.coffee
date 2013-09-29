@@ -31,7 +31,15 @@ app.post "/api/products/:id.json", (req, res) ->
     res.send product
 
 app.get "/api/products/:id.json", (req, res) ->
-  productProvider.findById req.params.id, (error, product) ->
+  id = req.params.id
+
+  productProvider.findById id, (error, product) ->
     res.send if product? then product else 404
+
+app.delete "/api/products/:id.json", (req, res) ->
+  id = req.params.id
+
+  productProvider.destroy id, (error, product) ->
+    res.send product
 
 module.exports = app

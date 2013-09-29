@@ -17,8 +17,8 @@ describe "Controller `products.ShowCtrl`", ->
 
     return
 
-  ctrl = null
   $scope = null
+  ctrl = null
 
   # Initialize the controller and a mock scope
   beforeEach inject ($rootScope, $controller) ->
