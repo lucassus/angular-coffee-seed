@@ -6,7 +6,7 @@ module.exports = (grunt) ->
     stdout: true
 
   startServer:
-    command: "./script/start-server.sh"
+    command: "./script/start-server"
 
   testServer:
     command: "mocha --compilers coffee:coffee-script --watch --reporter spec server/test"

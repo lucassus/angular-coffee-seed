@@ -116,9 +116,9 @@ Run test against specific browsers
 
 Running integration tests
 
-* `script/test-ci.sh` - run all specs (useful for CI)
-* `script/test-casperjs.sh` - run CasperJS specs
-* `script/test-e2e.sh` - run AngularJS e2e specs
+* `script/test-ci` - run all specs (useful for CI)
+* `script/test-casperjs` - run CasperJS specs
+* `script/test-e2e` - run AngularJS e2e specs
 
 ## Running tests for the server side application
 
