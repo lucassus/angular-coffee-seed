@@ -1,20 +1,30 @@
 describe "Controller `products.FormCtrl`", ->
 
-  beforeEach module "myApp"
+  # stub external services
+  beforeEach module "myApp", ($provide) ->
+    $provide.factory "product", ($q) ->
+      promise = ->
+        deferred = $q.defer()
+        deferred.resolve(true) # always resolved
+        deferred.promise
+
+      id: 1, name: "foo"
+      $save: sinon.stub().returns promise()
+      $delete: sinon.stub().returns promise()
+
+    $provide.value "$location", sinon.stub(path: angular.noop)
+    $provide.value "alerts", sinon.stub(success: angular.noop, info: angular.noop)
+
+    return
 
   $scope = null
   ctrl = null
-  product = null
 
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
     $scope.productForm = {}
 
-    product = sinon.stub(id: 1, name: "foo", $save: angular.noop)
-
-    ctrl = $controller "products.FormCtrl",
-      $scope: $scope
-      product: product
+    ctrl = $controller "products.FormCtrl", $scope: $scope
 
   describe "$scope", ->
 
@@ -26,18 +36,34 @@ describe "Controller `products.FormCtrl`", ->
   describe "#save()", ->
 
     context "when the form is invalid", ->
-      beforeEach -> ctrl.save(product)
+      beforeEach inject (product) -> ctrl.save(product)
 
-      it "does nothing", ->
+      it "does nothing", inject (product) ->
         expect(product.$save).not.to.be.called
 
-    # TODO finish it
-    xcontext "when the form is valid", ->
-      beforeEach ->
+    context "when the form is valid", ->
+      beforeEach inject (product) ->
         $scope.productForm = $valid: true
-        ctrl.save(product)
+        $scope.$apply -> ctrl.save(product)
 
-      it "saves a product", ->
+      it "saves a product", inject (product) ->
         expect(product.$save).to.be.called
 
-      it "redirects to the list page"
+      it "sets an alert", inject (alerts) ->
+        expect(alerts.success).to.be.calledWith "Product was saved"
+
+      it "redirects to the products list page", inject ($location) ->
+        expect($location.path).to.be.calledWith "/products"
+
+  describe "#deleteProduct()", ->
+    beforeEach ->
+      $scope.$apply -> ctrl.deleteProduct()
+
+    it "deletes the product", inject (product) ->
+      expect(product.$delete).to.be.called
+
+    it "sets an alert", inject (alerts) ->
+      expect(alerts.info).to.be.calledWith "Product was deleted"
+
+    it "redirects to the products list page", inject ($location) ->
+      expect($location.path).to.be.calledWith "/products"
