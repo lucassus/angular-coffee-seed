@@ -1,9 +1,7 @@
 #!/bin/bash
 
-source ./script/lib/start_server
+source ./script/lib/server
 
 startServer
 grunt test:ci
 stopServer
-
-exit 0

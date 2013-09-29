@@ -28,5 +28,5 @@ function startServer() {
 
 function stopServer() {
     echo "Killing the backend server PID=$SERVER_PID"
-    kill -9 "$SERVER_PID"
+    kill "$SERVER_PID"
 }
