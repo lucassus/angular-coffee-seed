@@ -24,7 +24,7 @@ describe "Application routes", ->
 
     it "is recognized", inject ($route) ->
       expect($route.current)
-        .to.have.templateUrl("templates/views/products/index.html")
+        .to.have.templateUrl("templates/products/index.html")
         .and.to.have.controller("products.IndexCtrl as index")
         .and.to.resolve("products")
 
@@ -42,7 +42,7 @@ describe "Application routes", ->
 
     it "is recognized", inject ($route) ->
       expect($route.current)
-        .to.have.templateUrl("templates/views/products/form.html")
+        .to.have.templateUrl("templates/products/form.html")
         .and.to.have.controller("products.FormCtrl as form")
         .and.to.resolve("product")
 
@@ -56,7 +56,7 @@ describe "Application routes", ->
 
     it "is recognized", inject ($route) ->
       expect($route.current)
-        .to.have.templateUrl("templates/views/products/show.html")
+        .to.have.templateUrl("templates/products/show.html")
         .and.to.have.controller("products.ShowCtrl as show")
         .and.to.resolve("product")
 
@@ -73,7 +73,7 @@ describe "Application routes", ->
 
     it "is recognized", inject ($route) ->
       expect($route.current)
-        .to.have.templateUrl("templates/views/other.html")
+        .to.have.templateUrl("templates/other.html")
         .and.to.have.controller("OtherCtrl as other")
 
   describe "route `/tasks`", ->
@@ -81,7 +81,7 @@ describe "Application routes", ->
 
     it "is recognized", inject ($route) ->
       expect($route.current)
-        .to.have.templateUrl("templates/views/tasks.html")
+        .to.have.templateUrl("templates/tasks.html")
         .and.to.have.controller("TasksCtrl as tasks")
 
   describe "other routes", ->

@@ -52,7 +52,7 @@ alerts.directive "alerts", ->
   restrict: "E"
   transclude: true
 
-  templateUrl: "templates/alerts.html"
+  templateUrl: "templates/partials/alerts.html"
   replace: true
 
   controller: "alerts"
