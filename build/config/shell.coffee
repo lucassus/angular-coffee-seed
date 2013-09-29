@@ -10,6 +10,3 @@ module.exports = (grunt) ->
 
   testServer:
     command: "mocha --compilers coffee:coffee-script --watch --reporter spec server/test"
-
-  testCi:
-    command: "./script/test-ci.sh"
