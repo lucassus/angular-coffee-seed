@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/lucassus/angular-seed.png?label=ready)](https://waffle.io/lucassus/angular-seed)  
 # Custom AngularJS seed project
 
 [![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
