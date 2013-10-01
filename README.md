@@ -175,7 +175,7 @@ or
 
 ## Build process
 
-`grunt build` will build the minified production release.
+`script/build` will build the minified production release.
 
 `(cd dist/ ; python -m SimpleHTTPServer 8000)` will serve a static assets from `./dist` directory.
 
