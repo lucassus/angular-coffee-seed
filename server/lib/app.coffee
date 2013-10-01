@@ -4,7 +4,7 @@ path = require("path")
 app = express()
 app.use express.logger()
 app.use express.bodyParser()
-app.use express.static(path.join(__dirname, "dist"))
+app.use express.static(path.join(__dirname, "../../dist"))
 
 utils = require("./utils")
 
