@@ -71,7 +71,7 @@ sudo npm install -g bower
 ```
 npm install
 bower install
-foreman start
+script/start-server
 ```
 
 Navigate to `http://localhost:9000`
