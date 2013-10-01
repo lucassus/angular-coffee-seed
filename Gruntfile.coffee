@@ -32,6 +32,7 @@ module.exports = (grunt) ->
     casper:        loadMoule "casper"
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
+    shell:         loadMoule "shell"
 
   grunt.renameTask "regarde", "watch"
 
@@ -50,6 +51,7 @@ module.exports = (grunt) ->
   grunt.registerTask "server", [
     "build:dev"
 
+    "configureProxies"
     "livereload-start"
     "connect:livereload"
     "watch"
@@ -84,6 +86,7 @@ module.exports = (grunt) ->
   # run e2e integration tests
   grunt.registerTask "test:e2e", [
     "build:dev"
+    "configureProxies"
     "connect:e2e"
     "karma:e2e"
   ]
@@ -91,6 +94,7 @@ module.exports = (grunt) ->
   # run casperjs integration tests
   grunt.registerTask "test:casperjs", [
     "build:dev"
+    "configureProxies"
     "connect:e2e"
     "casper"
   ]
@@ -102,8 +106,10 @@ module.exports = (grunt) ->
     # run unit tests and generate code coverage report
     "karma:coverage"
 
-    # run all integration tests
+    "configureProxies"
     "connect:e2e"
+
+    # run all integration tests
     "karma:e2e"
     "casper"
   ]

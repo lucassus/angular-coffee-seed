@@ -1,4 +1,4 @@
-describe "Controller: OtherCtrl", ->
+describe "Controller `OtherCtrl`", ->
 
   # stub `alerts` service
   beforeEach module "myApp", ($provide) ->
@@ -15,7 +15,7 @@ describe "Controller: OtherCtrl", ->
   it "has a name", ->
     expect(ctrl.name).to.equal "This is the other controller"
 
-  describe "#sayHello", ->
+  describe "#sayHello()", ->
 
     it "displays the flash message", inject (alerts) ->
       # When

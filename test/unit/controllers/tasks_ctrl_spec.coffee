@@ -1,6 +1,7 @@
-describe "Controller: TasksCtrl", ->
+describe "Controller `TasksCtrl`", ->
 
-  beforeEach module("myApp")
+  beforeEach module "myApp"
+
   ctrl = null
   $scope = null
 
@@ -13,7 +14,7 @@ describe "Controller: TasksCtrl", ->
     expect(ctrl.tasks).to.not.be.undefined
     expect(ctrl.tasks.length).to.equal 3
 
-  describe "#archive", ->
+  describe "#archive()", ->
     beforeEach ->
       ctrl.tasks = [
         { done: false }, { done: true }, { done: true }
@@ -25,13 +26,13 @@ describe "Controller: TasksCtrl", ->
       ctrl.archive()
       expect(ctrl.tasks.length).to.equal 1
 
-  describe "#tasksCount", ->
+  describe "#tasksCount()", ->
 
     it "returs the number of all tasks", ->
       ctrl.tasks = [{}, {}, {}]
       expect(ctrl.tasksCount()).to.equal 3
 
-  describe "#remainingTasksCount", ->
+  describe "#remainingTasksCount()", ->
 
     describe "when task list is empty" ,->
       beforeEach -> ctrl.tasks = []
@@ -57,7 +58,7 @@ describe "Controller: TasksCtrl", ->
       it "returns 0", ->
         expect(ctrl.remainingTasksCount()).to.equal 0
 
-  describe "#addTask", ->
+  describe "#addTask()", ->
 
     describe "when the form is valid", ->
       stub = null

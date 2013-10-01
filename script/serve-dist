@@ -1,2 +1,4 @@
 #!/bin/bash
+
+grunt build
 (cd dist/ ; python -m SimpleHTTPServer 8000)

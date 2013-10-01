@@ -59,11 +59,12 @@ make
 sudo make install
 ```
 
-## Install grunt and bower globally
+## Install grunt, nodemon and bower globally
 
 ```
-npm install -g grunt-cli
-npm install -g bower
+sudo npm install -g grunt-cli
+sudo npm install -g nodemon
+sudo npm install -g bower
 ```
 
 ### Run the app
@@ -71,7 +72,7 @@ npm install -g bower
 ```
 npm install
 bower install
-grunt server
+script/start-server
 ```
 
 Navigate to `http://localhost:9000`
@@ -96,15 +97,33 @@ git checkout tags/1.0.2
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 ```
 
-## Running test
+## Running tests
 
 By default all tests are executes in PhantomJS browser
 
-`grunt test:unit`
+* `grunt test:unit` or `grunt test` - run unit tests
+* `grunt test:unit:watch` or
+* `grunt test:watch` - run unit tests in watch mode
+* `grunt test:coverage` or
+* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
+* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
+
+* `grunt test --reporters=spec` - run tests with `spec` reporter
+* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 Run test against specific browsers
 
 `grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
+
+Running integration tests
+
+* `script/test-ci` - run all specs (useful for CI)
+* `script/test-casperjs` - run CasperJS specs
+* `script/test-e2e` - run AngularJS e2e specs
+
+## Running tests for the server side application
+
+`mocha --compilers coffee:coffee-script --watch --reporter spec server/test`
 
 ### How to debug failing specs
 
@@ -138,26 +157,6 @@ or
 
 `karma test:unit:watch`
 
-### Running end2end tests
-
-`grunt test:e2e`
-`grunt test:casperjs`
-
-### Grunt tasks for running specs
-
-* `grunt test:unit` or `grunt test` - run unit tests
-* `grunt test:unit:watch` or
-* `grunt test:watch` - run unit tests in watch mode
-* `grunt test:coverage` or
-* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
-* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
-* `grunt test:e2e` - build the dev release and run e2e specs
-* `grunt test:casperjs` - build the dev release and run casperjs integration specs
-* `grunt test:ci` - run all tests on the CI server
-
-* `grunt test --reporters=spec` - run tests with `spec` reporter
-* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
-
 ### Running tests headlessly
 
 Start Xvfb and export DISPLAY variable:
@@ -177,7 +176,7 @@ or
 
 ## Build process
 
-`grunt build` will build the minified production release.
+`script/build` will build the minified production release.
 
 `(cd dist/ ; python -m SimpleHTTPServer 8000)` will serve a static assets from `./dist` directory.
 

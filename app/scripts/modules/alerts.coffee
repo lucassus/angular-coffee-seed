@@ -30,6 +30,8 @@ alerts.factory "alerts", [
 
     # Helper methods for various alerts types
     info: (text) -> @push("info", text)
+    success: (text) -> @push("success", text)
+    warning: (text) -> @push("warning", text)
     error: (text) -> @push("error", text)
 
     # Disposes a message with the given id
@@ -50,7 +52,7 @@ alerts.directive "alerts", ->
   restrict: "E"
   transclude: true
 
-  templateUrl: "templates/alerts.html"
+  templateUrl: "templates/partials/alerts.html"
   replace: true
 
   controller: "alerts"
