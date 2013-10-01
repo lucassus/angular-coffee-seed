@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html ng-app="myApp">
+<!doctype html>
+<html>
   <head>
     <title>Angular seed</title>
 
@@ -8,26 +8,40 @@
     <link rel="stylesheet" href="styles/style.min.css">
   </head>
 
-  <body>
-    <alerts></alerts>
+  <body ng-app="myApp">
+    <div id="wrap">
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
+      <!-- fixed navbar -->
+      <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-          <a class="brand" href="#">Angular seed</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav" nav-links="">
-              <li><a href="#/">Home</a></li>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Angular seed</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav" nav-links="">
+              <li><a href="#/products">Products</a></li>
               <li><a href="#/other">Other</a></li>
-              <li><a href="#/todos">Todos</a></li>
+              <li><a href="#/tasks">Tasks</a></li>
             </ul>
           </div>
         </div>
       </div>
+
+      <div class="container">
+        <alerts></alerts>
+        <ng-view class="reveal-animation"></ng-view>
+      </div>
     </div>
 
-    <div class="container">
-      <ng-view></ng-view>
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted credit">angular-seed project</p>
+      </div>
     </div>
 
     <script src="scripts/vendor.min.js"></script>
