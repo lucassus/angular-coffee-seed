@@ -3,18 +3,24 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "~2.0.3",
-    "angular": "~1.0.7",
-    "bootstrap": "~2.3.2"
+    "underscore": "~1.5.2",
+
+    "angular": "1.2.0-rc.2",
+    "angular-route": "1.2.0-rc.2",
+    "angular-resource": "1.2.0-rc.2",
+    "angular-animate": "1.2.0-rc.2",
+
+    "bootstrap": "~3.0.0",
+    "font-awesome": "~3.2.1"
   },
   "devDependencies": {
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7"
+    "angular-mocks": "1.2.0-rc.2",
+    "sinon": "~1.7.3"
   },
   "exportsOverride": {
-    "bootstrap": {
-      "js": "docs/assets/js/bootstrap.js",
-      "css": "docs/assets/css/bootstrap.css",
-      "img": "img/*.png"
+    "font-awesome": {
+      "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
+      "font": ["font/*"]
     }
   }
 }

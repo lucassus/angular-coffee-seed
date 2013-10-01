@@ -1,13 +1,18 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
-  "myApp.controllers"
+  "ngRoute"
+  "ngAnimate"
+
+  "myApp.templates"
   "myApp.alerts"
   "myApp.navigation"
+  "myApp.resources"
 ]
 
 app.config [
-  "$provide", "$routeProvider", ($provide, $routeProvider) ->
+
+  "$provide", ($provide) ->
     $provide.value("alertTimeout", 3000)
 
     # workarounds e2e scenarios
@@ -16,18 +21,4 @@ app.config [
       # disable timeouts, see https://github.com/angular/angular.js/issues/2402
       $provide.value("alertTimeout", null)
 
-    $routeProvider
-      .when "/",
-        templateUrl: "templates/views/main.html",
-        controller: "MainCtrl"
-
-      .when "/other",
-        templateUrl: "templates/views/other.html",
-        controller: "OtherCtrl"
-
-      .when "/todos",
-        templateUrl: "templates/views/todos.html",
-        controller: "TodosCtrl"
-
-      .otherwise redirectTo: "/"
 ]

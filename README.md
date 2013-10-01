@@ -1,25 +1,57 @@
 # Custom AngularJS seed project
 
-* AngularJS
-* browserify
-* Jasmine
-* karma
-* grunt
-* ..and a lot more
-
 [![Build status](https://secure.travis-ci.org/lucassus/angular-seed.png)](http://travis-ci.org/lucassus/angular-seed)
+[![Dependency Status](https://gemnasium.com/lucassus/angular-seed.png)](https://gemnasium.com/lucassus/angular-seed)
+[![Stories in Ready](https://badge.waffle.io/lucassus/angular-seed.png?label=ready)](https://waffle.io/lucassus/angular-seed)
+
+This is a custom AngularJS seed project based on grunt the JavaScript task runner.
+
+* AngularJS 1.2.0
+* CoffeeScript and Less support
+* Bower for front-end packages management
+* Full support for unit and end2end tests
+* Unit tests with Mocha, Chai and SinonJS
+* Generates code coverage for JavaScript unit tests
+* Support for AngularJS e2e and CasperJS integration tests
+* Support for Karma Test Runner (formerly Testacular)
+* Continuous Integration ready ready via `grunt test:ci` task
+* Grunt task runner along with several useful plugins
+* Production release minification and angular template caching
+* ..and a lot more
 
 Demo: http://lucassus-angular-seed.herokuapp.com
 
+## Directory structure
+
+* `./app` - contains CoffeeScript sources, styles, images, fonts and other assets
+  * `./app/scripts` - CoffeeScript sources
+  * `./app/styles` - stylesheets
+  * `./app/views` - html templates used by AngularJS
+* `./test` - contains tests for the application
+  * `./tests/casperjs` - CasperJS integration specs
+  * `./test/e2e` - AngularJS end2end scenarios
+  * `./tests/unit` - unit tests for AngularJS components
+
+Third-party libraries
+
+* `./bower_components` - components dowloaded by `bower install` command
+* `./custom_components` - you could put custom components here
+* `./node_modules` - command dowloaded by `npm install` command
+
+Generated stuff
+
+* `./dev` - compiled development release
+* `./dist` - created by `grunt build` command, contains the minified production release of the app
+
 ## Bootstrap
 
-Install nodejs v0.10.7 from the sources:
+Install nodejs v0.10.12 from the sources:
 
 ```
 sudo apt-get install build-essential openssl libssl-dev pkg-config
 
-wget http://nodejs.org/dist/v0.10.7/node-v0.10.7.tar.gz
-tar -xzf node-v0.10.7.tar.gz
+wget http://nodejs.org/dist/v0.10.12/node-v0.10.12.tar.gz
+tar -xzf node-v0.10.12.tar.gz
 
 cd node-v0.10.7
 ./configure
@@ -27,14 +59,12 @@ make
 sudo make install
 ```
 
-Newer versions of nodejs cause problems with karma and PhantomJS
-see: https://github.com/karma-runner/karma/issues/558
-
-## Install tools
+## Install grunt, nodemon and bower globally
 
 ```
-npm install -g grunt-cli
-npm install -g bower
+sudo npm install -g grunt-cli
+sudo npm install -g nodemon
+sudo npm install -g bower
 ```
 
 ### Run the app
@@ -42,12 +72,12 @@ npm install -g bower
 ```
 npm install
 bower install
-grunt server
+script/start-server
 ```
 
-Navigate to http://localhost:9000
+Navigate to `http://localhost:9000`
 
-## Install PhantomJS ad CasperJS for the integration testing
+## Install PhantomJS and CasperJS for the integration testing
 
 Download and install PhantomJS
 
@@ -67,37 +97,33 @@ git checkout tags/1.0.2
 ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 ```
 
-## Running test
+## Running tests
 
 By default all tests are executes in PhantomJS browser
 
-`grunt test`
+* `grunt test:unit` or `grunt test` - run unit tests
+* `grunt test:unit:watch` or
+* `grunt test:watch` - run unit tests in watch mode
+* `grunt test:coverage` or
+* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
+* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
+
+* `grunt test --reporters=spec` - run tests with `spec` reporter
+* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
 
 Run test against specific browsers
 
-`grunt test --browsers=Chrome,Firefox,Opera,PhantomJS`
+`grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
 
-Run karma with `autoWatch` option:
+Running integration tests
 
-```
-# inside the first terminal
-grunt server --force
+* `script/test-ci` - run all specs (useful for CI)
+* `script/test-casperjs` - run CasperJS specs
+* `script/test-e2e` - run AngularJS e2e specs
 
-# inside the second terminal
-grunt test:watch --browsers=Chrome,Opera
-```
+## Running tests for the server side application
 
-or
-
-```
-# inside the first terminal
-grunt build:dev watch --force
-
-# inside the second terminal
-grunt test:watch --browsers=Firefox,PhantomJS
-```
-
-Task `grunt watch` has to be executed since it's recompiling all CoffeeScripts.
+`mocha --compilers coffee:coffee-script --watch --reporter spec server/test`
 
 ### How to debug failing specs
 
@@ -113,16 +139,23 @@ describe "Failing spec", ->
 
 Run karma in Chrome browser:
 
-`grunt test:watch --browsers=Chrome`
+`grunt test:unit:watch --browsers=Chrome`
 
 * Go to the newly opened Chrome Browser
 * Open Chrome's DevTools and refresh the page
 * Now in the source tab you should see the execution stopped at the debugger
 
-### Running e2e tests
+Run karma directly without CoffeeScript compilation:
 
-`grunt test:e2e`
-`grunt test:casperjs`
+`karma start test/karma.conf.coffee --single-run`
+
+or with auto watch option:
+
+`karma start test/karma.conf.coffee`
+
+or
+
+`karma test:unit:watch`
 
 ### Running tests headlessly
 
@@ -135,7 +168,7 @@ export DISPLAY=:99
 
 Perform single run:
 
-grunt test --browsers=Firefox,Chrome,Opera,PhantomJS
+`grunt test --browsers=Firefox,Chrome,Opera,PhantomJS`
 
 or
 
@@ -143,18 +176,17 @@ or
 
 ## Build process
 
-```
-grunt build
-(cd dist/ ; python -m SimpleHTTPServer 8000)
-```
+`script/build` will build the minified production release.
 
-And then navigate to `http://localhost:8000` to see the production release.
+`(cd dist/ ; python -m SimpleHTTPServer 8000)` will serve a static assets from `./dist` directory.
+
+Navigate to `http://localhost:8000` to see the production release.
 
 # Heroku deployment
 
 ```
 git co heroku-production
 git merge master
-grunt heroku:production
+grunt build
 git push heroku heroku-production:master -f
 ```

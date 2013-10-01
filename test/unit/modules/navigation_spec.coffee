@@ -1,46 +1,43 @@
-describe "myApp.navigation", ->
-  beforeEach module("myApp.navigation")
-  beforeEach module("mocks")
+describe "Module `myApp.navigation`", ->
 
-  describe "directives", ->
+  beforeEach module "myApp.navigation"
+  beforeEach module "mocks"
+
+  describe "Directive `navLinks`", ->
     $scope = null
     element = null
+    changeLocation = null
 
-    changeLocation = ->
+    beforeEach inject ($rootScope, $compile, $location) ->
+      $scope = $rootScope
 
-    describe "navLinks", ->
+      # compite the html snippet
+      element = angular.element """
+        <ul nav-links>
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/foo">Foo</a></li>
+          <li><a href="#/bar">Bar</a></li>
+        </ul>
+      """
+      linkFn = $compile(element)
+      linkFn($scope)
 
-      beforeEach inject ($rootScope, $compile, $location) ->
-        $scope = $rootScope
+      changeLocation = (path) ->
+        $scope.$apply -> $location.path(path)
 
-        # compite the html snippet
-        element = angular.element """
-          <ul nav-links>
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/foo">Foo</a></li>
-            <li><a href="#/bar">Bar</a></li>
-          </ul>
-        """
-        linkFn = $compile(element)
-        linkFn($scope)
+    it "activates the 'Home' link by default", ->
+      changeLocation("/")
+      expect(element.find("li:nth-child(1)").hasClass("active")).to.be.true
+      expect(element.find("li:nth-child(2)").hasClass("active")).to.be.false
+      expect(element.find("li:nth-child(3)").hasClass("active")).to.be.false
 
-        changeLocation = (path) ->
-          $location.path(path)
-          $scope.$apply()
+    it "activates other links on location change", ->
+      changeLocation("/foo")
+      expect(element.find("li:nth-child(1)").hasClass("active")).to.be.false
+      expect(element.find("li:nth-child(2)").hasClass("active")).to.be.true
+      expect(element.find("li:nth-child(3)").hasClass("active")).to.be.false
 
-      it "activates the 'Home' link by default", ->
-        changeLocation("/")
-        expect(element.find("li:nth-child(1)").hasClass("active")).toBeTruthy()
-        expect(element.find("li:nth-child(2)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(3)").hasClass("active")).toBeFalsy()
-
-      it "activates other links on location change", ->
-        changeLocation("/foo")
-        expect(element.find("li:nth-child(1)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(2)").hasClass("active")).toBeTruthy()
-        expect(element.find("li:nth-child(3)").hasClass("active")).toBeFalsy()
-
-        changeLocation("/bar")
-        expect(element.find("li:nth-child(1)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(2)").hasClass("active")).toBeFalsy()
-        expect(element.find("li:nth-child(3)").hasClass("active")).toBeTruthy()
+      changeLocation("/bar")
+      expect(element.find("li:nth-child(1)").hasClass("active")).to.be.false
+      expect(element.find("li:nth-child(2)").hasClass("active")).to.be.false
+      expect(element.find("li:nth-child(3)").hasClass("active")).to.be.true

@@ -9,3 +9,7 @@ bower_components
 # Builds
 dev
 dist
+coverage
+
+# Other
+npm-debug.log

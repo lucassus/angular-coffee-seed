@@ -2,12 +2,12 @@ language:
   - node_js
 
 node_js:
-  - 0.10.7
+  - 0.10.12
 
 before_install:
-  - npm install grunt-cli bower -g
-  - npm install
-  - bower install
+  - travis_retry npm install bower grunt-cli mocha -g
+  - travis_retry npm install
+  - travis_retry bower install
 
   # install CasperJS
   - git clone git://github.com/n1k0/casperjs.git ~/casperjs
@@ -21,4 +21,4 @@ before_script:
   - casperjs --version
 
 script:
-  - DISPLAY=:99.0 grunt test:ci
+  - DISPLAY=:99.0 ./script/test-ci

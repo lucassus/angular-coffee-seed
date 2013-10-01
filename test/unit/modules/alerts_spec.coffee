@@ -1,8 +1,9 @@
-describe "myApp.alerts", ->
-  beforeEach module("myApp.alerts")
-  beforeEach module("mocks")
+describe "Module `myApp.alerts`", ->
 
-  describe "controller", ->
+  beforeEach module "myApp.alerts"
+  beforeEach module "mocks"
+
+  describe "Controller `alerts`", ->
     $scope = null
     alerts = null
 
@@ -16,32 +17,43 @@ describe "myApp.alerts", ->
         alerts: alerts
 
     it "assings flash messages", ->
-      expect($scope.alertMessages).toBeDefined()
-      expect($scope.alertMessages).toEqual([])
+      expect($scope.alertMessages).to.not.be.undefined
+      expect($scope.alertMessages).to.be.empty
 
+      # When
       alerts.info("Test message.")
-      expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Test message.")
 
-    describe "#disposeAlert", ->
+      # Then
+      lastMessage = $scope.alertMessages[0]
+      expect(lastMessage.id).to.equal 1
+      expect(lastMessage.type).to.equal "info"
+      expect(lastMessage.text).to.equal "Test message."
+
+    describe "#disposeAlert()", ->
       it "disposes an alert at the given index", ->
         # Given
         alerts.info("Information..")
         alerts.error("Error..")
-        spyOn(alerts, "dispose").andCallThrough()
+        spy = sinon.spy(alerts, "dispose")
 
         # When
         $scope.disposeAlert(2)
 
         # Then
-        expect(alerts.dispose).toHaveBeenCalledWith(2)
-        expect($scope.alertMessages).toContain(id: 1, type: "info", text: "Information..")
-        expect($scope.alertMessages).not.toContain(id: 2, type: "error", text: "Error..")
+        expect(spy).to.be.called
+        expect(spy).to.be.calledWith 2
 
-  describe "directive", ->
+        firstMessage = _.findWhere($scope.alertMessages, id: 1)
+        expect(firstMessage).to.not.be.undefined
+        expect(firstMessage.type).to.equal "info"
+        expect(firstMessage.text).to.equal "Information.."
+
+        secondMessage = _.findWhere($scope.alertMessages, id: 2)
+        expect(secondMessage).to.be.undefined
+
+  describe "Directive `alerts`", ->
     $scope = null
     element = null
-
-    beforeEach module("myApp.templates")
 
     beforeEach inject ($rootScope, $compile) ->
       $scope = $rootScope
@@ -57,30 +69,32 @@ describe "myApp.alerts", ->
       $scope.$apply -> $scope.alertMessages = [
         type: "info", text: "Test message"
       ]
-      expect(element.find(".alert-info").length).toEqual(1)
+      expect(element.find(".alert-info").length).to.equal(1)
 
-  describe "service", ->
+  describe "Service `alerts`", ->
     it "is defined", inject (alerts) ->
-      expect(alerts).toBeDefined()
+      expect(alerts).to.not.be.undefined
 
-    describe "#nextId", ->
+    describe "#nextId()", ->
       it "return the next id for the new flash message", inject (alerts) ->
-        expect(alerts.nextId()).toEqual(1)
+        expect(alerts.nextId()).to.equal(1)
         alerts.nextId() for [1..4]
-        expect(alerts.nextId()).toEqual(6)
+        expect(alerts.nextId()).to.equal(6)
 
-    describe "#push", ->
+    describe "#push()", ->
+      spy = null
+
       beforeEach inject (alerts) ->
-        spyOn(alerts, "delayedDispose")
+        spy = sinon.spy(alerts, "delayedDispose")
 
       it "returns an id for the new flash message", inject (alerts) ->
-        expect(alerts.push("info", "Test..")).toEqual(1)
-        expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+        expect(alerts.push("info", "Test..")).to.equal 1
+        expect(spy).to.be.calledWith 1
 
-        expect(alerts.push("error", "Test error..")).toEqual(2)
-        expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+        expect(alerts.push("error", "Test error..")).to.equal 2
+        expect(spy).to.be.calledWith 2
 
-      describe "#info", ->
+      describe "#info()", ->
         it "pushesh the given message", inject (alerts) ->
           # Given
           testMessage = "This is a test message!"
@@ -88,28 +102,67 @@ describe "myApp.alerts", ->
 
           # When
           alerts.info(testMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          expect(spy).to.be.calledWith 1
 
-          alerts.info(otherTestMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(2)
+          alerts.error(otherTestMessage)
+          expect(spy).to.be.calledWith 2
 
           # Then
-          expect(alerts.messages).toContain(id: 1, type: "info", text: testMessage)
-          expect(alerts.messages).toContain(id: 2, type: "info", text: otherTestMessage)
+          firstMessage = _.findWhere(alerts.messages, id: 1)
+          expect(firstMessage).to.not.be.undefined
+          expect(firstMessage.type).to.equal "info"
+          expect(firstMessage.text).to.equal testMessage
 
-      describe "#error", ->
+          secondMessage = _.findWhere(alerts.messages, id: 2)
+          expect(secondMessage).to.not.be.undefined
+          expect(secondMessage.type).to.equal "error"
+          expect(secondMessage.text).to.equal otherTestMessage
+
+      describe "#error()", ->
         it "pushesh the given message", inject (alerts) ->
           # Given
           testMessage = "This is a test message!"
 
           # When
           alerts.error(testMessage)
-          expect(alerts.delayedDispose).toHaveBeenCalledWith(1)
+          expect(spy).to.be.calledWith 1
 
           # Then
-          expect(alerts.messages).toContain(id: 1, type: "error", text: testMessage)
+          lastMessage = _.findWhere(alerts.messages, id: 1)
+          expect(lastMessage).to.not.be.undefined
+          expect(lastMessage.type).to.equal "error"
 
-    describe "#dispose", ->
+      describe "#success()", ->
+
+        it "pushesh the given message", inject (alerts) ->
+          # Given
+          testMessage = "This is a test message!"
+
+          # When
+          alerts.success(testMessage)
+          expect(spy).to.be.calledWith 1
+
+          # Then
+          lastMessage = _.findWhere(alerts.messages, id: 1)
+          expect(lastMessage).to.not.be.undefined
+          expect(lastMessage.type).to.equal "success"
+
+      describe "#warning()", ->
+
+        it "pushesh the given message", inject (alerts) ->
+          # Given
+          testMessage = "This is a test message!"
+
+          # When
+          alerts.warning(testMessage)
+          expect(spy).to.be.calledWith 1
+
+          # Then
+          lastMessage = _.findWhere(alerts.messages, id: 1)
+          expect(lastMessage).to.not.be.undefined
+          expect(lastMessage.type).to.equal "warning"
+
+    describe "#dispose()", ->
       it "removes a message with the given id", inject (alerts) ->
         # Given
         alerts.info("First message")
@@ -121,21 +174,35 @@ describe "myApp.alerts", ->
         alerts.dispose(2)
 
         # Then
-        expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
-        expect(alerts.messages).not.toContain(id: 2, type: "info", text: "Second message")
-        expect(alerts.messages).toContain(id: 3, type: "info", text: "Third message")
-        expect(alerts.messages).toContain(id: 4, type: "error", text: "Error message")
+        firstMessage = _.findWhere(alerts.messages, text: "First message")
+        expect(firstMessage).to.not.be.undefined
 
-    describe "#delayedDispose", ->
+        secondMessage = _.findWhere(alerts.messages, text: "Second message")
+        expect(secondMessage).to.be.undefined
+
+        thirdMessage = _.findWhere(alerts.messages, text: "Third message")
+        expect(thirdMessage).to.not.be.undefined
+
+        forthMessage = _.findWhere(alerts.messages, type: "error", text: "Error message")
+        expect(forthMessage).to.not.be.undefined
+
+    describe "#delayedDispose()", ->
+
       it "removes a message after the given time", inject (alerts, $timeout) ->
         # Given
         alerts.info("First message")
 
         # When
         alerts.delayedDispose(1)
-        expect(alerts.messages).toContain(id: 1, type: "info", text: "First message")
 
+        # Then
+        lastMessage = _.findWhere(alerts.message, id: 1)
+        expect(lastMessage).to.be.defined
+
+        # When
         $timeout.flush()
 
         # Then
-        expect(alerts.messages).toEqual([])
+        expect(alerts.messages).to.be.empty
+        disposedMessage = _.findWhere(alerts.message, id: 1)
+        expect(disposedMessage).to.not.be.defined

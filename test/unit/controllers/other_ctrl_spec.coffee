@@ -1,17 +1,26 @@
-describe "Controller: OtherCtrl", ->
+describe "Controller `OtherCtrl`", ->
 
-  beforeEach module("myApp")
-  $scope = null
+  # stub `alerts` service
+  beforeEach module "myApp", ($provide) ->
+    alertsMock = info: angular.noop
+    $provide.value "alerts", sinon.stub(alertsMock)
+    return
 
-  beforeEach inject ($controller, $rootScope, alerts) ->
-    $scope = $rootScope.$new()
-    $controller "OtherCtrl", $scope: $scope
+  ctrl = null
 
-    spyOn(alerts, "info")
+  # Initialize the controller
+  beforeEach inject ($controller) ->
+    ctrl = $controller "OtherCtrl"
 
-  it "should attach a name", ->
-    expect($scope.name).toBe "This is the other controller"
+  it "has a name", ->
+    expect(ctrl.name).to.equal "This is the other controller"
 
-  it "should display the flash message", inject (alerts) ->
-    $scope.sayHello()
-    expect(alerts.info).toHaveBeenCalledWith("Hello World!")
+  describe "#sayHello()", ->
+
+    it "displays the flash message", inject (alerts) ->
+      # When
+      ctrl.sayHello()
+
+      # Then
+      expect(alerts.info).to.be.called
+      expect(alerts.info).to.be.calledWith("Hello World!")

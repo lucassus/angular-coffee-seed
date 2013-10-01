@@ -2,4 +2,4 @@ exports.Base = class
   constructor: (@casper) ->
 
   pageTitleText: ->
-    @casper.fetchText "h2.page-title"
+    @casper.fetchText ".page-header h1"
