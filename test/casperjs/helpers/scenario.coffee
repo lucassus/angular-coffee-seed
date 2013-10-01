@@ -1,8 +1,9 @@
 Casper = require("casper").Casper
 
 class Scenario extends Casper
-  constructor: (@baseUrl = "http://localhost:9001") ->
-    super
+  constructor: (@baseUrl = "http://localhost:9001", options = {}) ->
+    options.viewportSize = width: 1024, height: 768
+    super(options)
 
     # catches remote `console.log` calls
     @on "remote.message", (message) ->

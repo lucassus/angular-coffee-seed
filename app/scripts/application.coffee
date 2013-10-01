@@ -7,6 +7,7 @@ app = angular.module "myApp", [
   "myApp.templates"
   "myApp.alerts"
   "myApp.navigation"
+  "myApp.resources"
 ]
 
 app.config [

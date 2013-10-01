@@ -1,2 +1,1 @@
-backend: coffee web.coffee
-frontend: grunt server
+web: coffee server/index.coffee
