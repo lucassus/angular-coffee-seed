@@ -1,4 +1,4 @@
-_ = require("underscore")
+_ = require("lodash")
 
 # Responsible for returning and updating the data for products
 class ProductProvider

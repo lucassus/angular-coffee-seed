@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "~2.0.3",
-    "underscore": "~1.5.2",
+    "lodash": "~2.2.0",
 
     "angular": "1.2.0-rc.2",
     "angular-route": "1.2.0-rc.2",
@@ -21,6 +21,9 @@
     "font-awesome": {
       "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
       "font": ["font/*"]
+    },
+    "lodash": {
+        "/": ["dist/lodash.js"]
     }
   }
 }
