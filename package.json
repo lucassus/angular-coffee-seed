@@ -9,7 +9,7 @@
   "dependencies": {
     "coffee-script": "~1.6.3",
     "express": "~3.4.0",
-    "underscore": "~1.5.2",
+    "lodash": "~2.2.0",
     "Faker": "~0.5.11"
   },
   "devDependencies": {
