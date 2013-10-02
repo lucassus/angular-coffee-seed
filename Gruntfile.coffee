@@ -83,19 +83,11 @@ module.exports = (grunt) ->
     "test:unit:coverage"
   ]
 
-  # run e2e integration tests
-  grunt.registerTask "test:e2e", [
-    "build:dev"
-    "configureProxies"
-    "connect:e2e"
-    "karma:e2e"
-  ]
-
   # run casperjs integration tests
   grunt.registerTask "test:casperjs", [
     "build:dev"
     "configureProxies"
-    "connect:e2e"
+    "connect:integration"
     "casper"
   ]
 
@@ -107,10 +99,9 @@ module.exports = (grunt) ->
     "karma:coverage"
 
     "configureProxies"
-    "connect:e2e"
+    "connect:integration"
 
-    # run all integration tests
-    "karma:e2e"
+    # integration tests
     "casper"
   ]
 

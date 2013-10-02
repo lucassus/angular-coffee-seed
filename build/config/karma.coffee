@@ -57,9 +57,3 @@ module.exports = (grunt) ->
       dir: "coverage"
 
     singleRun: true
-
-  # run e2e specs
-  e2e:
-    basePath: "../<%= appConfig.dev %>"
-    configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
-    singleRun: true
