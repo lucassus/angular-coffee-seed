@@ -2,6 +2,13 @@
 
 source ./script/lib/server
 
+grunt build:dev
+
 startServer
-grunt test:e2e
+./script/xvfb start
+
+export DISPLAY=:99.0
+mocha --compilers coffee:coffee-script --reporter spec dev/test/protractor/*_scenario.js
+
 stopServer
+./script/xvfb stop

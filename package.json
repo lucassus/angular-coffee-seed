@@ -47,7 +47,10 @@
     "karma-coverage": "~0.1.0",
     "karma-opera-launcher": "~0.1.0",
     "matchdep": "~0.1.1",
-    "nodemon": "~0.7.10"
+    "nodemon": "~0.7.10",
+
+    "protractor": "~0.10.0",
+    "selenium-webdriver": "~2.35.2"
   },
   "engines": {
     "node": "0.10.x",
