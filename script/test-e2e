@@ -8,7 +8,7 @@ startServer
 ./script/xvfb start
 
 export DISPLAY=:99.0
-mocha --compilers coffee:coffee-script --reporter spec dev/test/protractor/*_scenario.js
+protractor dev/test/protractor.js
 
 stopServer
 ./script/xvfb stop
