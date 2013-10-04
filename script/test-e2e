@@ -2,13 +2,27 @@
 
 source ./script/lib/server
 
-grunt build:dev
-
 startServer
 ./script/xvfb start
 
-export DISPLAY=:99.0
+# TODO prototype cleanup this solution
+grunt build:dev
+grunt configureProxies connect:integration watch &
+PID=$!
+
+function isRunning() {
+  nc -vz localhost 9001 &> /dev/null
+}
+
+while ! isRunning; do
+  echo "Waiting for the frontend server..."
+  sleep 0.250
+done
+
 protractor dev/test/protractor.js
 
 stopServer
 ./script/xvfb stop
+
+echo "Killing the frontend server PID=$PID"
+kill "$PID"
