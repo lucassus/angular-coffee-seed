@@ -14,9 +14,10 @@ function isRunning() {
   nc -vz localhost 9001 &> /dev/null
 }
 
+echo -n "Waiting for the frontend server."
 while ! isRunning; do
-  echo "Waiting for the frontend server..."
-  sleep 0.250
+  echo -n "."
+  sleep 0.1
 done
 
 protractor dev/test/protractor.js
