@@ -42,4 +42,9 @@ app.delete "/api/products/:id.json", (req, res) ->
   productProvider.destroy id, (error, product) ->
     res.send product
 
+app.post "/api/_loadFixtures.json", (req, res) ->
+  productProvider.destroyAll ->
+    productProvider.save fixtures.products(), ->
+      res.send 200
+
 module.exports = app
