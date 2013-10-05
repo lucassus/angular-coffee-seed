@@ -4,7 +4,7 @@ exports.config =
 
   # capabilities to be passed to the webdriver instance
   capabilities:
-    browserName: "chrome"
+    browserName: "firefox"
 
   # spec patterns
   specs: [
