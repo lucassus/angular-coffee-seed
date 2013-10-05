@@ -36,6 +36,10 @@ class ProductProvider
       @products = _.reject @products, (row) -> row.id is product.id
       callback(null, product)
 
+  destroyAll: (callback = ->) ->
+    @products = []
+    callback()
+
   # @private
   _nextId: ->
     @_currentId or= 0
