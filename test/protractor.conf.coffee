@@ -11,6 +11,10 @@ exports.config =
     "protractor/*_scenario.js"
   ]
 
+  # A base URL for your application under test. Calls to protractor.get()
+  # with relative paths will be prepended with this.
+  baseUrl: "http://localhost:9001"
+
   # options to be passed to Jasmine-node
   jasmineNodeOpts:
     showColors: true
