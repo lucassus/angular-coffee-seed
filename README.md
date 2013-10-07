@@ -99,7 +99,7 @@ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
 
 ## Running tests
 
-By default all tests are executes in PhantomJS browser
+By default all tests are executed in PhantomJS browser
 
 * `grunt test:unit` or `grunt test` - run unit tests
 * `grunt test:unit:watch` or
