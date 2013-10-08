@@ -29,22 +29,19 @@ describe "Products page", ->
     firstProduct = po.nthProduct(1)
 
     firstProduct.getId().then (id) ->
-      console.log id
       expect(id).not.toBeUndefined()
 
     firstProduct.getName().then (name) ->
       expect(name).toEqual "HTC Wildfire"
 
     firstProduct.getDescription().then (description) ->
-      console.log description
       expect(description).not.toBeUndefined()
 
   describe "create new product", ->
 
-    it "creates a new product", ->
-      createButton = ptor.findElement(protractor.By.xpath("//a[contains(text(), 'Create')]"))
-      createButton.click()
+    beforeEach -> po.clickCreateButton()
 
+    it "creates a new product", ->
       name = ptor.findElement(protractor.By.input("product.name"))
       name.sendKeys "New product"
 

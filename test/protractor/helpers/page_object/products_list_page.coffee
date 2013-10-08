@@ -24,4 +24,8 @@ class ProductsListPage extends PageObject
     getDescription: =>
       byBinding("product.description").getText()
 
+  clickCreateButton: ->
+    createButton = @findElement "xpath", "//a[contains(text(), 'Create')]"
+    createButton.click()
+
 module.exports = ProductsListPage
