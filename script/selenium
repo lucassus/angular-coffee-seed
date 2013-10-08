@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SELENIUM="-jar `pwd`/selenium/selenium-server-standalone-2.35.0.jar -Dwebdriver.chrome.driver=`pwd`/selenium/chromedriver"
+PIDFILE=./tmp/selenium.pid
+
+echo $SELENIUM
+
+case "$1" in
+  start)
+    echo -n "Starting selenium"
+    /sbin/start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile --background --exec /usr/bin/java -- $SELENIUM
+    echo "."
+    ;;
+
+  stop)
+    echo -n "Stopping selenium"
+    /sbin/start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    echo "."
+    ;;
+
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  *)
+
+  echo "Usage: script/selenium {start|stop|restart}"
+  exit 1
+esac
+
+exit 0
