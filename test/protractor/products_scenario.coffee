@@ -1,14 +1,15 @@
 util = require("util")
 fixtures = require("./helpers/fixtures")
 
-PageObject = require("./helpers/page_object/products_list_page")
+IndexPage = require("./helpers/page_objects/products/index_page")
+FormPage = require("./helpers/page_objects/products/form_page")
 
 describe "Products page", ->
   ptor = null
-  po = null
+  indexPage = null
 
   beforeEach ->
-    po = new PageObject(protractor)
+    indexPage = new IndexPage(protractor)
     ptor = protractor.getInstance()
 
     fixtures.load -> ptor.get "/"
@@ -17,16 +18,17 @@ describe "Products page", ->
     expect(ptor.getTitle()).toEqual "Angular Seed"
 
   it "displays the list of products", ->
-    po.greeting().then (greeting) ->
+    indexPage.greeting().then (greeting) ->
       expect(greeting.getText()).toEqual "You have 6 products"
 
-    po.productNames().then (productNames) ->
+    indexPage.productNames().then (productNames) ->
       expect(productNames.length).toEqual 6
 
       expect(productNames[0].getText()).toEqual "HTC Wildfire"
       expect(productNames[1].getText()).toEqual "Nexus One"
 
-    firstProduct = po.nthProduct(1)
+  it "displays correct columns", ->
+    firstProduct = indexPage.nthProduct(1)
 
     firstProduct.getId().then (id) ->
       expect(id).not.toBeUndefined()
@@ -38,26 +40,21 @@ describe "Products page", ->
       expect(description).not.toBeUndefined()
 
   describe "create new product", ->
+    formPage = null
 
-    beforeEach -> po.clickCreateButton()
+    beforeEach ->
+      indexPage.clickCreateButton()
+      formPage = new FormPage(protractor)
 
     it "creates a new product", ->
-      name = ptor.findElement(protractor.By.input("product.name"))
-      name.sendKeys "New product"
-
-      price = ptor.findElement(protractor.By.input("product.price"))
-      price.sendKeys "9.99"
-
-      description = ptor.findElement(protractor.By.textarea("product.description"))
-      description.sendKeys "this is the description"
-
-      submitButton = ptor.findElement(protractor.By.xpath("//button[@type='submit']"))
-      submitButton.click()
+      formPage.setName "New product"
+      formPage.setPrice "9.99"
+      formPage.setDescription "this is the description"
+      formPage.submit()
 
       results = ptor.findElement(protractor.By.css("div.alert-success span"))
       results.then (alert) ->
         expect(alert.getText()).toEqual "Product was saved"
 
-      results = ptor.findElements(protractor.By.repeater("product in index.products").column("product.name"))
-      results.then (products) ->
-        expect(products.length).toEqual 7
+      indexPage.greeting().then (greeting) ->
+        expect(greeting.getText()).toEqual "You have 7 products"
