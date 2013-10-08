@@ -1,24 +1,43 @@
 util = require("util")
 fixtures = require("./helpers/fixtures")
 
+PageObject = require("./helpers/page_object/products_list_page")
+
 describe "Products page", ->
   ptor = null
+  po = null
 
   beforeEach ->
+    po = new PageObject(protractor)
     ptor = protractor.getInstance()
+
     fixtures.load -> ptor.get "/"
 
+  it "displays a valid page title", ->
+    expect(ptor.getTitle()).toEqual "Angular Seed"
+
   it "displays the list of products", ->
-    greeting = ptor.findElement(protractor.By.binding("{{index.products.length}}"))
-    expect(greeting.getText()).toEqual "You have 6 products"
+    po.greeting().then (greeting) ->
+      expect(greeting.getText()).toEqual "You have 6 products"
 
-    results = ptor.findElements(protractor.By.repeater("product in index.products").column("product.name"))
-    results.then (products) ->
-      expect(products.length).toEqual 6
+    po.productNames().then (productNames) ->
+      expect(productNames.length).toEqual 6
 
-      firstProduct = products[0]
-      firstProduct.getText().then (text) ->
-        expect(text).toEqual "HTC Wildfire"
+      expect(productNames[0].getText()).toEqual "HTC Wildfire"
+      expect(productNames[1].getText()).toEqual "Nexus One"
+
+    firstProduct = po.nthProduct(1)
+
+    firstProduct.getId().then (id) ->
+      console.log id
+      expect(id).not.toBeUndefined()
+
+    firstProduct.getName().then (name) ->
+      expect(name).toEqual "HTC Wildfire"
+
+    firstProduct.getDescription().then (description) ->
+      console.log description
+      expect(description).not.toBeUndefined()
 
   describe "create new product", ->
 
