@@ -15,13 +15,13 @@ class ProductsListPage extends PageObject
     byBinding = (binding) =>
       @ptor.findElement(locator.column(binding))
 
-    getId: =>
+    getId: ->
       byBinding("product.id").getText()
 
-    getName: =>
+    getName: ->
       byBinding("product.name").getText()
 
-    getDescription: =>
+    getDescription: ->
       byBinding("product.description").getText()
 
   clickCreateButton: ->

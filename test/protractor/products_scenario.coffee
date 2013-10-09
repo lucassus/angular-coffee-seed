@@ -52,8 +52,7 @@ describe "Products page", ->
       formPage.setDescription "this is the description"
       formPage.submit()
 
-      results = ptor.findElement(protractor.By.css("div.alert-success span"))
-      results.then (alert) ->
+      indexPage.alert().success().then (alert) ->
         expect(alert.getText()).toEqual "Product was saved"
 
       indexPage.greeting().then (greeting) ->
