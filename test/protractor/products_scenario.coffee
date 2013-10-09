@@ -46,17 +46,35 @@ describe "Products page", ->
       indexPage.clickCreateButton()
       formPage = new FormPage(protractor)
 
-    it "creates a new product", ->
+    it "creates new product", ->
       formPage.setName "New product"
       formPage.setPrice "9.99"
       formPage.setDescription "this is the description"
       formPage.submit()
 
       indexPage.alert().success().then (alert) ->
-        expect(alert.getText()).toEqual "Product was saved"
+        expect(alert.getText()).toEqual "Product was created"
 
       indexPage.greeting().then (greeting) ->
         expect(greeting.getText()).toEqual "You have 7 products"
+
+  describe "edit a product", ->
+    formPage = null
+
+    beforeEach ->
+      thirdProduct = indexPage.nthProduct(3)
+      thirdProduct.getEditButton().click()
+
+      formPage = new FormPage(protractor)
+
+    it "updates a product", ->
+      formPage.setName "New name"
+      formPage.setPrice "199.99"
+      formPage.setDescription "this is the new description"
+      formPage.submit()
+
+      indexPage.alert().success().then (alert) ->
+        expect(alert.getText()).toEqual "Product was updated"
 
   describe "delete a product", ->
 

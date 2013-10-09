@@ -3,6 +3,7 @@ class FormCtrl
   @$inject = ["$scope", "$location", "alerts", "product"]
   constructor: (@$scope, @$location, @alerts, @product) ->
     @$scope.product = @product
+    @persisted = @product.id?
 
   save: (product) ->
     @$scope.productForm.$submitted = true
@@ -10,7 +11,9 @@ class FormCtrl
 
     promise = product.$save()
     promise.then =>
-      @alerts.success "Product was saved"
+      message = if @persisted then "Product was updated" else "Product was created"
+      @alerts.success message
+
       @$location.path "/products"
 
   deleteProduct: ->

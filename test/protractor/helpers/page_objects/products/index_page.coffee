@@ -24,6 +24,9 @@ class ProductsListPage extends PageObject
     getDescription: ->
       byBinding("product.description").getText()
 
+    getEditButton: =>
+      @ptor.findElement(locator).findElement(@getter("css", "a.btn-success"))
+
     getDeleteButton: =>
       @ptor.findElement(locator).findElement(@getter("css", "button.btn-danger"))
 

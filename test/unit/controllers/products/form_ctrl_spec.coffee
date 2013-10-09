@@ -50,7 +50,7 @@ describe "Controller `products.FormCtrl`", ->
         expect(product.$save).to.be.called
 
       it "sets an alert", inject (alerts) ->
-        expect(alerts.success).to.be.calledWith "Product was saved"
+        expect(alerts.success).to.be.calledWith "Product was updated"
 
       it "redirects to the products list page", inject ($location) ->
         expect($location.path).to.be.calledWith "/products"
