@@ -55,12 +55,13 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-6">
-      <button type="submit" class="btn btn-success" ng-hide="product.id">
-        <i class="icon-plus-sign"></i> Create
-      </button>
-
-      <button type="submit" class="btn btn-primary" ng-show="product.id">
-        <i class="icon-save"></i> Update
+      <button type="submit" class="btn btn-success">
+        <span ng-hide="product.id">
+          <i class="icon-plus-sign"></i> Create
+        </span>
+        <span ng-show="product.id">
+          <i class="icon-save"></i> Update
+        </span>
       </button>
 
       <a href="" class="btn btn-danger"
