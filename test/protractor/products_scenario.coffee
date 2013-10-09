@@ -57,3 +57,15 @@ describe "Products page", ->
 
       indexPage.greeting().then (greeting) ->
         expect(greeting.getText()).toEqual "You have 7 products"
+
+  describe "delete a product", ->
+
+    it "deletes a product", ->
+      secondProduct = indexPage.nthProduct(2)
+      secondProduct.getDeleteButton().click()
+
+      indexPage.alert().info().then (alert) ->
+        expect(alert.getText()).toEqual "Product was deleted"
+
+      indexPage.greeting().then (greeting) ->
+        expect(greeting.getText()).toEqual "You have 5 products"

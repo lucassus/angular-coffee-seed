@@ -24,6 +24,9 @@ class ProductsListPage extends PageObject
     getDescription: ->
       byBinding("product.description").getText()
 
+    getDeleteButton: =>
+      @ptor.findElement(locator).findElement(@getter("css", "button.btn-danger"))
+
   clickCreateButton: ->
     createButton = @findElement "xpath", "//a[contains(text(), 'Create')]"
     createButton.click()

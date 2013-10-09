@@ -9,9 +9,12 @@ class PageObject
   findElement: (name, locator) ->
     @ptor.findElement(@getter(name, locator))
 
-  alert: =>
+  alert: ->
 
-    success: =>
-      @findElement("css", "div.alert-success span")
+    byType = (type) =>
+      @findElement("css", "div.alert-#{type} span")
+
+    success: -> byType("success")
+    info: -> byType("info")
 
 module.exports = PageObject
