@@ -5,18 +5,25 @@ class ProductsFormPage extends PageObject
   findInput: (model) ->
     @ptor.findElement(@getter("input", model))
 
+  _setInputValue: (input, value) ->
+    input.clear()
+    input.sendKeys value
+
   setName: (name) ->
-    @findInput("product.name").sendKeys name
+    input = @findInput("product.name")
+    @_setInputValue(input, name)
 
   setPrice: (price) ->
-    @findInput("product.price").sendKeys price
+    input = @findInput("product.price")
+    @_setInputValue(input, price)
 
   setDiscount: (discount) ->
-    @findInput("product.discount").sendKeys discount
+    input = @findInput("product.discount")
+    @_setInputValue(input, discount)
 
   setDescription: (description) ->
     textarea = @ptor.findElement(@getter("textarea", "product.description"))
-    textarea.sendKeys description
+    @_setInputValue(textarea, description)
 
   getSubmitButton: ->
     @ptor.findElement(@getter("xpath", "//button[@type='submit']"))
