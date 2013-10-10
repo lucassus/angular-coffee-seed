@@ -1,0 +1,21 @@
+# TODO merge these notes with the docs
+
+How to develop tests
+
+1/ start the selenium `./selenium/start`
+2/ build dev `grunt build:dev`
+3/ start the app in the `test` evn `script/run-test-server`
+5/ run it `grunt coffee:test && protractor dev/test/protractor.js`
+
+Headless
+
+1/ start Xvfb `./script/xvfb start`
+2/ start selenium on the fake display `DISPLAY=:99.0 ./script/selenium start`
+3/ ...
+
+WebDriver and PhantomJS
+
+1/ stop selenium
+2/ run PhantomJS with WebDriver support `phantomjs --webdriver=4444`
+3/ setup protractor `browserName: "phantomjs"`
+4/ run specs
