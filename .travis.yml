@@ -5,7 +5,7 @@ node_js:
   - 0.10.12
 
 before_install:
-  - travis_retry npm install bower grunt-cli mocha -g
+  - travis_retry npm install bower grunt-cli mocha protractor -g
   - travis_retry npm install
   - travis_retry bower install
 
