@@ -3,8 +3,6 @@
 SELENIUM="-jar `pwd`/selenium/selenium-server-standalone-2.35.0.jar -Dwebdriver.chrome.driver=`pwd`/selenium/chromedriver"
 PIDFILE=./tmp/selenium.pid
 
-echo $SELENIUM
-
 case "$1" in
   start)
     echo -n "Starting selenium"
@@ -22,9 +20,14 @@ case "$1" in
     $0 stop
     $0 start
     ;;
+
+  status)
+    PID=`cat $PIDFILE`
+    ps u --pid "$PID"
+    ;;
   *)
 
-  echo "Usage: script/selenium {start|stop|restart}"
+  echo "Usage: script/selenium {start|stop|restart|status}"
   exit 1
 esac
 
