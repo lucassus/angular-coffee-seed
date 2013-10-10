@@ -8,7 +8,7 @@ scenario "Main page", ->
 
   @feature "Navigate to the products page", ->
     @clickLabel "Products", "a"
-    @test.assertTitle "Angular seed"
+    @test.assertTitle "Angular Seed"
 
   @feature "Display all products", ->
     @test.assertEquals page.pageTitleText(), "Products list"

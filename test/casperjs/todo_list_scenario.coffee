@@ -9,7 +9,7 @@ scenario "Task List page", ->
 
   @feature "Navigate to the Task List page", ->
     @clickLabel "Tasks", "a"
-    @test.assertTitle "Angular seed"
+    @test.assertTitle "Angular Seed"
 
     # Define custom assertion
     @test.assertTasksCount = (number) =>

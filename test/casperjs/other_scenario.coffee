@@ -10,7 +10,7 @@ scenario "Other page", ->
 
   @feature "Navigate to the other page", ->
     @clickLabel "Other", "a"
-    @test.assertTitle "Angular seed"
+    @test.assertTitle "Angular Seed"
 
   @feature "Show the valid page title", ->
     @test.assertEquals page.pageTitleText(), "Other Controller"
