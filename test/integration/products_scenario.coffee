@@ -17,27 +17,29 @@ describe "Products page", ->
   it "displays a valid page title", ->
     expect(ptor.getTitle()).toEqual "Angular Seed"
 
-  it "displays the list of products", ->
-    indexPage.greeting().then (greeting) ->
-      expect(greeting.getText()).toEqual "You have 6 products"
+  describe "products list page", ->
 
-    indexPage.productNames().then (productNames) ->
-      expect(productNames.length).toEqual 6
+    it "displays the list of products", ->
+      indexPage.greeting().then (greeting) ->
+        expect(greeting.getText()).toEqual "You have 6 products"
 
-      expect(productNames[0].getText()).toEqual "HTC Wildfire"
-      expect(productNames[1].getText()).toEqual "Nexus One"
+      indexPage.productNames().then (productNames) ->
+        expect(productNames.length).toEqual 6
 
-  it "displays correct columns", ->
-    firstProduct = indexPage.nthProduct(1)
+        expect(productNames[0].getText()).toEqual "HTC Wildfire"
+        expect(productNames[1].getText()).toEqual "Nexus One"
 
-    firstProduct.getId().then (id) ->
-      expect(id).not.toBeUndefined()
+    it "displays correct columns", ->
+      firstProduct = indexPage.nthProduct(1)
 
-    firstProduct.getName().then (name) ->
-      expect(name).toEqual "HTC Wildfire"
+      firstProduct.getId().then (id) ->
+        expect(id).not.toBeUndefined()
 
-    firstProduct.getDescription().then (description) ->
-      expect(description).not.toBeUndefined()
+      firstProduct.getName().then (name) ->
+        expect(name).toEqual "HTC Wildfire"
+
+      firstProduct.getDescription().then (description) ->
+        expect(description).not.toBeUndefined()
 
   describe "create new product", ->
     formPage = null
