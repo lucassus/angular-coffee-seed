@@ -20,8 +20,7 @@ describe "Products page", ->
   describe "products list page", ->
 
     it "displays the list of products", ->
-      indexPage.greeting().then (greeting) ->
-        expect(greeting.getText()).toEqual "You have 6 products"
+      expect(indexPage.greeting().getText()).toEqual "You have 6 products"
 
       indexPage.productNames().then (productNames) ->
         expect(productNames.length).toEqual 6
@@ -54,11 +53,9 @@ describe "Products page", ->
       formPage.setDescription "this is the description"
       formPage.submit()
 
-      indexPage.alert().success().then (alert) ->
-        expect(alert.getText()).toEqual "Product was created"
-
-      indexPage.greeting().then (greeting) ->
-        expect(greeting.getText()).toEqual "You have 7 products"
+      expect(indexPage.alert().success().isDisplayed()).toBeTruthy()
+      expect(indexPage.alert().success().getText()).toEqual "Product was created"
+      expect(indexPage.greeting().getText()).toEqual "You have 7 products"
 
   describe "edit a product", ->
     formPage = null
@@ -75,8 +72,8 @@ describe "Products page", ->
       formPage.setDescription "this is the new description"
       formPage.submit()
 
-      indexPage.alert().success().then (alert) ->
-        expect(alert.getText()).toEqual "Product was updated"
+      expect(indexPage.alert().success().isDisplayed()).toBeTruthy()
+      expect(indexPage.alert().success().getText()).toEqual "Product was updated"
 
   describe "delete a product", ->
 
@@ -84,8 +81,6 @@ describe "Products page", ->
       secondProduct = indexPage.nthProduct(2)
       secondProduct.getDeleteButton().click()
 
-      indexPage.alert().info().then (alert) ->
-        expect(alert.getText()).toEqual "Product was deleted"
-
-      indexPage.greeting().then (greeting) ->
-        expect(greeting.getText()).toEqual "You have 5 products"
+      expect(indexPage.alert().info().isDisplayed()).toBeTruthy()
+      expect(indexPage.alert().info().getText()).toEqual "Product was deleted"
+      expect(indexPage.greeting().getText()).toEqual "You have 5 products"
