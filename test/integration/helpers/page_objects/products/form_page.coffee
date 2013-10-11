@@ -3,7 +3,7 @@ PageObject = require("../../page_object")
 class ProductsFormPage extends PageObject
 
   findInput: (model) ->
-    @ptor.findElement(@getter("input", model))
+    @ptor.findElement @By.input(model)
 
   _setInputValue: (input, value) ->
     input.clear()
@@ -22,11 +22,11 @@ class ProductsFormPage extends PageObject
     @_setInputValue(input, discount)
 
   setDescription: (description) ->
-    textarea = @ptor.findElement(@getter("textarea", "product.description"))
+    textarea = @ptor.findElement @By.textarea("product.description")
     @_setInputValue(textarea, description)
 
   getSubmitButton: ->
-    @ptor.findElement(@getter("xpath", "//button[@type='submit']"))
+    @ptor.findElement(@By.xpath("//button[@type='submit']"))
 
   submit: ->
     @getSubmitButton().click()
