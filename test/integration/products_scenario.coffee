@@ -29,16 +29,11 @@ describe "Products page", ->
         expect(productNames[1].getText()).toEqual "Nexus One"
 
     it "displays correct columns", ->
-      firstProduct = indexPage.nthProduct(1)
+      product = indexPage.nthProduct(1)
 
-      firstProduct.getId().then (id) ->
-        expect(id).not.toBeUndefined()
-
-      firstProduct.getName().then (name) ->
-        expect(name).toEqual "HTC Wildfire"
-
-      firstProduct.getDescription().then (description) ->
-        expect(description).not.toBeUndefined()
+      expect(product.id.isDisplayed()).toBeTruthy()
+      expect(product.name.getText()).toEqual "HTC Wildfire"
+      expect(product.description.isDisplayed()).toBeTruthy()
 
   describe "create new product", ->
     formPage = null
@@ -62,7 +57,7 @@ describe "Products page", ->
 
     beforeEach ->
       thirdProduct = indexPage.nthProduct(3)
-      thirdProduct.getEditButton().click()
+      thirdProduct.editButton.click()
 
       formPage = new FormPage(protractor)
 
@@ -79,7 +74,7 @@ describe "Products page", ->
 
     it "deletes a product", ->
       secondProduct = indexPage.nthProduct(2)
-      secondProduct.getDeleteButton().click()
+      secondProduct.deleteButton.click()
 
       expect(indexPage.alert().info().isDisplayed()).toBeTruthy()
       expect(indexPage.alert().info().getText()).toEqual "Product was deleted"

@@ -14,20 +14,12 @@ class ProductsListPage extends PageObject
     byBinding = (binding) =>
       @ptor.findElement locator.column(binding)
 
-    getId: ->
-      byBinding("product.id").getText()
+    id: byBinding("product.id")
+    name: byBinding("product.name")
+    description: byBinding("product.description")
 
-    getName: ->
-      byBinding("product.name").getText()
-
-    getDescription: ->
-      byBinding("product.description").getText()
-
-    getEditButton: =>
-      @ptor.findElement(locator).findElement @By.css("a.btn-success")
-
-    getDeleteButton: =>
-      @ptor.findElement(locator).findElement @By.css("button.btn-danger")
+    editButton: @ptor.findElement(locator).findElement @By.css("a.btn-success")
+    deleteButton: @ptor.findElement(locator).findElement @By.css("button.btn-danger")
 
   clickCreateButton: ->
     createButton = @ptor.findElement @By.xpath("//a[contains(text(), 'Create')]")
