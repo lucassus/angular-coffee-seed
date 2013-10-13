@@ -23,7 +23,7 @@
       "font": ["font/*"]
     },
     "lodash": {
-        "/": ["dist/lodash.js"]
+      "/": ["dist/lodash.js"]
     }
   }
 }
