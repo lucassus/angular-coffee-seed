@@ -19,4 +19,4 @@ exports.config =
   jasmineNodeOpts:
     showColors: true
     # default time to wait in ms before a test fails
-    defaultTimeoutInterval: 30000
+    defaultTimeoutInterval: 10000
