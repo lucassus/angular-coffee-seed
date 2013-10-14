@@ -1,20 +1,18 @@
 util = require("util")
 fixtures = require("./helpers/fixtures")
 
-IndexPage = require("./helpers/page_objects/products/index_page")
-FormPage = require("./helpers/page_objects/products/form_page")
-
 describe "Products page", ->
   ptor = null
   indexPage = null
 
   beforeEach ->
-    indexPage = new IndexPage(protractor)
+    indexPage = require("./helpers/page_objects/products/index_page")(protractor)
     ptor = protractor.getInstance()
 
     fixtures.load -> ptor.get "/"
 
   it "displays a valid page title", ->
+    expect(ptor.getCurrentUrl()).toEqual "http://localhost:9001/#/products"
     expect(ptor.getTitle()).toEqual "Angular Seed"
 
   describe "products list page", ->
@@ -40,7 +38,7 @@ describe "Products page", ->
 
     beforeEach ->
       indexPage.clickCreateButton()
-      formPage = new FormPage(protractor)
+      formPage = require("./helpers/page_objects/products/form_page")(protractor)
 
     it "creates new product", ->
       formPage.setName "New product"
@@ -48,8 +46,8 @@ describe "Products page", ->
       formPage.setDescription "this is the description"
       formPage.submit()
 
-      expect(indexPage.alert().success().isDisplayed()).toBeTruthy()
-      expect(indexPage.alert().success().getText()).toEqual "Product was created"
+      expect(indexPage.alert.success().isDisplayed()).toBeTruthy()
+      expect(indexPage.alert.success().getText()).toEqual "Product was created"
       expect(indexPage.greeting().getText()).toEqual "You have 7 products"
 
   describe "edit a product", ->
@@ -59,7 +57,7 @@ describe "Products page", ->
       thirdProduct = indexPage.nthProduct(3)
       thirdProduct.editButton.click()
 
-      formPage = new FormPage(protractor)
+      formPage = require("./helpers/page_objects/products/form_page")(protractor)
 
     it "updates a product", ->
       formPage.setName "New name"
@@ -67,8 +65,8 @@ describe "Products page", ->
       formPage.setDescription "this is the new description"
       formPage.submit()
 
-      expect(indexPage.alert().success().isDisplayed()).toBeTruthy()
-      expect(indexPage.alert().success().getText()).toEqual "Product was updated"
+      expect(indexPage.alert.success().isDisplayed()).toBeTruthy()
+      expect(indexPage.alert.success().getText()).toEqual "Product was updated"
 
   describe "delete a product", ->
 
@@ -76,6 +74,6 @@ describe "Products page", ->
       secondProduct = indexPage.nthProduct(2)
       secondProduct.deleteButton.click()
 
-      expect(indexPage.alert().info().isDisplayed()).toBeTruthy()
-      expect(indexPage.alert().info().getText()).toEqual "Product was deleted"
+      expect(indexPage.alert.info().isDisplayed()).toBeTruthy()
+      expect(indexPage.alert.info().getText()).toEqual "Product was deleted"
       expect(indexPage.greeting().getText()).toEqual "You have 5 products"

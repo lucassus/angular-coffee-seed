@@ -1,34 +1,31 @@
-PageObject = require("../../page_object")
+module.exports = (protractor) ->
+  ptor = protractor.getInstance()
 
-class ProductsFormPage extends PageObject
+  findInput = (model, type = "input") ->
+    ptor.findElement protractor.By[type](model)
 
-  findInput: (model) ->
-    @ptor.findElement @By.input(model)
-
-  _setInputValue: (input, value) ->
+  setInputValue = (input, value) ->
     input.clear()
     input.sendKeys value
 
   setName: (name) ->
-    input = @findInput("product.name")
-    @_setInputValue(input, name)
+    input = findInput("product.name")
+    setInputValue(input, name)
 
   setPrice: (price) ->
-    input = @findInput("product.price")
-    @_setInputValue(input, price)
+    input = findInput("product.price")
+    setInputValue(input, price)
 
   setDiscount: (discount) ->
-    input = @findInput("product.discount")
-    @_setInputValue(input, discount)
+    input = findInput("product.discount")
+    setInputValue(input, discount)
 
   setDescription: (description) ->
-    textarea = @ptor.findElement @By.textarea("product.description")
-    @_setInputValue(textarea, description)
+    textarea = findInput("product.description", "textarea")
+    setInputValue(textarea, description)
 
-  getSubmitButton: ->
-    @ptor.findElement(@By.xpath("//button[@type='submit']"))
+  submitButton:
+    ptor.findElement(protractor.By.xpath("//button[@type='submit']"))
 
   submit: ->
-    @getSubmitButton().click()
-
-module.exports = ProductsFormPage
+    @submitButton.click()

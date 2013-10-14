@@ -1,28 +1,29 @@
-PageObject = require("../../page_object")
+module.exports = (protractor) ->
+  ptor = protractor.getInstance()
 
-class ProductsListPage extends PageObject
+  alert: require("../alert_view")(protractor)
 
   greeting: ->
-    @ptor.findElement @By.binding("You have {{index.products.length}} products")
+    ptor.findElement protractor.By.binding("You have {{index.products.length}} products")
 
   productNames: ->
-    @ptor.findElements @By.repeater("product in index.products").column("product.name")
+    ptor.findElements protractor.By.repeater("product in index.products").column("product.name")
 
   nthProduct: (index) ->
-    locator = @By.repeater("product in index.products").row(index)
+    locator = protractor.By.repeater("product in index.products").row(index)
 
     byBinding = (binding) =>
-      @ptor.findElement locator.column(binding)
+      ptor.findElement locator.column(binding)
 
     id: byBinding("product.id")
     name: byBinding("product.name")
     description: byBinding("product.description")
 
-    editButton: @ptor.findElement(locator).findElement @By.css("a.btn-success")
-    deleteButton: @ptor.findElement(locator).findElement @By.css("button.btn-danger")
+    editButton: ptor.findElement(locator).findElement protractor.By.css("a.btn-success")
+    deleteButton: ptor.findElement(locator).findElement protractor.By.css("button.btn-danger")
+
+  createButton: ->
+    ptor.findElement protractor.By.xpath("//a[contains(text(), 'Create')]")
 
   clickCreateButton: ->
-    createButton = @ptor.findElement @By.xpath("//a[contains(text(), 'Create')]")
-    createButton.click()
-
-module.exports = ProductsListPage
+    @createButton().click()
