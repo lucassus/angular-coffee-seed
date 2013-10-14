@@ -1,8 +1,13 @@
 express = require("express")
+fs = require("fs")
 path = require("path")
 
 app = express()
-app.use express.logger()
+
+# configure logger
+logFile = fs.createWriteStream("./tmp/express.log", flags: "a")
+app.use express.logger(stream: logFile)
+
 app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "../../dist"))
 
