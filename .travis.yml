@@ -22,3 +22,4 @@ before_script:
 
 script:
   - DISPLAY=:99.0 ./script/test-ci
+  - ./script/test-integration

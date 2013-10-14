@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function startSelenium() {
+  SELENIUM_PORT=4444
+
+  # Return true when the server is already running
+  function isRunning() {
+    nc -vz localhost "$SELENIUM_PORT" &> /dev/null
+  }
+
+  if isRunning; then
+    echo "The selenium server is already running on port $SELENIUM_PORT"
+  fi
+
+  # start the backend server
+  DISPLAY=:99.0 java -jar `pwd`/selenium/selenium-server-standalone-2.35.0.jar \
+    -port "$SELENIUM_PORT" \
+    -log ./tmp/selenium.log \
+    -Dwebdriver.chrome.driver=`pwd`/selenium/chromedriver &
+
+  # ..grab its PID
+  SELENIUM_PID=$!
+
+  # ..and wait till it's fully operational
+  while ! isRunning; do
+    echo "Waiting for the selenium server..."
+    sleep 0.250
+  done
+
+  echo "The selenium server is fully operational PID=$SELENIUM_PID"
+}
+
+function stopSelenium() {
+  echo "Killing the selenium server PID=$SELENIUM_PID"
+  kill "$SELENIUM_PID"
+}

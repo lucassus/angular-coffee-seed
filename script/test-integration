@@ -1,8 +1,10 @@
 #!/bin/bash
 
 source ./script/lib/server
+source ./script/lib/selenium
 
 startServer
+startSelenium
 ./script/xvfb start
 
 # TODO prototype cleanup this solution
@@ -23,6 +25,7 @@ done
 protractor dev/test/protractor.js
 
 stopServer
+stopSelenium
 ./script/xvfb stop
 
 echo "Killing the frontend server PID=$PID"
