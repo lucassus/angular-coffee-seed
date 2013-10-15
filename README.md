@@ -147,11 +147,11 @@ Run karma in Chrome browser:
 
 Run karma directly without CoffeeScript compilation:
 
-`karma start test/karma.conf.coffee --single-run`
+`karma start test/karma-conf.coffee --single-run`
 
 or with auto watch option:
 
-`karma start test/karma.conf.coffee`
+`karma start test/karma-conf.coffee`
 
 or
 

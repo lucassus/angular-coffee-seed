@@ -22,7 +22,7 @@ while ! isRunning; do
   sleep 0.1
 done
 
-protractor dev/test/protractor.js
+protractor dev/test/protractor-conf.js
 
 stopServer
 stopSelenium
