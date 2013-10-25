@@ -2,14 +2,13 @@ describe "Controller `products.IndexCtrl`", ->
 
   # stub external services
   beforeEach module "myApp", ($provide) ->
-    $provide.value "alerts", sinon.stub(info: angular.noop)
-
-    return
+    $provide.decorator "alerts", ($delegate) ->
+      sinon.stub($delegate)
+      $delegate
 
   $scope = null
   ctrl = null
 
-  # Initialize the controller and a mock scope
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
 

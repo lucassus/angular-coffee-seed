@@ -1,10 +1,10 @@
 describe "Controller `OtherCtrl`", ->
 
-  # stub `alerts` service
   beforeEach module "myApp", ($provide) ->
-    alertsMock = info: angular.noop
-    $provide.value "alerts", sinon.stub(alertsMock)
-    return
+    # stub `alerts` service
+    $provide.decorator "alerts", ($delegate) ->
+      sinon.stub($delegate)
+      $delegate
 
   ctrl = null
 
