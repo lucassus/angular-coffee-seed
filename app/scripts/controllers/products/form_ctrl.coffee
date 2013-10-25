@@ -2,18 +2,17 @@ class FormCtrl
 
   @$inject = ["$scope", "$location", "alerts", "product"]
   constructor: (@$scope, @$location, @alerts, @product) ->
-    @$scope.product = @product
-    @persisted = @product.id?
+    $scope.product = product
 
   save: (product) ->
     @$scope.productForm.$submitted = true
     return unless @$scope.productForm?.$valid
 
     promise = product.$save()
-    promise.then =>
-      message = if @persisted then "Product was updated" else "Product was created"
-      @alerts.success message
 
+    successMessage = if product.id? then "Product was updated" else "Product was created"
+    promise.then =>
+      @alerts.success successMessage
       @$location.path "/products"
 
   deleteProduct: ->
