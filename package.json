@@ -51,7 +51,8 @@
     "request": "~2.27.0",
 
     "protractor": "~0.10.0",
-    "selenium-webdriver": "~2.35.2"
+    "selenium-webdriver": "~2.35.2",
+    "jasmine-only": "~0.1.0"
   },
   "engines": {
     "node": "0.10.x",
