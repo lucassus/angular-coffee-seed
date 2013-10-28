@@ -26,8 +26,8 @@ describe "Controller `products.FormCtrl`", ->
 
     it "has a product", ->
       expect($scope.product).not.to.be.undefined
-      expect($scope.product.id).to.equal 123
-      expect($scope.product.name).to.equal "foo"
+      expect($scope.product).to.have.property "id", 123
+      expect($scope.product).to.have.property "name", "foo"
 
   describe "#save()", ->
 
@@ -82,11 +82,31 @@ describe "Controller `products.FormCtrl`", ->
         itSetsAnAlertTo "Product was created"
         itRedirectsToTheProductsListPage()
 
-  describe "#deleteProduct()", ->
+  describe "#isClean()", ->
+
+    context "when the product is not modified", ->
+
+      it "returns true", ->
+        expect(ctrl.isClean()).to.be.true
+
+    context "otherwise", ->
+      beforeEach -> ctrl.product.name = "new name"
+
+      it "returns false", ->
+        expect(ctrl.isClean()).to.be.false
+
+  describe "#reset()", ->
+
+    it "rollbacks product changes", ->
+      ctrl.product.name = "new name"
+      ctrl.reset()
+      expect(ctrl.product).to.have.property "name", "foo"
+
+  describe "#delete()", ->
     beforeEach inject ($httpBackend) ->
       $httpBackend.expectDELETE("/api/products/123.json").respond id: 123, name: "foo"
 
-      ctrl.deleteProduct()
+      ctrl.delete()
       $httpBackend.flush()
 
     it "deletes the product", inject ($httpBackend) ->

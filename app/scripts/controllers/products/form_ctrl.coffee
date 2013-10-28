@@ -1,10 +1,15 @@
 class FormCtrl
 
   @$inject = ["$scope", "$location", "alerts", "product"]
-  constructor: (@$scope, @$location, @alerts, @product) ->
-    $scope.product = product
+  constructor: (@$scope, @$location, @alerts, @remote) ->
+    @reset()
+
+  isClean: ->
+    angular.equals(@product, @remote)
 
   save: (product) ->
+    return if @isClean()
+
     @$scope.productForm.$submitted = true
     return unless @$scope.productForm?.$valid
 
@@ -15,7 +20,13 @@ class FormCtrl
       @alerts.success successMessage
       @$location.path "/products"
 
-  deleteProduct: ->
+  reset: ->
+    return if @isClean()
+
+    @product = angular.copy(@remote)
+    @$scope.product = @product
+
+  delete: ->
     promise = @product.$delete()
     promise.then =>
       @alerts.info "Product was deleted"
