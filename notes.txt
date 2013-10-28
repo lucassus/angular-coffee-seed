@@ -19,3 +19,6 @@ WebDriver and PhantomJS
 2/ run PhantomJS with WebDriver support `phantomjs --webdriver=4444`
 3/ setup protractor `browserName: "phantomjs"`
 4/ run specs
+
+# TODO check https://github.com/jamesottaway/js-page-object
+# TODO check https://github.com/stuplum/astrolabe

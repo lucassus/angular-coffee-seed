@@ -8,24 +8,23 @@ module.exports = (protractor) ->
     input.clear()
     input.sendKeys value
 
-  setName: (name) ->
-    input = findInput("product.name")
-    setInputValue(input, name)
+  Object.create Object::,
 
-  setPrice: (price) ->
-    input = findInput("product.price")
-    setInputValue(input, price)
+    setName: value: (name) ->
+      input = findInput("product.name")
+      setInputValue(input, name)
 
-  setDiscount: (discount) ->
-    input = findInput("product.discount")
-    setInputValue(input, discount)
+    setPrice: value: (price) ->
+      input = findInput("product.price")
+      setInputValue(input, price)
 
-  setDescription: (description) ->
-    textarea = findInput("product.description", "textarea")
-    setInputValue(textarea, description)
+    setDiscount: value: (discount) ->
+      input = findInput("product.discount")
+      setInputValue(input, discount)
 
-  submitButton:
-    ptor.findElement(protractor.By.xpath("//button[@type='submit']"))
+    setDescription: value: (description) ->
+      textarea = findInput("product.description", "textarea")
+      setInputValue(textarea, description)
 
-  submit: ->
-    @submitButton.click()
+    submitButton: get: ->
+      ptor.findElement(protractor.By.xpath("//button[@type='submit']"))

@@ -1,13 +1,19 @@
+require("jasmine-only")
+
 util = require("util")
 fixtures = require("./helpers/fixtures")
 
 describe "Products page", ->
   ptor = null
+
   indexPage = null
+  alertView = null
 
   beforeEach ->
-    indexPage = require("./helpers/page_objects/products/index_page")(protractor)
     ptor = protractor.getInstance()
+
+    indexPage = require("./helpers/page_objects/products/index_page")(protractor)
+    alertView = require("./helpers/page_objects/alert_view")(protractor)
 
     fixtures.load -> ptor.get "/"
 
@@ -18,9 +24,9 @@ describe "Products page", ->
   describe "products list page", ->
 
     it "displays the list of products", ->
-      expect(indexPage.greeting().getText()).toEqual "You have 6 products"
+      expect(indexPage.greeting.getText()).toEqual "You have 6 products"
 
-      indexPage.productNames().then (productNames) ->
+      indexPage.productNames.then (productNames) ->
         expect(productNames.length).toEqual 6
 
         expect(productNames[0].getText()).toEqual "HTC Wildfire"
@@ -37,18 +43,18 @@ describe "Products page", ->
     formPage = null
 
     beforeEach ->
-      indexPage.clickCreateButton()
+      indexPage.createButton.click()
       formPage = require("./helpers/page_objects/products/form_page")(protractor)
 
     it "creates new product", ->
       formPage.setName "New product"
       formPage.setPrice "9.99"
       formPage.setDescription "this is the description"
-      formPage.submit()
+      formPage.submitButton.click()
 
-      expect(indexPage.alert.success().isDisplayed()).toBeTruthy()
-      expect(indexPage.alert.success().getText()).toEqual "Product was created"
-      expect(indexPage.greeting().getText()).toEqual "You have 7 products"
+      expect(alertView.success.isDisplayed()).toBeTruthy()
+      expect(alertView.success.getText()).toEqual "Product was created"
+      expect(indexPage.greeting.getText()).toEqual "You have 7 products"
 
   describe "edit a product", ->
     formPage = null
@@ -63,10 +69,23 @@ describe "Products page", ->
       formPage.setName "New name"
       formPage.setPrice "199.99"
       formPage.setDescription "this is the new description"
-      formPage.submit()
+      formPage.submitButton.click()
 
-      expect(indexPage.alert.success().isDisplayed()).toBeTruthy()
-      expect(indexPage.alert.success().getText()).toEqual "Product was updated"
+      expect(alertView.success.isDisplayed()).toBeTruthy()
+      expect(alertView.success.getText()).toEqual "Product was updated"
+
+  describe "show a product", ->
+    showPage = null
+
+    beforeEach ->
+      thirdProduct = indexPage.nthProduct(3)
+      thirdProduct.showButton.click()
+
+      showPage = require("./helpers/page_objects/products/show_page")(protractor)
+
+    it "displays product page", ->
+      expect(showPage.product.name.getText()).toEqual "HTC Wildfire"
+      expect(showPage.product.description.getText()).toEqual "Old android phone"
 
   describe "delete a product", ->
 
@@ -74,6 +93,6 @@ describe "Products page", ->
       secondProduct = indexPage.nthProduct(2)
       secondProduct.deleteButton.click()
 
-      expect(indexPage.alert.info().isDisplayed()).toBeTruthy()
-      expect(indexPage.alert.info().getText()).toEqual "Product was deleted"
-      expect(indexPage.greeting().getText()).toEqual "You have 5 products"
+      expect(alertView.info.isDisplayed()).toBeTruthy()
+      expect(alertView.info.getText()).toEqual "Product was deleted"
+      expect(indexPage.greeting.getText()).toEqual "You have 5 products"

@@ -4,5 +4,7 @@ module.exports = (protractor) ->
   byType = (type) ->
     ptor.findElement protractor.By.css("div.alert-#{type} span")
 
-  success: -> byType("success")
-  info: -> byType("info")
+  Object.create Object::,
+
+    success: get: -> byType("success")
+    info: get: -> byType("info")

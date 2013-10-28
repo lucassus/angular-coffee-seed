@@ -1,29 +1,42 @@
 module.exports = (protractor) ->
   ptor = protractor.getInstance()
 
-  alert: require("../alert_view")(protractor)
+  Object.create Object::,
 
-  greeting: ->
-    ptor.findElement protractor.By.binding("You have {{index.products.length}} products")
+    greeting: get: ->
+      ptor.findElement protractor.By.binding("You have {{index.products.length}} products")
 
-  productNames: ->
-    ptor.findElements protractor.By.repeater("product in index.products").column("product.name")
+    productNames: get: ->
+      ptor.findElements protractor.By.repeater("product in index.products").column("product.name")
 
-  nthProduct: (index) ->
-    locator = protractor.By.repeater("product in index.products").row(index)
+    nthProduct: value: (index) ->
+      locator = protractor.By.repeater("product in index.products").row(index)
 
-    byBinding = (binding) =>
-      ptor.findElement locator.column(binding)
+      byBinding = (binding) =>
+        ptor.findElement locator.column(binding)
 
-    id: byBinding("product.id")
-    name: byBinding("product.name")
-    description: byBinding("product.description")
+      Object.create Object::,
 
-    editButton: ptor.findElement(locator).findElement protractor.By.css("a.btn-success")
-    deleteButton: ptor.findElement(locator).findElement protractor.By.css("button.btn-danger")
+        # row values
+        id:          get: -> byBinding("product.id")
+        name:        get: -> byBinding("product.name")
+        description: get: -> byBinding("product.description")
 
-  createButton: ->
-    ptor.findElement protractor.By.xpath("//a[contains(text(), 'Create')]")
+        # action buttons
+        actionButton: get: ->
+          ptor.findElement(locator).findElement protractor.By.xpath("//button[contains(text(), 'Action')]")
 
-  clickCreateButton: ->
-    @createButton().click()
+        showButton: get: ->
+          @actionButton.click()
+          ptor.findElement(locator).findElement protractor.By.xpath("//a[contains(text(), 'Show')]")
+
+        editButton: get: ->
+          @actionButton.click()
+          ptor.findElement(locator).findElement protractor.By.xpath("//a[contains(text(), 'Edit')]")
+
+        deleteButton: get: ->
+          @actionButton.click()
+          ptor.findElement(locator).findElement protractor.By.xpath("//a[contains(text(), 'Delete')]")
+
+    createButton: get: ->
+      ptor.findElement protractor.By.xpath("//a[contains(text(), 'Create new product')]")
