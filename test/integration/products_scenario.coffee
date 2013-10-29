@@ -1,6 +1,4 @@
 require("jasmine-only")
-
-util = require("util")
 fixtures = require("./helpers/fixtures")
 
 describe "Products page", ->
@@ -26,18 +24,32 @@ describe "Products page", ->
     it "displays the list of products", ->
       expect(indexPage.greeting.getText()).toEqual "You have 6 products"
 
-      indexPage.productNames.then (productNames) ->
-        expect(productNames.length).toEqual 6
+      indexPage.table.productNames.then (names) ->
+        expect(names.length).toEqual 6
 
-        expect(productNames[0].getText()).toEqual "HTC Wildfire"
-        expect(productNames[1].getText()).toEqual "Nexus One"
+        expect(names[0].getText()).toEqual "HTC Wildfire"
+        expect(names[1].getText()).toEqual "Nexus One"
 
     it "displays correct columns", ->
-      product = indexPage.nthProduct(1)
+      tableRow = indexPage.table.nthProduct(1)
 
-      expect(product.id.isDisplayed()).toBeTruthy()
-      expect(product.name.getText()).toEqual "HTC Wildfire"
-      expect(product.description.isDisplayed()).toBeTruthy()
+      expect(tableRow.id.isDisplayed()).toBeTruthy()
+
+      expect(tableRow.name.isDisplayed()).toBeTruthy()
+      expect(tableRow.name.getText()).toEqual "HTC Wildfire"
+
+      expect(tableRow.description.isDisplayed()).toBeTruthy()
+      expect(tableRow.description.isDisplayed()).toBeTruthy()
+
+    describe "delete product button", ->
+
+      it "deletes the product", ->
+        tableRow = indexPage.table.nthProduct(2)
+        tableRow.deleteButton.click()
+
+        expect(alertView.info.isDisplayed()).toBeTruthy()
+        expect(alertView.info.getText()).toEqual "Product was deleted"
+        expect(indexPage.greeting.getText()).toEqual "You have 5 products"
 
   describe "create new product", ->
     formPage = null
@@ -60,8 +72,8 @@ describe "Products page", ->
     formPage = null
 
     beforeEach ->
-      thirdProduct = indexPage.nthProduct(3)
-      thirdProduct.editButton.click()
+      tableRow = indexPage.table.nthProduct(3)
+      tableRow.editButton.click()
 
       formPage = require("./helpers/page_objects/products/form_page")(protractor)
 
@@ -78,21 +90,26 @@ describe "Products page", ->
     showPage = null
 
     beforeEach ->
-      thirdProduct = indexPage.nthProduct(3)
-      thirdProduct.showButton.click()
+      tableRow = indexPage.table.nthProduct(3)
+      tableRow.showButton.click()
 
       showPage = require("./helpers/page_objects/products/show_page")(protractor)
 
-    it "displays product page", ->
+    it "displays product details", ->
       expect(showPage.product.name.getText()).toEqual "HTC Wildfire"
       expect(showPage.product.description.getText()).toEqual "Old android phone"
 
-  describe "delete a product", ->
+    describe "edit button", ->
 
-    it "deletes a product", ->
-      secondProduct = indexPage.nthProduct(2)
-      secondProduct.deleteButton.click()
+      it "navigates to edit product page", ->
+        showPage.editButton.click()
+        expect(ptor.getCurrentUrl()).toMatch /products\/\d+\/edit/
 
-      expect(alertView.info.isDisplayed()).toBeTruthy()
-      expect(alertView.info.getText()).toEqual "Product was deleted"
-      expect(indexPage.greeting.getText()).toEqual "You have 5 products"
+    describe "delete button", ->
+
+      it "deletes the product", ->
+        showPage.deleteButton.click()
+
+        expect(alertView.info.isDisplayed()).toBeTruthy()
+        expect(alertView.info.getText()).toEqual "Product was deleted"
+        expect(indexPage.greeting.getText()).toEqual "You have 5 products"
