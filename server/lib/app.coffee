@@ -13,7 +13,7 @@ app.use express.static(path.join(__dirname, "../../dist"))
 
 utils = require("./utils")
 
-ProductProvider = new require("./product_provider")
+ProductProvider = require("./product_provider")
 productProvider = new ProductProvider()
 
 # bootstrap with dummy data
