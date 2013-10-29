@@ -14,16 +14,16 @@ module.exports = (protractor, table, locator) ->
 
     # action buttons
     actionButton: get: ->
-      row.findElement protractor.By.xpath("//button[contains(text(), 'Action')]")
+      row.findElement protractor.By.xpath(".//button[contains(text(), 'Action')]")
 
     showButton: get: ->
       @actionButton.click()
-      row.findElement protractor.By.xpath("//a[contains(text(), 'Show')]")
+      row.findElement protractor.By.xpath(".//a[contains(text(), 'Show')]")
 
     editButton: get: ->
       @actionButton.click()
-      row.findElement protractor.By.xpath("//a[contains(text(), 'Edit')]")
+      row.findElement protractor.By.xpath(".//a[contains(text(), 'Edit')]")
 
     deleteButton: get: ->
       @actionButton.click()
-      row.findElement protractor.By.xpath("//a[contains(text(), 'Delete')]")
+      row.findElement protractor.By.xpath(".//a[contains(text(), 'Delete')]")
