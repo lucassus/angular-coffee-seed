@@ -17,6 +17,9 @@ exports.config =
 
   # options to be passed to Jasmine-node
   jasmineNodeOpts:
-    showColors: true
     # default time to wait in ms before a test fails
     defaultTimeoutInterval: 10000
+
+    showColors: true
+    isVerbose: false
+    includeStackTrace: true
