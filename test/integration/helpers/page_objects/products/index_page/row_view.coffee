@@ -1,28 +1,32 @@
-module.exports = (table, locator) ->
-  row = table.findElement locator
+PageObject = require("./../../page_object")
 
-  byBinding = (binding) ->
-    table.findElement locator.column(binding)
+class RowView extends PageObject
 
-  Object.create Object::,
+  constructor: (@table, @locator) ->
+    @row = table.findElement locator
 
-    # row values
-    id: get: -> byBinding("product.id")
-    name: get: -> byBinding("product.name")
-    description: get: -> byBinding("product.description")
+  # row values
+  @has "id",          -> @byBinding("product.id")
+  @has "name",        -> @byBinding("product.name")
+  @has "description", -> @byBinding("product.description")
 
-    # action buttons
-    actionButton: get: ->
-      row.findElement protractor.By.xpath(".//button[contains(text(), 'Action')]")
+  # row action buttons
+  @has "actionButton", ->
+    @row.findElement protractor.By.xpath(".//button[contains(text(), 'Action')]")
 
-    showButton: get: ->
-      @actionButton.click()
-      row.findElement protractor.By.xpath(".//a[contains(text(), 'Show')]")
+  @has "showButton", ->
+    @actionButton.click()
+    @row.findElement protractor.By.xpath(".//a[contains(text(), 'Show')]")
 
-    editButton: get: ->
-      @actionButton.click()
-      row.findElement protractor.By.xpath(".//a[contains(text(), 'Edit')]")
+  @has "editButton", ->
+    @actionButton.click()
+    @row.findElement protractor.By.xpath(".//a[contains(text(), 'Edit')]")
 
-    deleteButton: get: ->
-      @actionButton.click()
-      row.findElement protractor.By.xpath(".//a[contains(text(), 'Delete')]")
+  @has "deleteButton", ->
+    @actionButton.click()
+    @row.findElement protractor.By.xpath(".//a[contains(text(), 'Delete')]")
+
+  byBinding: (binding) ->
+    @table.findElement @locator.column(binding)
+
+module.exports = RowView

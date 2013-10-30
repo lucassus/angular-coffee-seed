@@ -1,13 +1,18 @@
 require("jasmine-only")
 utils = require("./helpers/utils")
 
+AlertView = require("./helpers/page_objects/alert_view")
+IndexPage = require("./helpers/page_objects/products/index_page")
+FormPage = require("./helpers/page_objects/products/form_page")
+ShowPage = require("./helpers/page_objects/products/show_page")
+
 describe "Products page", ->
   indexPage = null
   alertView = null
 
   beforeEach ->
-    indexPage = require("./helpers/page_objects/products/index_page")
-    alertView = require("./helpers/page_objects/alert_view")
+    alertView = new AlertView()
+    indexPage = new IndexPage()
 
     utils.loadFixtures -> browser.get "/"
 
@@ -56,7 +61,7 @@ describe "Products page", ->
 
     beforeEach ->
       indexPage.createButton.click()
-      formPage = require("./helpers/page_objects/products/form_page")
+      formPage = new FormPage()
 
     it "creates new product", ->
       formPage.setName "New product"
@@ -75,7 +80,7 @@ describe "Products page", ->
       tableRow = indexPage.table.nthProduct(2)
       tableRow.editButton.click()
 
-      formPage = require("./helpers/page_objects/products/form_page")
+      formPage = new FormPage()
 
     it "updates a product", ->
       formPage.setName "New name"
@@ -93,7 +98,7 @@ describe "Products page", ->
       tableRow = indexPage.table.nthProduct(0)
       tableRow.showButton.click()
 
-      showPage = require("./helpers/page_objects/products/show_page")
+      showPage = new ShowPage()
 
     it "displays product details", ->
       expect(showPage.product.name.getText()).toEqual "HTC Wildfire"

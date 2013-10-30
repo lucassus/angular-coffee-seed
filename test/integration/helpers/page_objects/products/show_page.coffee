@@ -1,17 +1,22 @@
-module.exports = Object.create Object::,
+PageObject = require("./../page_object")
 
-  editButton: get: ->
+class ShowPage extends PageObject
+
+  constructor: ->
+
+  @has "editButton", ->
     browser.findElement protractor.By.xpath("//a[contains(text(), 'Edit')]")
 
-  deleteButton: get: ->
+  @has "deleteButton", ->
     browser.findElement protractor.By.xpath("//button[contains(text(), 'Delete')]")
 
-  product: get: ->
+  @has "product", ->
+    listElement = browser.findElement protractor.By.xpath("//dl")
 
-    byField = (name) ->
-      container = browser.findElement protractor.By.xpath("//dl")
-      container.findElement protractor.By.binding("product.#{name}")
+    byProperty = (name) ->
+      listElement.findElement protractor.By.binding("product.#{name}")
 
-    Object.create Object::,
-      name: get: -> byField("name")
-      description: get: -> byField("description")
+    name: byProperty("name")
+    description: byProperty("description")
+
+module.exports = ShowPage

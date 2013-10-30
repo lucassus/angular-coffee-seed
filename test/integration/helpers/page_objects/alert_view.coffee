@@ -1,7 +1,11 @@
-byType = (type) ->
-  browser.findElement protractor.By.css("div.alert-#{type} span")
+PageObject = require("./page_object")
 
-module.exports = Object.create Object::,
+class AlertView extends PageObject
 
-  success: get: -> byType("success")
-  info: get: -> byType("info")
+  @has "success", -> @byType("success")
+  @has "info",    -> @byType("info")
+
+  byType: (type) ->
+    browser.findElement protractor.By.css("div.alert-#{type} span")
+
+module.exports = AlertView
