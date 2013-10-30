@@ -1,5 +1,5 @@
 PageObject = require("./../page_object")
-RowView = require("./index_page/row_view")
+TableView = require("./index_page/table_view")
 
 class IndexPage extends PageObject
 
@@ -11,13 +11,6 @@ class IndexPage extends PageObject
 
   @has "table", ->
     table = browser.findElement protractor.By.css "table.products"
-    locator = protractor.By.repeater("product in index.products")
-
-    Object.create table,
-      nthProduct: value: (index) ->
-        new RowView(table, locator.row(index))
-
-      productNames: get: ->
-        @findElements locator.column("product.name")
+    new TableView(table)
 
 module.exports = IndexPage

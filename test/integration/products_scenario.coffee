@@ -36,7 +36,7 @@ describe "Products page", ->
         expect(names[5].getText()).toEqual "Samsung S4"
 
     it "displays correct columns", ->
-      tableRow = indexPage.table.nthProduct(0)
+      tableRow = indexPage.table.rowAt(0)
 
       expect(tableRow.id.isDisplayed()).toBeTruthy()
 
@@ -49,7 +49,7 @@ describe "Products page", ->
     describe "delete product button", ->
 
       it "deletes the product", ->
-        tableRow = indexPage.table.nthProduct(1)
+        tableRow = indexPage.table.rowAt(1)
         tableRow.deleteButton.click()
 
         expect(alertView.info.isDisplayed()).toBeTruthy()
@@ -77,7 +77,7 @@ describe "Products page", ->
     formPage = null
 
     beforeEach ->
-      tableRow = indexPage.table.nthProduct(2)
+      tableRow = indexPage.table.rowAt(2)
       tableRow.editButton.click()
 
       formPage = new FormPage()
@@ -95,7 +95,7 @@ describe "Products page", ->
     showPage = null
 
     beforeEach ->
-      tableRow = indexPage.table.nthProduct(0)
+      tableRow = indexPage.table.rowAt(0)
       tableRow.showButton.click()
 
       showPage = new ShowPage()
