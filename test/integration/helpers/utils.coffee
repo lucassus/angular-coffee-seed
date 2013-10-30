@@ -1,4 +1,5 @@
 request = require("request")
+fs = require("fs")
 
 module.exports =
 
@@ -6,14 +7,13 @@ module.exports =
     loaded = false
 
     runs ->
-      baseUrl = protractor.getInstance().baseUrl
+      baseUrl = browser.baseUrl
       request.post "#{baseUrl}/api/_loadFixtures.json", ->
         callback()
         loaded = true
 
     waitsFor -> loaded
 
-  takeScreenshot: (name = "screenshot") ->
-    protractor.getInstance().takeScreenshot().then (screenshot) ->
-      fs = require("fs")
-      fs.writeFileSync("#{name}.png", screenshot, "base64")
+  takeScreenshot: (fileName = "screenshot-#{new Date()}") ->
+    browser.takeScreenshot().then (screenshot) ->
+      fs.writeFileSync("#{fileName}.png", screenshot, "base64")

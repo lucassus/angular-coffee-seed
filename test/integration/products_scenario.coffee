@@ -7,8 +7,8 @@ FormPage = require("./helpers/page_objects/products/form_page")
 ShowPage = require("./helpers/page_objects/products/show_page")
 
 describe "Products page", ->
-  indexPage = null
   alertView = null
+  indexPage = null
 
   beforeEach ->
     alertView = new AlertView()
@@ -36,25 +36,27 @@ describe "Products page", ->
         expect(names[5].getText()).toEqual "Samsung S4"
 
     it "displays correct columns", ->
-      tableRow = indexPage.table.rowAt(0)
+      row = indexPage.table.rowAt(0)
 
-      expect(tableRow.id.isDisplayed()).toBeTruthy()
+      expect(row.id.isDisplayed()).toBeTruthy()
 
-      expect(tableRow.name.isDisplayed()).toBeTruthy()
-      expect(tableRow.name.getText()).toEqual "HTC Wildfire"
+      expect(row.name.isDisplayed()).toBeTruthy()
+      expect(row.name.getText()).toEqual "HTC Wildfire"
 
-      expect(tableRow.description.isDisplayed()).toBeTruthy()
-      expect(tableRow.description.isDisplayed()).toBeTruthy()
+      expect(row.description.isDisplayed()).toBeTruthy()
+      expect(row.description.isDisplayed()).toBeTruthy()
 
-    describe "delete product button", ->
+    describe "click on delete product button", ->
+      beforeEach ->
+        row = indexPage.table.rowAt(1)
+        row.deleteButton.click()
 
       it "deletes the product", ->
-        tableRow = indexPage.table.rowAt(1)
-        tableRow.deleteButton.click()
+        expect(indexPage.greeting.getText()).toEqual "You have 5 products"
 
+      it "sets an alert message ", ->
         expect(alertView.info.isDisplayed()).toBeTruthy()
         expect(alertView.info.getText()).toEqual "Product was deleted"
-        expect(indexPage.greeting.getText()).toEqual "You have 5 products"
 
   describe "create new product", ->
     formPage = null
@@ -77,8 +79,8 @@ describe "Products page", ->
     formPage = null
 
     beforeEach ->
-      tableRow = indexPage.table.rowAt(2)
-      tableRow.editButton.click()
+      row = indexPage.table.rowAt(2)
+      row.editButton.click()
 
       formPage = new FormPage()
 
@@ -95,8 +97,8 @@ describe "Products page", ->
     showPage = null
 
     beforeEach ->
-      tableRow = indexPage.table.rowAt(0)
-      tableRow.showButton.click()
+      row = indexPage.table.rowAt(0)
+      row.showButton.click()
 
       showPage = new ShowPage()
 
