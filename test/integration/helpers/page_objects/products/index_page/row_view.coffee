@@ -6,27 +6,27 @@ class RowView extends PageObject
     @row = table.findElement locator
 
   # row values
-  @has "id",          -> @byBinding("product.id")
-  @has "name",        -> @byBinding("product.name")
-  @has "description", -> @byBinding("product.description")
+  @has "id",          -> @findField("product.id")
+  @has "name",        -> @findField("product.name")
+  @has "description", -> @findField("product.description")
 
   # row action buttons
   @has "actionButton", ->
-    @row.findElement protractor.By.xpath(".//button[contains(text(), 'Action')]")
+    @row.findElement @byLabel "Action", "button"
 
   @has "showButton", ->
     @actionButton.click()
-    @row.findElement protractor.By.xpath(".//a[contains(text(), 'Show')]")
+    @row.findElement @byLabel "Show"
 
   @has "editButton", ->
     @actionButton.click()
-    @row.findElement protractor.By.xpath(".//a[contains(text(), 'Edit')]")
+    @row.findElement @byLabel "Edit"
 
   @has "deleteButton", ->
     @actionButton.click()
-    @row.findElement protractor.By.xpath(".//a[contains(text(), 'Delete')]")
+    @row.findElement @byLabel "Delete"
 
-  byBinding: (binding) ->
+  findField: (binding) ->
     @table.findElement @locator.column(binding)
 
 module.exports = RowView

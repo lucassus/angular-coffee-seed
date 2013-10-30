@@ -5,10 +5,10 @@ class ShowPage extends PageObject
   constructor: ->
 
   @has "editButton", ->
-    browser.findElement protractor.By.xpath("//a[contains(text(), 'Edit')]")
+    browser.findElement @byLabel "Edit"
 
   @has "deleteButton", ->
-    browser.findElement protractor.By.xpath("//button[contains(text(), 'Delete')]")
+    browser.findElement @byLabel "Delete", "button"
 
   @has "product", ->
     listElement = browser.findElement protractor.By.xpath("//dl")

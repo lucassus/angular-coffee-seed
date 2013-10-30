@@ -7,7 +7,7 @@ class IndexPage extends PageObject
     browser.findElement protractor.By.binding("You have {{index.products.length}} products")
 
   @has "createButton", ->
-    browser.findElement protractor.By.xpath("//a[contains(text(), 'Create new product')]")
+    browser.findElement @byLabel "Create new product"
 
   @has "table", ->
     table = browser.findElement protractor.By.css "table.products"

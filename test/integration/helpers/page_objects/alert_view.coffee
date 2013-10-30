@@ -2,10 +2,10 @@ PageObject = require("./page_object")
 
 class AlertView extends PageObject
 
-  @has "success", -> @byType("success")
-  @has "info",    -> @byType("info")
+  @has "success", -> @findAlert "success"
+  @has "info",    -> @findAlert "info"
 
-  byType: (type) ->
+  findAlert: (type) ->
     browser.findElement protractor.By.css("div.alert-#{type} span")
 
 module.exports = AlertView
