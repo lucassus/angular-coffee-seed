@@ -2,7 +2,7 @@ request = require("request")
 
 module.exports =
 
-  load: (callback = ->) ->
+  loadFixtures: (callback = ->) ->
     loaded = false
 
     runs ->
@@ -12,3 +12,8 @@ module.exports =
         loaded = true
 
     waitsFor -> loaded
+
+  takeScreenshot: (name = "screenshot") ->
+    protractor.getInstance().takeScreenshot().then (screenshot) ->
+      fs = require("fs")
+      fs.writeFileSync("#{name}.png", screenshot, "base64")

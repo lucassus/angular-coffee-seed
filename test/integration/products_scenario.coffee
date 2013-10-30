@@ -1,23 +1,19 @@
 require("jasmine-only")
-fixtures = require("./helpers/fixtures")
+utils = require("./helpers/utils")
 
 describe "Products page", ->
-  ptor = null
-
   indexPage = null
   alertView = null
 
   beforeEach ->
-    ptor = protractor.getInstance()
+    indexPage = require("./helpers/page_objects/products/index_page")
+    alertView = require("./helpers/page_objects/alert_view")
 
-    indexPage = require("./helpers/page_objects/products/index_page")(protractor)
-    alertView = require("./helpers/page_objects/alert_view")(protractor)
-
-    fixtures.load -> ptor.get "/"
+    utils.loadFixtures -> browser.get "/"
 
   it "displays a valid page title", ->
-    expect(ptor.getCurrentUrl()).toEqual "http://localhost:9001/#/products"
-    expect(ptor.getTitle()).toEqual "Angular Seed"
+    expect(browser.getCurrentUrl()).toEqual "http://localhost:9001/#/products"
+    expect(browser.getTitle()).toEqual "Angular Seed"
 
   describe "products list page", ->
 
@@ -29,9 +25,13 @@ describe "Products page", ->
 
         expect(names[0].getText()).toEqual "HTC Wildfire"
         expect(names[1].getText()).toEqual "Nexus One"
+        expect(names[2].getText()).toEqual "Nexus 7"
+        expect(names[3].getText()).toEqual "iPhone"
+        expect(names[4].getText()).toEqual "Samsung Galaxy Note"
+        expect(names[5].getText()).toEqual "Samsung S4"
 
     it "displays correct columns", ->
-      tableRow = indexPage.table.nthProduct(1)
+      tableRow = indexPage.table.nthProduct(0)
 
       expect(tableRow.id.isDisplayed()).toBeTruthy()
 
@@ -44,7 +44,7 @@ describe "Products page", ->
     describe "delete product button", ->
 
       it "deletes the product", ->
-        tableRow = indexPage.table.nthProduct(2)
+        tableRow = indexPage.table.nthProduct(1)
         tableRow.deleteButton.click()
 
         expect(alertView.info.isDisplayed()).toBeTruthy()
@@ -56,7 +56,7 @@ describe "Products page", ->
 
     beforeEach ->
       indexPage.createButton.click()
-      formPage = require("./helpers/page_objects/products/form_page")(protractor)
+      formPage = require("./helpers/page_objects/products/form_page")
 
     it "creates new product", ->
       formPage.setName "New product"
@@ -72,10 +72,10 @@ describe "Products page", ->
     formPage = null
 
     beforeEach ->
-      tableRow = indexPage.table.nthProduct(3)
+      tableRow = indexPage.table.nthProduct(2)
       tableRow.editButton.click()
 
-      formPage = require("./helpers/page_objects/products/form_page")(protractor)
+      formPage = require("./helpers/page_objects/products/form_page")
 
     it "updates a product", ->
       formPage.setName "New name"
@@ -90,10 +90,10 @@ describe "Products page", ->
     showPage = null
 
     beforeEach ->
-      tableRow = indexPage.table.nthProduct(3)
+      tableRow = indexPage.table.nthProduct(0)
       tableRow.showButton.click()
 
-      showPage = require("./helpers/page_objects/products/show_page")(protractor)
+      showPage = require("./helpers/page_objects/products/show_page")
 
     it "displays product details", ->
       expect(showPage.product.name.getText()).toEqual "HTC Wildfire"
@@ -103,7 +103,7 @@ describe "Products page", ->
 
       it "navigates to edit product page", ->
         showPage.editButton.click()
-        expect(ptor.getCurrentUrl()).toMatch /products\/\d+\/edit/
+        expect(browser.getCurrentUrl()).toMatch /products\/\d+\/edit/
 
     describe "delete button", ->
 

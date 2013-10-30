@@ -1,5 +1,4 @@
-module.exports = (protractor, table, locator) ->
-
+module.exports = (table, locator) ->
   row = table.findElement locator
 
   byBinding = (binding) ->
@@ -8,9 +7,9 @@ module.exports = (protractor, table, locator) ->
   Object.create Object::,
 
     # row values
-    id: get: ->byBinding("product.id")
-    name: get: ->byBinding("product.name")
-    description: get: ->byBinding("product.description")
+    id: get: -> byBinding("product.id")
+    name: get: -> byBinding("product.name")
+    description: get: -> byBinding("product.description")
 
     # action buttons
     actionButton: get: ->

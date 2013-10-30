@@ -1,20 +1,17 @@
-module.exports = (protractor) ->
-  ptor = protractor.getInstance()
+module.exports = Object.create Object::,
 
-  Object.create Object::,
+  editButton: get: ->
+    browser.findElement protractor.By.xpath("//a[contains(text(), 'Edit')]")
 
-    editButton: get: ->
-      ptor.findElement protractor.By.xpath("//a[contains(text(), 'Edit')]")
+  deleteButton: get: ->
+    browser.findElement protractor.By.xpath("//button[contains(text(), 'Delete')]")
 
-    deleteButton: get: ->
-      ptor.findElement protractor.By.xpath("//button[contains(text(), 'Delete')]")
+  product: get: ->
 
-    product: get: ->
+    byField = (name) ->
+      container = browser.findElement protractor.By.xpath("//dl")
+      container.findElement protractor.By.binding("product.#{name}")
 
-      byField = (name) ->
-        container = ptor.findElement protractor.By.xpath("//dl")
-        container.findElement protractor.By.binding("product.#{name}")
-
-      Object.create Object::,
-        name: get: -> byField("name")
-        description: get: -> byField("description")
+    Object.create Object::,
+      name: get: -> byField("name")
+      description: get: -> byField("description")

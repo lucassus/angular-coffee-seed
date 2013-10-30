@@ -1,10 +1,7 @@
-module.exports = (protractor) ->
-  ptor = protractor.getInstance()
+byType = (type) ->
+  browser.findElement protractor.By.css("div.alert-#{type} span")
 
-  byType = (type) ->
-    ptor.findElement protractor.By.css("div.alert-#{type} span")
+module.exports = Object.create Object::,
 
-  Object.create Object::,
-
-    success: get: -> byType("success")
-    info: get: -> byType("info")
+  success: get: -> byType("success")
+  info: get: -> byType("info")

@@ -1,30 +1,27 @@
-module.exports = (protractor) ->
-  ptor = protractor.getInstance()
+findInput = (model, type = "input") ->
+  browser.findElement protractor.By[type](model)
 
-  findInput = (model, type = "input") ->
-    ptor.findElement protractor.By[type](model)
+setInputValue = (input, value) ->
+  input.clear()
+  input.sendKeys value
 
-  setInputValue = (input, value) ->
-    input.clear()
-    input.sendKeys value
+module.exports = Object.create Object::,
 
-  Object.create Object::,
+  setName: value: (name) ->
+    input = findInput("product.name")
+    setInputValue(input, name)
 
-    setName: value: (name) ->
-      input = findInput("product.name")
-      setInputValue(input, name)
+  setPrice: value: (price) ->
+    input = findInput("product.price")
+    setInputValue(input, price)
 
-    setPrice: value: (price) ->
-      input = findInput("product.price")
-      setInputValue(input, price)
+  setDiscount: value: (discount) ->
+    input = findInput("product.discount")
+    setInputValue(input, discount)
 
-    setDiscount: value: (discount) ->
-      input = findInput("product.discount")
-      setInputValue(input, discount)
+  setDescription: value: (description) ->
+    textarea = findInput("product.description", "textarea")
+    setInputValue(textarea, description)
 
-    setDescription: value: (description) ->
-      textarea = findInput("product.description", "textarea")
-      setInputValue(textarea, description)
-
-    submitButton: get: ->
-      ptor.findElement(protractor.By.xpath("//button[@type='submit']"))
+  submitButton: get: ->
+    browser.findElement(protractor.By.xpath("//button[@type='submit']"))
