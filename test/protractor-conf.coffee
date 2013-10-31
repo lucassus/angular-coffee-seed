@@ -20,6 +20,7 @@ exports.config =
     # default time to wait in ms before a test fails
     defaultTimeoutInterval: 10000
 
+    # TODO does not work with new protractor
     showColors: true
     isVerbose: false
     includeStackTrace: true

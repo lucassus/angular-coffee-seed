@@ -1,16 +1,16 @@
 class PageObject
 
   # an alias for a collection of element locators
-  by: protractor.By
+  By: protractor.By
 
   # Locates the first element containing `label` text
   byLabel: (label, tag = "a") ->
-    @by.xpath ".//#{tag}[contains(text(), '#{label}')]"
+    @By.xpath ".//#{tag}[contains(text(), '#{label}')]"
 
   # Waits until all animations stop
   waitForAnimations: ->
     browser.wait =>
-      animated = browser.findElements @by.css(".ng-animate")
+      animated = browser.findElements @By.css(".ng-animate")
       animated.then (animated) -> animated.length is 0
 
   # Define element on the page
