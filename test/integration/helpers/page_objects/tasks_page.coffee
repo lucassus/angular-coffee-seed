@@ -4,16 +4,16 @@ TaskView = require("./tasks/task_view")
 class TasksPage extends PageObject
 
   @has "remaining", ->
-    browser.findElement protractor.By.css("span#remaining")
+    browser.findElement @by.css("span#remaining")
 
   @has "archiveButton", ->
     browser.findElement @byLabel "archive"
 
   @has "tasks", ->
-    browser.findElements protractor.By.css("ul#tasks li")
+    browser.findElements @by.css("ul#tasks li")
 
   taskAt: (index) ->
-    taskElement = browser.findElement protractor.By.repeater("task in tasks.tasks").row(index)
+    taskElement = browser.findElement @by.repeater("task in tasks.tasks").row(index)
     new TaskView(taskElement)
 
   tasksCount: ->

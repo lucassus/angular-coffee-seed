@@ -11,10 +11,10 @@ class ShowPage extends PageObject
     browser.findElement @byLabel "Delete", "button"
 
   @has "product", ->
-    listElement = browser.findElement protractor.By.xpath("//dl")
+    listElement = browser.findElement @by.xpath("//dl")
 
     byProperty = (name) ->
-      listElement.findElement protractor.By.binding("product.#{name}")
+      listElement.findElement @by.binding("product.#{name}")
 
     name: byProperty("name")
     description: byProperty("description")

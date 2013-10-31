@@ -6,6 +6,6 @@ class AlertView extends PageObject
   @has "info",    -> @findAlert "info"
 
   findAlert: (type) ->
-    browser.findElement protractor.By.css("div.alert-#{type} span")
+    browser.findElement @by.css("div.alert-#{type} span")
 
 module.exports = AlertView

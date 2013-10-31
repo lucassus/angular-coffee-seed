@@ -5,7 +5,7 @@ class FormPage extends PageObject
   @has "nameField",        -> @findField "product.name"
   @has "priceField",       -> @findField "product.price"
   @has "discountField",    -> @findField "product.discount"
-  @has "descriptionField", -> @findField "product.description", protractor.By.textarea
+  @has "descriptionField", -> @findField "product.description", @by.textarea
 
   setName: (name)               -> @setFieldValue @nameField, name
   setPrice: (price)             -> @setFieldValue @priceField, price
@@ -13,9 +13,9 @@ class FormPage extends PageObject
   setDescription: (description) -> @setFieldValue @descriptionField, description
 
   @has "submitButton", ->
-    browser.findElement protractor.By.xpath("//button[@type='submit']")
+    browser.findElement @by.xpath("//button[@type='submit']")
 
-  findField: (model, findBy = protractor.By.input) ->
+  findField: (model, findBy = @by.input) ->
     browser.findElement findBy(model)
 
   setFieldValue: (field, value) ->

@@ -4,7 +4,7 @@ RowView = require("./row_view")
 class TableView extends PageObject
 
   constructor: (@table) ->
-    @locator = protractor.By.repeater("product in index.products")
+    @locator = @by.repeater("product in index.products")
 
   @has "productNames", ->
     @table.findElements @locator.column("product.name")
