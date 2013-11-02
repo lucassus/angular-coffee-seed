@@ -3,9 +3,8 @@
 How to develop tests
 
 1/ start the selenium `./selenium/start`
-2/ build dev `grunt build:dev`
-3/ start the app in the `test` evn `script/start-test-server`
-5/ run it `grunt coffee:test && protractor dev/test/protractor-conf.js`
+2/ start the app in the `test` evn `script/start-test-server`
+3/ run it `grunt coffee:test && protractor dev/test/protractor-conf.js`
 
 Headless
 

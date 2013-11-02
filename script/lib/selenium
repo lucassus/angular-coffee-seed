@@ -22,9 +22,10 @@ function startSelenium() {
   SELENIUM_PID=$!
 
   # ..and wait till it's fully operational
+  echo -n "Waiting for the selenium server."
   while ! isRunning; do
-    echo "Waiting for the selenium server..."
-    sleep 0.250
+    echo -n "."
+    sleep 0.1
   done
 
   echo "The selenium server is fully operational PID=$SELENIUM_PID"

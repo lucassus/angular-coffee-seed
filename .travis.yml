@@ -13,5 +13,5 @@ before_install:
   - ./node_modules/protractor/bin/install_selenium_standalone
 
 script:
-  - DISPLAY=:99.0 grunt test:coverage
-  - ./script/test-integration
+  - DISPLAY=:99.0 ./script/test-unit
+  - DISPLAY=:99.0 ./script/test-integration

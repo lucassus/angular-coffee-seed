@@ -3,11 +3,10 @@
 source ./script/lib/server
 source ./script/lib/selenium
 
+./script/xvfb start
 startServer
 startSelenium
-./script/xvfb start
 
-# TODO prototype cleanup this solution
 grunt build:dev
 grunt configureProxies connect:integration watch &
 PID=$!
@@ -22,7 +21,9 @@ while ! isRunning; do
   sleep 0.1
 done
 
-protractor dev/test/protractor-conf.js
+echo -e "\nRunning integration specs."
+
+protractor dev/test/protractor-conf.js --verbose --includeStackTrace
 
 stopServer
 stopSelenium
