@@ -29,7 +29,6 @@ module.exports = (grunt) ->
     ngtemplates:   loadMoule "ngtemplates"
     bower:         loadMoule "bower"
     karma:         loadMoule "karma"
-    casper:        loadMoule "casper"
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
     shell:         loadMoule "shell"
@@ -81,28 +80,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask "test:coverage", [
     "test:unit:coverage"
-  ]
-
-  # run casperjs integration tests
-  grunt.registerTask "test:casperjs", [
-    "build:dev"
-    "configureProxies"
-    "connect:integration"
-    "casper"
-  ]
-
-  # run all tests on the ci server
-  grunt.registerTask "test:ci", [
-    "build:dev"
-
-    # run unit tests and generate code coverage report
-    "karma:coverage"
-
-    "configureProxies"
-    "connect:integration"
-
-    # integration tests
-    "casper"
   ]
 
   grunt.registerTask "test", [
