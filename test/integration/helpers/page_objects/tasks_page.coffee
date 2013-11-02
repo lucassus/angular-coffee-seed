@@ -1,5 +1,6 @@
 PageObject = require("./page_object")
 TaskView = require("./tasks/task_view")
+FormView = require("./tasks/form_view")
 
 class TasksPage extends PageObject
 
@@ -11,6 +12,10 @@ class TasksPage extends PageObject
 
   @has "tasks", ->
     browser.findElements @By.css("ul#tasks li")
+
+  @has "form", ->
+    form = browser.findElement @By.css("form[name=taskForm]")
+    new FormView(form)
 
   taskAt: (index) ->
     taskElement = browser.findElement @By.repeater("task in tasks.tasks").row(index)

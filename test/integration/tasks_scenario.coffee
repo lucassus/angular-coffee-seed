@@ -56,4 +56,19 @@ describe "Tasks page", ->
         expect(task.isCompleted()).toBeFalsy()
         expect(tasksPage.remaining.getText()).toEqual "3 of 3 remaining"
 
-  # TODO describe "create a new task"
+  describe "new task form", ->
+    form = null
+    beforeEach -> form = tasksPage.form
+
+    describe "fill in the name and click `create` button", ->
+
+      it "creates a new task", ->
+        form.setName "New task"
+        form.submitButton.click()
+
+        expect(tasksPage.tasksCount()).toEqual 4
+        expect(tasksPage.remaining.getText()).toEqual "3 of 4 remaining"
+
+        task = tasksPage.taskAt(2)
+        expect(task.isCompleted()).toBeFalsy()
+        expect(task.label.getText()).toEqual "New task"

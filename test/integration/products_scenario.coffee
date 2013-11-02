@@ -46,7 +46,7 @@ describe "Products page", ->
       expect(row.description.isDisplayed()).toBeTruthy()
       expect(row.description.isDisplayed()).toBeTruthy()
 
-    describe "click on delete product button", ->
+    describe "click on `delete` button", ->
       beforeEach ->
         row = indexPage.table.rowAt(1)
         row.deleteButton.click()
@@ -65,15 +65,32 @@ describe "Products page", ->
       indexPage.createButton.click()
       formPage = new FormPage()
 
-    it "creates new product", ->
-      formPage.setName "New product"
-      formPage.setPrice "9.99"
-      formPage.setDescription "this is the description"
-      formPage.submitButton.click()
+    describe "click on `create` button", ->
+      beforeEach ->
+        formPage.setName "New product"
+        formPage.setPrice "9.99"
+        formPage.setDescription "this is the description"
 
-      expect(alertView.success.isDisplayed()).toBeTruthy()
-      expect(alertView.success.getText()).toEqual "Product was created"
-      expect(indexPage.greeting.getText()).toEqual "You have 7 products"
+      it "creates new product", ->
+        expect(formPage.submitButton.getText()).toEqual "Create"
+        formPage.submitButton.click()
+
+        expect(alertView.success.isDisplayed()).toBeTruthy()
+        expect(alertView.success.getText()).toEqual "Product was created"
+        expect(indexPage.greeting.getText()).toEqual "You have 7 products"
+
+    describe "click on `reset` button", ->
+      beforeEach ->
+        formPage.setName "New product"
+        formPage.setPrice "9.99"
+        formPage.setDescription "this is the description"
+
+      it "clears the form", ->
+        formPage.resetButton.click()
+
+        expect(formPage.nameField.getAttribute("value")).toEqual ""
+        expect(formPage.priceField.getAttribute("value")).toEqual ""
+        expect(formPage.descriptionField.getText()).toEqual ""
 
   describe "edit a product", ->
     formPage = null
@@ -84,14 +101,34 @@ describe "Products page", ->
 
       formPage = new FormPage()
 
-    it "updates a product", ->
-      formPage.setName "New name"
-      formPage.setPrice "199.99"
-      formPage.setDescription "this is the new description"
-      formPage.submitButton.click()
+    it "displays a form for updating the product", ->
+      expect(formPage.nameField.getAttribute("value")).toEqual "Nexus 7"
+      expect(formPage.priceField.getAttribute("value")).toEqual "1200"
+      expect(formPage.discountField.getAttribute("value")).toEqual "12"
 
-      expect(alertView.success.isDisplayed()).toBeTruthy()
-      expect(alertView.success.getText()).toEqual "Product was updated"
+    describe "click on `update` button", ->
+      beforeEach ->
+        formPage.setName "New name"
+        formPage.setPrice "199.99"
+        formPage.setDescription "this is the new description"
+
+      it "updates the product", ->
+        expect(formPage.submitButton.getText()).toEqual "Update"
+        formPage.submitButton.click()
+
+        expect(alertView.success.isDisplayed()).toBeTruthy()
+        expect(alertView.success.getText()).toEqual "Product was updated"
+
+    describe "click on `reset` button", ->
+      beforeEach ->
+        formPage.setName "New name"
+        formPage.setPrice "199.99"
+
+      it "rollbacks all changes", ->
+        formPage.resetButton.click()
+
+        expect(formPage.nameField.getAttribute("value")).toEqual "Nexus 7"
+        expect(formPage.priceField.getAttribute("value")).toEqual "1200"
 
   describe "show a product", ->
     showPage = null
@@ -102,21 +139,20 @@ describe "Products page", ->
 
       showPage = new ShowPage()
 
-    it "displays product details", ->
+    it "displays the product details", ->
       expect(showPage.product.name.getText()).toEqual "HTC Wildfire"
       expect(showPage.product.description.getText()).toEqual "Old android phone"
 
-    describe "edit button", ->
+    describe "click on `edit` button", ->
+      beforeEach -> showPage.editButton.click()
 
       it "navigates to edit product page", ->
-        showPage.editButton.click()
         expect(browser.getCurrentUrl()).toMatch /products\/\d+\/edit/
 
-    describe "delete button", ->
+    describe "click on `delete` button", ->
+      beforeEach -> showPage.deleteButton.click()
 
       it "deletes the product", ->
-        showPage.deleteButton.click()
-
         expect(alertView.info.isDisplayed()).toBeTruthy()
         expect(alertView.info.getText()).toEqual "Product was deleted"
         expect(indexPage.greeting.getText()).toEqual "You have 5 products"

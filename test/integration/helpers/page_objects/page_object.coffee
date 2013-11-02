@@ -1,6 +1,7 @@
+# Base class for all page objects
 class PageObject
 
-  # an alias for a collection of element locators
+  # Alias for a collection of element locators
   By: protractor.By
 
   # Locates the first element containing `label` text
