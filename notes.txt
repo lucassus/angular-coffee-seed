@@ -5,7 +5,7 @@ How to develop tests
 1/ start the selenium `./selenium/start`
 2/ build dev `grunt build:dev`
 3/ start the app in the `test` evn `script/start-test-server`
-5/ run it `grunt coffee:testIntegration && protractor dev/test/protractor-conf.js`
+5/ run it `grunt coffee:test && protractor dev/test/protractor-conf.js`
 
 Headless
 
@@ -19,6 +19,3 @@ WebDriver and PhantomJS
 2/ run PhantomJS with WebDriver support `phantomjs --webdriver=4444`
 3/ setup protractor `browserName: "phantomjs"`
 4/ run specs
-
-# TODO check https://github.com/jamesottaway/js-page-object
-# TODO check https://github.com/stuplum/astrolabe
