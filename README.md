@@ -95,11 +95,29 @@ Run test against specific browsers
 
 `grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
 
-Running integration tests
+## Running integration tests
 
-* `script/test-ci` - run all specs (useful for CI)
+* `script/test-unit` - run unit tests
 * `script/test-integration` - run integration specs
-* `script/test-e2e` - run AngularJS e2e specs
+
+### How to develop specs
+
+* start the selenium `./selenium/start`
+* start the app in the `test` evn `script/start-test-server`
+* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
+
+### Headlessly
+
+* start Xvfb `./script/xvfb start`
+* start selenium on the fake display `DISPLAY=:99.0 ./script/selenium start`
+* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
+
+### WebDriver and PhantomJS
+
+* stop selenium
+* run PhantomJS with WebDriver support `phantomjs --webdriver=4444`
+* setup protractor `browserName: "phantomjs"`
+* run specs
 
 ## Running tests for the server side application
 
