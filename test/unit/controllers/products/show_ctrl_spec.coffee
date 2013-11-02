@@ -42,4 +42,4 @@ describe "Controller `products.ShowCtrl`", ->
       expect(alerts.info).to.be.calledWith "Product was deleted"
 
     it "redirects to the products list page", inject ($state) ->
-      expect($state.go).to.be.calledWith "products.list"
+      expect($state.go).to.be.calledWith "products"

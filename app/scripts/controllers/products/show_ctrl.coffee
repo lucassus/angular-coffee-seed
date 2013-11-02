@@ -8,7 +8,7 @@ class ShowCtrl
     promise = @product.$delete()
     promise.then =>
       @alerts.info "Product was deleted"
-      @$state.go "products.list"
+      @$state.go "products"
 
 angular.module("myApp")
   .controller("products.ShowCtrl", ShowCtrl)

@@ -31,7 +31,7 @@
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li ng-class="{'active': $state.includes('products')}">
-                <a ui-sref="products">Products</a>
+                <a ui-sref="products.list">Products</a>
               </li>
 
               <li ng-class="{'active': $state.includes('other')}">
@@ -48,7 +48,7 @@
 
       <div class="container">
         <alerts></alerts>
-        <ui-view class="reveal-animation"></ui-view>
+        <ui-view></ui-view>
       </div>
     </div>
 

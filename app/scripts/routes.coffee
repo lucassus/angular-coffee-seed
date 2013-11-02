@@ -47,13 +47,14 @@ app.config [
             Products.get(id: $stateParams.id).$promise
           ]
 
+      # TODO write integration specs
       .state "products.show.info",
         url: ""
-        templateUrl: "templates/products/show/info.html"
+        data: activeTab: "info"
 
       .state "products.show.details",
         url: "/details"
-        templateUrl: "templates/products/show/details.html"
+        data: activeTab: "details"
 
       .state "other",
         url: "/other",
