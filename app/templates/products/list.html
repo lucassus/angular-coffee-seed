@@ -3,7 +3,7 @@
 </div>
 <p class="lead">You have {{index.products.length}} products</p>
 
-<a href="#/products/create" class="btn btn-success">
+<a ui-sref="products.create" class="btn btn-success">
   <i class="icon-plus-sign"></i> Create new product
 </a>
 
@@ -29,8 +29,8 @@
             Action <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#/products/{{product.id}}"><i class="icon-search"></i> Show</a></li>
-            <li><a href="#/products/{{product.id}}/edit"><i class="icon-edit"></i> Edit</a></li>
+            <li><a ui-sref="products.show({id: product.id})"><i class="icon-search"></i> Show</a></li>
+            <li><a ui-sref="products.edit({id: product.id})"><i class="icon-edit"></i> Edit</a></li>
             <li class="divider"></li>
             <li><a href="" ng-click="index.deleteProduct(product)"><i class="icon-trash"></i> Delete</a></li>
           </ul>

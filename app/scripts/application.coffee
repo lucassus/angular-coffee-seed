@@ -1,12 +1,11 @@
 # The entry point for the application
 
 app = angular.module "myApp", [
-  "ngRoute"
   "ngAnimate"
+  "ui.router"
 
   "myApp.templates"
   "myApp.alerts"
-  "myApp.navigation"
   "myApp.resources"
 ]
 
@@ -21,4 +20,9 @@ app.config [
       # disable timeouts, see https://github.com/angular/angular.js/issues/2402
       $provide.value("alertTimeout", null)
 
+]
+
+app.controller "NavbarCtrl", [
+  "$scope", "$state", ($scope, $state) ->
+    $scope.activeFor = (state) -> $state.includes(state)
 ]
