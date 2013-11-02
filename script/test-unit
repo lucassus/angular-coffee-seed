@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ./script/lib/server
-
 # Run test for the server side application
 mocha --compilers coffee:coffee-script --reporter spec server/test
 
@@ -12,6 +10,4 @@ if [ $? -ne 0 ]; then
 fi
 
 # ..run other specs
-startServer
-grunt test:ci
-stopServer
+grunt test:coverage

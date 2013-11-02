@@ -16,10 +16,12 @@
     </div>
   </div>
 
-  <div class="form-group"
+  <div class="form-group">
+    <div class="col-lg-2"></div>
+
+      <div class="col-lg-2"
        ng-class="{'has-error': productForm.price.$invalid && (productForm.$submitted || productForm.price.$dirty)}">
-    <label for="product-price" class="col-lg-2 control-label">Price</label>
-    <div class="col-lg-2">
+      <label for="product-price" class="control-label">Price</label>
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input id="product-price" type="number" class="form-control" placeholder="Enter price"
@@ -30,20 +32,27 @@
         Price is required
       </span>
     </div>
-  </div>
 
-  <div class="form-group"
+    <div class="col-lg-2"
        ng-class="{'has-error': productForm.discount.$invalid && (productForm.$submitted || productForm.discount.$dirty)}">
-    <label for="product-discount" class="col-lg-2 control-label">Discount</label>
-    <div class="col-lg-2">
+      <label for="product-discount" class="control-label">Discount</label>
       <div class="input-group">
         <input id="product-discount" type="number" class="form-control" placeholder="Enter discount"
                name="discount" ng-model="product.discount" />
         <span class="input-group-addon">%</span>
       </div>
+  </div>
+
+    <div class="col-lg-2" ng-show="product.hasDiscount()">
+      <label class="control-label">Price with discount</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" disabled="disabled" class="form-control"
+               value="{{product.priceWithDiscount() | currency:''}}" />
+      </div>
     </div>
   </div>
-  
+
   <div class="form-group">
     <label for="product-description" class="col-lg-2 control-label">Description</label>
     <div class="col-lg-6">
@@ -55,19 +64,24 @@
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-6">
-      <button type="submit" class="btn btn-success" ng-hide="product.id">
-        <i class="icon-plus-sign"></i> Create
+      <button type="submit" class="btn btn-success" ng-disabled="form.isClean()">
+        <span ng-hide="product.id">
+          <i class="icon-plus-sign"></i> Create
+        </span>
+        <span ng-show="product.id">
+          <i class="icon-save"></i> Update
+        </span>
       </button>
 
-      <button type="submit" class="btn btn-primary" ng-show="product.id">
-        <i class="icon-save"></i> Update
-      </button>
+      <a href="" class="btn btn-warning" ng-disabled="form.isClean()" ng-click="form.reset()">
+        <i class="icon-eraser"></i> Reset
+      </a>
 
       <a href="" class="btn btn-danger"
          ng-show="product.id"
-         ng-click="form.deleteProduct()"><i class="icon-trash"></i> Delete</a>
+         ng-click="form.delete()"><i class="icon-trash"></i> Delete</a>
 
-      <a href="#/products" class="btn btn-warning">Cancel</a>
+      <a href="#/products" class="btn btn-default">Cancel</a>
     </div>
   </div>
 </form>

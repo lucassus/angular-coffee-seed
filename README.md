@@ -12,7 +12,7 @@ This is a custom AngularJS seed project based on grunt the JavaScript task runne
 * Full support for unit and end2end tests
 * Unit tests with Mocha, Chai and SinonJS
 * Generates code coverage for JavaScript unit tests
-* Support for AngularJS e2e and CasperJS integration tests
+* Support for protractor integration tests
 * Support for Karma Test Runner (formerly Testacular)
 * Continuous Integration ready ready via `grunt test:ci` task
 * Grunt task runner along with several useful plugins
@@ -28,7 +28,7 @@ Demo: http://lucassus-angular-seed.herokuapp.com
   * `./app/styles` - stylesheets
   * `./app/views` - html templates used by AngularJS
 * `./test` - contains tests for the application
-  * `./tests/casperjs` - CasperJS integration specs
+  * `./tests/integration` - protractor integration specs
   * `./test/e2e` - AngularJS end2end scenarios
   * `./tests/unit` - unit tests for AngularJS components
 
@@ -77,29 +77,9 @@ script/start-server
 
 Navigate to `http://localhost:9000`
 
-## Install PhantomJS and CasperJS for the integration testing
-
-Download and install PhantomJS
-
-```
-wget https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-x86_64.tar.bz2
-tar xvjf phantomjs-1.9.1-linux-x86_64.tar.bz2
-cd tar xvjf phantomjs-1.9.1-linux-x86_64
-ln -sf `pwd`/bin/phantomjs /usr/local/bin/phantomjs
-```
-
-Checkout and install CasperJS
-
-```
-git clone git://github.com/n1k0/casperjs.git
-cd casperjs
-git checkout tags/1.0.2
-ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
-```
-
 ## Running tests
 
-By default all tests are executes in PhantomJS browser
+By default all tests are executed in PhantomJS browser
 
 * `grunt test:unit` or `grunt test` - run unit tests
 * `grunt test:unit:watch` or
@@ -115,11 +95,29 @@ Run test against specific browsers
 
 `grunt test:unit --browsers=Chrome,Firefox,Opera,PhantomJS`
 
-Running integration tests
+## Running integration tests
 
-* `script/test-ci` - run all specs (useful for CI)
-* `script/test-casperjs` - run CasperJS specs
-* `script/test-e2e` - run AngularJS e2e specs
+* `script/test-unit` - run unit tests
+* `script/test-integration` - run integration specs
+
+### How to develop specs
+
+* start the selenium `./selenium/start`
+* start the app in the `test` evn `script/start-test-server`
+* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
+
+### Headlessly
+
+* start Xvfb `./script/xvfb start`
+* start selenium on the fake display `DISPLAY=:99.0 ./script/selenium start`
+* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
+
+### WebDriver and PhantomJS
+
+* stop selenium
+* run PhantomJS with WebDriver support `phantomjs --webdriver=4444`
+* setup protractor `browserName: "phantomjs"`
+* run specs
 
 ## Running tests for the server side application
 
@@ -147,11 +145,11 @@ Run karma in Chrome browser:
 
 Run karma directly without CoffeeScript compilation:
 
-`karma start test/karma.conf.coffee --single-run`
+`karma start test/karma-conf.coffee --single-run`
 
 or with auto watch option:
 
-`karma start test/karma.conf.coffee`
+`karma start test/karma-conf.coffee`
 
 or
 

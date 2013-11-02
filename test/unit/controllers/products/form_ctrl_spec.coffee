@@ -2,20 +2,16 @@ describe "Controller `products.FormCtrl`", ->
 
   # stub external services
   beforeEach module "myApp", ($provide) ->
-    $provide.factory "product", ($q) ->
-      promise = ->
-        deferred = $q.defer()
-        deferred.resolve(true) # always resolved
-        deferred.promise
+    $provide.factory "product", (Products) ->
+      new Products(id: 123, name: "foo")
 
-      id: 1, name: "foo"
-      $save: sinon.stub().returns promise()
-      $delete: sinon.stub().returns promise()
+    $provide.decorator "$location", ($delegate) ->
+      sinon.stub($delegate, "path")
+      $delegate
 
-    $provide.value "$location", sinon.stub(path: angular.noop)
-    $provide.value "alerts", sinon.stub(success: angular.noop, info: angular.noop)
-
-    return
+    $provide.decorator "alerts", ($delegate) ->
+      sinon.stub($delegate)
+      $delegate
 
   $scope = null
   ctrl = null
@@ -30,37 +26,92 @@ describe "Controller `products.FormCtrl`", ->
 
     it "has a product", ->
       expect($scope.product).not.to.be.undefined
-      expect($scope.product.id).to.equal 1
-      expect($scope.product.name).to.equal "foo"
+      expect($scope.product).to.have.property "id", 123
+      expect($scope.product).to.have.property "name", "foo"
 
   describe "#save()", ->
 
     context "when the form is invalid", ->
-      beforeEach inject (product) -> ctrl.save(product)
+      beforeEach inject (product) ->
+        ctrl.save(product)
+        $scope.productForm = $valid: false, $invalid: true
 
-      it "does nothing", inject (product) ->
-        expect(product.$save).not.to.be.called
+      it "does not create or update a product", inject ($httpBackend) ->
+        $httpBackend.verifyNoOutstandingExpectation()
+        $httpBackend.verifyNoOutstandingRequest()
 
     context "when the form is valid", ->
-      beforeEach inject (product) ->
-        $scope.productForm = $valid: true
-        $scope.$apply -> ctrl.save(product)
+      beforeEach -> $scope.productForm = $valid: true, $invalid: false
 
-      it "saves a product", inject (product) ->
-        expect(product.$save).to.be.called
+      itSavesAProduct = ->
+        it "saves a product", inject ($httpBackend) ->
+          $httpBackend.verifyNoOutstandingExpectation()
+          $httpBackend.verifyNoOutstandingRequest()
 
-      it "sets an alert", inject (alerts) ->
-        expect(alerts.success).to.be.calledWith "Product was saved"
+      itSetsAnAlertTo = (message) ->
+        it "sets an alert", inject (alerts) ->
+          expect(alerts.success).to.be.calledWith message
 
-      it "redirects to the products list page", inject ($location) ->
-        expect($location.path).to.be.calledWith "/products"
+      itRedirectsToTheProductsListPage = ->
+        it "redirects to the products list page", inject ($location) ->
+          expect($location.path).to.be.calledWith "/products"
 
-  describe "#deleteProduct()", ->
-    beforeEach ->
-      $scope.$apply -> ctrl.deleteProduct()
+      context "on update", ->
+        beforeEach inject ($httpBackend, product) ->
+          $httpBackend.expectPOST("/api/products/123.json", id: 123, name: "bar").respond id: 123, name: "bar"
 
-    it "deletes the product", inject (product) ->
-      expect(product.$delete).to.be.called
+          product.name = "bar"
+          ctrl.save(product)
+          $httpBackend.flush()
+
+        itSavesAProduct()
+        itSetsAnAlertTo "Product was updated"
+        itRedirectsToTheProductsListPage()
+
+      context "on create", ->
+        beforeEach inject ($httpBackend, product) ->
+          $httpBackend.expectPOST("/api/products.json", name: "foo").respond id: 124, name: "foo"
+
+          product.id = undefined
+          product.name = "foo"
+
+          ctrl.save(product)
+          $httpBackend.flush()
+
+        itSavesAProduct()
+        itSetsAnAlertTo "Product was created"
+        itRedirectsToTheProductsListPage()
+
+  describe "#isClean()", ->
+
+    context "when the product is not modified", ->
+
+      it "returns true", ->
+        expect(ctrl.isClean()).to.be.true
+
+    context "otherwise", ->
+      beforeEach -> ctrl.product.name = "new name"
+
+      it "returns false", ->
+        expect(ctrl.isClean()).to.be.false
+
+  describe "#reset()", ->
+
+    it "rollbacks product changes", ->
+      ctrl.product.name = "new name"
+      ctrl.reset()
+      expect(ctrl.product).to.have.property "name", "foo"
+
+  describe "#delete()", ->
+    beforeEach inject ($httpBackend) ->
+      $httpBackend.expectDELETE("/api/products/123.json").respond id: 123, name: "foo"
+
+      ctrl.delete()
+      $httpBackend.flush()
+
+    it "deletes the product", inject ($httpBackend) ->
+      $httpBackend.verifyNoOutstandingExpectation()
+      $httpBackend.verifyNoOutstandingRequest()
 
     it "sets an alert", inject (alerts) ->
       expect(alerts.info).to.be.calledWith "Product was deleted"

@@ -13,3 +13,5 @@ coverage
 
 # Other
 npm-debug.log
+selenium
+tmp

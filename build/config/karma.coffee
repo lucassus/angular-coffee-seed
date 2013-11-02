@@ -36,13 +36,13 @@ module.exports = (grunt) ->
 
   # single run karma for unit tests
   unit:
-    configFile: "<%= appConfig.test %>/karma.conf.coffee"
+    configFile: "<%= appConfig.test %>/karma-conf.coffee"
     reporters: parseReporters(default: "dots")
     singleRun: true
 
   # run karma for unit tests in watch mode
   watch:
-    configFile: "<%= appConfig.test %>/karma.conf.coffee"
+    configFile: "<%= appConfig.test %>/karma-conf.coffee"
     reporters: parseReporters(default: "dots")
     singleRun: false
     autoWatch: true
@@ -50,16 +50,10 @@ module.exports = (grunt) ->
   # generate test code coverage for compiled javascripts
   coverage:
     basePath: "../<%= appConfig.dev %>"
-    configFile: "<%= appConfig.test %>/karma-coverage.conf.coffee"
+    configFile: "<%= appConfig.test %>/karma-coverage-conf.coffee"
     reporters: ["dots", "coverage"]
     coverageReporter:
       type: grunt.option("coverage-reporter") || "text"
       dir: "coverage"
 
-    singleRun: true
-
-  # run e2e specs
-  e2e:
-    basePath: "../<%= appConfig.dev %>"
-    configFile: "<%= appConfig.test %>/karma-e2e.conf.coffee"
     singleRun: true

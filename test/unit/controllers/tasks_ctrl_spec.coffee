@@ -61,11 +61,10 @@ describe "Controller `TasksCtrl`", ->
   describe "#addTask()", ->
 
     describe "when the form is valid", ->
-      stub = null
 
       beforeEach ->
         $scope.taskForm = $valid: true
-        stub = sinon.stub(ctrl, "reset")
+        sinon.stub(ctrl, "reset")
 
       it "adds a new task", ->
         # Given
@@ -87,7 +86,7 @@ describe "Controller `TasksCtrl`", ->
         ctrl.addTask({})
 
         # Then
-        expect(stub).to.be.called
+        expect(ctrl.reset).to.be.called
 
     describe "when the form is not valid", ->
       beforeEach -> $scope.taskForm = $valid: false

@@ -2,7 +2,7 @@ class ShowCtrl
 
   @$inject = ["$scope", "$location", "alerts", "product"]
   constructor: (@$scope, @$location, @alerts, @product) ->
-    @$scope.product = @product
+    $scope.product = product
 
   deleteProduct: ->
     promise = @product.$delete()

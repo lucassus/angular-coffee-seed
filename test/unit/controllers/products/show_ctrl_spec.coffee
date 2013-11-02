@@ -2,44 +2,41 @@ describe "Controller `products.ShowCtrl`", ->
 
   # stub external services
   beforeEach module "myApp", ($provide) ->
-    $provide.factory "product", ($q) ->
-      promise = ->
-        deferred = $q.defer()
-        deferred.resolve(true) # always resolved
-        deferred.promise
+    $provide.factory "product", (Products) ->
+      new Products(id: 123, name: "foo")
 
-      id: 1, name: "foo"
-      $save: sinon.stub().returns promise()
-      $delete: sinon.stub().returns promise()
+    $provide.decorator "$location", ($delegate) ->
+      sinon.stub($delegate, "path")
+      $delegate
 
-    $provide.value "$location", sinon.stub(path: angular.noop)
-    $provide.value "alerts", sinon.stub(success: angular.noop, info: angular.noop)
-
-    return
+    $provide.decorator "alerts", ($delegate) ->
+      sinon.stub($delegate)
+      $delegate
 
   $scope = null
   ctrl = null
 
-  # Initialize the controller and a mock scope
   beforeEach inject ($rootScope, $controller) ->
     $scope = $rootScope.$new()
-
-    ctrl = $controller "products.ShowCtrl",
-      $scope: $scope
+    ctrl = $controller "products.ShowCtrl", $scope: $scope
 
   describe "$scope", ->
 
     it "has a product", ->
       expect($scope.product).to.not.be.undefined
-      expect($scope.product.id).to.equal 1
-      expect($scope.product.name).to.equal "foo"
+      expect($scope.product).to.have.property "id", 123
+      expect($scope.product).to.have.property "name", "foo"
 
   describe "#deleteProduct()", ->
-    beforeEach ->
-      $scope.$apply -> ctrl.deleteProduct()
+    beforeEach inject ($httpBackend) ->
+      $httpBackend.expectDELETE("/api/products/123.json").respond 200
 
-    it "deletes the product", inject (product) ->
-      expect(product.$delete).to.be.called
+      ctrl.deleteProduct()
+      $httpBackend.flush()
+
+    it "deletes the product", inject ($httpBackend) ->
+      $httpBackend.verifyNoOutstandingExpectation()
+      $httpBackend.verifyNoOutstandingRequest()
 
     it "sets an alert", inject (alerts) ->
       expect(alerts.info).to.be.calledWith "Product was deleted"

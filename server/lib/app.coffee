@@ -1,14 +1,19 @@
 express = require("express")
+fs = require("fs")
 path = require("path")
 
 app = express()
-app.use express.logger()
+
+# configure logger
+logFile = fs.createWriteStream("./tmp/express.log", flags: "a")
+app.use express.logger(stream: logFile)
+
 app.use express.bodyParser()
 app.use express.static(path.join(__dirname, "../../dist"))
 
 utils = require("./utils")
 
-ProductProvider = new require("./product_provider")
+ProductProvider = require("./product_provider")
 productProvider = new ProductProvider()
 
 # bootstrap with dummy data
@@ -41,5 +46,10 @@ app.delete "/api/products/:id.json", (req, res) ->
 
   productProvider.destroy id, (error, product) ->
     res.send product
+
+app.post "/api/_loadFixtures.json", (req, res) ->
+  productProvider.destroyAll ->
+    productProvider.save fixtures.products(), ->
+      res.send 200
 
 module.exports = app

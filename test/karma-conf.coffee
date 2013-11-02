@@ -81,7 +81,6 @@ module.exports = (config) ->
       "karma-mocha"
       "karma-chai-plugins"
       "karma-spec-reporter"
-      "karma-coverage"
 
       "karma-phantomjs-launcher"
       "karma-chrome-launcher"
