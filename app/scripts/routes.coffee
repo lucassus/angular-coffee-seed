@@ -38,6 +38,7 @@ app.config [
           ]
 
       .state "products.show",
+        abstract: true
         url: "/:id"
         templateUrl: "templates/products/show.html"
         controller: "products.ShowCtrl as show"
@@ -45,6 +46,14 @@ app.config [
           product: ["Products", "$stateParams", (Products, $stateParams) ->
             Products.get(id: $stateParams.id).$promise
           ]
+
+      .state "products.show.info",
+        url: ""
+        templateUrl: "templates/products/show/info.html"
+
+      .state "products.show.details",
+        url: "/details"
+        templateUrl: "templates/products/show/details.html"
 
       .state "other",
         url: "/other",
@@ -55,5 +64,4 @@ app.config [
         url: "/tasks"
         templateUrl: "templates/tasks.html"
         controller: "TasksCtrl as tasks"
-
 ]

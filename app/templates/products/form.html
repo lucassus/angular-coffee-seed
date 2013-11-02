@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Product form</h1>
+  <h2>Product form</h2>
 </div>
 
 <form name="productForm" class="form-horizontal" ng-submit="form.save(product)" novalidate>
@@ -81,7 +81,7 @@
          ng-show="product.id"
          ng-click="form.delete()"><i class="icon-trash"></i> Delete</a>
 
-      <a ui-sref="products" class="btn btn-default">Cancel</a>
+      <a ui-sref="products.list" class="btn btn-default">Cancel</a>
     </div>
   </div>
 </form>

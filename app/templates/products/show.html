@@ -1,25 +1,22 @@
-<dl class="dl-horizontal">
-  <dt>ID</dt>
-  <dd>{{product.id}}</dd>
+<div class="page-header">
+  <h2>Product "{{product.name}}" details</h2>
+</div>
 
-  <dt>Name</dt>
-  <dd>{{product.name}}</dd>
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li ng-class="{active: $state.includes('products.show.info')}">
+      <a ui-sref="products.show.info">Info</a>
+    </li>
 
-  <dt>Headline</dt>
-  <dd>{{product.headline}}</dd>
+    <li ng-class="{active: $state.includes('products.show.details')}">
+      <a ui-sref="products.show.details">Details</a>
+    </li>
+  </ul>
 
-  <dt>Manufacturer</dt>
-  <dd>{{product.manufacturer}}</dd>
+  <div class="tab-content" ui-view></div>
+</div>
 
-  <dt>Price with discount</dt>
-  <dd>{{product.priceWithDiscount() | currency}}</dd>
-
-  <dt>Description</dt>
-  <dd>{{product.description}}</dd>
-
-  <dt>Created At</dt>
-  <dd>{{product.createdAt | date}}</dd>
-</dl>
+<hr/>
 
 <div class="col-lg-offset-2">
   <a ui-sref="products.edit({id: product.id})" class="btn btn-success">

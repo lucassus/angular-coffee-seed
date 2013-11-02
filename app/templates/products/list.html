@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Products list</h1>
+  <h2>Products list</h2>
 </div>
 <p class="lead">You have {{index.products.length}} products</p>
 
@@ -29,14 +29,14 @@
             Action <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li><a ui-sref="products.show({id: product.id})"><i class="icon-search"></i> Show</a></li>
+            <li><a ui-sref="products.show.info({id: product.id})"><i class="icon-search"></i> Show</a></li>
             <li><a ui-sref="products.edit({id: product.id})"><i class="icon-edit"></i> Edit</a></li>
             <li class="divider"></li>
             <li><a href="" ng-click="index.deleteProduct(product)"><i class="icon-trash"></i> Delete</a></li>
           </ul>
         </div>
       </td>
-      <td>{{product.name}}</td>
+      <td><a ui-sref="products.show.info({id: product.id})">{{product.name}}</a></td>
       <td>{{product.priceWithDiscount() | currency}}</td>
       <td>
         <span ng-show="product.hasDiscount()">{{product.discount}}%</span>
