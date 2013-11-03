@@ -20,7 +20,7 @@ exports.config =
     # default time to wait in ms before a test fails
     defaultTimeoutInterval: 10000
 
-    # TODO does not work with new protractor
+    # TODO does not work with new protractor https://github.com/angular/protractor/issues/208?source=cc
     showColors: true
     isVerbose: false
     includeStackTrace: true

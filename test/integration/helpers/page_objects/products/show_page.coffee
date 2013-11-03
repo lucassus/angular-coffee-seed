@@ -16,7 +16,15 @@ class ShowPage extends PageObject
     byProperty = (name) =>
       listElement.findElement @By.binding("product.#{name}")
 
-    name: byProperty("name")
-    description: byProperty("description")
+    Object.create Object::,
+      name: get: -> byProperty("name")
+      description: get: -> byProperty("description")
+      manufacturer: get: -> byProperty("manufacturer")
+
+  @has "tabs", ->
+    browser.findElement @By.css(".nav-tabs")
+
+  @has "tabDetails", ->
+    @tabs.findElement @byLabel "Details"
 
 module.exports = ShowPage
