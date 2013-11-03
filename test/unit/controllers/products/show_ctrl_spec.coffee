@@ -2,8 +2,7 @@ describe "Controller `products.ShowCtrl`", ->
 
   # stub external services
   beforeEach module "myApp", ($provide) ->
-    $state = sinon.stub(go: ->)
-    $provide.value "$state", $state
+    $provide.value "$state", sinon.stub(go: ->)
 
     $provide.decorator "alerts", ($delegate) ->
       sinon.stub($delegate)
@@ -42,4 +41,4 @@ describe "Controller `products.ShowCtrl`", ->
       expect(alerts.info).to.be.calledWith "Product was deleted"
 
     it "redirects to the products list page", inject ($state) ->
-      expect($state.go).to.be.calledWith "products"
+      expect($state.go).to.be.calledWith "products.list"
