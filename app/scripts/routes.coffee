@@ -3,44 +3,65 @@
 app = angular.module "myApp"
 
 app.config [
-  "$routeProvider", ($routeProvider) ->
+  "$stateProvider", "$urlRouterProvider", ($stateProvider, $urlRouterProvider) ->
 
-    $routeProvider
-      .when "/products",
-        templateUrl: "templates/products/index.html"
+    # For any unmatched url, redirect to /products
+    $urlRouterProvider.otherwise "/products"
+
+    $stateProvider
+      .state "products",
+        abstract: true
+        url: "/products"
+        template: "<ui-view/>"
+
+      .state "products.list",
+        url: ""
+        templateUrl: "templates/products/list.html"
         controller: "products.IndexCtrl as index"
         resolve:
           products: ["Products", (Products) -> Products.query().$promise]
 
-      .when "/products/create",
+      .state "products.create",
+        url: "/create"
         templateUrl: "templates/products/form.html"
         controller: "products.FormCtrl as form"
         resolve:
           product: ["Products", (Products) -> new Products()]
 
-      .when "/products/:id/edit",
+      .state "products.edit",
+        url: "/:id/edit"
         templateUrl: "templates/products/form.html"
         controller: "products.FormCtrl as form"
         resolve:
-          product: ["Products", "$route", (Products, $route) ->
-            Products.get(id: $route.current.params.id).$promise
+          product: ["Products", "$stateParams", (Products, $stateParams) ->
+            Products.get(id: $stateParams.id).$promise
           ]
 
-      .when "/products/:id",
+      .state "products.show",
+        abstract: true
+        url: "/:id"
         templateUrl: "templates/products/show.html"
         controller: "products.ShowCtrl as show"
         resolve:
-          product: ["Products", "$route", (Products, $route) ->
-            Products.get(id: $route.current.params.id).$promise
+          product: ["Products", "$stateParams", (Products, $stateParams) ->
+            Products.get(id: $stateParams.id).$promise
           ]
 
-      .when "/other",
+      .state "products.show.info",
+        url: ""
+        data: activeTab: "info"
+
+      .state "products.show.details",
+        url: "/details"
+        data: activeTab: "details"
+
+      .state "other",
+        url: "/other",
         templateUrl: "templates/other.html"
         controller: "OtherCtrl as other"
 
-      .when "/tasks",
+      .state "tasks",
+        url: "/tasks"
         templateUrl: "templates/tasks.html"
         controller: "TasksCtrl as tasks"
-
-      .otherwise redirectTo: "/products"
 ]

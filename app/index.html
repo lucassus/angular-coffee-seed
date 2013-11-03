@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="myApp" ng-controller="MainCtrl">
   <head>
     <title>Angular Seed</title>
 
@@ -14,7 +14,7 @@
     <!-- endbuild -->
   </head>
 
-  <body ng-app="myApp">
+  <body>
     <div id="wrap">
 
       <!-- fixed navbar -->
@@ -29,10 +29,18 @@
             <a class="navbar-brand" href="#">Angular seed</a>
           </div>
           <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav" nav-links="">
-              <li><a href="#/products">Products</a></li>
-              <li><a href="#/other">Other</a></li>
-              <li><a href="#/tasks">Tasks</a></li>
+            <ul class="nav navbar-nav">
+              <li ng-class="{'active': $state.includes('products')}">
+                <a ui-sref="products.list">Products</a>
+              </li>
+
+              <li ng-class="{'active': $state.includes('other')}">
+                <a ui-sref="other">Other</a>
+              </li>
+
+              <li ng-class="{'active': $state.includes('tasks')}">
+                <a ui-sref="tasks">Tasks</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -40,13 +48,15 @@
 
       <div class="container">
         <alerts></alerts>
-        <ng-view class="reveal-animation"></ng-view>
+        <ui-view></ui-view>
       </div>
     </div>
 
     <div id="footer">
       <div class="container">
-        <p class="text-muted credit">angular-seed project</p>
+        <p class="text-muted credit">
+          <a href="https://github.com/lucassus/angular-seed" target="_blank">angular-seed</a>
+        </p>
       </div>
     </div>
 
@@ -58,7 +68,7 @@
     <script type="text/javascript" src="components/angular/angular.js"></script>
     <script type="text/javascript" src="components/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="components/angular-resource/angular-resource.js"></script>
-    <script type="text/javascript" src="components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="components/angular-ui-router/angular-ui-router.js"></script>
     <!-- endbuild -->
 
     <!-- build:js(dev) scripts/scripts.min.js -->
@@ -69,6 +79,8 @@
     <script type="text/javascript" src="scripts/templates.js"></script>
     <script type="text/javascript" src="scripts/application.js"></script>
     <script type="text/javascript" src="scripts/routes.js"></script>
+
+    <script type="text/javascript" src="scripts/controllers/main_ctrl.js"></script>
 
     <script type="text/javascript" src="scripts/controllers/products/form_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/products/index_ctrl.js"></script>

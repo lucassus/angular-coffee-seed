@@ -2,12 +2,7 @@ describe "Controller `products.ShowCtrl`", ->
 
   # stub external services
   beforeEach module "myApp", ($provide) ->
-    $provide.factory "product", (Products) ->
-      new Products(id: 123, name: "foo")
-
-    $provide.decorator "$location", ($delegate) ->
-      sinon.stub($delegate, "path")
-      $delegate
+    $provide.value "$state", sinon.stub(go: ->)
 
     $provide.decorator "alerts", ($delegate) ->
       sinon.stub($delegate)
@@ -16,9 +11,13 @@ describe "Controller `products.ShowCtrl`", ->
   $scope = null
   ctrl = null
 
-  beforeEach inject ($rootScope, $controller) ->
+  beforeEach inject ($rootScope, $controller, Products) ->
     $scope = $rootScope.$new()
-    ctrl = $controller "products.ShowCtrl", $scope: $scope
+    product = new Products(id: 123, name: "foo")
+
+    ctrl = $controller "products.ShowCtrl",
+      $scope: $scope
+      product: product
 
   describe "$scope", ->
 
@@ -41,5 +40,5 @@ describe "Controller `products.ShowCtrl`", ->
     it "sets an alert", inject (alerts) ->
       expect(alerts.info).to.be.calledWith "Product was deleted"
 
-    it "redirects to the products list page", inject ($location) ->
-      expect($location.path).to.be.calledWith "/products"
+    it "redirects to the products list page", inject ($state) ->
+      expect($state.go).to.be.calledWith "products.list"

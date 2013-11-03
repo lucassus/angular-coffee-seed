@@ -4,7 +4,11 @@ module.exports =
 
   products: ->
     products = [
-      { name: "HTC Wildfire", description: "Old android phone", price: 499.99, discount: 10 }
+      {
+        name: "HTC Wildfire", description: "Old android phone",
+        manufacturer: "HTC",
+        price: 499.99, discount: 10
+      }
       { name: "iPhone", price: 2500 }
       { name: "Nexus One", price: 1000, discount: 7 }
       { name: "Nexus 7", price: 1200, discount: 12 }

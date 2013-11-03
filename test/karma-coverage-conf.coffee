@@ -15,8 +15,8 @@ module.exports = (config) ->
       "components/angular/angular.js"
       "components/angular-mocks/angular-mocks.js"
       "components/angular-resource/angular-resource.js"
-      "components/angular-route/angular-route.js"
       "components/angular-animate/angular-animate.js"
+      "components/angular-ui-router/angular-ui-router.js"
 
       "components/sinon/lib/sinon.js"
       "components/sinon/lib/sinon/spy.js"
