@@ -52,22 +52,43 @@ describe "Application routes", ->
       expect(product).to.be.instanceOf(Products)
       expect(product.id).to.be.undefined
 
-  xdescribe "route `/products/:id`", ->
-    navigateTo "products.show.info", id: 123
+  describe "route `/products/:id`", ->
+    itIsRecognized = ->
+      it "is recognized", inject ($state) ->
+        expect($state.$current.parent)
+          .to.have.templateUrl("templates/products/show.html")
+          .and.to.have.controller("products.ShowCtrl as show")
+          .and.to.resolve("product")
 
-    it "is recognized", inject ($state) ->
-      expect($state.current)
-        .to.have.templateUrl("templates/products/show/info.html")
-        .and.to.have.controller("products.ShowCtrl as show")
-        .and.to.resolve("product")
+    itQueriesForAProduct = ->
+      it "queries for a product", inject ($state, Products) ->
+        expect(Products.get).to.be.calledWith(id: "123")
 
-    it "queries for a product", inject ($state, Products) ->
-      expect(Products.get).to.be.calledWith(id: "123")
+    itLoadsAProduct = ->
+      it "loads a product", inject ($state) ->
+        product = $state.$current.locals.resolve.$$values.product
+        expect(product.id).to.equal 123
+        expect(product.name).to.equal "foo"
 
-    it "loads a product", inject ($state) ->
-      product = $state.$current.locals.resolve.$$values.product
-      expect(product.id).to.equal 123
-      expect(product.name).to.equal "foo"
+    describe "`info` tab", ->
+      navigateTo "products.show.info", id: 123
+
+      itIsRecognized()
+      itQueriesForAProduct()
+      itLoadsAProduct()
+
+      it "activates `info` tab", inject ($state) ->
+        expect($state.current.data).to.have.property "activeTab", "info"
+
+    describe "`details` tab", ->
+      navigateTo "products.show.details", id: 123
+
+      itIsRecognized()
+      itQueriesForAProduct()
+      itLoadsAProduct()
+
+      it "activates `details` tab", inject ($state) ->
+        expect($state.current.data).to.have.property "activeTab", "details"
 
   describe "route `/other`", ->
     navigateTo "other"

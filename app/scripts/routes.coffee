@@ -47,7 +47,6 @@ app.config [
             Products.get(id: $stateParams.id).$promise
           ]
 
-      # TODO write integration specs
       .state "products.show.info",
         url: ""
         data: activeTab: "info"
