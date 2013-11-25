@@ -1,6 +1,10 @@
 exports.config =
-  # the address of a running selenium server
-  seleniumAddress: "http://localhost:4444/wd/hub"
+  # Run with selenium standalone server
+  # seleniumServerJar: "./selenium/selenium-server-standalone-2.37.0.jar"
+  # seleniumPort: 4444,
+
+  chromeDriver: "./selenium/chromedriver"
+  chromeOnly: true
 
   # capabilities to be passed to the webdriver instance
   capabilities:
@@ -20,7 +24,6 @@ exports.config =
     # default time to wait in ms before a test fails
     defaultTimeoutInterval: 10000
 
-    # TODO does not work with new protractor https://github.com/angular/protractor/issues/208?source=cc
     showColors: true
     isVerbose: false
     includeStackTrace: true
