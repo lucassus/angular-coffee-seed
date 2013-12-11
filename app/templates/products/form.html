@@ -66,20 +66,20 @@
     <div class="col-lg-offset-2 col-lg-6">
       <button type="submit" class="btn btn-success" ng-disabled="form.isClean()">
         <span ng-hide="product.id">
-          <i class="icon-plus-sign"></i> Create
+          <i class="fa fa-plus"></i> Create
         </span>
         <span ng-show="product.id">
-          <i class="icon-save"></i> Update
+          <i class="fa fa-save"></i> Update
         </span>
       </button>
 
       <a href="" class="btn btn-warning" ng-disabled="form.isClean()" ng-click="form.reset()">
-        <i class="icon-eraser"></i> Reset
+        <i class="fa fa-eraser"></i> Reset
       </a>
 
       <a href="" class="btn btn-danger"
          ng-show="product.id"
-         ng-click="form.delete()"><i class="icon-trash"></i> Delete</a>
+         ng-click="form.delete()"><i class="fa fa-trash-o"></i> Delete</a>
 
       <a ui-sref="products.list" class="btn btn-default">Cancel</a>
     </div>

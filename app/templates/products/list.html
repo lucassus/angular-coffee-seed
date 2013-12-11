@@ -4,7 +4,7 @@
 <p class="lead">You have {{index.products.length}} products</p>
 
 <a ui-sref="products.create" class="btn btn-success">
-  <i class="icon-plus-sign"></i> Create new product
+  <i class="fa fa-plus"></i> Create new product
 </a>
 
 <table class="table table-hover products" ng-show="index.products.length > 0">
@@ -29,10 +29,10 @@
             Action <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li><a ui-sref="products.show.info({id: product.id})"><i class="icon-search"></i> Show</a></li>
-            <li><a ui-sref="products.edit({id: product.id})"><i class="icon-edit"></i> Edit</a></li>
+            <li><a ui-sref="products.show.info({id: product.id})"><i class="fa fa-search"></i> Show</a></li>
+            <li><a ui-sref="products.edit({id: product.id})"><i class="fa fa-edit"></i> Edit</a></li>
             <li class="divider"></li>
-            <li><a href="" ng-click="index.deleteProduct(product)"><i class="icon-trash"></i> Delete</a></li>
+            <li><a href="" ng-click="index.deleteProduct(product)"><i class="fa fa-trash-o"></i> Delete</a></li>
           </ul>
         </div>
       </td>

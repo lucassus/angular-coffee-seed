@@ -2,20 +2,20 @@
   "name": "Angular grunt seed",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "~2.0.3",
-    "lodash": "~2.2.0",
+    "jquery": "2.0.3",
+    "lodash": "2.4.1",
 
     "angular": "1.2.4",
     "angular-resource": "1.2.4",
     "angular-animate": "1.2.4",
-    "angular-ui-router": "0.2.0 ",
+    "angular-ui-router": "0.2.7 ",
 
-    "bootstrap": "3.0.0",
-    "font-awesome": "~3.2.1"
+    "bootstrap": "3.0.3",
+    "font-awesome": "4.0.3"
   },
   "devDependencies": {
     "angular-mocks": "1.2.4",
-    "sinon": "~1.7.3"
+    "sinon": "1.7.3"
   },
   "exportsOverride": {
     "angular-ui-router": {
@@ -23,7 +23,7 @@
     },
     "font-awesome": {
       "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
-      "font": ["font/*"]
+      "fonts": ["fonts/*"]
     },
     "lodash": {
       "/": ["dist/lodash.js"]
