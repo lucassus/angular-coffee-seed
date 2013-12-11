@@ -27,6 +27,10 @@
     },
     "lodash": {
       "/": ["dist/lodash.js"]
+    },
+    "sinon": {
+      "/": ["lib/sinon.js"],
+      "lib": ["lib/**/*.js"]
     }
   }
 }

@@ -1,17 +1,15 @@
 module.exports = (grunt) ->
 
+  # copy resources from the app directory
   dev:
     files: [
       expand: true
-      dot: true
       cwd: "<%= appConfig.app %>"
       dest: "<%= appConfig.dev %>"
       src: [
         "*.{ico,txt}"
         "**/*.html"
-        "components/**/*"
         "images/**/*.{gif,webp}"
-        "styles/fonts/*"
       ]
     ]
 
@@ -19,10 +17,7 @@ module.exports = (grunt) ->
   dist:
     files: [
       expand: true
-      dot: true
-      cwd: "bower_components/font-awesome"
+      cwd: "<%= appConfig.dev %>/components/font-awesome"
       dest: "<%= appConfig.dist %>"
-      src: [
-        "font/**/*"
-      ]
+      src: ["fonts/**/*"]
     ]

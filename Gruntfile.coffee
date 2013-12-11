@@ -88,6 +88,8 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build:dist", [
     "test:unit"
+
+    "build:dev"
     "useminPrepare"
     "htmlmin"
     "concat"

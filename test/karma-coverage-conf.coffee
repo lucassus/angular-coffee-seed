@@ -18,12 +18,12 @@ module.exports = (config) ->
       "components/angular-animate/angular-animate.js"
       "components/angular-ui-router/angular-ui-router.js"
 
-      "components/sinon/lib/sinon.js"
-      "components/sinon/lib/sinon/spy.js"
-      "components/sinon/lib/sinon/call.js"
-      "components/sinon/lib/sinon/stub.js"
-      "components/sinon/lib/sinon/mock.js"
-      "components/sinon/lib/sinon/assert.js"
+      "components/sinon/sinon.js"
+      "components/sinon/lib/spy.js"
+      "components/sinon/lib/call.js"
+      "components/sinon/lib/stub.js"
+      "components/sinon/lib/mock.js"
+      "components/sinon/lib/assert.js"
 
       "scripts/modules/**/*.js"
       "scripts/templates.js"
