@@ -7,6 +7,9 @@ resources.factory "Products", [
       get: { method: "GET" }
 
     angular.extend Products.prototype,
+      # Returns true when the product is persisted (has an id)
+      persisted: -> !!@id
+
       # Returns price with discount
       priceWithDiscount: ->
         return @price unless @hasDiscount()

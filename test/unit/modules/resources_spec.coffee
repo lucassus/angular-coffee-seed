@@ -79,6 +79,22 @@ describe "Module `myApp.resources`", ->
 
           $httpBackend.flush()
 
+    describe "#persisted()", ->
+      product = null
+      beforeEach -> product = new Products(id: @id)
+
+      context "when the product has an id", ->
+        before -> @id = 123
+
+        it "returns true", ->
+          expect(product.persisted()).to.be.true
+
+      context "when the product does not have an id", ->
+        before -> @id = null
+
+        it "returns false", ->
+          expect(product.persisted()).to.be.false
+
     describe "#priceWithDiscount()", ->
       product = null
       beforeEach inject (Products) ->

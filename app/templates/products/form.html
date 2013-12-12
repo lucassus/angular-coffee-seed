@@ -65,10 +65,10 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-6">
       <button type="submit" class="btn btn-success" ng-disabled="form.isClean()">
-        <span ng-hide="product.id">
+        <span ng-hide="product.persisted()">
           <i class="fa fa-plus"></i> Create
         </span>
-        <span ng-show="product.id">
+        <span ng-show="product.persisted()">
           <i class="fa fa-save"></i> Update
         </span>
       </button>
@@ -78,7 +78,7 @@
       </a>
 
       <a href="" class="btn btn-danger"
-         ng-show="product.id"
+         ng-show="product.persisted()"
          ng-click="form.delete()"><i class="fa fa-trash-o"></i> Delete</a>
 
       <a ui-sref="products.list" class="btn btn-default">Cancel</a>
