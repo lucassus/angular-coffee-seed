@@ -11,7 +11,7 @@ This is a custom AngularJS seed project based on grunt the JavaScript task runne
 * Bower for front-end packages management
 * Full support for unit and end2end tests
 * Unit tests with Mocha, Chai and SinonJS
-* Generates code coverage for JavaScript unit tests
+* Generates test code coverage the unit tests
 * Support for protractor integration tests
 * Support for Karma Test Runner (formerly Testacular)
 * Continuous Integration ready ready via `grunt test:ci` task
@@ -84,12 +84,7 @@ By default all tests are executed in PhantomJS browser
 * `grunt test:unit` or `grunt test` - run unit tests
 * `grunt test:unit:watch` or
 * `grunt test:watch` - run unit tests in watch mode
-* `grunt test:coverage` or
-* `grunt test:unit:coverage` - run unit tests against compiled development release and generate code coverage report
-* `grunt test:unit:coverage --coverage-reporter=html` - generate html code coverage report
-
-* `grunt test --reporters=spec` - run tests with `spec` reporter
-* `grunt test --browsers=Chrome,Firefox` - run tests inside Chrome and Firefox
+* `grunt test --coverage-reporter=html` - generate html code coverage report
 
 Run test against specific browsers
 

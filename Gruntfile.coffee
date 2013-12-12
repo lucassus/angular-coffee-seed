@@ -71,17 +71,6 @@ module.exports = (grunt) ->
     "test:unit:watch"
   ]
 
-  # run unit tests against compiled develepment release
-  # and generate code coverage report
-  grunt.registerTask "test:unit:coverage", [
-    "build:dev"
-    "karma:coverage"
-  ]
-
-  grunt.registerTask "test:coverage", [
-    "test:unit:coverage"
-  ]
-
   grunt.registerTask "test", [
     "karma:unit"
   ]

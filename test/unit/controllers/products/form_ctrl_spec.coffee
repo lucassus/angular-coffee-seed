@@ -11,7 +11,6 @@ describe "Controller `products.FormCtrl`", ->
 
     $provide.decorator "alerts", ($delegate) ->
       sinon.stub($delegate)
-      $delegate
 
   $scope = null
   ctrl = null

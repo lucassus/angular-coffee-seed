@@ -38,14 +38,27 @@ module.exports = (config) ->
     ]
 
     preprocessors:
-      "**/*.coffee": ["coffee"]
       "**/*.html": ["html2js"]
+
+      "app/scripts/**/*.coffee": ["coverage"]
+      "test/unit/**/*.coffee": ["coffee"]
 
     ngHtml2JsPreprocessor:
       stripPrefix: "app/"
       moduleName: "myApp.templates"
 
-    reporters: ["dots"]
+    # Test results reporter to use. Possible values: dots || progress || growl
+    reporters: ["dots", "coverage"]
+
+    # html - produces a bunch of HTML files with annotated source code
+    # lcovonly - produces an lcov.info file
+    # lcov - produces html + lcov files. This is the default format
+    # cobertura - produces a cobertura-coverage.xml file for easy Hudson integration
+    # text-summary - produces a compact text summary of coverage, typically to console
+    # text - produces a detailed text table with coverage for all files
+    coverageReporter:
+      type: "text-summary"
+      dir: "coverage"
 
     # web server port
     port: 8080
@@ -81,6 +94,7 @@ module.exports = (config) ->
       "karma-mocha"
       "karma-chai-plugins"
       "karma-spec-reporter"
+      "karma-coverage"
 
       "karma-phantomjs-launcher"
       "karma-chrome-launcher"

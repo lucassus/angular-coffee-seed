@@ -10,4 +10,4 @@ if [ $? -ne 0 ]; then
 fi
 
 # ..run other specs
-grunt test:coverage
+grunt test

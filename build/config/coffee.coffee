@@ -1,5 +1,6 @@
 module.exports = (grunt) ->
 
+  # compile coffeescript sources
   dist:
     files: [
       expand: true
@@ -9,11 +10,15 @@ module.exports = (grunt) ->
       ext: ".js"
     ]
 
-  test:
+  # compile integration specs
+  testIntegration:
     files: [
       expand: true
       cwd: "<%= appConfig.test %>"
-      src: "**/*.coffee"
+      src: [
+        "integration/**/*.coffee",
+        "protractor-conf.coffee"
+      ]
       dest: "<%= appConfig.dev %>/test"
       ext: ".js"
     ]
