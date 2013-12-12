@@ -22,7 +22,18 @@ echo -e "\nRunning integration specs."
 
 ./node_modules/protractor/bin/protractor dev/test/protractor-conf.js --verbose --includeStackTrace
 
-stopServer
+function stopAll() {
+  stopServer
+  echo "Killing the frontend server PID=$PID"
+  kill "$PID"
+}
 
-echo "Killing the frontend server PID=$PID"
-kill "$PID"
+# ..check if it pass
+if [ $? -ne 0 ]; then
+  stopAll
+
+  echo "Failed!"
+  exit 1
+else
+  stopAll
+fi
