@@ -6,7 +6,7 @@ resources.factory "Products", [
       query: { method: "GET", isArray: true }
       get: { method: "GET" }
 
-    angular.extend Products.prototype,
+    angular.extend Products::,
       # Returns true when the product is persisted (has an id)
       persisted: -> !!@id
 
