@@ -157,19 +157,31 @@ describe "Products page", ->
         expect(browser.getCurrentUrl()).toMatch /#\/products\/\d+\/details/
         expect(showPage.product.manufacturer.getText()).toEqual "HTC"
 
-    describe "click on `edit` button", ->
-      beforeEach -> showPage.editButton.click()
+    describe "`Actions` tab", ->
+      beforeEach -> showPage.tabActions.click()
 
-      it "navigates to edit product page", ->
-        expect(browser.getCurrentUrl()).toMatch /#\/products\/\d+\/edit/
+      describe "click on `edit` button", ->
+        beforeEach -> showPage.editButton.click()
 
-    describe "click on `delete` button", ->
-      beforeEach -> showPage.deleteButton.click()
+        it "navigates to edit product page", ->
+          expect(browser.getCurrentUrl()).toMatch /#\/products\/\d+\/edit/
 
-      it "deletes the product", ->
-        expect(alertView.info.isDisplayed()).toBeTruthy()
-        expect(alertView.info.getText()).toEqual "Product was deleted"
-        expect(indexPage.greeting.getText()).toEqual "You have 5 products"
+      describe "click on `delete` button", ->
+        beforeEach ->
+          # click on the delete button
+          showPage.deleteButton.click()
 
-      it "redirects to the products page", ->
-        expect(browser.getCurrentUrl()).toMatch /#\/products$/
+          # ..verify that the confirmation dialog is present
+          alert = browser.switchTo().alert()
+          expect(alert.getText()).toEqual("Are you sure?")
+
+          # ..accept the confirmation
+          alert.accept()
+
+        it "deletes the product", ->
+          expect(alertView.info.isDisplayed()).toBeTruthy()
+          expect(alertView.info.getText()).toEqual "Product was deleted"
+          expect(indexPage.greeting.getText()).toEqual "You have 5 products"
+
+        it "redirects to the products page", ->
+          expect(browser.getCurrentUrl()).toMatch /#\/products$/

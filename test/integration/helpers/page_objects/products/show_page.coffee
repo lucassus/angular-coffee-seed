@@ -27,4 +27,7 @@ class ShowPage extends PageObject
   @has "tabDetails", ->
     @tabs.findElement @byLabel "Details"
 
+  @has "tabActions", ->
+    @tabs.findElement @byLabel "Actions"
+
 module.exports = ShowPage

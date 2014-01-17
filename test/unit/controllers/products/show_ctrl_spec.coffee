@@ -1,12 +1,6 @@
 describe "Controller `products.ShowCtrl`", ->
 
-  # stub external services
-  beforeEach module "myApp", ($provide) ->
-    $provide.value "$state", sinon.stub(go: ->)
-
-    $provide.decorator "alerts", ($delegate) ->
-      sinon.stub($delegate)
-      $delegate
+  beforeEach module "myApp", ->
 
   $scope = null
   ctrl = null
@@ -25,20 +19,3 @@ describe "Controller `products.ShowCtrl`", ->
       expect($scope.product).to.not.be.undefined
       expect($scope.product).to.have.property "id", 123
       expect($scope.product).to.have.property "name", "foo"
-
-  describe "#deleteProduct()", ->
-    beforeEach inject ($httpBackend) ->
-      $httpBackend.expectDELETE("/api/products/123.json").respond 200
-
-      ctrl.deleteProduct()
-      $httpBackend.flush()
-
-    it "deletes the product", inject ($httpBackend) ->
-      $httpBackend.verifyNoOutstandingExpectation()
-      $httpBackend.verifyNoOutstandingRequest()
-
-    it "sets an alert", inject (alerts) ->
-      expect(alerts.info).to.be.calledWith "Product was deleted"
-
-    it "redirects to the products list page", inject ($state) ->
-      expect($state.go).to.be.calledWith "products.list"

@@ -49,11 +49,16 @@ app.config [
 
       .state "products.show.info",
         url: ""
-        data: activeTab: "info"
+        templateUrl: "templates/products/show/info.html"
 
       .state "products.show.details",
         url: "/details"
-        data: activeTab: "details"
+        templateUrl: "templates/products/show/details.html"
+
+      .state "products.show.actions",
+        url: "/actions"
+        templateUrl: "templates/products/show/actions.html"
+        controller: "products.ShowActionsCtrl as actions"
 
       .state "other",
         url: "/other",

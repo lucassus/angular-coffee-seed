@@ -77,18 +77,12 @@ describe "Application routes", ->
       itQueriesForAProduct()
       itLoadsAProduct()
 
-      it "activates `info` tab", inject ($state) ->
-        expect($state.current.data).to.have.property "activeTab", "info"
-
     describe "`details` tab", ->
       navigateTo "products.show.details", id: 123
 
       itIsRecognized()
       itQueriesForAProduct()
       itLoadsAProduct()
-
-      it "activates `details` tab", inject ($state) ->
-        expect($state.current.data).to.have.property "activeTab", "details"
 
   describe "route `/other`", ->
     navigateTo "other"
