@@ -7,7 +7,7 @@ module.exports = (grunt) ->
     ]
     tasks: [
       "coffee:dist"
-      "coffee:test"
+      "coffee:testIntegration"
       "ngtemplates"
       "timestamp"
     ]
