@@ -3,6 +3,7 @@
 app = angular.module "myApp", [
   "ngAnimate"
   "ui.router"
+  "pasvaz.bindonce"
 
   "myApp.templates"
   "myApp.alerts"

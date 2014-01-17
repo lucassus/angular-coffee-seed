@@ -1,10 +1,10 @@
-<dl class="dl-horizontal">
+<dl bindonce class="dl-horizontal">
   <dt>Name</dt>
-  <dd>{{product.name}}</dd>
+  <dd bo-text="product.name"></dd>
 
   <dt>Price with discount</dt>
-  <dd>{{product.priceWithDiscount() | currency}}</dd>
+  <dd bo-text="product.priceWithDiscount() | currency"></dd>
 
   <dt>Description</dt>
-  <dd>{{product.description}}</dd>
+  <dd bo-text="product.description"></dd>
 </dl>

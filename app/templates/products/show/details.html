@@ -1,13 +1,13 @@
-<dl class="dl-horizontal">
+<dl bindonce class="dl-horizontal">
   <dt>ID</dt>
-  <dd>{{product.id}}</dd>
+  <dd bo-text="product.id"></dd>
 
   <dt>Headline</dt>
-  <dd>{{product.headline}}</dd>
+  <dd bo-text="product.headline"></dd>
 
   <dt>Manufacturer</dt>
-  <dd>{{product.manufacturer}}</dd>
+  <dd bo-text="product.manufacturer"></dd>
 
   <dt>Created At</dt>
-  <dd>{{product.createdAt | date}}</dd>
+  <dd bo-text="product.createdAt | date"></dd>
 </dl>

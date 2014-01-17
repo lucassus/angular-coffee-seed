@@ -18,6 +18,7 @@ module.exports = (config) ->
       "bower_components/angular-resource/angular-resource.js"
       "bower_components/angular-animate/angular-animate.js"
       "bower_components/angular-ui-router/release/angular-ui-router.js"
+      "bower_components/angular-bindonce/bindonce.js"
 
       "bower_components/sinon/lib/sinon.js"
       "bower_components/sinon/lib/sinon/spy.js"

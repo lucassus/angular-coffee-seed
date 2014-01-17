@@ -9,6 +9,7 @@
     "angular-resource": "1.2.9",
     "angular-animate": "1.2.9",
     "angular-ui-router": "git@github.com:angular-ui/ui-router.git#cf3427162b5b4209a9feefb71ef4c54d2901514b",
+    "angular-bindonce": "0.2.2",
 
     "bootstrap": "3.0.3",
     "font-awesome": "4.0.3"
