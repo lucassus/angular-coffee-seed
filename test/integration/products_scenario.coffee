@@ -1,4 +1,3 @@
-require("jasmine-only")
 utils = require("./helpers/utils")
 
 AlertView = require("./helpers/page_objects/alert_view")

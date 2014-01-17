@@ -15,8 +15,9 @@ module.exports = (grunt) ->
       collapseBooleanAttributes: true
 
   app:
+    cwd: "<%= appConfig.app %>"
     src: [
-      "<%= appConfig.app %>/templates/**/*.html"
-      "<%= appConfig.app %>/views/**/*.html"
+      "templates/**/*.html"
+      "views/**/*.html"
     ]
     dest: "<%= appConfig.dev %>/scripts/templates.js"

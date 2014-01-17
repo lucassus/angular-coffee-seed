@@ -1,4 +1,3 @@
-require("jasmine-only")
 utils = require("./helpers/utils")
 
 TasksPage = require("./helpers/page_objects/tasks_page")

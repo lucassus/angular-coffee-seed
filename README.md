@@ -97,14 +97,8 @@ Run test against specific browsers
 
 ### How to develop specs
 
-* start the selenium `./selenium/start`
+* install standalone Selenium `node_modules/protractor/bin/webdriver-manager update`
 * start the app in the `test` evn `script/start-test-server`
-* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
-
-### Headlessly
-
-* start Xvfb `./script/xvfb start`
-* start selenium on the fake display `DISPLAY=:99.0 ./script/selenium start`
 * run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
 
 ### WebDriver and PhantomJS
