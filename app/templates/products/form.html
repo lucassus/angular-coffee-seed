@@ -2,7 +2,7 @@
   <h2>Product form</h2>
 </div>
 
-<form name="productForm" class="form-horizontal" ng-submit="form.save(product)" novalidate>
+<form name="productForm" class="form-horizontal" ng-submit="form.save(productForm, product)" novalidate>
   <div class="form-group"
        ng-class="{'has-error': productForm.name.$invalid && (productForm.$submitted || productForm.name.$dirty)}">
     <label for="product-name" class="col-lg-2 control-label">Name</label>

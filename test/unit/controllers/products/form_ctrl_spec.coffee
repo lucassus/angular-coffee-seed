@@ -2,8 +2,7 @@ describe "Controller `products.FormCtrl`", ->
 
   # stub external services
   beforeEach module "myApp", ($provide) ->
-    $provide.factory "product", (Products) ->
-      new Products(id: 123, name: "foo")
+    $provide.factory "product", (Products) -> new Products(id: 123, name: "foo")
 
     $provide.decorator "$location", ($delegate) ->
       sinon.stub($delegate, "path")
@@ -32,15 +31,13 @@ describe "Controller `products.FormCtrl`", ->
 
     context "when the form is invalid", ->
       beforeEach inject (product) ->
-        ctrl.save(product)
-        $scope.productForm = $valid: false, $invalid: true
+        ctrl.save({ $valid: false }, product)
 
       it "does not create or update a product", inject ($httpBackend) ->
         $httpBackend.verifyNoOutstandingExpectation()
         $httpBackend.verifyNoOutstandingRequest()
 
     context "when the form is valid", ->
-      beforeEach -> $scope.productForm = $valid: true, $invalid: false
 
       itSavesAProduct = ->
         it "saves a product", inject ($httpBackend) ->
@@ -60,7 +57,7 @@ describe "Controller `products.FormCtrl`", ->
           $httpBackend.expectPOST("/api/products/123.json", id: 123, name: "bar").respond id: 123, name: "bar"
 
           product.name = "bar"
-          ctrl.save(product)
+          ctrl.save({ $valid: true }, product)
           $httpBackend.flush()
 
         itSavesAProduct()
@@ -74,7 +71,7 @@ describe "Controller `products.FormCtrl`", ->
           product.id = undefined
           product.name = "foo"
 
-          ctrl.save(product)
+          ctrl.save({ $valid: true }, product)
           $httpBackend.flush()
 
         itSavesAProduct()
