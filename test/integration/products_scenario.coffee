@@ -1,3 +1,4 @@
+expect = require("./helpers/expect")
 utils = require("./helpers/utils")
 
 AlertView = require("./helpers/page_objects/alert_view")
@@ -13,37 +14,38 @@ describe "Products page", ->
     alertView = new AlertView()
     indexPage = new IndexPage()
 
-    utils.loadFixtures -> browser.get "/"
+    utils.loadFixtures()
+    browser.get "/"
 
   it "displays a valid page title", ->
-    expect(browser.getCurrentUrl()).toMatch /#\/products$/
-    expect(browser.getTitle()).toEqual "Angular Seed"
+    expect(browser.getCurrentUrl()).to.eventually.match /#\/products$/
+    expect(browser.getTitle()).to.eventually.eq "Angular Seed"
 
   describe "products list page", ->
 
     it "displays the list of products", ->
-      expect(indexPage.greeting.getText()).toEqual "You have 6 products"
+      expect(indexPage.greeting.getText()).to.eventually.eq "You have 6 products"
 
       indexPage.table.productNames.then (names) ->
-        expect(names.length).toEqual 6
+        expect(names.length).to.eq 6
 
-        expect(names[0].getText()).toEqual "HTC Wildfire"
-        expect(names[1].getText()).toEqual "Nexus One"
-        expect(names[2].getText()).toEqual "Nexus 7"
-        expect(names[3].getText()).toEqual "iPhone"
-        expect(names[4].getText()).toEqual "Samsung Galaxy Note"
-        expect(names[5].getText()).toEqual "Samsung S4"
+        expect(names[0].getText()).to.eventually.eq "HTC Wildfire"
+        expect(names[1].getText()).to.eventually.eq "Nexus One"
+        expect(names[2].getText()).to.eventually.eq "Nexus 7"
+        expect(names[3].getText()).to.eventually.eq "iPhone"
+        expect(names[4].getText()).to.eventually.eq "Samsung Galaxy Note"
+        expect(names[5].getText()).to.eventually.eq "Samsung S4"
 
     it "displays correct columns", ->
       row = indexPage.table.rowAt(0)
 
-      expect(row.id.isDisplayed()).toBeTruthy()
+      expect(row.id.isDisplayed()).to.eventually.be.true
 
-      expect(row.name.isDisplayed()).toBeTruthy()
-      expect(row.name.getText()).toEqual "HTC Wildfire"
+      expect(row.name.isDisplayed()).to.eventually.be.true
+      expect(row.name.getText()).to.eventually.eq "HTC Wildfire"
 
-      expect(row.description.isDisplayed()).toBeTruthy()
-      expect(row.description.isDisplayed()).toBeTruthy()
+      expect(row.description.isDisplayed()).to.eventually.be.true
+      expect(row.description.isDisplayed()).to.eventually.be.true
 
     describe "click on `delete` button", ->
       beforeEach ->
@@ -51,11 +53,11 @@ describe "Products page", ->
         row.deleteButton.click()
 
       it "deletes the product", ->
-        expect(indexPage.greeting.getText()).toEqual "You have 5 products"
+        expect(indexPage.greeting.getText()).to.eventually.eq "You have 5 products"
 
       it "sets an alert message ", ->
-        expect(alertView.info.isDisplayed()).toBeTruthy()
-        expect(alertView.info.getText()).toEqual "Product was deleted"
+        expect(alertView.info.isDisplayed()).to.eventually.be.true
+        expect(alertView.info.getText()).to.eventually.eq "Product was deleted"
 
   describe "create new product", ->
     formPage = null
@@ -65,9 +67,9 @@ describe "Products page", ->
       formPage = new FormPage()
 
     it "displays a form for creating a new product", ->
-      expect(formPage.nameField.getAttribute("value")).toEqual ""
-      expect(formPage.descriptionField.getAttribute("value")).toEqual ""
-      expect(formPage.submitButton.getText()).toEqual "Create"
+      expect(formPage.nameField.getAttribute("value")).to.eventually.eq ""
+      expect(formPage.descriptionField.getAttribute("value")).to.eventually.eq ""
+      expect(formPage.submitButton.getText()).to.eventually.eq "Create"
 
     describe "click on `create` button", ->
       beforeEach ->
@@ -77,12 +79,12 @@ describe "Products page", ->
         formPage.submitButton.click()
 
       it "creates new product", ->
-        expect(alertView.success.isDisplayed()).toBeTruthy()
-        expect(alertView.success.getText()).toEqual "Product was created"
-        expect(indexPage.greeting.getText()).toEqual "You have 7 products"
+        expect(alertView.success.isDisplayed()).to.eventually.be.true
+        expect(alertView.success.getText()).to.eventually.eq "Product was created"
+        expect(indexPage.greeting.getText()).to.eventually.eq "You have 7 products"
 
       it "redirects to the products page", ->
-        expect(browser.getCurrentUrl()).toMatch /#\/products$/
+        expect(browser.getCurrentUrl()).to.eventually.match /#\/products$/
 
     describe "click on `reset` button", ->
       beforeEach ->
@@ -93,9 +95,9 @@ describe "Products page", ->
       it "clears the form", ->
         formPage.resetButton.click()
 
-        expect(formPage.nameField.getAttribute("value")).toEqual ""
-        expect(formPage.priceField.getAttribute("value")).toEqual ""
-        expect(formPage.descriptionField.getText()).toEqual ""
+        expect(formPage.nameField.getAttribute("value")).to.eventually.eq ""
+        expect(formPage.priceField.getAttribute("value")).to.eventually.eq ""
+        expect(formPage.descriptionField.getText()).to.eventually.eq ""
 
   describe "edit a product", ->
     formPage = null
@@ -107,10 +109,10 @@ describe "Products page", ->
       formPage = new FormPage()
 
     it "displays a form for updating the product", ->
-      expect(formPage.nameField.getAttribute("value")).toEqual "Nexus 7"
-      expect(formPage.priceField.getAttribute("value")).toEqual "1200"
-      expect(formPage.discountField.getAttribute("value")).toEqual "12"
-      expect(formPage.submitButton.getText()).toEqual "Update"
+      expect(formPage.nameField.getAttribute("value")).to.eventually.eq "Nexus 7"
+      expect(formPage.priceField.getAttribute("value")).to.eventually.eq "1200"
+      expect(formPage.discountField.getAttribute("value")).to.eventually.eq "12"
+      expect(formPage.submitButton.getText()).to.eventually.eq "Update"
 
     describe "click on `update` button", ->
       beforeEach ->
@@ -120,11 +122,11 @@ describe "Products page", ->
         formPage.submitButton.click()
 
       it "updates the product", ->
-        expect(alertView.success.isDisplayed()).toBeTruthy()
-        expect(alertView.success.getText()).toEqual "Product was updated"
+        expect(alertView.success.isDisplayed()).to.eventually.be.true
+        expect(alertView.success.getText()).to.eventually.eq "Product was updated"
 
       it "redirects to the products page", ->
-        expect(browser.getCurrentUrl()).toMatch /#\/products$/
+        expect(browser.getCurrentUrl()).to.eventually.match /#\/products$/
 
     describe "click on `reset` button", ->
       beforeEach ->
@@ -134,8 +136,8 @@ describe "Products page", ->
       it "rollbacks all changes", ->
         formPage.resetButton.click()
 
-        expect(formPage.nameField.getAttribute("value")).toEqual "Nexus 7"
-        expect(formPage.priceField.getAttribute("value")).toEqual "1200"
+        expect(formPage.nameField.getAttribute("value")).to.eventually.eq "Nexus 7"
+        expect(formPage.priceField.getAttribute("value")).to.eventually.eq "1200"
 
   describe "show a product", ->
     showPage = null
@@ -147,15 +149,15 @@ describe "Products page", ->
       showPage = new ShowPage()
 
     it "displays the product basic info", ->
-      expect(showPage.product.name.getText()).toEqual "HTC Wildfire"
-      expect(showPage.product.description.getText()).toEqual "Old android phone"
+      expect(showPage.product.name.getText()).to.eventually.eq "HTC Wildfire"
+      expect(showPage.product.description.getText()).to.eventually.eq "Old android phone"
 
     describe "switch to details tab", ->
       beforeEach -> showPage.tabDetails.click()
 
       it "displays product details", ->
-        expect(browser.getCurrentUrl()).toMatch /#\/products\/\d+\/details/
-        expect(showPage.product.manufacturer.getText()).toEqual "HTC"
+        expect(browser.getCurrentUrl()).to.eventually.match /#\/products\/\d+\/details/
+        expect(showPage.product.manufacturer.getText()).to.eventually.eq "HTC"
 
     describe "`Actions` tab", ->
       beforeEach -> showPage.tabActions.click()
@@ -164,7 +166,7 @@ describe "Products page", ->
         beforeEach -> showPage.editButton.click()
 
         it "navigates to edit product page", ->
-          expect(browser.getCurrentUrl()).toMatch /#\/products\/\d+\/edit/
+          expect(browser.getCurrentUrl()).to.eventually.match /#\/products\/\d+\/edit/
 
       describe "click on `delete` button", ->
         beforeEach ->
@@ -173,15 +175,15 @@ describe "Products page", ->
 
           # ..verify that the confirmation dialog is present
           alert = browser.switchTo().alert()
-          expect(alert.getText()).toEqual("Are you sure?")
+          expect(alert.getText()).to.eventually.eq "Are you sure?"
 
           # ..accept the confirmation
           alert.accept()
 
         it "deletes the product", ->
-          expect(alertView.info.isDisplayed()).toBeTruthy()
-          expect(alertView.info.getText()).toEqual "Product was deleted"
-          expect(indexPage.greeting.getText()).toEqual "You have 5 products"
+          expect(alertView.info.isDisplayed()).to.eventually.be.true
+          expect(alertView.info.getText()).to.eventually.eq "Product was deleted"
+          expect(indexPage.greeting.getText()).to.eventually.eq "You have 5 products"
 
         it "redirects to the products page", ->
-          expect(browser.getCurrentUrl()).toMatch /#\/products$/
+          expect(browser.getCurrentUrl()).to.eventually.match /#\/products$/

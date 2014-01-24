@@ -13,8 +13,9 @@
     "Faker": "0.5.11"
   },
   "devDependencies": {
-    "mocha": "1.17.0",
+    "mocha": "1.17.1",
     "chai": "1.8.1",
+    "chai-as-promised": "~4.1.0",
     "supertest": "0.8.3",
 
     "grunt": "0.4.2",
@@ -49,7 +50,7 @@
     "nodemon": "1.0.9",
     "request": "2.33.0",
 
-    "protractor": "0.16.1"
+    "protractor": "0.17.0"
   },
   "engines": {
     "node": "0.10.x",

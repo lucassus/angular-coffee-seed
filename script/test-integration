@@ -20,7 +20,7 @@ done
 
 echo -e "\nRunning integration specs."
 
-./node_modules/protractor/bin/protractor dev/test/protractor-conf.js --verbose --includeStackTrace
+./node_modules/protractor/bin/protractor test/protractor-conf.coffee --verbose --includeStackTrace
 
 function stopAll() {
   stopServer

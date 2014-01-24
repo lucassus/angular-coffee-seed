@@ -3,11 +3,9 @@ module.exports = (grunt) ->
   coffee:
     files: [
       "<%= appConfig.app %>/scripts/**/*.coffee"
-      "<%= appConfig.test %>/**/*.coffee"
     ]
     tasks: [
       "coffee:dist"
-      "coffee:testIntegration"
       "ngtemplates"
       "timestamp"
     ]

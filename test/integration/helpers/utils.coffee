@@ -3,16 +3,13 @@ fs = require("fs")
 
 module.exports =
 
-  loadFixtures: (callback = ->) ->
-    loaded = false
+  # Load fixtures and wait until the request is completed
+  loadFixtures: ->
+    baseUrl = browser.baseUrl
 
-    runs ->
-      baseUrl = browser.baseUrl
-      request.post "#{baseUrl}/api/_loadFixtures.json", ->
-        callback()
-        loaded = true
-
-    waitsFor -> loaded
+    fixturesLoaded = false
+    request.post "#{baseUrl}/api/_loadFixtures.json", -> fixturesLoaded = true
+    browser.wait -> fixturesLoaded
 
   takeScreenshot: (fileName = "screenshot-#{new Date()}") ->
     browser.takeScreenshot().then (screenshot) ->
