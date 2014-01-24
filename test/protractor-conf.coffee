@@ -19,11 +19,11 @@ exports.config =
   # with relative paths will be prepended with this.
   baseUrl: "http://localhost:9001"
 
-  # options to be passed to Jasmine-node
-  jasmineNodeOpts:
-    # default time to wait in ms before a test fails
-    defaultTimeoutInterval: 10000
+  # Use mocha (currently in beta)
+  framework: "mocha"
 
-    showColors: true
-    isVerbose: false
-    includeStackTrace: true
+  # Options to be passed to mocha
+  # See the full list at http://visionmedia.github.io/mocha/
+  mochaOpts:
+    ui: "bdd"
+    reporter: "list"
