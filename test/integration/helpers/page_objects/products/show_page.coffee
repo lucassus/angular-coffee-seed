@@ -13,6 +13,7 @@ class ShowPage extends PageObject
   @has "product", ->
     listElement = browser.findElement @By.xpath("//dl")
 
+    # TODO figure out how to use it with bind-once
     byProperty = (name) =>
       listElement.findElement @By.binding("product.#{name}")
 
