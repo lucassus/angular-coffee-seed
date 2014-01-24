@@ -34,9 +34,9 @@ Demo: http://lucassus-angular-seed.herokuapp.com
 
 Third-party libraries
 
-* `./bower_components` - components dowloaded by `bower install` command
+* `./bower_components` - components downloaded by `bower install` command
 * `./custom_components` - you could put custom components here
-* `./node_modules` - command dowloaded by `npm install` command
+* `./node_modules` - command downloaded by `npm install` command
 
 Generated stuff
 
@@ -99,7 +99,7 @@ Run test against specific browsers
 
 * install standalone Selenium `node_modules/protractor/bin/webdriver-manager update`
 * start the app in the `test` evn `script/start-test-server`
-* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
+* run it with `grunt coffee:test && protractor dev/test/protractor-conf.coffee`
 
 ### WebDriver and PhantomJS
 

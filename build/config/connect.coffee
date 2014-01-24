@@ -6,6 +6,9 @@ mountFolder = (connect, dir) ->
 
 module.exports = (grunt, appConfig) ->
 
+  env = grunt.option("env") or "development"
+  port = if env is "test" then 9001 else 9000
+
   options:
     hostname: "localhost"
 
@@ -17,18 +20,9 @@ module.exports = (grunt, appConfig) ->
     changeOrigin: false
   ]
 
-  integration:
-    options:
-      port: 9001
-      middleware: (connect) ->
-        [
-          proxySnippet
-          mountFolder(connect, appConfig.dev)
-        ]
-
   livereload:
     options:
-      port: 9000
+      port: port
       middleware: (connect) ->
         [
           livereloadSnippet

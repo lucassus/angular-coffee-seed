@@ -11,7 +11,7 @@ class AlertsController
 alerts.controller "alerts", AlertsController
 
 alerts.factory "alerts", [
-  "$log", "$timeout", "alertTimeout", ($log, $timeout, alertTimeout) ->
+  "$log", "$interval", "alertTimeout", ($log, $interval, alertTimeout) ->
     lastId: 0
     messages: []
 
@@ -45,7 +45,8 @@ alerts.factory "alerts", [
         disposeTheAlert = =>
           $log.info("Disposing alert", id, "after", alertTimeout, "milliseconds")
           @dispose(id)
-        $timeout(disposeTheAlert, alertTimeout)
+
+        $interval(disposeTheAlert, alertTimeout, 1)
 ]
 
 alerts.directive "alerts", ->

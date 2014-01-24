@@ -5,10 +5,10 @@ module.exports = (grunt) ->
 
   # configurable paths
   appConfig =
-    app: "app"
+    app:  "app"
     test: "test"
     dist: "dist"
-    dev: "dev"
+    dev:  "dev"
 
   loadMoule = (name) ->
     require("./build/config/#{name}")(grunt, appConfig)
@@ -32,6 +32,7 @@ module.exports = (grunt) ->
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
     shell:         loadMoule "shell"
+    preprocess:    loadMoule "preprocess"
 
   grunt.renameTask "regarde", "watch"
 
@@ -45,6 +46,7 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
+    "preprocess:env"
   ]
 
   grunt.registerTask "server", [
