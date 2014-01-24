@@ -12,7 +12,7 @@ exports.config =
 
   # spec patterns
   specs: [
-    "integration/*_scenario.js"
+    "integration/*_scenario.coffee"
   ]
 
   # A base URL for your application under test. Calls to protractor.get()
