@@ -4,7 +4,7 @@ exports.config =
   # seleniumPort: 4444
 
   chromeDriver: null # use default location
-  chromeOnly: true
+  chromeOnly: false
 
   # capabilities to be passed to the webdriver instance
   capabilities:
