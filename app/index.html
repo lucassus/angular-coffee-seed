@@ -42,6 +42,20 @@
                 <a ui-sref="tasks">Tasks</a>
               </li>
             </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <!-- @if ENV='development' -->
+              <li>
+                <a href="">development</a>
+              </li>
+              <!-- @endif -->
+
+              <!-- @if ENV='test' -->
+              <li>
+                <a href="">test</a>
+              </li>
+              <!-- @endif -->
+            </ul>
           </div>
         </div>
       </div>
@@ -90,5 +104,11 @@
     <script type="text/javascript" src="scripts/controllers/other_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/tasks_ctrl.js"></script>
     <!-- endbuild -->
+
+    <!-- @if USE_MOCKS -->
+    <script type="text/javascript" src="components/angular-mocks/angular-mocks.js"></script>
+    <script type="text/javascript" src="scripts/e2e_mocks.js"></script>
+    <script type="text/javascript" src="scripts/e2e_mocks/products.js"></script>
+    <!-- @endif -->
   </body>
 </html>
