@@ -1,49 +1,13 @@
 <div class="page-header">
   <h2>Products list</h2>
 </div>
+
 <p class="lead">You have {{index.products.length}} products</p>
+
+<div class="products-grid" ng-grid="gridOptions"></div>
+
+<hr />
 
 <a ui-sref="products.create" class="btn btn-success">
   <i class="fa fa-plus"></i> Create new product
 </a>
-
-<table class="table table-hover products" ng-show="index.products.length > 0">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Actions</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Discount</th>
-      <th>Description</th>
-      <th>Created At</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="product in index.products | orderBy:'priceWithDiscount()'"
-        ng-class="{'success': product.hasDiscount()}">
-      <td>{{product.id}}</td>
-      <td>
-        <div class="btn-group">
-          <button type="button" class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown">
-            Action <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a ui-sref="products.show.info({id: product.id})"><i class="fa fa-search"></i> Show</a></li>
-            <li><a ui-sref="products.edit({id: product.id})"><i class="fa fa-edit"></i> Edit</a></li>
-            <li class="divider"></li>
-            <li><a href="" ng-click="index.deleteProduct(product)"><i class="fa fa-trash-o"></i> Delete</a></li>
-          </ul>
-        </div>
-      </td>
-      <td><a ui-sref="products.show.info({id: product.id})">{{product.name}}</a></td>
-      <td>{{product.priceWithDiscount() | currency}}</td>
-      <td>
-        <span ng-show="product.hasDiscount()">{{product.discount}}%</span>
-        <span ng-hide="product.hasDiscount()">---</span>
-      </td>
-      <td style="width: 50%">{{product.description}}</td>
-      <td style="width: 120px">{{product.createdAt | date}}</td>
-    </tr>
-  </tbody>
-</table>
