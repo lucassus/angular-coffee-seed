@@ -21,7 +21,11 @@ fixtures = require("./fixtures")
 productProvider.save fixtures.products()
 
 app.get "/api/products.json", (req, res) ->
-  productProvider.findAll (error, products) ->
+  options =
+    currentPage: parseInt req.query.currentPage
+    pageSize: parseInt req.query.pageSize
+
+  productProvider.findAllPaged options, (error, products) ->
     res.send products
 
 app.post "/api/products.json", (req, res) ->

@@ -10,6 +10,21 @@ class ProductProvider
   findAll: (callback = ->) ->
     callback(null, @products)
 
+  # jqgrid: page,total,records,rows
+  findAllPaged: (options = {}, callback = ->) ->
+    currentPage = options.currentPage or 1
+    pageSize = options.pageSize or 10
+    total = @products.length
+
+    result =
+      currentPage: currentPage
+      pageSize: pageSize
+      pages: Math.ceil(total / pageSize)
+      total: total
+      rows: @products.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
+    callback(null, result)
+
   findById: (id, callback = ->) ->
     product = _.findWhere(@products, id: parseInt(id))
     callback(null, product)

@@ -16,7 +16,7 @@ describe "The application", ->
           products = resp.body
 
           expect(products).to.not.be.undefined
-          expect(products.length).to.equal 6
+          expect(products.rows.length).to.equal 6
 
           done()
 
