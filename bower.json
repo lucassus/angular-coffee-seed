@@ -20,14 +20,24 @@
   },
   "exportsOverride": {
     "angular-ui-router": {
-      "/": ["release/angular-ui-router.js"]
+      "/": [
+        "release/angular-ui-router.js"
+      ]
     },
     "font-awesome": {
-      "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
-      "fonts": ["fonts/*"]
+      "css": [
+        "css/font-awesome.css",
+        "css/font-awesome-ie7.css"
+      ],
+      "fonts": [
+        "fonts/*"
+      ]
     },
     "lodash": {
       "/": ["dist/lodash.js"]
     }
+  },
+  "resolutions": {
+    "angular": "1.2.12"
   }
 }
