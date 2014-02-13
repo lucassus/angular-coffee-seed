@@ -27,9 +27,22 @@ class IndexCtrl extends BaseCtrl
       fields: ["id"]
       directions: ["asc"]
 
+    nameCellTpl = """
+      <div>
+        <a ui-sref="products.show.info({id: row.getProperty('id')})"><i class="fa fa-search"></i>
+          {{row.getProperty('name')}}
+        </a>
+      </div>
+    """
+
     $scope.gridColumnDefs = [
       { field: "id",          displayName: "#", width: "auto" }
-      { field: "name",        displayName: "Name", resizable: true }
+      {
+        field: "name"
+        displayName: "Name"
+        resizable: true
+        cellTemplate: nameCellTpl
+      }
       { field: "price",       displayName: "Price", width: "120px", resizable: false }
       { field: "description", displayName: "Description" }
       { field: "createdAt",   displayName: "Created At" }
