@@ -3,7 +3,7 @@ resources = angular.module("myApp.resources", ["ngResource"])
 resources.factory "Products", [
   "$resource", ($resource) ->
     Products = $resource "/api/products/:id.json", id: "@id",
-      query: { method: "GET", isArray: true }
+      query: { method: "GET", isArray: false }
       get: { method: "GET" }
 
     angular.extend Products::,
