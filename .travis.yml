@@ -10,8 +10,8 @@ before_install:
   - travis_retry npm install
   - travis_retry bower install
 
-  # install selenium standalone
-  - ./node_modules/protractor/bin/install_selenium_standalone
+  # install selenium
+  - ./node_modules/protractor/bin/webdriver-manager update
 
   # run xvfb
   - export DISPLAY=:99.0
