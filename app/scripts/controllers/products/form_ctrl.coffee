@@ -4,9 +4,9 @@ class FormCtrl
   constructor: (@$scope, @$location, @alerts, @remote) ->
     @reset()
 
-  save: (form, product) ->
+  save: (product) ->
     promise = product.$save()
-    successMessage = if product.id? then "Product was updated" else "Product was created"
+    successMessage = if product.persisted() then "Product was updated" else "Product was created"
 
     promise.then =>
       @alerts.success successMessage

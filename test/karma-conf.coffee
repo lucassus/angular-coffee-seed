@@ -17,6 +17,7 @@ module.exports = (config) ->
       "bower_components/angular-mocks/angular-mocks.js"
       "bower_components/angular-resource/angular-resource.js"
       "bower_components/angular-animate/angular-animate.js"
+      "app/scripts/angular-messages.js"
       "bower_components/angular-ui-router/release/angular-ui-router.js"
       "bower_components/angular-bindonce/bindonce.js"
 

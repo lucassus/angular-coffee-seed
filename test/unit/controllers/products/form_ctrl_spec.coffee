@@ -29,14 +29,6 @@ describe "Controller `products.FormCtrl`", ->
 
   describe "#save()", ->
 
-    context "when the form is invalid", ->
-      beforeEach inject (product) ->
-        ctrl.save({ $valid: false }, product)
-
-      it "does not create or update a product", inject ($httpBackend) ->
-        $httpBackend.verifyNoOutstandingExpectation()
-        $httpBackend.verifyNoOutstandingRequest()
-
     context "when the form is valid", ->
 
       itSavesAProduct = ->
@@ -57,7 +49,7 @@ describe "Controller `products.FormCtrl`", ->
           $httpBackend.expectPOST("/api/products/123.json", id: 123, name: "bar").respond id: 123, name: "bar"
 
           product.name = "bar"
-          ctrl.save({ $valid: true }, product)
+          ctrl.save(product)
           $httpBackend.flush()
 
         itSavesAProduct()
@@ -71,25 +63,12 @@ describe "Controller `products.FormCtrl`", ->
           product.id = undefined
           product.name = "foo"
 
-          ctrl.save({ $valid: true }, product)
+          ctrl.save(product)
           $httpBackend.flush()
 
         itSavesAProduct()
         itSetsAnAlertTo "Product was created"
         itRedirectsToTheProductsListPage()
-
-  describe "#isClean()", ->
-
-    context "when the product is not modified", ->
-
-      it "returns true", ->
-        expect(ctrl.isClean()).to.be.true
-
-    context "otherwise", ->
-      beforeEach -> ctrl.product.name = "new name"
-
-      it "returns false", ->
-        expect(ctrl.isClean()).to.be.false
 
   describe "#reset()", ->
 

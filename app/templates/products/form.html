@@ -3,13 +3,14 @@
 </div>
 
 <form name="productForm" class="form-horizontal"
-      my-submit="form.save(productForm, product)" novalidate="true">
+      my-submit="form.save(product)" novalidate="true">
 
   <div class="form-group" my-error-for="name">
     <label for="product-name" class="col-lg-2 control-label">Name</label>
 
     <div class="col-lg-6">
-      <input id="product-name" type="text" class="form-control" placeholder="Enter name"
+      <input id="product-name" type="text" class="form-control"
+             placeholder="Enter name" autocomplete="off"
              name="name" ng-model="product.name"
              ng-required="true" ng-minlength="3"/>
 
@@ -29,11 +30,13 @@
       <div class="input-group">
         <span class="input-group-addon">$</span>
         <input id="product-price" type="number" class="form-control" placeholder="Enter price"
-               name="price" ng-model="product.price" ng-required="true"/>
+               name="price" ng-model="product.price"
+               ng-required="true" min="0.01"/>
       </div>
 
       <div my-messages="price">
         <span class="help-block" ng-message="required">Price is required</span>
+        <span class="help-block" ng-message="min">Minimum price is $0.01</span>
       </div>
     </div>
 
