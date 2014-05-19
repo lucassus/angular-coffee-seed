@@ -26,8 +26,7 @@ describe "Module `forms`", ->
 
       it "calls `save` method", ->
         element.find("button[type=submit]").click()
-        expect($scope.save.called).to.be.true
-        expect($scope.save.calledWith($scope.item, $scope.testForm)).to.be.true
+        expect($scope.save).to.be.calledWith($scope.item, $scope.testForm)
 
       it "marks the form as submitted", ->
         expect($scope.testForm.$submitted).to.be.undefined
@@ -40,7 +39,7 @@ describe "Module `forms`", ->
 
       it "does not call `save` method", ->
         element.find("button[type=submit]").click()
-        expect($scope.save.called).to.be.false
+        expect($scope.save).to.not.be.called
 
   describe "Directive `myMessages`", ->
 
