@@ -3,7 +3,7 @@ app = angular.module("myApp")
 class FormCtrl extends BaseCtrl
 
   @register app, "products.FormCtrl"
-  @inject "$scope", "$location", "alerts", { "product": "remote" }
+  @inject "$scope", "$location", "alerts", "product as remote"
 
   initialize: ->
     @reset()

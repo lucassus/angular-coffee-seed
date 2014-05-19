@@ -1,28 +1,21 @@
-# TODO write specs for BaseCtrl
-
 class @BaseCtrl
 
   @register: (app, name) ->
-    name ?= @name || @toString().match(/function\s*(.*?)\(/)?[1]
+    name ?= @name or @toString().match(/function\s*(.*?)\(/)?[1]
+    app = angular.module(app) if typeof app is "string"
     app.controller name, this
 
   @inject: (annotations...) ->
-    @annotations = annotations
-    @$inject = []
+    ANNOTATION_REG = /^(\S+)(\s+as\s+(\w+))?$/
 
-    for annotation in annotations
-      if typeof annotation is "object"
-        annotation = Object.keys(annotation)[0]
+    @annotations = _.map annotations, (annotation) ->
+      match = annotation.match(ANNOTATION_REG)
+      name: match[1], identifier: match[3] or match[1]
 
-      @$inject.push(annotation)
+    @$inject = _.map @annotations, (annotation) -> annotation.name
 
-  constructor: (services...) ->
-
+  constructor: (dependencies...) ->
     for annotation, index in @constructor.annotations
-      name = if typeof annotation is "object" \
-        then annotation[Object.keys(annotation)[0]] \
-        else annotation
-
-      this[name] = services[index]
+      this[annotation.identifier] = dependencies[index]
 
     @initialize?()
