@@ -1,7 +1,11 @@
-class TasksCtrl
+app = angular.module("myApp")
 
-  @$inject = ["$scope"]
-  constructor: (@$scope) ->
+class TasksCtrl extends BaseCtrl
+
+  @register app
+  @inject "$scope"
+
+  initialize: ->
     @tasks = [
       { name: "First task", done: false }
       { name: "Completed task", done: true }
@@ -11,17 +15,17 @@ class TasksCtrl
     @master = { name: "", done: false }
     @reset()
 
-  incompeleteTasks: ->
+  incompleteTasks: ->
     task for task in @tasks when not task.done
 
   tasksCount: ->
     @tasks.length
 
   remainingTasksCount: ->
-    @incompeleteTasks().length
+    @incompleteTasks().length
 
   archive: ->
-    @tasks = @incompeleteTasks()
+    @tasks = @incompleteTasks()
 
   reset: ->
     @$scope.task = angular.copy(@master)
@@ -34,6 +38,3 @@ class TasksCtrl
 
     @tasks.push angular.copy(task)
     @reset()
-
-angular.module("myApp")
-  .controller("TasksCtrl", TasksCtrl)

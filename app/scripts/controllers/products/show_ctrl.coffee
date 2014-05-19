@@ -1,8 +1,9 @@
-class ShowCtrl
+app = angular.module("myApp")
 
-  @$inject = ["$scope", "product"]
-  constructor: ($scope, product) ->
-    $scope.product = product
+class ShowCtrl extends BaseCtrl
 
-angular.module("myApp")
-  .controller("products.ShowCtrl", ShowCtrl)
+  @register app, "products.ShowCtrl"
+  @inject "$scope", "product"
+
+  initialize: ->
+    @$scope.product = @product

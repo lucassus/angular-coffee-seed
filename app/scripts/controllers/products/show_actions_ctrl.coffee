@@ -1,7 +1,9 @@
-class ShowActionsCtrl
+app = angular.module("myApp")
 
-  @$inject = ["$scope", "$state", "$window", "alerts"]
-  constructor: (@$scope, @$state, @$window, @alerts) ->
+class ShowActionsCtrl extends BaseCtrl
+
+  @register app, "products.ShowActionsCtrl"
+  @inject "$scope", "$state", "$window", "alerts"
 
   deleteProduct: ->
     return unless @$window.confirm("Are you sure?")
@@ -10,6 +12,3 @@ class ShowActionsCtrl
     promise.then =>
       @alerts.info "Product was deleted"
       @$state.go "products.list"
-
-angular.module("myApp")
-  .controller("products.ShowActionsCtrl", ShowActionsCtrl)

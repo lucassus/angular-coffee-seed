@@ -1,7 +1,9 @@
-class IndexCtrl
+app = angular.module("myApp")
 
-  @$inject = ["alerts", "products"]
-  constructor: (@alerts, @products) ->
+class IndexCtrl extends BaseCtrl
+
+  @register app, "products.IndexCtrl"
+  @inject "alerts", "products"
 
   deleteProduct: (product) ->
     promise = product.$delete()
@@ -10,6 +12,3 @@ class IndexCtrl
       @products.splice(index, 1) if index isnt -1
 
       @alerts.info "Product was deleted"
-
-angular.module("myApp")
-  .controller("products.IndexCtrl", IndexCtrl)

@@ -27,6 +27,7 @@ module.exports = (config) ->
       "app/scripts/modules/**/*.coffee"
       "app/scripts/application.coffee"
       "app/scripts/routes.coffee"
+      "app/scripts/base_ctrl.coffee"
       "app/scripts/controllers/**/*.coffee"
 
       "test/unit/helpers/**/*.coffee"

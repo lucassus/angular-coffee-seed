@@ -1,7 +1,11 @@
-class FormCtrl
+app = angular.module("myApp")
 
-  @$inject = ["$scope", "$location", "alerts", "product"]
-  constructor: (@$scope, @$location, @alerts, @remote) ->
+class FormCtrl extends BaseCtrl
+
+  @register app, "products.FormCtrl"
+  @inject "$scope", "$location", "alerts", { "product": "remote" }
+
+  initialize: ->
     @reset()
 
   save: (product) ->
@@ -21,6 +25,3 @@ class FormCtrl
     promise.then =>
       @alerts.info "Product was deleted"
       @$location.path "/products"
-
-angular.module("myApp")
-  .controller("products.FormCtrl", FormCtrl)

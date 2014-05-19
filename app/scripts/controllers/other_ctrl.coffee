@@ -1,11 +1,12 @@
-class OtherCtrl
+app = angular.module("myApp")
 
-  @$inject = ["alerts"]
-  constructor: (@alerts) ->
+class OtherCtrl extends BaseCtrl
+
+  @register app
+  @inject "alerts"
+
+  initialize: ->
     @name = "This is the other controller"
 
   sayHello: ->
     @alerts.info("Hello World!")
-
-angular.module("myApp")
-  .controller("OtherCtrl", OtherCtrl)

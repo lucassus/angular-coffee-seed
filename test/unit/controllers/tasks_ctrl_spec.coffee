@@ -10,7 +10,7 @@ describe "Controller `TasksCtrl`", ->
     $scope = $rootScope.$new()
     ctrl = $controller "TasksCtrl", $scope: $scope
 
-  it "assisgns tasks", ->
+  it "assigns tasks", ->
     expect(ctrl.tasks).to.not.be.undefined
     expect(ctrl.tasks.length).to.equal 3
 
@@ -28,7 +28,7 @@ describe "Controller `TasksCtrl`", ->
 
   describe "#tasksCount()", ->
 
-    it "returs the number of all tasks", ->
+    it "returns the number of all tasks", ->
       ctrl.tasks = [{}, {}, {}]
       expect(ctrl.tasksCount()).to.equal 3
 
