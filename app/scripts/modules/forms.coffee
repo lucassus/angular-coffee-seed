@@ -1,7 +1,8 @@
 forms = angular.module("myApp.forms", ["ngMessages"])
 
-# TODO write specs for this module
-
+# Custom submit directive
+# * calls the given expression only when the form is valid
+# * marks the current form as submitted
 forms.directive "mySubmit", [
   "$parse", "$log", ($parse, $log) ->
 
@@ -13,7 +14,7 @@ forms.directive "mySubmit", [
       (scope, element, attrs, formCtrl) ->
 
         element.on "submit", (event) ->
-          $log.debug "Submitting form '#{formCtrl.$name}'", formCtrl
+          $log.debug "Submitting the form '#{formCtrl.$name}'", formCtrl
 
           scope.$apply ->
             onSubmit(scope, $event: event) if formCtrl.$valid
@@ -21,6 +22,7 @@ forms.directive "mySubmit", [
 
 ]
 
+# Wrapper for `ngMessages` directive
 forms.directive "myMessages", [
   ->
 
@@ -32,16 +34,18 @@ forms.directive "myMessages", [
     link: (scope, element, attrs, formCtrl) ->
       field = formCtrl[attrs.myMessages]
 
-      scope.showMessages = -> formCtrl.$submitted or field.$dirty
-      scope.messages     = -> field.$error
+      scope.touched  = -> formCtrl.$submitted or field.$dirty
+      scope.messages = -> field.$error
 
     template: """
-      <div ng-show="showMessages()"
+      <div ng-show="touched()"
            ng-messages="messages()"
            ng-transclude></div>
     """
 ]
 
+# Toggles bootstrap classes (has-error, has-success)
+# TODO write specs for this directive
 forms.directive "myErrorFor", [
   ->
 
