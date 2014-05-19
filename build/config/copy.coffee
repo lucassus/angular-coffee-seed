@@ -8,6 +8,7 @@ module.exports = (grunt) ->
       dest: "<%= appConfig.dev %>"
       src: [
         "*.{ico,txt}"
+        "**/*.js"
         "**/*.html"
         "images/**/*.{gif,webp}"
       ]
