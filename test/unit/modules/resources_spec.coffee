@@ -38,7 +38,7 @@ describe "Module `myApp.resources`", ->
       it "is defined", ->
         expect(Products.get).to.not.be.undefined
 
-      it "quries for a product", ->
+      it "queries for a product", ->
         $httpBackend.whenGET("/api/products/123.json").respond(@product)
         promise = Products.get(id: 123).$promise
         expect(promise).to.not.be.undefined
@@ -81,16 +81,16 @@ describe "Module `myApp.resources`", ->
 
     describe "#persisted()", ->
       product = null
-      beforeEach -> product = new Products(id: @id)
+      beforeEach -> product = new Products()
 
       context "when the product has an id", ->
-        before -> @id = 123
+        beforeEach -> product.id = 123
 
         it "returns true", ->
           expect(product.persisted()).to.be.true
 
       context "when the product does not have an id", ->
-        before -> @id = null
+        beforeEach -> product.id = null
 
         it "returns false", ->
           expect(product.persisted()).to.be.false
@@ -98,23 +98,23 @@ describe "Module `myApp.resources`", ->
     describe "#priceWithDiscount()", ->
       product = null
       beforeEach inject (Products) ->
-        product = new Products(price: @price, discount: @discount)
+        product = new Products()
 
       it "is defined", ->
         expect(product.priceWithDiscount).to.not.be.undefined
 
       context "when discount is not defined", ->
-        before ->
-          @discount = undefined
-          @price = 9.99
+        beforeEach ->
+          product.discount = undefined
+          product.price = 9.99
 
         it "returns the base price", ->
           expect(product.priceWithDiscount()).to.equal 9.99
 
       context "when discount is defined", ->
-        before ->
-          @discount = 22
-          @price = 100
+        beforeEach ->
+          product.discount = 22
+          product.price = 100
 
         it "returns price with discount", ->
           expect(product.priceWithDiscount()).to.equal 78
@@ -130,37 +130,37 @@ describe "Module `myApp.resources`", ->
 
       product = null
       beforeEach inject (Products) ->
-        product = new Products(discount: @discount)
+        product = new Products()
 
       it "is defined", ->
         expect(product.hasDiscount).to.not.be.undefined
 
       context "when the discount is not defined", ->
-        before -> @discount = undefined
+        beforeEach -> product.discount = undefined
 
         it "returns false", ->
           expect(product).to.not.have.discount
 
       context "when the @discount is null", ->
-        before -> @discount = null
+        beforeEach -> product.discount = null
 
         it "returns false", ->
           expect(product).to.not.have.discount
 
       context "when the @discount is 0", ->
-        before -> @discount = 0
+        beforeEach -> product.discount = 0
 
         it "returns false", ->
           expect(product).to.not.have.discount
 
       context "when the @discount < 0", ->
-        before -> @discount = -10
+        beforeEach -> product.discount = -10
 
         it "returns false", ->
           expect(product).to.not.have.discount
 
       context "when the @discount is > 0", ->
-        before -> @discount = 10
+        beforeEach -> product.discount = 10
 
         it "returns true", ->
           expect(product).to.have.discount
