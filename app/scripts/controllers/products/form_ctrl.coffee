@@ -4,25 +4,15 @@ class FormCtrl
   constructor: (@$scope, @$location, @alerts, @remote) ->
     @reset()
 
-  isClean: ->
-    angular.equals(@product, @remote)
-
-  save: (form, product) ->
-    return if @isClean()
-
-    form.$submitted = true
-    return unless form.$valid
-
+  save: (product) ->
     promise = product.$save()
-    successMessage = if product.id? then "Product was updated" else "Product was created"
+    successMessage = if product.persisted() then "Product was updated" else "Product was created"
 
     promise.then =>
       @alerts.success successMessage
       @$location.path "/products"
 
   reset: ->
-    return if @isClean()
-
     @product = angular.copy(@remote)
     @$scope.product = @product
 

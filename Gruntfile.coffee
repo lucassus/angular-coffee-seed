@@ -32,6 +32,7 @@ module.exports = (grunt) ->
     clean:         loadMoule "clean"
     connect:       loadMoule "connect"
     shell:         loadMoule "shell"
+    devUpdate:     loadMoule "devUpdate"
 
   grunt.renameTask "regarde", "watch"
 

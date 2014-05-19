@@ -1,8 +1,6 @@
 #!/bin/bash
 
-source ./script/lib/server
-
-startServer
+./node_modules/protractor/bin/webdriver-manager update
 
 grunt build:dev
 grunt configureProxies connect:integration watch &
@@ -23,7 +21,6 @@ echo -e "\nRunning integration specs."
 ./node_modules/protractor/bin/protractor test/protractor-conf.coffee --verbose --includeStackTrace
 
 function stopAll() {
-  stopServer
   echo "Killing the frontend server PID=$PID"
   kill "$PID"
 }

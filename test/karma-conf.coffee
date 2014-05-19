@@ -6,6 +6,7 @@ module.exports = (config) ->
     frameworks: [
       "mocha"
       "chai"
+      "sinon"
     ]
 
     # list of files / patterns to load in the browser
@@ -17,15 +18,9 @@ module.exports = (config) ->
       "bower_components/angular-mocks/angular-mocks.js"
       "bower_components/angular-resource/angular-resource.js"
       "bower_components/angular-animate/angular-animate.js"
+      "app/scripts/angular-messages.js"
       "bower_components/angular-ui-router/release/angular-ui-router.js"
       "bower_components/angular-bindonce/bindonce.js"
-
-      "bower_components/sinon/lib/sinon.js"
-      "bower_components/sinon/lib/sinon/spy.js"
-      "bower_components/sinon/lib/sinon/call.js"
-      "bower_components/sinon/lib/sinon/stub.js"
-      "bower_components/sinon/lib/sinon/mock.js"
-      "bower_components/sinon/lib/sinon/assert.js"
 
       "app/templates/**/*.html"
 
@@ -58,7 +53,12 @@ module.exports = (config) ->
     # text-summary - produces a compact text summary of coverage, typically to console
     # text - produces a detailed text table with coverage for all files
     coverageReporter:
-      type: "text-summary"
+      reporters: [
+        { type: "html" }
+        { type: "text", file: "karma-coverage.txt" }
+        { type: "text-summary" }
+        { type: "cobertura" }
+      ]
       dir: "coverage"
 
     # web server port
@@ -87,18 +87,3 @@ module.exports = (config) ->
     # level of logging
     # possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_WARN
-
-    plugins: [
-      "karma-coffee-preprocessor"
-      "karma-ng-html2js-preprocessor"
-
-      "karma-mocha"
-      "karma-chai-plugins"
-      "karma-spec-reporter"
-      "karma-coverage"
-
-      "karma-phantomjs-launcher"
-      "karma-chrome-launcher"
-      "karma-firefox-launcher"
-      "karma-opera-launcher"
-    ]

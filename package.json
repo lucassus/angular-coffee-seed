@@ -7,16 +7,16 @@
   },
   "main": "./server/index.coffee",
   "dependencies": {
-    "coffee-script": "1.6.3",
+    "coffee-script": "1.7.1",
     "express": "3.4.8",
     "lodash": "2.4.1",
-    "Faker": "0.5.11"
+    "Faker": "0.7.0"
   },
   "devDependencies": {
-    "mocha": "1.17.1",
-    "chai": "1.8.1",
-    "chai-as-promised": "~4.1.0",
-    "supertest": "0.8.3",
+    "mocha": "1.18.2",
+    "chai": "1.9.1",
+    "chai-as-promised": "4.1.1",
+    "supertest": "0.12.1",
 
     "grunt": "0.4.2",
     "grunt-contrib-connect": "0.6.0",
@@ -37,20 +37,22 @@
     "grunt-bower-task": "0.3.4",
     "grunt-usemin": "2.0.2",
     "grunt-regarde": "0.1.1",
-    "grunt-karma": "0.6.2",
-    "karma": "0.10.9",
-    "karma-mocha": "0.1.1",
-    "karma-chai-plugins": "0.1.3",
-    "karma-spec-reporter": "0.0.8",
-    "karma-coffee-preprocessor": "0.1.2",
+    "grunt-karma": "0.8.3",
+    "grunt-dev-update": "0.5.7",
+    "karma": "0.12.16",
+    "karma-mocha": "~0.1.3",
+    "karma-chai": "~0.1.0",
+    "karma-sinon": "~1.0.3",
+    "karma-spec-reporter": "0.0.12",
+    "karma-coffee-preprocessor": "0.2.1",
     "karma-ng-html2js-preprocessor": "0.1.0",
     "karma-coverage": "git+https://github.com/kylewelsby/karma-coverage#fix-coffee-script-compiler",
     "karma-opera-launcher": "0.1.0",
     "matchdep": "0.3.0",
-    "nodemon": "1.0.9",
-    "request": "2.33.0",
+    "nodemon": "1.0.19",
+    "request": "2.34.0",
 
-    "protractor": "0.17.0"
+    "protractor": "0.22.0"
   },
   "engines": {
     "node": "0.10.x",

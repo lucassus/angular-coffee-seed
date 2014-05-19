@@ -1,6 +1,6 @@
 module.exports = (grunt) ->
 
-  _extractOptions = (key, opts = {}) ->
+  extractOptions = (key, opts = {}) ->
     options = grunt.option(key) or opts.default
     options = options.replace(/[\s\[\]]/, "")
     options.split(",")
@@ -17,17 +17,13 @@ module.exports = (grunt) ->
   # - IE (only Windows)
   parseBrowsers = (opts = {}) ->
     opts.default or= "PhantomJS"
-    _extractOptions("browsers", opts)
+    extractOptions("browsers", opts)
 
   # common options for all karma's modes (unit, watch, coverage, e2e)
   options:
     configFile: "<%= appConfig.test %>/karma-conf.coffee"
     browsers: parseBrowsers(default: "PhantomJS")
     colors: true
-
-    coverageReporter:
-      type: grunt.option("coverage-reporter") || "text"
-      dir: "coverage"
 
     # If browser does not capture in given timeout [ms], kill it
     captureTimeout: 5000
