@@ -54,6 +54,7 @@ class IndexCtrl extends BaseCtrl
       pagingOptions: @$scope.pagingOptions
       sortInfo: @$scope.sortInfo
       useExternalSorting: true
+      enableColumnReordering: true
       showFooter: true
       primaryKey: "id"
 
