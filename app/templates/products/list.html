@@ -2,17 +2,17 @@
   <h2>Products list</h2>
 </div>
 
-<p class="lead">You have {{index.products.length}} products</p>
+<p class="lead">You have {{products.length}} products</p>
 
 <div class="products-grid" ng-grid="gridOptions"></div>
 
-<hr />
+<div class="well">
+  <pre>
+    {{selectedProducts | json}}
+  </pre>
 
-<pre>
-  {{selectedProducts | json}}
-</pre>
-
-<a href="" ng-click="index.clearSelection()">Clear selection</a>
+  <a href="" ng-click="index.clearSelection()">Clear selection</a>
+</div>
 
 <a ui-sref="products.create" class="btn btn-success">
   <i class="fa fa-plus"></i> Create new product

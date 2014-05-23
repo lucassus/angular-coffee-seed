@@ -6,22 +6,23 @@ class IndexCtrl extends BaseCtrl
   @inject "$scope", "alerts", "Products"
 
   initialize: ->
-    @totalServerItems = 0
-
-    fetchProducts = ->
-      params = _.pick($scope.pagingOptions, "currentPage", "pageSize")
-      params.sortField = $scope.sortInfo.fields[0]
-      params.sortDirection = $scope.sortInfo.directions[0]
-
-      promise = Products.query(params).$promise
-      promise.then (data) ->
-        $scope.products = data.rows
-        $scope.totalServerItems = data.total
+    @$scope.totalServerItems = 0
+    @$scope.selectedProducts = []
 
     @$scope.pagingOptions =
       pageSizes: [2, 3, 5]
       currentPage: 1
       pageSize: 2
+
+    fetchProducts = =>
+      params = _.pick(@$scope.pagingOptions, "currentPage", "pageSize")
+      params.sortField = @$scope.sortInfo.fields[0]
+      params.sortDirection = @$scope.sortInfo.directions[0]
+
+      promise = @Products.query(params).$promise
+      promise.then (data) =>
+        @$scope.products = data.rows
+        @$scope.totalServerItems = data.total
 
     @$scope.sortInfo =
       fields: ["id"]
@@ -29,13 +30,14 @@ class IndexCtrl extends BaseCtrl
 
     nameCellTpl = """
       <div>
-        <a ui-sref="products.show.info({id: row.getProperty('id')})"><i class="fa fa-search"></i>
+        <a ui-sref="products.show.info({id: row.getProperty('id')})">
+          <i class="fa fa-search"></i>
           {{row.getProperty('name')}}
         </a>
       </div>
     """
 
-    $scope.gridColumnDefs = [
+    gridColumnDefs = [
       { field: "id",          displayName: "#", width: "auto" }
       {
         field: "name"
@@ -48,14 +50,14 @@ class IndexCtrl extends BaseCtrl
       { field: "createdAt",   displayName: "Created At" }
     ]
 
-    @pagingOptions =
+    @$scope.pagingOptions =
       pageSizes: [2, 3, 5]
       pageSize: 2
       currentPage: 1
 
-    @gridOptions =
+    @$scope.gridOptions =
       data: "products"
-      columnDefs: $scope.gridColumnDefs
+      columnDefs: gridColumnDefs
       totalServerItems: "totalServerItems"
       enableColumnResize: true
       enablePaging: true
@@ -65,15 +67,15 @@ class IndexCtrl extends BaseCtrl
       showFooter: true
       primaryKey: "id"
       multiSelect: true
-      selectedItems: $scope.selectedProducts
+      selectedItems: @$scope.selectedProducts
 
     loadGrid = (newVal, oldVal) ->
       fetchProducts() unless angular.equals(newVal, oldVal)
 
-    $scope.$watch "pagingOptions.currentPage", loadGrid, true
-    $scope.$watch "pagingOptions.pageSize", loadGrid, true
-    $scope.$watch "sortInfo.fields", loadGrid, true
-    $scope.$watch "sortInfo.directions", loadGrid, true
+    @$scope.$watch "pagingOptions.currentPage", loadGrid, true
+    @$scope.$watch "pagingOptions.pageSize", loadGrid, true
+    @$scope.$watch "sortInfo.fields", loadGrid, true
+    @$scope.$watch "sortInfo.directions", loadGrid, true
 
     fetchProducts()
 

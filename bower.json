@@ -11,7 +11,7 @@
     "angular-messages": "1.3.0-beta.9",
     "angular-ui-router": "0.2.10",
     "angular-bindonce": "0.3.1",
-    "ng-grid": "2.0.7",
+    "ng-grid": "2.0.11",
 
     "bootstrap": "3.0.3",
     "font-awesome": "4.1.0"
