@@ -52,6 +52,10 @@ class IndexCtrl extends BaseCtrl
     ]
 
     @$scope.gridOptions =
+      plugins: [
+        new ngGridFlexibleHeightPlugin()
+      ]
+
       data: "products"
       columnDefs: gridColumnDefs
       totalServerItems: "totalServerItems"
@@ -71,15 +75,6 @@ class IndexCtrl extends BaseCtrl
       rowHeight: 32
       headerRowHeight: 45
       footerRowHeight: 55
-
-    # dynamically change grid height
-    @$scope.getTableStyle = =>
-      rowHeight = 32
-      headerRowHeight = 45
-      footerRowHeight = 55
-      offset = 2
-
-      height: (@$scope.products.length * rowHeight + headerRowHeight + footerRowHeight + offset) + "px"
 
     loadGrid = (newVal, oldVal) ->
       fetchProducts() unless angular.equals(newVal, oldVal)

@@ -27,7 +27,8 @@
     },
     "ng-grid": {
       "css": "ng-grid.css",
-      "js": "build/ng-grid.js"
+      "js": "build/ng-grid.js",
+      "js/plugins": "plugins/*.js"
     },
     "font-awesome": {
       "css": [
