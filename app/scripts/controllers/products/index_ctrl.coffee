@@ -3,7 +3,7 @@ app = angular.module("myApp")
 class IndexCtrl extends BaseCtrl
 
   @register app, "products.IndexCtrl"
-  @inject "$scope", "alerts", "Products"
+  @inject "$scope", "$state", "$stateParams", "alerts", "Products"
 
   initialize: ->
     @$scope.products = []
@@ -12,22 +12,12 @@ class IndexCtrl extends BaseCtrl
 
     @$scope.pagingOptions =
       pageSizes: [10, 20, 50, 100]
-      pageSize: 10
-      currentPage: 1
-
-    fetchProducts = =>
-      params = _.pick(@$scope.pagingOptions, "currentPage", "pageSize")
-      params.sortField = @$scope.sortInfo.fields[0]
-      params.sortDirection = @$scope.sortInfo.directions[0]
-
-      promise = @Products.query(params).$promise
-      promise.then (data) =>
-        @$scope.products = data.rows
-        @$scope.totalServerItems = data.total
+      pageSize: if @$stateParams.pageSize? then parseInt(@$stateParams.pageSize) else 10
+      currentPage: if @$stateParams.page? then parseInt(@$stateParams.page) else 1
 
     @$scope.sortInfo =
-      fields: ["id"]
-      directions: ["asc"]
+      fields: [if @$stateParams.sortField? then @$stateParams.sortField else "id"]
+      directions: [if @$stateParams.sortDirection? then @$stateParams.sortDirection else "asc"]
 
     nameCellTpl = """
       <div>
@@ -76,8 +66,25 @@ class IndexCtrl extends BaseCtrl
       headerRowHeight: 45
       footerRowHeight: 55
 
-    loadGrid = (newVal, oldVal) ->
+    fetchProducts = =>
+      params = _.pick(@$scope.pagingOptions, "currentPage", "pageSize")
+      params.sortField = @$scope.sortInfo.fields[0]
+      params.sortDirection = @$scope.sortInfo.directions[0]
+
+      promise = @Products.query(params).$promise
+      promise.then (data) =>
+        @$scope.products = data.rows
+        @$scope.totalServerItems = data.total
+
+    loadGrid = (newVal, oldVal) =>
       fetchProducts() unless angular.equals(newVal, oldVal)
+
+      params =
+        page: @$scope.pagingOptions.currentPage
+        pageSize: @$scope.pagingOptions.pageSize
+        sortField: @$scope.sortInfo.fields[0]
+        sortDirection: @$scope.sortInfo.directions[0]
+      @$state.go("products.list", params, notify: false)
 
     @$scope.$watch "pagingOptions.currentPage", loadGrid, true
     @$scope.$watch "pagingOptions.pageSize", loadGrid, true

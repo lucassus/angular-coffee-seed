@@ -15,7 +15,7 @@ app.config [
         template: "<ui-view/>"
 
       .state "products.list",
-        url: ""
+        url: "?page&pageSize&sortField&sortDirection"
         templateUrl: "templates/products/list.html"
         controller: "products.IndexCtrl as index"
 
