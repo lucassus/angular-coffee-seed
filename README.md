@@ -97,13 +97,12 @@ Run test against specific browsers
 
 ### How to develop specs
 
-* install standalone Selenium `node_modules/protractor/bin/webdriver-manager update`
-* start the app in the `test` evn `script/start-test-server`
-* run it with `grunt coffee:test && protractor dev/test/protractor-conf.js`
+* install standalone Selenium `./node_modules/protractor/bin/webdriver-manager update`
+* start the app in the `test` evn `./script/start-test-server`
+* run it with `./node_modules/protractor/bin/protractor test/protractor-conf.coffee`
 
 ### WebDriver and PhantomJS
 
-* stop selenium
 * run PhantomJS with WebDriver support `phantomjs --webdriver=4444`
 * setup protractor `browserName: "phantomjs"`
 * run specs

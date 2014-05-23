@@ -57,7 +57,7 @@ describe "Controller `products.ShowActionsCtrl`", ->
       it "redirects to the products list page", inject ($state) ->
         expect($state.go).to.be.calledWith "products.list"
 
-    confirm "when the confirmation was not accepted", ->
+    context "when the confirmation was not accepted", ->
       beforeEach inject ($window) ->
         $window.confirm.returns(false)
         ctrl.deleteProduct()

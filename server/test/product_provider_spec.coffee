@@ -35,6 +35,16 @@ describe "ProductProvider", ->
         expect(products.length).to.equal 2
         done()
 
+  describe "#findAllPaged()", ->
+
+    it "finds all products", (done) ->
+
+      options = currentPage: 1
+      productProvider.findAllPaged options, (error, result) ->
+        products = result.rows
+        expect(products.length).to.equal 2
+        done()
+
   describe "#findById()", ->
 
     context "when the product can be found", ->

@@ -3,6 +3,7 @@
 app = angular.module "myApp", [
   "ngAnimate"
   "ui.router"
+  "ngGrid"
   "pasvaz.bindonce"
 
   "myApp.templates"

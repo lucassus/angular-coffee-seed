@@ -3,6 +3,7 @@ exports.config =
   # seleniumServerJar: null # use default location
   # seleniumPort: 4444
 
+  chromeDriver: null # use default location
   chromeOnly: false
 
   capabilities:

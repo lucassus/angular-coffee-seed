@@ -11,6 +11,7 @@
     "angular-messages": "1.3.0-beta.9",
     "angular-ui-router": "0.2.10",
     "angular-bindonce": "0.3.1",
+    "ng-grid": "2.0.11",
 
     "bootstrap": "3.0.3",
     "font-awesome": "4.1.0"
@@ -20,14 +21,29 @@
   },
   "exportsOverride": {
     "angular-ui-router": {
-      "/": ["release/angular-ui-router.js"]
+      "/": [
+        "release/angular-ui-router.js"
+      ]
+    },
+    "ng-grid": {
+      "css": "ng-grid.css",
+      "js": "build/ng-grid.js",
+      "js/plugins": "plugins/*.js"
     },
     "font-awesome": {
-      "css": ["css/font-awesome.css", "css/font-awesome-ie7.css"],
-      "fonts": ["fonts/*"]
+      "css": [
+        "css/font-awesome.css",
+        "css/font-awesome-ie7.css"
+      ],
+      "fonts": [
+        "fonts/*"
+      ]
     },
     "lodash": {
       "/": ["dist/lodash.js"]
     }
+  },
+  "resolutions": {
+    "angular": "1.2.12"
   }
 }

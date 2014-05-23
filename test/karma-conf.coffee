@@ -21,6 +21,7 @@ module.exports = (config) ->
       "bower_components/angular-messages/angular-messages.js"
       "bower_components/angular-ui-router/release/angular-ui-router.js"
       "bower_components/angular-bindonce/bindonce.js"
+      "bower_components/ng-grid/build/ng-grid.js"
 
       "app/templates/**/*.html"
 

@@ -15,11 +15,9 @@ app.config [
         template: "<ui-view/>"
 
       .state "products.list",
-        url: ""
+        url: "?page&pageSize&sortField&sortDirection&filterText"
         templateUrl: "templates/products/list.html"
         controller: "products.IndexCtrl as index"
-        resolve:
-          products: ["Products", (Products) -> Products.query().$promise]
 
       .state "products.create",
         url: "/create"
