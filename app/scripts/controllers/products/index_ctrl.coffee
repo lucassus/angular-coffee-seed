@@ -19,8 +19,8 @@ class IndexCtrl extends BaseCtrl
       fields: [if @$stateParams.sortField? then @$stateParams.sortField else "id"]
       directions: [if @$stateParams.sortDirection? then @$stateParams.sortDirection else "asc"]
 
-    nameCellTpl = """
-      <div>
+    nameCellTemplate = """
+      <div class="ngCellText" ng-class="col.colIndex()">
         <a ui-sref="products.show.info({id: row.getProperty('id')})">
           <i class="fa fa-search"></i>
           {{row.getProperty('name')}}
@@ -29,16 +29,16 @@ class IndexCtrl extends BaseCtrl
     """
 
     gridColumnDefs = [
-      { field: "id",          displayName: "#", width: "auto" }
+      { field: "id", displayName: "#", width: "auto" }
       {
         field: "name"
         displayName: "Name"
         resizable: true
-        cellTemplate: nameCellTpl
+        cellTemplate: nameCellTemplate
       }
-      { field: "price",       displayName: "Price", width: "120px", resizable: false }
+      { field: "price",       displayName: "Price", cellFilter: "currency", width: "120px", resizable: false }
       { field: "description", displayName: "Description" }
-      { field: "createdAt",   displayName: "Created At" }
+      { field: "createdAt",   displayName: "Created At", cellFilter: "date", width: "120px" }
     ]
 
     @$scope.gridOptions =
