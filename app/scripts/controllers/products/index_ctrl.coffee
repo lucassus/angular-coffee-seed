@@ -62,7 +62,10 @@ class IndexCtrl extends BaseCtrl
       useExternalSorting: true
       showFooter: true
       primaryKey: "id"
+
       multiSelect: true
+      selectWithCheckboxOnly: true
+      showSelectionCheckbox: true
       selectedItems: @$scope.selectedProducts
 
       rowHeight: 32
@@ -90,6 +93,7 @@ class IndexCtrl extends BaseCtrl
 
   clearSelection: ->
     @$scope.selectedProducts.splice(0, @$scope.selectedProducts.length)
+    @$scope.gridOptions.selectAll(false)
 
   deleteProduct: (product) ->
     promise = product.$delete()
