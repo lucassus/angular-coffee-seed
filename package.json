@@ -10,7 +10,7 @@
     "coffee-script": "1.7.1",
     "express": "3.4.8",
     "lodash": "2.4.1",
-    "Faker": "0.7.0"
+    "Faker": "0.7.2"
   },
   "devDependencies": {
     "mocha": "1.19.0",

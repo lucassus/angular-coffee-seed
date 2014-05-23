@@ -6,13 +6,14 @@ class IndexCtrl extends BaseCtrl
   @inject "$scope", "alerts", "Products"
 
   initialize: ->
+    @$scope.products = []
     @$scope.totalServerItems = 0
     @$scope.selectedProducts = []
 
     @$scope.pagingOptions =
-      pageSizes: [2, 3, 5]
+      pageSizes: [10, 20, 50, 100]
+      pageSize: 10
       currentPage: 1
-      pageSize: 2
 
     fetchProducts = =>
       params = _.pick(@$scope.pagingOptions, "currentPage", "pageSize")
@@ -50,11 +51,6 @@ class IndexCtrl extends BaseCtrl
       { field: "createdAt",   displayName: "Created At" }
     ]
 
-    @$scope.pagingOptions =
-      pageSizes: [2, 3, 5]
-      pageSize: 2
-      currentPage: 1
-
     @$scope.gridOptions =
       data: "products"
       columnDefs: gridColumnDefs
@@ -68,6 +64,19 @@ class IndexCtrl extends BaseCtrl
       primaryKey: "id"
       multiSelect: true
       selectedItems: @$scope.selectedProducts
+
+      rowHeight: 32
+      headerRowHeight: 45
+      footerRowHeight: 55
+
+    # dynamically change grid height
+    @$scope.getTableStyle = =>
+      rowHeight = 32
+      headerRowHeight = 45
+      footerRowHeight = 55
+      offset = 2
+
+      height: (@$scope.products.length * rowHeight + headerRowHeight + footerRowHeight + offset) + "px"
 
     loadGrid = (newVal, oldVal) ->
       fetchProducts() unless angular.equals(newVal, oldVal)

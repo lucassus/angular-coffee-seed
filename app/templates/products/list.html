@@ -4,7 +4,9 @@
 
 <p class="lead">You have {{products.length}} products</p>
 
-<div class="products-grid" ng-grid="gridOptions"></div>
+<div class="products-grid"
+     ng-grid="gridOptions"
+     ng-style="getTableStyle()"></div>
 
 <div class="well">
   <pre>
