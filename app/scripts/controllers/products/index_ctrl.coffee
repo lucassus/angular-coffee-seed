@@ -11,7 +11,7 @@ class IndexCtrl extends BaseCtrl
     @$scope.selectedProducts = []
 
     @$scope.pagingOptions =
-      pageSizes: [10, 20, 50, 100]
+      pageSizes: [5, 10, 20, 50, 100]
       pageSize: if @$stateParams.pageSize? then parseInt(@$stateParams.pageSize) else 10
       currentPage: if @$stateParams.page? then parseInt(@$stateParams.page) else 1
 
@@ -87,12 +87,8 @@ class IndexCtrl extends BaseCtrl
         sortDirection: @$scope.sortInfo.directions[0]
       @$state.go("products.list", params, notify: false)
 
-    @$scope.$watch "pagingOptions.currentPage", loadGrid, true
-    @$scope.$watch "pagingOptions.pageSize", loadGrid, true
-    @$scope.$watch "sortInfo.fields", loadGrid, true
-    @$scope.$watch "sortInfo.directions", loadGrid, true
-
-    fetchProducts()
+    @$scope.$watch "pagingOptions", loadGrid, true
+    @$scope.$watch "sortInfo", loadGrid, true
 
   clearSelection: ->
     @$scope.selectedProducts.splice(0, @$scope.selectedProducts.length)
