@@ -6,6 +6,9 @@
     "url": "https://github.com/lucassus/angular-seed.git"
   },
   "main": "./server/index.coffee",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register --reporter spec server/test"
+  },
   "dependencies": {
     "coffee-script": "1.7.1",
 
