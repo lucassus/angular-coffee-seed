@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run test for the server side application
-mocha --compilers coffee:coffee-script/register --reporter spec server/test
+./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register --reporter spec server/test
 
 # ..check if it pass
 if [ $? -ne 0 ]; then
