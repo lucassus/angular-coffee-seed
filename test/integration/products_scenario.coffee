@@ -12,6 +12,7 @@ describe.only "Products page", ->
 
   # mock the backend
   beforeEach ->
+    # TODO use the real server, maintain spike-ng-mocks-in-integration-specs
     mockScript = ->
       products = [
         {
