@@ -29,12 +29,19 @@ class TasksCtrl extends BaseCtrl
 
   reset: ->
     @$scope.task = angular.copy(@master)
-    @$scope.taskForm?.$setPristine()
-    @$scope.taskForm?.$submitted = false
+
+    form = @$scope.taskForm
+    if form
+      form.$setPristine()
+      form.$submitted = false
 
   addTask: (task) ->
-    @$scope.taskForm?.$submitted = true
-    return unless @$scope.taskForm?.$valid
+    # TODO pass form here
+    form = @$scope.taskForm
+
+    # TODO use custom submit method
+    form.$submitted = true
+    return unless form.$valid
 
     @tasks.push angular.copy(task)
     @reset()
