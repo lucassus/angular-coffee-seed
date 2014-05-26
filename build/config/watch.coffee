@@ -28,7 +28,3 @@ module.exports = (grunt) ->
   livereload:
     files: ["<%= appConfig.dev %>/**/*"]
     tasks: ["livereload", "timestamp"]
-
-  express:
-    files: ["<%= appConfig.server %>/**/*"]
-    tasks: ["express:dev", "timestamp"]

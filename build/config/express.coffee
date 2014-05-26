@@ -1,12 +1,10 @@
+path = require("path")
+
 module.exports = (grunt) ->
 
-  # Override defaults here
   options:
-    node_env: "development"
     port: 5000
-    background: true
-    opts: ["./node_modules/coffee-script/bin/coffee"]
+    server: path.resolve(__dirname, "../../server/lib/app")
 
-  dev:
-    options:
-      script: "./server/index.coffee"
+  # Override defaults here
+  default_option: {}

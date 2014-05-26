@@ -4,7 +4,7 @@
 ./node_modules/protractor/bin/webdriver-manager update
 
 grunt build:dev
-grunt configureProxies connect:integration watch &
+grunt express configureProxies connect:integration watch &
 PID=$!
 
 function isRunning() {
