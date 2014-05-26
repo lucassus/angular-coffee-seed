@@ -29,7 +29,7 @@
 
       <div class="input-group">
         <span class="input-group-addon">$</span>
-        <input id="product-price" type="number" class="form-control" placeholder="Enter price"
+        <input id="product-price" type="text" class="form-control" placeholder="Enter price"
                name="price" ng-model="product.price"
                ng-required="true" min="0.01"/>
       </div>
@@ -44,7 +44,7 @@
       <label for="product-discount" class="control-label">Discount</label>
 
       <div class="input-group">
-        <input id="product-discount" type="number" class="form-control" placeholder="Enter discount"
+        <input id="product-discount" type="text" class="form-control" placeholder="Enter discount"
                name="discount" ng-model="product.discount" min="0" max="100"/>
         <span class="input-group-addon">%</span>
       </div>

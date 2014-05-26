@@ -6,7 +6,7 @@ IndexPage = require("./helpers/page_objects/products/index_page")
 FormPage = require("./helpers/page_objects/products/form_page")
 ShowPage = require("./helpers/page_objects/products/show_page")
 
-describe.only "Products page", ->
+describe "Products page", ->
   alertView = null
   indexPage = null
 
@@ -72,6 +72,7 @@ describe.only "Products page", ->
       expect(formPage.submitButton.getText()).to.eventually.eq "Create"
 
     describe "click on `create` button", ->
+
       beforeEach ->
         formPage.setName "New product"
         formPage.setPrice "9.99"
