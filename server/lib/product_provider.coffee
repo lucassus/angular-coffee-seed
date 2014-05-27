@@ -10,18 +10,25 @@ class ProductProvider
   findAll: (callback = ->) ->
     callback(null, @products)
 
-  # jqgrid: page,total,records,rows
-  findAllPaged: (options = {}, callback = ->) ->
+  # jqGrid: page,total,records,rows
+  findAllPaged: (options = {}, sort = {}, callback = ->) ->
     currentPage = options.currentPage or 1
     pageSize = options.pageSize or 10
     total = @products.length
+
+    rows = []
+    if sort.field
+      rows = _.sortBy(@products, (product) -> product[sort.field])
+      rows = rows.reverse() if sort.direction isnt "asc"
+    else
+      rows = @products
 
     result =
       currentPage: currentPage
       pageSize: pageSize
       pages: Math.ceil(total / pageSize)
       total: total
-      rows: @products.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      rows: rows.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 
     callback(null, result)
 

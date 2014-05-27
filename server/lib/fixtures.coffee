@@ -1,4 +1,5 @@
 faker = require("Faker")
+_ = require("lodash")
 
 module.exports =
 
@@ -15,6 +16,11 @@ module.exports =
       { name: "Samsung Galaxy Note", price: 2699, discount: 0 }
       { name: "Samsung S4", price: 3000, discount: 2 }
     ]
+
+    _(1000).times ->
+      products.push
+        name: faker.Lorem.sentence(3)
+        price: faker.Helpers.randomNumber(10000)
 
     for product in products
       product.description ?= faker.Lorem.paragraphs(3)
