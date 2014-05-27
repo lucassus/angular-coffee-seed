@@ -10,15 +10,29 @@
 <button ng-click="index.tableParams.reload()" class="btn btn-default">Reload</button>
 <button ng-click="index.tableParams.sorting({})" class="btn btn-default">Clear sorting</button>
 
-<table ng-table="index.tableParams" show-filter="false" class="table">
+<table ng-table="index.tableParams" show-filter="false" class="table products">
   <tbody>
   <tr ng-repeat="product in $data">
     <td data-title="'#'" data-sortable="'id'">
       {{product.id}}
     </td>
 
+    <td>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown">
+          Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ui-sref="products.show.info({id: product.id})"><i class="fa fa-search"></i> Show</a></li>
+          <li><a ui-sref="products.edit({id: product.id})"><i class="fa fa-edit"></i> Edit</a></li>
+          <li class="divider"></li>
+          <li><a href="" ng-click="index.deleteProduct(product)"><i class="fa fa-trash-o"></i> Delete</a></li>
+        </ul>
+      </div>
+    </td>
+
     <td data-title="'Name'" data-sortable="'name'">
-      {{product.name}}
+      <a ui-sref="products.show.info({id: product.id})">{{product.name}}</a>
     </td>
 
     <td data-title="'Price'" data-sortable="'price'">

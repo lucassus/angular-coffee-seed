@@ -3,20 +3,24 @@ app = angular.module("myApp")
 class IndexCtrl extends BaseCtrl
 
   @register app, "products.IndexCtrl"
-  @inject "alerts", "ngTableParams", "Products"
+  @inject "$location", "alerts", "ngTableParams", "Products"
 
   initialize: ->
     defaultSorting = { price: "asc" }
 
-    @tableParams = new @ngTableParams({
+    parameters = angular.extend({
       page: 1     # show the first page
       count: 10   # 10 rows per page
 
       # initialize sorting
       sorting: defaultSorting
-    }, {
+    }, @$location.search())
+
+    settings = {
       total: 0
       getData: ($defer, params) =>
+        # put params in the url
+        @$location.search(params.url())
 
         rawParams = params.url()
         sorting = _.chain(rawParams)
@@ -41,4 +45,6 @@ class IndexCtrl extends BaseCtrl
 
           # set new data
           $defer.resolve(data.rows)
-    })
+    }
+
+    @tableParams = new @ngTableParams(parameters, settings)
