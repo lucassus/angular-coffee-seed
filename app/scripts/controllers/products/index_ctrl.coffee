@@ -18,6 +18,7 @@ class IndexCtrl extends BaseCtrl
 
     settings = {
       total: 0
+      counts: [10, 20, 50, 100, 1000]
       getData: ($defer, params) =>
         # put params in the url
         @$location.search(params.url())
