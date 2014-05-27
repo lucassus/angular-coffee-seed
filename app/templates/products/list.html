@@ -10,14 +10,26 @@
 <button ng-click="index.tableParams.reload()" class="btn btn-default">Reload</button>
 <button ng-click="index.tableParams.sorting({})" class="btn btn-default">Clear sorting</button>
 
+id: <input type="checkbox" ng-model="index.columns.id" />
+name: <input type="checkbox" ng-model="index.columns.name" />
+price: <input type="checkbox" ng-model="index.columns.price" />
+discount: <input type="checkbox" ng-model="index.columns.discount" />
+priceWithDiscount: <input type="checkbox" ng-model="index.columns.priceWithDiscount" />
+
 <table ng-table="index.tableParams" show-filter="false" class="table products">
   <tbody>
-  <tr ng-repeat="product in $data">
-    <td data-title="'#'" data-sortable="'id'">
+  <tr ng-repeat="product in $data"
+      ng-class="{ 'active': product.$selected }">
+
+    <td class="selection">
+      <input type="checkbox" ng-model="product.$selected" />
+    </td>
+
+    <td ng-show="index.columns.id" class="id" data-title="'#'" data-sortable="'id'">
       {{product.id}}
     </td>
 
-    <td>
+    <td class="actions">
       <div class="btn-group">
         <button type="button" class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown">
           Action <span class="caret"></span>
@@ -31,13 +43,27 @@
       </div>
     </td>
 
-    <td data-title="'Name'" data-sortable="'name'">
+    <td ng-show="index.columns.name" data-title="'Name'" data-sortable="'name'">
       <a ui-sref="products.show.info({id: product.id})">{{product.name}}</a>
     </td>
 
-    <td data-title="'Price'" data-sortable="'price'">
+    <td ng-show="index.columns.price" data-title="'Price'" data-sortable="'price'">
       {{product.price | currency}}
+    </td>
+
+    <td ng-show="index.columns.discount" data-title="'Discount'">
+      <span ng-show="product.hasDiscount()">{{product.discount}}%</span>
+      <span ng-hide="product.hasDiscount()">---</span>
+    </td>
+
+    <td ng-show="index.columns.priceWithDiscount" data-title="'Price with discount'">
+      {{product.priceWithDiscount() | currency}}
     </td>
   </tr>
   </tbody>
 </table>
+
+<div>
+  <strong>Selected products</strong>
+  <pre>{{ index.tableParams.data | filter:{"$selected": true} | json }}</pre>
+</div>

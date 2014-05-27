@@ -48,3 +48,9 @@ class IndexCtrl extends BaseCtrl
     }
 
     @tableParams = new @ngTableParams(parameters, settings)
+
+    @columns =
+      id: true
+      name: true
+      price: true
+      priceWithDiscount: false
