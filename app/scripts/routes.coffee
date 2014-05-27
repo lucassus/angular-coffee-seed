@@ -19,8 +19,6 @@ app.config [
         url: ""
         templateUrl: "templates/products/list.html"
         controller: "products.IndexCtrl as index"
-        resolve:
-          products: ["Products", (Products) -> Products.query().$promise]
       })
 
       .state("products.create", {

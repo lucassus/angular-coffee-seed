@@ -4,6 +4,7 @@ app = angular.module "myApp", [
   "ngAnimate"
   "ui.router"
   "pasvaz.bindonce"
+  "ngTable"
 
   "myApp.templates"
   "myApp.alerts"

@@ -26,7 +26,15 @@ productProvider.save fixtures.products()
 api = express.Router()
 
 api.get "/products.json", (req, res) ->
-  productProvider.findAll (error, products) ->
+  pagerOptions =
+    currentPage: parseInt req.query.currentPage
+    pageSize: parseInt req.query.pageSize
+
+  sortOptions =
+    field: req.query.sortField
+    direction: req.query.sortDirection
+
+  productProvider.findAllPaged pagerOptions, sortOptions, (error, products) ->
     res.send products
 
 api.post "/products.json", (req, res) ->

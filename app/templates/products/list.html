@@ -7,43 +7,63 @@
   <i class="fa fa-plus"></i> Create new product
 </a>
 
-<table class="table table-hover products" ng-show="index.products.length > 0">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Actions</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Discount</th>
-      <th>Description</th>
-      <th>Created At</th>
-    </tr>
-  </thead>
+<button ng-click="index.tableParams.reload()" class="btn btn-default">Reload</button>
+<button ng-click="index.tableParams.sorting({})" class="btn btn-default">Clear sorting</button>
+
+id: <input type="checkbox" ng-model="index.columns.id" />
+name: <input type="checkbox" ng-model="index.columns.name" />
+price: <input type="checkbox" ng-model="index.columns.price" />
+discount: <input type="checkbox" ng-model="index.columns.discount" />
+priceWithDiscount: <input type="checkbox" ng-model="index.columns.priceWithDiscount" />
+
+<table ng-table="index.tableParams" show-filter="false" class="table products">
   <tbody>
-    <tr ng-repeat="product in index.products | orderBy:'priceWithDiscount()'"
-        ng-class="{'success': product.hasDiscount()}">
-      <td>{{product.id}}</td>
-      <td>
-        <div class="btn-group">
-          <button type="button" class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown">
-            Action <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a ui-sref="products.show.info({id: product.id})"><i class="fa fa-search"></i> Show</a></li>
-            <li><a ui-sref="products.edit({id: product.id})"><i class="fa fa-edit"></i> Edit</a></li>
-            <li class="divider"></li>
-            <li><a href="" ng-click="index.deleteProduct(product)"><i class="fa fa-trash-o"></i> Delete</a></li>
-          </ul>
-        </div>
-      </td>
-      <td><a ui-sref="products.show.info({id: product.id})">{{product.name}}</a></td>
-      <td>{{product.priceWithDiscount() | currency}}</td>
-      <td>
-        <span ng-show="product.hasDiscount()">{{product.discount}}%</span>
-        <span ng-hide="product.hasDiscount()">---</span>
-      </td>
-      <td style="width: 50%">{{product.description}}</td>
-      <td style="width: 120px">{{product.createdAt | date}}</td>
-    </tr>
+  <tr ng-repeat="product in $data"
+      ng-class="{ 'active': product.$selected }">
+
+    <td class="selection">
+      <input type="checkbox" ng-model="product.$selected" />
+    </td>
+
+    <td ng-show="index.columns.id" class="id" data-title="'#'" data-sortable="'id'">
+      {{product.id}}
+    </td>
+
+    <td class="actions">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown">
+          Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ui-sref="products.show.info({id: product.id})"><i class="fa fa-search"></i> Show</a></li>
+          <li><a ui-sref="products.edit({id: product.id})"><i class="fa fa-edit"></i> Edit</a></li>
+          <li class="divider"></li>
+          <li><a href="" ng-click="index.deleteProduct(product)"><i class="fa fa-trash-o"></i> Delete</a></li>
+        </ul>
+      </div>
+    </td>
+
+    <td ng-show="index.columns.name" data-title="'Name'" data-sortable="'name'">
+      <a ui-sref="products.show.info({id: product.id})">{{product.name}}</a>
+    </td>
+
+    <td ng-show="index.columns.price" data-title="'Price'" data-sortable="'price'">
+      {{product.price | currency}}
+    </td>
+
+    <td ng-show="index.columns.discount" data-title="'Discount'">
+      <span ng-show="product.hasDiscount()">{{product.discount}}%</span>
+      <span ng-hide="product.hasDiscount()">---</span>
+    </td>
+
+    <td ng-show="index.columns.priceWithDiscount" data-title="'Price with discount'">
+      {{product.priceWithDiscount() | currency}}
+    </td>
+  </tr>
   </tbody>
 </table>
+
+<div>
+  <strong>Selected products</strong>
+  <pre>{{ index.tableParams.data | filter:{"$selected": true} | json }}</pre>
+</div>
