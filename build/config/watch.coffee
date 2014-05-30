@@ -5,7 +5,8 @@ module.exports = (grunt) ->
       "<%= appConfig.app %>/scripts/**/*.coffee"
     ]
     tasks: [
-      "coffee:dist"
+      "copy:coffee"
+      "coffee:dev"
       "ngtemplates"
       "timestamp"
     ]

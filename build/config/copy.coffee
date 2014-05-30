@@ -1,5 +1,14 @@
 module.exports = (grunt) ->
 
+  coffee:
+    files: [
+      expand: true
+      dot: true
+      cwd: '<%= appConfig.app %>/scripts'
+      dest: '<%= appConfig.dev %>/scripts'
+      src: '**/*.coffee'
+    ]
+
   # copy resources from the app directory
   dev:
     files: [

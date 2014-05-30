@@ -42,6 +42,7 @@ module.exports = (grunt) ->
     "clean"
     "bower"
     "coffeelint"
+    "copy:coffee"
     "coffee"
     "less"
     "copy:dev"
