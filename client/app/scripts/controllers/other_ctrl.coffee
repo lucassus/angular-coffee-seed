@@ -2,7 +2,7 @@ app = angular.module("myApp")
 
 class OtherCtrl extends BaseCtrl
 
-  @register app
+  @register app, "OtherCtrl"
   @inject "alerts"
 
   initialize: ->

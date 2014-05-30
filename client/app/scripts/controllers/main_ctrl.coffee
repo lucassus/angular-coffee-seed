@@ -2,7 +2,7 @@ app = angular.module("myApp")
 
 class MainCtrl extends BaseCtrl
 
-  @register app
+  @register app, "MainCtrl"
   @inject "$scope", "$state", "$stateParams"
 
   initialize: ->

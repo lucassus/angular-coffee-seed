@@ -3,5 +3,5 @@
 source ./script/lib/server
 
 startServer
-grunt build:dev configureProxies livereload-start connect:integration watch
+(cd client ; grunt build:dev configureProxies livereload-start connect:integration watch)
 stopServer

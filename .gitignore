@@ -3,15 +3,14 @@
 *.iml
 
 # 3hrd party libraries
-node_modules
-bower_components
+client/node_modules
+client/bower_components
+server/node_modules
 
 # Builds
-dev
-dist
-coverage
+client/.tmp
+client/coverage
 
 # Other
 npm-debug.log
-.tmp
-tmp
+server/log/*.log

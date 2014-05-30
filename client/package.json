@@ -5,17 +5,7 @@
     "type": "git",
     "url": "https://github.com/lucassus/angular-seed.git"
   },
-  "main": "./server/index.coffee",
-  "dependencies": {
-    "coffee-script": "1.7.1",
-
-    "express": "4.3.1",
-    "morgan": "1.1.1",
-    "body-parser": "1.2.0",
-
-    "lodash": "2.4.1",
-    "Faker": "0.7.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "1.19.0",
     "chai": "1.9.1",

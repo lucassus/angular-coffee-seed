@@ -5,14 +5,14 @@ path = require("path")
 app = express()
 
 # configure logger
-logFile = fs.createWriteStream("./tmp/express.log", flags: "a")
+logFile = fs.createWriteStream(path.join(__dirname, "../log/express.log"), flags: "a")
 morgan  = require("morgan")
 app.use morgan(stream: logFile)
 
 bodyParser = require("body-parser")
 app.use bodyParser()
 
-app.use express.static(path.join(__dirname, "../../dist"))
+app.use express.static(path.join(__dirname, "../../client/dist"))
 
 utils = require("./utils")
 
