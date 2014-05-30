@@ -6,80 +6,15 @@ IndexPage = require("./helpers/page_objects/products/index_page")
 FormPage = require("./helpers/page_objects/products/form_page")
 ShowPage = require("./helpers/page_objects/products/show_page")
 
-describe.only "Products page", ->
+describe "Products page", ->
   alertView = null
   indexPage = null
-
-  # mock the backend
-  beforeEach ->
-    # TODO use the real server, maintain spike-ng-mocks-in-integration-specs
-    mockScript = ->
-      products = [
-        {
-          id: 1, name: "HTC Wildfire", description: "Old android phone",
-          manufacturer: "HTC",
-          price: 499.99, discount: 10
-        }
-        { id: 2, name: "iPhone", price: 2500 }
-        { id: 3, name: "Nexus One", price: 1000, discount: 7 }
-        { id: 4, name: "Nexus 7", price: 1200, discount: 12 }
-        { id: 5, name: "Samsung Galaxy Note", price: 2699, discount: 0 }
-        { id: 6, name: "Samsung S4", price: 3000, discount: 2 }
-      ]
-
-      angular.module("httpBackendMock", ["ngMockE2E"])
-        .run ($httpBackend) ->
-          productUrlRegexp = /\/api\/products\/(\d+).json/
-
-          # stub list
-          $httpBackend.whenGET("/api/products.json").respond(products)
-
-          # stub get
-          $httpBackend.whenGET(productUrlRegexp).respond (method, url, data) ->
-            id = url.match(productUrlRegexp)[1]
-            product = _.findWhere(products, id: parseInt(id))
-
-            if product?
-              [200, angular.toJson(product)]
-            else
-              [404]
-
-          # stub create
-          $httpBackend.whenPOST("/api/products.json").respond (method, url, data) ->
-            product = angular.fromJson(data)
-            product.id = _.last(products).id + 1
-            products.push(product)
-
-            [201]
-
-          # stub update
-          $httpBackend.whenPOST(productUrlRegexp).respond (method, url, data) ->
-            id = url.match(productUrlRegexp)[1]
-            product = _.findWhere(products, id: parseInt(id))
-
-            params = angular.fromJson(data)
-            product[field] = value for field, value of params
-
-            [201, angular.toJson(product)]
-
-          # stub delete
-          $httpBackend.whenDELETE(productUrlRegexp).respond (method, url, data) ->
-            id = url.match(productUrlRegexp)[1]
-            product = _.findWhere(products, id: parseInt(id))
-            index = products.indexOf(product)
-
-            products.splice(index, 1) if index isnt -1
-
-            [200]
-
-          $httpBackend.whenGET(/.*/).passThrough()
-
-    browser.addMockModule("httpBackendMock", mockScript)
 
   beforeEach ->
     alertView = new AlertView()
     indexPage = new IndexPage()
 
+    utils.loadFixtures()
     browser.get "/"
 
   it "displays a valid page title", ->
@@ -137,6 +72,7 @@ describe.only "Products page", ->
       expect(formPage.submitButton.getText()).to.eventually.eq "Create"
 
     describe "click on `create` button", ->
+
       beforeEach ->
         formPage.setName "New product"
         formPage.setPrice "9.99"

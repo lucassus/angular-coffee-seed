@@ -6,6 +6,7 @@ module.exports = (grunt) ->
   # configurable paths
   appConfig =
     app: "app"
+    server: "server"
     test: "test"
     dist: "dist"
     dev: "dev"
@@ -33,6 +34,7 @@ module.exports = (grunt) ->
     connect:       loadModule "connect"
     shell:         loadModule "shell"
     devUpdate:     loadModule "devUpdate"
+    express:       loadModule "express"
 
   grunt.renameTask "regarde", "watch"
 
@@ -51,6 +53,7 @@ module.exports = (grunt) ->
   grunt.registerTask "server", [
     "build:dev"
 
+    "express"
     "configureProxies"
     "livereload-start"
     "connect:livereload"

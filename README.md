@@ -72,7 +72,7 @@ sudo npm install -g bower
 ```
 npm install
 bower install
-script/start-server
+grunt server
 ```
 
 Navigate to `http://localhost:9000`
