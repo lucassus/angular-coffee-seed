@@ -175,5 +175,5 @@ Navigate to `http://localhost:8000` to see the production release.
 git co heroku-production
 git merge master
 grunt build
-git push heroku heroku-production:master -f
+git push heroku `git subtree split --prefix server heroku-production`:master --force
 ```
