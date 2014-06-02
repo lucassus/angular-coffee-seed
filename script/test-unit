@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Run test for the server side application
+./server/node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register --reporter spec server/test
+
+# ..check if it pass
+if [ $? -ne 0 ]; then
+  echo "Failed!"
+  exit 1
+fi
+
+# ..run specs for client side
+(cd client ; grunt test)

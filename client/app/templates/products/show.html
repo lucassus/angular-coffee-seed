@@ -1,0 +1,24 @@
+<div bindonce class="page-header">
+  <h2>Product "<span bo-text="product.name"></span>" details</h2>
+</div>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li ng-class="{active: $state.includes('products.show.info')}">
+      <a ui-sref="products.show.info">Info</a>
+    </li>
+
+    <li ng-class="{active: $state.includes('products.show.details')}">
+      <a ui-sref="products.show.details">Details</a>
+    </li>
+
+    <li ng-class="{active: $state.includes('products.show.actions')}">
+      <a ui-sref="products.show.actions">Actions</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <hr/>
+    <div ui-view></div>
+  </div>
+</div>

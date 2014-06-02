@@ -128,3 +128,11 @@ describe "ProductProvider", ->
         productProvider.findById product.id, (error, product) ->
           expect(product).to.be.undefined
           done()
+
+  describe "#destroyAll()", ->
+
+    it "deletes all products", (done) ->
+
+      productProvider.destroyAll ->
+        expect(productProvider.products.length).to.equal 0
+        done()

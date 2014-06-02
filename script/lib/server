@@ -20,9 +20,10 @@ function startServer() {
   SERVER_PID=$!
 
   # ..and wait till it's fully operational
+  echo -n "Waiting for the backend server."
   while ! isRunning; do
-    echo "Waiting for the backend server..."
-    sleep 0.250
+    echo -n "."
+    sleep 0.1
   done
 
   echo "The backend server is fully operational PID=$SERVER_PID"

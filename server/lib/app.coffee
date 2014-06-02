@@ -1,45 +1,62 @@
 express = require("express")
+fs = require("fs")
 path = require("path")
 
 app = express()
-app.use express.logger()
-app.use express.bodyParser()
-app.use express.static(path.join(__dirname, "../../dist"))
+
+# configure logger
+logFile = fs.createWriteStream(path.join(__dirname, "../log/express.log"), flags: "a")
+morgan  = require("morgan")
+app.use morgan(stream: logFile)
+
+bodyParser = require("body-parser")
+app.use bodyParser()
+
+app.use express.static(path.join(__dirname, "../../client/dist"))
 
 utils = require("./utils")
 
-ProductProvider = new require("./product_provider")
+ProductProvider = require("./product_provider")
 productProvider = new ProductProvider()
 
 # bootstrap with dummy data
 fixtures = require("./fixtures")
 productProvider.save fixtures.products()
 
-app.get "/api/products.json", (req, res) ->
+api = express.Router()
+
+api.get "/products.json", (req, res) ->
   productProvider.findAll (error, products) ->
     res.send products
 
-app.post "/api/products.json", (req, res) ->
+api.post "/products.json", (req, res) ->
   productProvider.save req.body, (error, products) ->
     res.send products[0]
 
-app.post "/api/products/:id.json", (req, res) ->
+api.post "/products/:id.json", (req, res) ->
   id = req.params.id
   params = req.body
 
   productProvider.update id, params, (error, product) ->
     res.send product
 
-app.get "/api/products/:id.json", (req, res) ->
+api.get "/products/:id.json", (req, res) ->
   id = req.params.id
 
   productProvider.findById id, (error, product) ->
     res.send if product? then product else 404
 
-app.delete "/api/products/:id.json", (req, res) ->
+api.delete "/products/:id.json", (req, res) ->
   id = req.params.id
 
   productProvider.destroy id, (error, product) ->
     res.send product
+
+api.post "/_loadFixtures.json", (req, res) ->
+  productProvider.destroyAll ->
+    productProvider.save fixtures.products(), ->
+      res.send 200
+
+app.use "/api", api
 
 module.exports = app

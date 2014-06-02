@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source ./script/lib/server
+
+startServer
+(cd client ; grunt build:dev configureProxies livereload-start connect:integration watch)
+stopServer

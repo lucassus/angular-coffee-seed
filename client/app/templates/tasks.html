@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h2>Tasks List</h2>
+</div>
+<p class="lead">Very simple TODO list</p>
+
+<span id="remaining">{{tasks.remainingTasksCount()}} of {{tasks.tasksCount()}} remaining</span>
+[ <a href="" class="archive" ng-click="tasks.archive()">archive</a> ]
+
+<ul id="tasks" class="icons-ul">
+  <li ng-repeat="task in tasks.tasks | orderBy:'done'" class="repeat-item">
+    <label>
+      <input type="checkbox" ng-model="task.done" />&nbsp;
+      <span ng-class="{done: task.done}">{{task.name}}</span>
+    </label>
+  </li>
+</ul>
+
+<form name="taskForm" ng-submit="tasks.addTask(task)" novalidate>
+  <div class="form-group"
+       ng-class="{'has-error': taskForm.$submitted && taskForm.name.$invalid}">
+    <label for="new-task-name">Task name</label>
+    <input id="new-task-name" type="text" class="form-control" placeholder="Enter task name"
+           name="name" ng-model="task.name" required />
+    <span class="help-block"
+          ng-show="taskForm.$submitted && taskForm.name.$error.required">Task name is required</span>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"
+             name="done" ng-model="task.done" /> Done
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    <i class="fa fa-plus"></i> Add
+  </button>
+
+  <button type="button" class="btn"
+          ng-click="tasks.reset()"
+          ng-disabled="taskForm.$pristine">
+    <i class="fa fa-eraser"></i> Reset
+  </button>
+</form>

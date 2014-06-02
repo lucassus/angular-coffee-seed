@@ -2,23 +2,24 @@ language:
   - node_js
 
 node_js:
-  - 0.10.12
+  - 0.10.28
 
 before_install:
-  - travis_retry npm install bower grunt-cli mocha -g
-  - travis_retry npm install
-  - travis_retry bower install
+  # install global dependencies
+  - travis_retry npm install bower grunt-cli -g
 
-  # install CasperJS
-  - git clone git://github.com/n1k0/casperjs.git ~/casperjs
-  - cd ~/casperjs
-  - git checkout tags/1.0.2
-  - export PATH=$PATH:`pwd`/bin
-  - cd -
+  # install dependencies for both client and server side
+  - (cd client ; travis_retry npm install)
+  - (cd client ; travis_retry bower install)
+  - (cd server ; travis_retry npm install)
 
-before_script:
-  - phantomjs --version
-  - casperjs --version
+  # install selenium
+  - (cd client ; ./node_modules/protractor/bin/webdriver-manager update)
+
+  # run xvfb
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 script:
-  - DISPLAY=:99.0 ./script/test-ci
+  - ./script/test-unit
+  - ./script/test-integration

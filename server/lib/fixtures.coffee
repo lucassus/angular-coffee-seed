@@ -4,7 +4,11 @@ module.exports =
 
   products: ->
     products = [
-      { name: "HTC Wildfire", price: 499.99, discount: 10 }
+      {
+        name: "HTC Wildfire", description: "Old android phone",
+        manufacturer: "HTC",
+        price: 499.99, discount: 10
+      }
       { name: "iPhone", price: 2500 }
       { name: "Nexus One", price: 1000, discount: 7 }
       { name: "Nexus 7", price: 1200, discount: 12 }
@@ -13,8 +17,8 @@ module.exports =
     ]
 
     for product in products
-      product.description = faker.Lorem.paragraphs(3)
-      product.manufacturer = faker.Company.companyName()
-      product.headline = faker.Company.catchPhrase()
+      product.description ?= faker.Lorem.paragraphs(3)
+      product.manufacturer ?= faker.Company.companyName()
+      product.headline ?= faker.Company.catchPhrase()
 
     products

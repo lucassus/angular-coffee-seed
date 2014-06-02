@@ -1,0 +1,39 @@
+#!/bin/bash
+
+(cd client ; ./node_modules/protractor/bin/webdriver-manager update)
+
+(cd client ; grunt build:dev)
+
+cd client ; grunt configureProxies connect:integration watch &
+PID=$!
+cd ../
+echo "Client server is running PID=$PID"
+
+function isRunning() {
+  nc -vz localhost 9001 &> /dev/null
+}
+
+echo -n "Waiting for the frontend server."
+while ! isRunning; do
+  echo -n "."
+  sleep 0.1
+done
+
+echo -e "\nRunning integration specs."
+
+(cd client ; ./node_modules/protractor/bin/protractor test/protractor-conf.coffee --verbose --includeStackTrace)
+
+function stopAll() {
+  echo "Killing the frontend server PID=$PID"
+  kill "$PID"
+}
+
+# ..check if it pass
+if [ $? -ne 0 ]; then
+  stopAll
+
+  echo "Failed!"
+  exit 1
+else
+  stopAll
+fi

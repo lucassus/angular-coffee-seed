@@ -3,5 +3,5 @@
 source ./script/lib/server
 
 startServer
-grunt server
+(cd client ; grunt server)
 stopServer

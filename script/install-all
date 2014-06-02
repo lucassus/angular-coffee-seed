@@ -1,0 +1,7 @@
+#!/bin/bash
+
+npm install bower grunt-cli -g
+(cd client ; npm install)
+(cd client ; bower install)
+
+(cd server ; npm install)
