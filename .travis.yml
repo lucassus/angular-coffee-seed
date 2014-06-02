@@ -5,13 +5,16 @@ node_js:
   - 0.10.28
 
 before_install:
-  # install dependencies
-  - travis_retry npm install bower grunt-cli mocha protractor -g
-  - travis_retry npm install
-  - travis_retry bower install
+  # install global dependencies
+  - travis_retry npm install bower grunt-cli -g
+
+  # install dependencies for both client and server side
+  - (cd client ; travis_retry npm install)
+  - (cd client ; travis_retry bower install)
+  - (cd server ; travis_retry npm install)
 
   # install selenium
-  - ./node_modules/protractor/bin/webdriver-manager update
+  - (cd client ; ./node_modules/protractor/bin/webdriver-manager update)
 
   # run xvfb
   - export DISPLAY=:99.0

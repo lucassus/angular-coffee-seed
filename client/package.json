@@ -5,19 +5,9 @@
     "type": "git",
     "url": "https://github.com/lucassus/angular-seed.git"
   },
-  "main": "./server/index.coffee",
-  "dependencies": {
-    "coffee-script": "1.7.1",
-
-    "express": "4.3.1",
-    "morgan": "1.1.1",
-    "body-parser": "1.2.0",
-
-    "lodash": "2.4.1",
-    "Faker": "0.7.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "1.19.0",
+    "mocha": "1.20.0",
     "chai": "1.9.1",
     "chai-as-promised": "4.1.1",
     "supertest": "0.13.0",
@@ -29,7 +19,7 @@
     "grunt-contrib-watch": "0.6.1",
     "grunt-contrib-clean": "0.5.0",
     "grunt-contrib-clean": "0.5.0",
-    "grunt-contrib-less": "0.11.0",
+    "grunt-contrib-less": "0.11.1",
     "grunt-contrib-livereload": "0.1.2",
     "grunt-contrib-concat": "0.4.0",
     "grunt-contrib-uglify": "0.4.0",
@@ -57,8 +47,6 @@
     "karma-firefox-launcher": "0.1.3",
     "karma-opera-launcher": "0.1.0",
     "matchdep": "0.3.0",
-    "nodemon": "1.0.20",
-    "request": "2.36.0",
 
     "protractor": "0.23.1"
   },

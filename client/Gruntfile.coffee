@@ -8,31 +8,31 @@ module.exports = (grunt) ->
     app: "app"
     test: "test"
     dist: "dist"
-    dev: "dev"
+    dev: ".tmp"
 
-  loadModule = (name) ->
+  config = (name) ->
     require("./build/config/#{name}")(grunt, appConfig)
 
   grunt.initConfig
     appConfig: appConfig
     pkg: grunt.file.readJSON("package.json")
 
-    watch:         loadModule "watch"
-    coffee:        loadModule "coffee"
-    less:          loadModule "less"
-    concat:        loadModule "concat"
-    useminPrepare: loadModule "usemin_prepare"
-    usemin:        loadModule "usemin"
-    htmlmin:       loadModule "htmlmin"
-    copy:          loadModule "copy"
-    coffeelint:    loadModule "coffeelint"
-    ngtemplates:   loadModule "ngtemplates"
-    bower:         loadModule "bower"
-    karma:         loadModule "karma"
-    clean:         loadModule "clean"
-    connect:       loadModule "connect"
-    shell:         loadModule "shell"
-    devUpdate:     loadModule "devUpdate"
+    watch:         config("watch")
+    coffee:        config("coffee")
+    less:          config("less")
+    concat:        config("concat")
+    useminPrepare: config("usemin_prepare")
+    usemin:        config("usemin")
+    htmlmin:       config("htmlmin")
+    copy:          config("copy")
+    coffeelint:    config("coffeelint")
+    ngtemplates:   config("ngtemplates")
+    bower:         config("bower")
+    karma:         config("karma")
+    clean:         config("clean")
+    connect:       config("connect")
+    shell:         config("shell")
+    devUpdate:     config("devUpdate")
 
   grunt.renameTask "regarde", "watch"
 

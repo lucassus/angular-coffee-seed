@@ -2,7 +2,7 @@ app = angular.module("myApp")
 
 class TasksCtrl extends BaseCtrl
 
-  @register app
+  @register app, "TasksCtrl"
   @inject "$scope"
 
   initialize: ->
