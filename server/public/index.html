@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="myApp" ng-controller="MainCtrl">
+  <head>
+    <title>Angular Seed</title>
+
+    <link rel="stylesheet" href="styles/vendor.min.css"/>
+
+    <link rel="stylesheet" href="styles/style.min.css"/>
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      <!-- fixed navbar -->
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Angular seed</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li ng-class="{'active': $state.includes('products')}">
+                <a ui-sref="products.list">Products</a>
+              </li>
+
+              <li ng-class="{'active': $state.includes('other')}">
+                <a ui-sref="other">Other</a>
+              </li>
+
+              <li ng-class="{'active': $state.includes('tasks')}">
+                <a ui-sref="tasks">Tasks</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <alerts></alerts>
+        <div ui-view></div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted credit">
+          <a href="https://github.com/lucassus/angular-seed" target="_blank">angular-seed</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="scripts/vendor.min.js"></script>
+
+    <script src="scripts/scripts.min.js"></script>
+  </body>
+</html>

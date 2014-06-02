@@ -12,7 +12,7 @@ app.use morgan(stream: logFile)
 bodyParser = require("body-parser")
 app.use bodyParser()
 
-app.use express.static(path.join(__dirname, "../../client/dist"))
+app.use express.static(path.join(__dirname, "public"))
 
 utils = require("./utils")
 

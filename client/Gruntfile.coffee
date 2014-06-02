@@ -7,7 +7,7 @@ module.exports = (grunt) ->
   appConfig =
     app: "app"
     test: "test"
-    dist: "dist"
+    dist: "../server/public"
     dev: ".tmp"
 
   config = (name) ->
