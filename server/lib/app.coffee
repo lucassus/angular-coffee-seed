@@ -12,7 +12,7 @@ app = express()
 bodyParser = require("body-parser")
 app.use bodyParser()
 
-app.use express.static(path.join(__dirname, "public"))
+app.use express.static(path.join(__dirname, "../public"))
 
 utils = require("./utils")
 
