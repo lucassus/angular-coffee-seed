@@ -9,6 +9,7 @@
   "devDependencies": {
     "chai": "1.9.1",
     "chai-as-promised": "4.1.1",
+    "coffee-script": "1.7.1",
     "grunt": "0.4.5",
     "grunt-angular-templates": "0.5.5",
     "grunt-bower-task": "0.3.4",
