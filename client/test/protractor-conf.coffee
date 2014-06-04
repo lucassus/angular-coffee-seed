@@ -1,5 +1,3 @@
-require "coffee-script/register"
-
 exports.config =
   # Run with selenium standalone server
   # seleniumServerJar: null # use default location

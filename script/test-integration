@@ -2,7 +2,7 @@
 
 (cd client ; ./node_modules/protractor/bin/webdriver-manager update)
 
-(cd client ; grunt build:dev)
+(cd client ; grunt build:test)
 
 cd client ; grunt configureProxies connect:integration watch &
 PID=$!

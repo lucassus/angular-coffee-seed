@@ -21,6 +21,7 @@ module.exports = (grunt) ->
     coffee:        config("coffee")
     less:          config("less")
     concat:        config("concat")
+    targethtml:    config("targethtml")
     useminPrepare: config("usemin_prepare")
     usemin:        config("usemin")
     htmlmin:       config("htmlmin")
@@ -47,6 +48,11 @@ module.exports = (grunt) ->
     "less"
     "copy:dev"
     "ngtemplates"
+  ]
+
+  grunt.registerTask "build:test", [
+    "build:dev"
+    "targethtml:test"
   ]
 
   grunt.registerTask "server", [

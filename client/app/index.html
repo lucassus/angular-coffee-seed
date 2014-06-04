@@ -71,10 +71,11 @@
     <script type="text/javascript" src="components/angular-messages/angular-messages.js"></script>
     <script type="text/javascript" src="components/angular-ui-router/angular-ui-router.js"></script>
     <script type="text/javascript" src="components/angular-bindonce/bindonce.js"></script>
-
-    <!--TODO get rid of this file-->
-    <script type="text/javascript" src="components/angular-mocks/angular-mocks.js"></script>
     <!-- endbuild -->
+
+    <!--(if target test)>
+      <script type="text/javascript" src="components/angular-mocks/angular-mocks.js"></script>
+    <!(endif)-->
 
     <!-- build:js(.tmp) scripts/scripts.min.js -->
     <script type="text/javascript" src="scripts/modules/alerts.js"></script>
@@ -95,5 +96,9 @@
     <script type="text/javascript" src="scripts/controllers/other_ctrl.js"></script>
     <script type="text/javascript" src="scripts/controllers/tasks_ctrl.js"></script>
     <!-- endbuild -->
+
+    <!--(if target test)>
+      <script type="text/javascript" src="scripts/application_test.js"></script>
+    <!(endif)-->
   </body>
 </html>
