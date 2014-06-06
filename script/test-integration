@@ -10,7 +10,7 @@ cd ../
 echo "Client server is running PID=$PID"
 
 function isRunning() {
-  nc -vz localhost 9001 &> /dev/null
+  nc -vz localhost 9010 &> /dev/null
 }
 
 echo -n "Waiting for the frontend server."

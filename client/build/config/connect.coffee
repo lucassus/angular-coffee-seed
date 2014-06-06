@@ -19,7 +19,7 @@ module.exports = (grunt, appConfig) ->
 
   integration:
     options:
-      port: 9001
+      port: 9010
       middleware: (connect) ->
         [
           proxySnippet
