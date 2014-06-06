@@ -45,7 +45,7 @@
     "karma-sinon": "1.0.3",
     "karma-spec-reporter": "0.0.13",
     "load-grunt-tasks": "0.4.0",
-    "protractor": "0.23.1",
+    "protractor": "0.24.0",
     "supertest": "0.13.0"
   },
   "engines": {

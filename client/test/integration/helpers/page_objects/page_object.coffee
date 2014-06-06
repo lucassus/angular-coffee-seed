@@ -11,7 +11,7 @@ class PageObject
   # Waits until all animations stop
   waitForAnimations: ->
     browser.wait =>
-      animated = browser.findElements @By.css(".ng-animate")
+      animated = browser.findElement @By.css(".ng-animate")
       animated.then (animated) -> animated.length is 0
 
   # Define element on the page

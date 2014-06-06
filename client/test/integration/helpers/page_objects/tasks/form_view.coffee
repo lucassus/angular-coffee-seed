@@ -4,11 +4,11 @@ class FormView extends PageObject
 
   constructor: (@base) ->
 
-  @has "nameField", -> @base.findElement @By.input("task.name")
+  @has "nameField", -> @base.element @By.input("task.name")
 
-  @has "doneCheckbox", -> @base.findElement @By.input("task.done")
+  @has "doneCheckbox", -> @base.element @By.input("task.done")
 
-  @has "submitButton", -> @base.findElement @byLabel "Add", "button"
+  @has "submitButton", -> @base.element @byLabel("Add", "button")
 
   setName: (value) ->
     @nameField.clear()

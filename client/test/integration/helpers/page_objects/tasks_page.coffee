@@ -5,20 +5,20 @@ FormView = require("./tasks/form_view")
 class TasksPage extends PageObject
 
   @has "remaining", ->
-    browser.findElement @By.css("span#remaining")
+    browser.element @By.css("span#remaining")
 
   @has "archiveButton", ->
-    browser.findElement @byLabel "archive"
+    browser.element @byLabel("archive")
 
   @has "tasks", ->
     browser.findElements @By.css("ul#tasks li")
 
   @has "form", ->
-    form = browser.findElement @By.css("form[name=taskForm]")
+    form = browser.element @By.css("form[name=taskForm]")
     new FormView(form)
 
   taskAt: (index) ->
-    taskElement = browser.findElement @By.repeater("task in tasks.tasks").row(index)
+    taskElement = browser.element @By.repeater("task in tasks.tasks").row(index)
     new TaskView(taskElement)
 
   tasksCount: ->

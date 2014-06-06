@@ -16,12 +16,12 @@ class FormPage extends PageObject
     browser.findElement @By.xpath("//button[@type='submit']")
 
   @has "resetButton", ->
-    browser.findElement @byLabel "Reset"
+    browser.findElement @byLabel("Reset")
 
   @has "cancelButton", ->
-    browser.findElement @byLabel "Cancel"
+    browser.findElement @byLabel("Cancel")
 
-  findField: (model, findBy = @By.input) ->
+  findField: (model, findBy = @By.model) ->
     browser.findElement findBy(model)
 
   setFieldValue: (field, value) ->

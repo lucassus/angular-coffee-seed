@@ -3,7 +3,7 @@ PageObject = require("./../../page_object")
 class RowView extends PageObject
 
   constructor: (@table, @locator) ->
-    @row = table.findElement locator
+    @row = table.element(locator)
 
   # row values
   @has "id",          -> @findField("product.id")
@@ -12,21 +12,21 @@ class RowView extends PageObject
 
   # row action buttons
   @has "actionButton", ->
-    @row.findElement @byLabel "Action", "button"
+    @row.element @byLabel("Action", "button")
 
   @has "showButton", ->
     @actionButton.click()
-    @row.findElement @byLabel "Show"
+    @row.element @byLabel("Show")
 
   @has "editButton", ->
     @actionButton.click()
-    @row.findElement @byLabel "Edit"
+    @row.element @byLabel("Edit")
 
   @has "deleteButton", ->
     @actionButton.click()
-    @row.findElement @byLabel "Delete"
+    @row.element @byLabel("Delete")
 
   findField: (binding) ->
-    @table.findElement @locator.column(binding)
+    @table.element @locator.column(binding)
 
 module.exports = RowView

@@ -5,17 +5,16 @@ class ShowPage extends PageObject
   constructor: ->
 
   @has "editButton", ->
-    browser.findElement @byLabel "Edit"
+    browser.element @byLabel("Edit")
 
   @has "deleteButton", ->
-    browser.findElement @byLabel "Delete", "button"
+    browser.element @byLabel("Delete", "button")
 
   @has "product", ->
-    listElement = browser.findElement @By.xpath("//dl")
+    listElement = browser.element @By.xpath("//dl")
 
-    # TODO figure out how to use it with bind-once
     byProperty = (name) =>
-      listElement.findElement @By.binding("product.#{name}")
+      listElement.element @By.binding("product.#{name}")
 
     Object.create Object::,
       name: get: -> byProperty("name")
@@ -23,12 +22,12 @@ class ShowPage extends PageObject
       manufacturer: get: -> byProperty("manufacturer")
 
   @has "tabs", ->
-    browser.findElement @By.css(".nav-tabs")
+    browser.element @By.css(".nav-tabs")
 
   @has "tabDetails", ->
-    @tabs.findElement @byLabel "Details"
+    @tabs.element @byLabel("Details")
 
   @has "tabActions", ->
-    @tabs.findElement @byLabel "Actions"
+    @tabs.element @byLabel("Actions")
 
 module.exports = ShowPage

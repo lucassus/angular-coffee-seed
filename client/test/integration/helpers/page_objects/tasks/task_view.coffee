@@ -5,10 +5,10 @@ class TaskView extends PageObject
   constructor: (@element) ->
 
   @has "checkbox", ->
-    @element.findElement @By.css("input[type=checkbox]")
+    @element.element @By.css("input[type=checkbox]")
 
   @has "label", ->
-    @element.findElement @By.css("label span")
+    @element.element @By.css("label span")
 
   isCompleted: ->
     d = protractor.promise.defer()

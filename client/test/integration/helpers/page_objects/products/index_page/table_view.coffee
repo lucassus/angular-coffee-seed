@@ -7,7 +7,7 @@ class TableView extends PageObject
     @locator = @By.repeater("product in index.products")
 
   @has "productNames", ->
-    @table.findElements @locator.column("product.name")
+    @table.all(@locator.column("product.name"))
 
   rowAt: (index) ->
     new RowView(@table, @locator.row(index))
