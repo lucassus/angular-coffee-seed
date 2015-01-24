@@ -1,5 +1,4 @@
-# Build Environment
-build_environment: Ubuntu 12.04
+build_image: lucassus/angular-seed
 
 # language setting
 language: node_js
