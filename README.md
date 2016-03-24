@@ -11,7 +11,7 @@ This is a custom AngularJS seed project based on grunt the JavaScript task runne
 * Bower for front-end packages management
 * Full support for unit and end2end tests
 * Unit tests with Mocha, Chai and SinonJS
-* Generates test code coverage the unit tests
+* Generates test code coverage for the unit tests
 * Support for protractor integration tests
 * Support for Karma Test Runner (formerly Testacular)
 * Continuous Integration ready ready via `grunt test:ci` task
