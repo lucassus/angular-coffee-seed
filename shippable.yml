@@ -9,7 +9,7 @@ node_js:
   - 0.10.28
 
 addons:
-  firefox: 29.0
+  firefox: 47.0.1
 
 install:
   # install global dependencies
