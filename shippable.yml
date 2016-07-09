@@ -17,7 +17,7 @@ install:
 
   # install dependencies for both client and server side
   - (cd client ; npm install)
-  - (cd client ; bower install)
+  - (cd client ; bower install --allow-root)
   - (cd server ; npm install)
 
   # install selenium
