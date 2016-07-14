@@ -9,7 +9,7 @@ node_js:
   - 0.10.28
 
 addons:
-  firefox: 29.0
+  firefox: 47.0.1
 
 install:
   # install global dependencies
@@ -17,7 +17,7 @@ install:
 
   # install dependencies for both client and server side
   - (cd client ; npm install)
-  - (cd client ; bower install)
+  - (cd client ; bower install --allow-root)
   - (cd server ; npm install)
 
   # install selenium
@@ -27,10 +27,10 @@ before_script:
 
   # run xvfb
   - export DISPLAY=:99.0
-  - etc/init.d/xvfb start
+  - ./script/xvfb start
 
 after_script:
-  - /etc/init.d/xvfb stop
+  - ./script/xvfb stop
 
 script:
   - ./script/test-unit
